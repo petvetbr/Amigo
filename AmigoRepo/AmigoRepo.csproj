@@ -38,7 +38,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="IChaveValor.cs" />
     <Compile Include="IRepositorio.cs" />
     <Compile Include="ISocio.cs" />
