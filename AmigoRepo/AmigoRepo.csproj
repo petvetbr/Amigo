@@ -38,10 +38,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAnimal.cs" />
+    <Compile Include="ICaixaTransporte.cs" />
     <Compile Include="IChaveValor.cs" />
+    <Compile Include="IEmprestimoCaixa.cs" />
+    <Compile Include="IObservacao.cs" />
+    <Compile Include="IPessoa.cs" />
     <Compile Include="IRepositorio.cs" />
     <Compile Include="ISocio.cs" />
     <Compile Include="ITelefone.cs" />
+    <Compile Include="IVacinaVermifugo.cs" />
+    <Compile Include="IVeterinario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

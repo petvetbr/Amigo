@@ -5,9 +5,8 @@ using System.Text;
 
 namespace AmigoRepo
 {
-    public interface IRepositorio
+    public interface IObservacao
     {
-        Guid Repositorio { get; set; }
-        int  Numero { get; set; }
+        string Observacao { get; set; }
     }
 }
