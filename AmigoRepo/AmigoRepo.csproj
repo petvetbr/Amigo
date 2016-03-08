@@ -41,6 +41,7 @@
     <Compile Include="Animal.cs" />
     <Compile Include="CaixaTransporte.cs" />
     <Compile Include="ChaveValor.cs" />
+    <Compile Include="EmprestimoCaixa.cs" />
     <Compile Include="EntidadeRepo.cs" />
     <Compile Include="IAnimal.cs" />
     <Compile Include="ICaixaTransporte.cs" />
