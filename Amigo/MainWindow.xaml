@@ -110,10 +110,10 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Style="{StaticResource splinha}">
 
-                <Button Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO">INCLUI</Button>
-                <Button Margin="8,0" Padding="5,0" ToolTip="ALTERA REGISTRO">ALTERA</Button>
-                <Button Margin="8,0" Padding="5,0" ToolTip="PESQUISA REGISTRO">PESQUISA</Button>
-                <Button Margin="8,0" Padding="5,0" ToolTip="EXCLUI REGISTRO">EXCLUI</Button>
+                <Button Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO" Background="#FF3FCFF9">INCLUI</Button>
+                <Button Margin="8,0" Padding="5,0" ToolTip="ALTERA REGISTRO" Background="#FF3FCFF9">ALTERA</Button>
+                <Button Margin="8,0" Padding="5,0" ToolTip="PESQUISA REGISTRO" Background="#FF3FCFF9">PESQUISA</Button>
+                <Button Margin="8,0" Padding="5,0" ToolTip="EXCLUI REGISTRO" Background="#FF3FCFF9">EXCLUI</Button>
             </StackPanel>
 
 
