@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
-        <Style TargetType="{x:Type StackPanel}" x:Name="splinha">
-            <Setter Property="Margin" Value="5">
+        <Style TargetType="{x:Type StackPanel}" x:Key="splinha">
+            <Setter Property="Margin" Value="4">
 
             </Setter>
         </Style>
@@ -16,74 +16,106 @@
     <Grid>
         <StackPanel>
             <DockPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top"  Style="{StaticResource splinha}" >
                     <TextBlock Margin="8,0" FontWeight="Bold">Nº:</TextBlock>
                     <TextBox Width="40" IsReadOnly="True" ></TextBox>
                 </StackPanel>
 
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
-                    <TextBlock VerticalAlignment="Center" Margin="8,0" FontWeight="Bold" Cursor="do cadastro">Data:</TextBlock>
-                    
+                    <TextBlock VerticalAlignment="Center" Margin="8,0" FontWeight="Bold" >Data:</TextBlock>
+                    <DatePicker/>
 
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
-                    <TextBlock Text="Tipo de Pessoa:" VerticalAlignment="Center" Margin="8,0,0,2" Width="100" FontWeight="Bold">
+                    <TextBlock Text="Tipo de Pessoa:" VerticalAlignment="Center" Margin="5,0,0,2" Width="100" FontWeight="Bold">
 
                     </TextBlock>
 
-                    <RadioButton Margin="5" FontStyle="Italic">Física</RadioButton>
-                    <RadioButton Margin="5" FontStyle="Italic">Jurídica</RadioButton>
+                    <RadioButton Margin="4" FontStyle="Italic">Física</RadioButton>
+                    <RadioButton Margin="4" FontStyle="Italic">Jurídica</RadioButton>
 
                 </StackPanel>
             </DockPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0" Width="120" FontWeight="Bold">Nome:</TextBlock>
-                <TextBox Width="300"></TextBox>
+                <TextBox Width="350"></TextBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0"  Width="120" FontWeight="Bold">Nome fantasia:</TextBlock>
-                <TextBox Width="300"></TextBox>
+                <TextBox Width="350"></TextBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0" Width="120" FontWeight="Bold">Nome representante:</TextBlock>
-                <TextBox Width="300"></TextBox>
+                <TextBox Width="350"></TextBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0" Width="120" FontWeight="Bold">CPF/CNPJ:</TextBlock>
                 <TextBox Width="150"></TextBox>
                 <TextBlock Margin="8,0" Width="50" FontWeight="Bold">Telefone:</TextBlock>
-                <TextBox Width="120"></TextBox>
+                <TextBox Width="135"></TextBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Width="120" Margin="8,0" FontWeight="Bold">E-mail:</TextBlock>
                 <TextBox Width="100"></TextBox>
                 <TextBlock Margin="8,0" FontWeight="Bold">Homepage:</TextBlock>
-                <TextBox Width="160"></TextBox>
+                <TextBox Width="170"></TextBox>
             </StackPanel>
 
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0" Width="120" FontWeight="Bold">Endereço:</TextBlock>
-                <TextBox Width="300"></TextBox>
+                <TextBox Width="350"></TextBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0" Width="120" FontWeight="Bold">Cidade:</TextBlock>
-                <TextBox Width="200"></TextBox>
+                <TextBox Width="350"></TextBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0" Width="120" FontWeight="Bold">UF:</TextBlock>
-                <TextBox Width="100"></TextBox>
-                <TextBlock Margin="8,0" Width="50" FontWeight="Bold">CEP:</TextBlock>
-                <TextBox Width="100"></TextBox>
+                <TextBox Width="140"></TextBox>
+                <TextBlock Margin="8,0" Width="30" FontWeight="Bold">CEP:</TextBlock>
+                <TextBox Width="164"></TextBox>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Style="{StaticResource splinha}"  >
+                <TextBlock FontWeight="Bold"><Run Text="Categoria"/></TextBlock>
+                <ComboBox x:Name="Categoria" ToolTip="Escolha a categoria" Width="100" Margin="10,0">
+                    
+                    <ComboBoxItem>1 - fundador</ComboBoxItem>
+                    <ComboBoxItem>2 - efetivo</ComboBoxItem>
+                    <ComboBoxItem>3 - colaborador</ComboBoxItem>
+                    <ComboBoxItem>4 - honorário</ComboBoxItem>
+                    <ComboBoxItem>5 - mirins</ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock Margin="10,0" FontWeight="Bold"><Run Text="Tipo"/></TextBlock>
+                <ComboBox Width="100">
+                    <ComboBoxItem>1 - normal</ComboBoxItem>
+                    <ComboBoxItem>2 - diretoria</ComboBoxItem>
+                    <ComboBoxItem>3 - voluntário</ComboBoxItem>
+                </ComboBox>
+                <TextBlock Margin="10,0" FontWeight="Bold"><Run Text="Status"/></TextBlock>
+                <ComboBox Width="100">
+                    <ComboBoxItem>1 - ativo</ComboBoxItem>
+                    <ComboBoxItem>2 - pendente</ComboBoxItem>
+                    <ComboBoxItem>3 - inativo</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Style="{StaticResource splinha}">
+
+                <Button Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO">INCLUI</Button>
+                <Button Margin="8,0" Padding="5,0" ToolTip="ALTERA REGISTRO">ALTERA</Button>
+                <Button Margin="8,0" Padding="5,0" ToolTip="PESQUISA REGISTRO">PESQUISA</Button>
+                <Button Margin="8,0" Padding="5,0" ToolTip="EXCLUI REGISTRO">EXCLUI</Button>
+            </StackPanel>
+
 
         </StackPanel>
 
