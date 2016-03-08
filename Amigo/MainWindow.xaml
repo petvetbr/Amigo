@@ -6,7 +6,87 @@
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <Style TargetType="{x:Type StackPanel}" x:Name="splinha">
+            <Setter Property="Margin" Value="5">
+
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <StackPanel>
+            <DockPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
+                    <TextBlock Margin="8,0" FontWeight="Bold">Nº:</TextBlock>
+                    <TextBox Width="40" IsReadOnly="True" ></TextBox>
+                </StackPanel>
+
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
+                    <TextBlock VerticalAlignment="Center" Margin="8,0" FontWeight="Bold" Cursor="do cadastro">Data:</TextBlock>
+                    
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                    <TextBlock Text="Tipo de Pessoa:" VerticalAlignment="Center" Margin="8,0,0,2" Width="100" FontWeight="Bold">
+
+                    </TextBlock>
+
+                    <RadioButton Margin="5" FontStyle="Italic">Física</RadioButton>
+                    <RadioButton Margin="5" FontStyle="Italic">Jurídica</RadioButton>
+
+                </StackPanel>
+            </DockPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Margin="8,0" Width="120" FontWeight="Bold">Nome:</TextBlock>
+                <TextBox Width="300"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Margin="8,0"  Width="120" FontWeight="Bold">Nome fantasia:</TextBlock>
+                <TextBox Width="300"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Margin="8,0" Width="120" FontWeight="Bold">Nome representante:</TextBlock>
+                <TextBox Width="300"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Margin="8,0" Width="120" FontWeight="Bold">CPF/CNPJ:</TextBlock>
+                <TextBox Width="150"></TextBox>
+                <TextBlock Margin="8,0" Width="50" FontWeight="Bold">Telefone:</TextBlock>
+                <TextBox Width="120"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Width="120" Margin="8,0" FontWeight="Bold">E-mail:</TextBlock>
+                <TextBox Width="100"></TextBox>
+                <TextBlock Margin="8,0" FontWeight="Bold">Homepage:</TextBlock>
+                <TextBox Width="160"></TextBox>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Margin="8,0" Width="120" FontWeight="Bold">Endereço:</TextBlock>
+                <TextBox Width="300"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Margin="8,0" Width="120" FontWeight="Bold">Cidade:</TextBlock>
+                <TextBox Width="200"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Margin="8,0" Width="120" FontWeight="Bold">UF:</TextBlock>
+                <TextBox Width="100"></TextBox>
+                <TextBlock Margin="8,0" Width="50" FontWeight="Bold">CEP:</TextBlock>
+                <TextBox Width="100"></TextBox>
+            </StackPanel>
+
+        </StackPanel>
+
     </Grid>
 </Window>
+
