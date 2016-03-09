@@ -4,6 +4,8 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,7 +52,58 @@ namespace Amigo.ViewModel
                 }
             }
         }
-       
+
+        ObservableCollection<IChaveValor<int,string>> _listaCategorias;
+        public ObservableCollection<IChaveValor<int,string>> ListaCategorias
+        {
+            get
+            {
+                return _listaCategorias;
+            }
+            set
+            {
+                if (_listaCategorias != value)
+                {
+                    _listaCategorias = value;
+                    RaisePropertyChanged(nameof(ListaCategorias));
+                }
+            }
+        }
+        ObservableCollection<IChaveValor<int, string>> _listaTipos;
+        public ObservableCollection<IChaveValor<int, string>> ListaTipos
+        {
+            get
+            {
+                return _listaTipos;
+            }
+            set
+            {
+                if (_listaTipos != value)
+                {
+                    _listaTipos = value;
+                    RaisePropertyChanged(nameof(ListaTipos));
+                }
+            }
+        }
+        ObservableCollection<IChaveValor<int,string>> _listaSatus;
+        public ObservableCollection<IChaveValor<int, string>> ListaSatus
+        {
+            get
+            {
+                return _listaSatus;
+            }
+            set
+            {
+                if (_listaSatus != value)
+                {
+                    _listaSatus = value;
+                    RaisePropertyChanged(nameof(ListaSatus));
+                }
+            }
+        }
+
+
+
         public RelayCommand AlteraCommand { get; private set; }
 
         //bool podeAlterar = true;
@@ -64,6 +117,33 @@ namespace Amigo.ViewModel
             this.SalvarCommand = new RelayCommand(Salvar, () => podeSalvar);
             this.ExcluiCommand = new RelayCommand(Excluir, () => podeExcluir);
             this.PesquisaCommand = new RelayCommand(Pesquisar);
+
+            
+            //var categorias = (ConfigurationManager.GetSection("appSettings/Categorias") as System.Collections.Hashtable)
+            //     .Cast<System.Collections.DictionaryEntry>()
+            //     .Select(n => new ChaveValor<int, string>() {
+            //         Chave = Convert.ToInt32(n.Key),
+            //         Valor = n.Value.ToString() });
+                 
+            //this.ListaCategorias = new ObservableCollection<IChaveValor<int, string>>(categorias);
+            //var tipos = (ConfigurationManager.GetSection("Tipos") as System.Collections.Hashtable)
+            //     .Cast<System.Collections.DictionaryEntry>()
+            //      .Select(n => new ChaveValor<int, string>()
+            //      {
+            //          Chave = Convert.ToInt32(n.Key),
+            //          Valor = n.Value.ToString()
+            //      });
+            //this.ListaSatus = new ObservableCollection<IChaveValor<int, string>>(tipos);
+
+            //var status = (ConfigurationManager.GetSection("Status") as System.Collections.Hashtable)
+            //     .Cast<System.Collections.DictionaryEntry>()
+            //      .Select(n => new ChaveValor<int, string>()
+            //      {
+            //          Chave = Convert.ToInt32(n.Key),
+            //          Valor = n.Value.ToString()
+            //      });
+            //this.ListaSatus = new ObservableCollection<IChaveValor<int, string>>(status);
+
         }
 
         private void Salvar()

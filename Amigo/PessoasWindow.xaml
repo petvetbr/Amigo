@@ -87,26 +87,16 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Style="{StaticResource splinha}"  >
                 <TextBlock FontWeight="Bold"><Run Text="Categoria"/></TextBlock>
-                <ComboBox x:Name="Categoria" ToolTip="Escolha a categoria" Width="100" Margin="10,0">
-
-                    <ComboBoxItem>1 - fundador</ComboBoxItem>
-                    <ComboBoxItem>2 - efetivo</ComboBoxItem>
-                    <ComboBoxItem>3 - colaborador</ComboBoxItem>
-                    <ComboBoxItem>4 - honorário</ComboBoxItem>
-                    <ComboBoxItem>5 - mirins</ComboBoxItem>
+                <ComboBox x:Name="Categoria" ToolTip="Escolha a categoria" Width="100" Margin="10,0"
+                          ItemsSource="{Binding ListaCategorias}" SelectedItem="{Binding Pessoa.Categoria, Mode=TwoWay}"  DisplayMemberPath="Valor">
                 </ComboBox>
 
                 <TextBlock Margin="10,0" FontWeight="Bold"><Run Text="Tipo"/></TextBlock>
-                <ComboBox Width="100">
-                    <ComboBoxItem>1 - normal</ComboBoxItem>
-                    <ComboBoxItem>2 - diretoria</ComboBoxItem>
-                    <ComboBoxItem>3 - voluntário</ComboBoxItem>
+                <ComboBox Width="100" ItemsSource="{Binding ListaTipos}" SelectedItem="{Binding Pessoa.Tipo, Mode=TwoWay}"  DisplayMemberPath="Valor">
+                 
                 </ComboBox>
                 <TextBlock Margin="10,0" FontWeight="Bold"><Run Text="Status"/></TextBlock>
-                <ComboBox Width="100">
-                    <ComboBoxItem>1 - ativo</ComboBoxItem>
-                    <ComboBoxItem>2 - pendente</ComboBoxItem>
-                    <ComboBoxItem>3 - inativo</ComboBoxItem>
+                <ComboBox Width="100" ItemsSource="{Binding ListaStatus}" SelectedItem="{Binding Pessoa.Status, Mode=TwoWay}"   DisplayMemberPath="Valor">
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Style="{StaticResource splinha}">
