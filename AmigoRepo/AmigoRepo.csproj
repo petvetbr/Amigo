@@ -46,6 +46,10 @@
     <Compile Include="ICaixaTransporte.cs" />
     <Compile Include="IChaveValor.cs" />
     <Compile Include="IEmprestimoCaixa.cs" />
+    <Compile Include="IFluxoCaixa.cs" />
+    <Compile Include="ILancamentoCaixa.cs" />
+    <Compile Include="IMensalidades.cs" />
+    <Compile Include="IMesMensalidade.cs" />
     <Compile Include="IObservacao.cs" />
     <Compile Include="IPessoa.cs" />
     <Compile Include="IRepositorio.cs" />

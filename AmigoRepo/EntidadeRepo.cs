@@ -7,8 +7,8 @@ namespace AmigoRepo
 {
     public abstract class EntidadeRepo:Observable
     {
-        Guid _repositorio;
-        public Guid Repositorio
+        string _repositorio;
+        public string Repositorio
         {
             get
             {
