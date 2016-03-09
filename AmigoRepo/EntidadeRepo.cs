@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AmigoRepo
 {
-    public abstract class EntidadeRepo:Observable
+    public abstract class EntidadeRepo : Observable
     {
         string _repositorio;
         public string Repositorio
@@ -35,6 +35,22 @@ namespace AmigoRepo
                 if (value.Equals(_numero)) return;
                 _numero = value;
                 OnPropertyChanged(nameof(Numero));
+            }
+        }
+
+        int _id;
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+
+            set
+            {
+                if (value.Equals(_id)) return;
+                _id = value;
+                OnPropertyChanged(nameof(Id));
             }
         }
         string _observacao;

@@ -8,6 +8,7 @@ namespace AmigoRepo
     public interface IRepositorio
     {
         string Repositorio { get; set; }
-        int  Numero { get; set; }
+        int Id { get; set; }
+        int Numero { get; set; }
     }
 }
