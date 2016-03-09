@@ -57,6 +57,8 @@
     <Compile Include="ITelefone.cs" />
     <Compile Include="IVacinaVermifugo.cs" />
     <Compile Include="IVeterinario.cs" />
+    <Compile Include="Mensalidades.cs" />
+    <Compile Include="MesMensalidade.cs" />
     <Compile Include="ObjetoObservavel.cs" />
     <Compile Include="Pessoa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
