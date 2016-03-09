@@ -142,6 +142,12 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AmigoRepo\AmigoRepo.csproj">
+      <Project>{02e4bdb1-1131-40ad-b0a2-9109f0d2b6fc}</Project>
+      <Name>AmigoRepo</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -73,11 +73,15 @@ namespace AmigoRepo
             }
 
         }
-        public IEnumerable<T> ObterLista<T>(Expression<Func<T, bool>> exp) where T : class, new()
+        public IEnumerable<T> ObterLista<T>(Expression<Func<T, bool>> exp=null) where T : class, new()
         {
             try
             {
                 var socios = db.GetCollection<T>(ObterPlural<T>());
+                if(exp==null)
+                {
+                    return socios.FindAll();
+                }
                 return socios.Find(exp);
             }
             catch (Exception)

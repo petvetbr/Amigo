@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AmigoRepo
 {
-    class CaixaTransporte:EntidadeRepo, ICaixaTransporte
+    public class CaixaTransporte:EntidadeRepo, ICaixaTransporte
     {
         int _altura;
         public int Altura
