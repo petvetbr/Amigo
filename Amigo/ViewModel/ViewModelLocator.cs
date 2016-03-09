@@ -43,6 +43,7 @@ namespace Amigo.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+
         }
 
         public MainViewModel Main
@@ -52,7 +53,34 @@ namespace Amigo.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+        public FluxoCaixaViewModel FluxoCaixa
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<FluxoCaixaViewModel>();
+            }
+        }
+        public MensalidadesViewModel Mensalidades
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MensalidadesViewModel>();
+            }
+        }
+        public PessoasViewModel Pessoas
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<PessoasViewModel>();
+            }
+        }
+        public CaixaTransporteViewModel CaixaTransporte
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CaixaTransporteViewModel>();
+            }
+        }
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

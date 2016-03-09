@@ -69,8 +69,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CaixaTransporteWindow.xaml.cs">
+      <DependentUpon>CaixaTransporteWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FluxoCaixaWindow.xaml.cs">
+      <DependentUpon>FluxoCaixaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MensalidadesWindow.xaml.cs">
+      <DependentUpon>MensalidadesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PessoasWindow.xaml.cs">
+      <DependentUpon>PessoasWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\CaixaTransporteViewModel.cs" />
+    <Compile Include="ViewModel\FluxoCaixaViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MensalidadesViewModel.cs" />
+    <Compile Include="ViewModel\PessoasViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="CaixaTransporteWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FluxoCaixaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -83,6 +107,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MensalidadesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PessoasWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
