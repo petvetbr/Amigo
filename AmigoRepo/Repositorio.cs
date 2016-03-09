@@ -2,88 +2,100 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace AmigoRepo
 {
-    public class Repositorio:IDisposable
+    public class Repositorio : IDisposable
     {
         private readonly string NomeRepositorio;
         private readonly string CaminhoRepositorio;
         LiteDatabase db;
-        public Repositorio(string nomeRepositorio, string caminho=null)
+        public Repositorio(string nomeRepositorio, string caminho = null)
         {
             caminho = caminho ?? @"e:\acpa\";
             this.NomeRepositorio = nomeRepositorio;
             this.CaminhoRepositorio = string.Format("{0}{1}.db", caminho, nomeRepositorio);
-            db=new LiteDatabase(CaminhoRepositorio);
+            db = new LiteDatabase(CaminhoRepositorio);
         }
-        
 
-        public KeyValuePair<bool, int> SalvarSocio(Socio socio)
+    
+
+        public KeyValuePair<bool, int> Salvar<T>(T item) where T :  class, IRepositorio, new()
         {
             try
             {
-                // Open database (or create if not exits)
-               
-                    // Get customer collection
 
-                    var socios = db.GetCollection<Socio>("Socios");
-                    Socio socioAntigo = null;
-                    if (socio.Id > 0)
-                    {
-                        socioAntigo = socios.FindById(socio.Id);
-                        socio.Id = socioAntigo.Id;
-                        socios.Update(socio);
-                    }
-                    else
-                    {
-                        AssociarRepositorio(socio);
-                        socios.Insert(socio);
-                    }
-                    socios.EnsureIndex(x => x.Id);
+                var itens = db.GetCollection<T>(ObterPlural<T>());
+                T itemAntigo = null;
+                if (item.Id > 0)
+                {
+                    itemAntigo = itens.FindById(new BsonValue(item.Id));
+                    item.Id = itemAntigo.Id;
+                    itens.Update(item);
+                }
+                else
+                {
+                    AssociarRepositorio(item);
+                    itens.Insert(item);
+                }
+                itens.EnsureIndex(x => x.Id);
 
-              
-                return new KeyValuePair<bool, int>(true, socio.Id);
+
+                return new KeyValuePair<bool, int>(true, item.Id);
             }
             catch (Exception)
             {
-
                 throw;
             }
-           
+
 
         }
-
-        public Socio ObterSocio(int id)
+        private static string ObterPlural<T>()
+            {
+            var s = typeof(T).Name;
+            var nome = s + "s";
+            return nome;
+        }
+        public T Obter<T>(Expression<Func<T,bool>> exp) where T: class,new()
         {
             try
             {
-                Socio socio = null;
                 
-                    // Get customer collection
-
-                    var socios = db.GetCollection<Socio>("Socios");
-                    socio = socios.FindById(id);
-               
-                return socio;
+                var socios = db.GetCollection<T>(ObterPlural<T>());
+                return socios.FindOne(exp);
             }
             catch (Exception)
             {
 
                 throw;
             }
-           
+
         }
-        public bool ApagarSocio(int id)
+        public IEnumerable<T> ObterLista<T>(Expression<Func<T, bool>> exp) where T : class, new()
         {
             try
             {
-               
+                var socios = db.GetCollection<T>(ObterPlural<T>());
+                return socios.Find(exp);
+            }
+            catch (Exception)
+            {
 
-                    var socios = db.GetCollection<Socio>("Socios");
-                    socios.Delete(id);
-               
+                throw;
+            }
+
+        }
+
+        
+        public bool Apagar<T>(Expression<Func<T, bool>> exp) where T : class, new()
+
+        {
+            try
+            {
+                var socios = db.GetCollection<T>(ObterPlural<T>());
+                socios.Delete(exp);
                 return true;
             }
             catch (Exception)
@@ -91,7 +103,7 @@ namespace AmigoRepo
 
                 throw;
             }
-           
+
         }
 
         private void AssociarRepositorio(IRepositorio item)
