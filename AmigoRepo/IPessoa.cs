@@ -7,8 +7,8 @@ namespace AmigoRepo
 {
     public interface IPessoa: IRepositorio, IObservacao
     {
-        DateTime DataCadastro { get; set; }
-        DateTime DataNascimento { get; set; }
+        DateTime? DataCadastro { get; set; }
+        DateTime? DataNascimento { get; set; }
         string Cidade { get; set; }
         string UF { get; set; }
         string CEP { get; set; }
