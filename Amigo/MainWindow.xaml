@@ -24,7 +24,8 @@
                 
             </ListBox>
             <StackPanel HorizontalAlignment="Center"  Orientation="Horizontal">
-                <Button Command="{Binding AbrirItem}">Abrir</Button>
+                <Button Margin="5" Command="{Binding NovoItemCommand}">Novo</Button>
+                <Button Margin="5" Command="{Binding AbrirItemCommand}">Exibir</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

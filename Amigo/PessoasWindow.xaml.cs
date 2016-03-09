@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,7 @@ namespace Amigo
         public PessoasWindow()
         {
             InitializeComponent();
+            Messenger.Default.Register<CloseWindowMessage>(this,"PessoasWindow", _ => Close());
         }
     }
 }

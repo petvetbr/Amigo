@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System;
 using AmigoRepo;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Amigo.ViewModel
 {
@@ -22,7 +23,12 @@ namespace Amigo.ViewModel
     public class MainViewModel : ViewModelBase
     {
 
-        public RelayCommand AbrirItem
+        public RelayCommand AbrirItemCommand
+        {
+            get;
+            private set;
+        }
+        public RelayCommand NovoItemCommand
         {
             get;
             private set;
@@ -77,7 +83,7 @@ namespace Amigo.ViewModel
                 {
                     itemSelecionado = value;
                     RaisePropertyChanged(nameof(ItemSelecionado));
-                    if (value.Key > 0) { AlterarLista(); }
+                    if (value.Key > 0) { RefreshLista(); }
                 }
             }
         }
@@ -98,26 +104,23 @@ namespace Amigo.ViewModel
             }
         }
 
-        private void AlterarLista()
+        private void RefreshLista()
         {
             switch (itemSelecionado.Key)
             {
                 case 1:
                     {
-                        using (var repo = new Repositorio("Teste"))
-                        {
-                            var lista = repo.ObterLista<Socio>(null);
+                        
+                            var lista = Util.Repositorio.ObterLista<Socio>();
                             this.ListaItens = new ObservableCollection<IRepositorio>(lista);
-                        }
+                        
                     }
                     break;
                 case 2:
                     {
-                        using (var repo = new Repositorio("Teste"))
-                        {
-                            var lista = repo.ObterLista<CaixaTransporte>(p => true);
+                       
+                            var lista = Util.Repositorio.ObterLista<CaixaTransporte>();
                             this.ListaItens = new ObservableCollection<IRepositorio>(lista);
-                        }
                     }
                     break;
                 case 3:
@@ -143,7 +146,8 @@ namespace Amigo.ViewModel
             listaCombo.Add(3, "Mensalidades");
             this.ListaCombo = new ObservableCollection<KeyValuePair<int, string>>(listaCombo);
 
-            AbrirItem = new RelayCommand(ExecutarAbrirItem,() => itemSelecionadoLista != null);
+            AbrirItemCommand = new RelayCommand(ExecutarAbrirItem,() => itemSelecionadoLista != null);
+            NovoItemCommand = new RelayCommand(ExecutarNovoItem, () => true);
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -154,9 +158,30 @@ namespace Amigo.ViewModel
             ////}
         }
 
+        private void ExecutarNovoItem()
+        {
+            var pw = new PessoasWindow();
+            pw.Show();
+        }
+
         private void ExecutarAbrirItem()
         {
-            throw new NotImplementedException();
+            switch (itemSelecionado.Key)
+            {
+                case 1:
+                    {
+                        
+                        var pw = new PessoasWindow();
+                        Messenger.Default.Send(itemSelecionadoLista as IPessoa);
+                        pw.ShowDialog();
+                        RefreshLista();
+
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
+
     }
 }

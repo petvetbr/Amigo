@@ -72,6 +72,8 @@
     <Compile Include="CaixaTransporteWindow.xaml.cs">
       <DependentUpon>CaixaTransporteWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CloseWindowMessage.cs" />
+    <Compile Include="Constantes.cs" />
     <Compile Include="FluxoCaixaWindow.xaml.cs">
       <DependentUpon>FluxoCaixaWindow.xaml</DependentUpon>
     </Compile>
@@ -81,6 +83,7 @@
     <Compile Include="PessoasWindow.xaml.cs">
       <DependentUpon>PessoasWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Util.cs" />
     <Compile Include="ViewModel\CaixaTransporteViewModel.cs" />
     <Compile Include="ViewModel\FluxoCaixaViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

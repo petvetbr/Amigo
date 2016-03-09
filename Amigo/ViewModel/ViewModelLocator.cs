@@ -43,6 +43,10 @@ namespace Amigo.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<PessoasViewModel>();
+            SimpleIoc.Default.Register<MensalidadesViewModel>();
+            SimpleIoc.Default.Register<FluxoCaixaViewModel>();
+            SimpleIoc.Default.Register<CaixaTransporteViewModel>();
 
         }
 
