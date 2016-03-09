@@ -57,8 +57,8 @@ namespace AmigoRepo
                 OnPropertyChanged(nameof(Cpf_Cnpj));
             }
         }
-        DateTime _DataCadastro;
-        public DateTime DataCadastro
+        DateTime? _DataCadastro;
+        public DateTime? DataCadastro
         {
             get
             {
@@ -72,8 +72,8 @@ namespace AmigoRepo
                 OnPropertyChanged(nameof(DataCadastro));
             }
         }
-        DateTime _DataNascimento;
-        public DateTime DataNascimento
+        DateTime? _DataNascimento;
+        public DateTime? DataNascimento
         {
             get
             {
@@ -243,6 +243,10 @@ namespace AmigoRepo
                 _UF = value;
                 OnPropertyChanged(nameof(UF));
             }
+        }
+        public override string ToString()
+        {
+            return string.Format("{0} -{1}", this.Numero, this.Nome);
         }
     }
 }
