@@ -172,20 +172,23 @@ namespace Amigo.ViewModel
             }
         }
 
-        public RelayCommand AlteraCommand { get; private set; }
-
-        //bool podeAlterar = true;
-        bool podeSalvar = true;
-        bool podeExcluir = true;
 
         public PessoasViewModel()
         {
 
             Messenger.Default.Register<TipoPessoa>(this, TipoPessoaEnviada);
-            this.SalvarCommand = new RelayCommand(Salvar, () => podeSalvar);
-            this.ExcluiCommand = new RelayCommand(Excluir, () => podeExcluir);
+            this.SalvarCommand = new RelayCommand(Salvar, () => Pessoa != null);
+            this.ExcluiCommand = new RelayCommand(Excluir, () => Pessoa != null);
             this.PesquisaCommand = new RelayCommand(Pesquisar);
+            this.NovoItemCommand = new RelayCommand(CriarNovoItem);
+            ExpanderAberto = true;
 
+            CarregarListas();
+
+        }
+
+        private void CarregarListas()
+        {
             var cat = new List<KeyValuePair<int, string>>();
             cat.Add(new KeyValuePair<int, string>(1, "Fundador"));
             cat.Add(new KeyValuePair<int, string>(2, "Efetivo"));
@@ -209,11 +212,8 @@ namespace Amigo.ViewModel
             status.Add(new KeyValuePair<int, string>(3, "Inativo"));
 
             this.ListaStatus = new ObservableCollection<KeyValuePair<int, string>>(status);
-            NovoItemCommand = new RelayCommand(CriarNovoItem);
-            ExpanderAberto = true;
-
-
         }
+
         private string _nomeTabela;
         private void TipoPessoaEnviada(TipoPessoa tipo)
         {
@@ -299,10 +299,6 @@ namespace Amigo.ViewModel
             RefreshLista(x => x.Nome.Contains(FiltroPesquisa));
         }
 
-        private void Alterar()
-        {
-            throw new NotImplementedException();
-        }
         private void RefreshLista(Expression<Func<Pessoa, bool>> expression = null)
         {
             var lista = Util.Repositorio.ObterLista<Pessoa>(expression, _nomeTabela);
