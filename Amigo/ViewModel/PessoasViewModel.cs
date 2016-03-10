@@ -61,6 +61,7 @@ namespace Amigo.ViewModel
                 {
                     _pessoa = value;
                     RaisePropertyChanged(nameof(Pessoa));
+                    if (value == null) return;
                     this.TelefoneSelecionado = value.Telefones.FirstOrDefault() ?? new Telefone();
                 }
             }
