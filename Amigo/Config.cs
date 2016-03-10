@@ -22,6 +22,40 @@ namespace Amigo
         private static IEnumerable<KeyValuePair<int, string>> _statusAnimal;
         private static IEnumerable<KeyValuePair<int, string>> _especieAnimal;
         private static IEnumerable<KeyValuePair<int, string>> _generoAnimal;
+        private static IEnumerable<KeyValuePair<int, string>> _tiposTelefones;
+
+
+        public static IEnumerable<KeyValuePair<int, string>> ObterListaTiposTelefone()
+        {
+            if (_tiposTelefones != null)
+            {
+                return _tiposTelefones;
+            }
+            var tel = new List<KeyValuePair<int, string>>();
+            tel.Add(new KeyValuePair<int, string>(1, "Celular"));
+            tel.Add(new KeyValuePair<int, string>(2, "Fixo"));
+            tel.Add(new KeyValuePair<int, string>(2, "Recado"));
+            _tiposTelefones = tel;
+            return tel;
+        }
+
+
+
+        public static IEnumerable<KeyValuePair<int, string>> ObterListaGeneroAnimal()
+        {
+            if (_generoAnimal != null)
+            {
+                return _generoAnimal;
+            }
+            var sexo = new List<KeyValuePair<int, string>>();
+            sexo.Add(new KeyValuePair<int, string>(1, "Macho"));
+            sexo.Add(new KeyValuePair<int, string>(2, "Fêmea"));
+            _generoAnimal = sexo;
+            return sexo;
+        }
+
+
+
 
         public static IEnumerable<KeyValuePair<int, string>> ObterListaEspecieAnimal()
         {

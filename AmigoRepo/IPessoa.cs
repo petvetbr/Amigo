@@ -12,6 +12,7 @@ namespace AmigoRepo
         string Cidade { get; set; }
         string UF { get; set; }
         string CEP { get; set; }
+        string Bairro { get; set; }
         string Endereco { get; set; }
         string Nome { get; set; }
         string NomeFantasia { get; set; }
@@ -20,7 +21,7 @@ namespace AmigoRepo
         string Cpf_Cnpj { get; set; }
         string TipoPessoa { get; set; }
         string Homepage { get; set; }
-        IEnumerable<ITelefone> Telefones { get; set; }
+        IList<ITelefone> Telefones { get; set; }
         int Status { get; set; }
         int Categoria { get; set; }
         int Tipo { get; set; }
