@@ -33,19 +33,18 @@ namespace Amigo.ViewModel
             private set;
         }
       
-
-        public RelayCommand AbrirItemCommand
+        public RelayCommand MenuServicosCaixaTransporteCommand
         {
             get;
             private set;
         }
-        public RelayCommand NovoItemCommand
+        public RelayCommand MenuFluxoCaixaCommand
         {
             get;
             private set;
         }
 
-     
+        
 
 
         /// <summary>
@@ -56,7 +55,19 @@ namespace Amigo.ViewModel
            
             MenuCadastroSociosCommand = new RelayCommand(MenuCadastroSocios);
             MenuCadastroCaixasTransporteCommand = new RelayCommand(MenuCadastroCaixasTransporte);
+            MenuFluxoCaixaCommand = new RelayCommand(MenuFluxoCaixa);
+            MenuServicosCaixaTransporteCommand = new RelayCommand(ServicosCaixaTransporte);
             
+        }
+
+        private void ServicosCaixaTransporte()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void MenuFluxoCaixa()
+        {
+            throw new NotImplementedException();
         }
 
         private void MenuCadastroCaixasTransporte()

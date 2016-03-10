@@ -23,6 +23,12 @@
                 <MenuItem Header="Sócios" Command="{Binding MenuCadastroSociosCommand}"/>
                 <MenuItem Header="Caixas de Transportes" Command="{Binding MenuCadastroCaixasTransporteCommand}"/>
             </MenuItem>
+            <MenuItem Header="Serviços">
+                <MenuItem Header="Empréstimo Caixas Transporte" Command="{Binding MenuServicosCaixaTransporteCommand}"/>
+            </MenuItem>
+            <MenuItem Header="Financeiro">
+                <MenuItem Header="Fluxo Caixa" Command="{Binding MenuFluxoCaixaCommand}"/>
+            </MenuItem>
         </Menu>
         <StackPanel Grid.Row="1">
         </StackPanel>
