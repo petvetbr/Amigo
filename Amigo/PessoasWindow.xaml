@@ -43,13 +43,13 @@
         </Expander>
             <StackPanel DockPanel.Dock="Right">
             <DockPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top"  Style="{StaticResource splinha}" >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Center"  Style="{StaticResource splinha}" >
                     <TextBlock Margin="8,0" FontWeight="Bold">Nº:</TextBlock>
                     <TextBox Width="40"  Text="{Binding Pessoa.Numero}" ></TextBox>
                 </StackPanel>
 
-                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
-                    <TextBlock VerticalAlignment="Center" Margin="8,0" FontWeight="Bold" >Data:</TextBlock>
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
+                    <TextBlock VerticalAlignment="Center" Margin="10,0" FontWeight="Bold" >Data de cadastro:</TextBlock>
                     <DatePicker SelectedDate="{Binding Pessoa.DataCadastro}"/>
 
                 </StackPanel>
