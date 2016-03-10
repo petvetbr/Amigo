@@ -24,6 +24,7 @@ namespace AmigoRepo
         int Status { get; set; }
         int Categoria { get; set; }
         int Tipo { get; set; }
+        IEnumerable<IChaveValor<string,string>> CamposExtras { get; set; }
 
     }
 }

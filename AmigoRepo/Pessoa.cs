@@ -281,5 +281,23 @@ namespace AmigoRepo
                 }
             }
         }
+
+        IEnumerable<IChaveValor<string, string>> _camposExtras;
+        public IEnumerable<IChaveValor<string, string>> CamposExtras
+        {
+            get
+            {
+                return _camposExtras;
+            }
+            set
+            {
+                if (_camposExtras != value)
+                {
+                    _camposExtras = value;
+                    OnPropertyChanged(nameof(CamposExtras));
+                }
+            }
+        }
+
     }
 }
