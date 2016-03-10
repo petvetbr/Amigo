@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Icon="Imagens/LogoAmigo64.png"
         DataContext="{Binding Path=Pessoas, Source={StaticResource Locator}}"
-        Title="{Binding Titulo}" Height="400" Width="1000">
+        Title="{Binding Titulo}" Height="450" Width="1000">
     <Window.Resources>
         <Style TargetType="{x:Type StackPanel}" x:Key="splinha">
             <Setter Property="Margin" Value="4">
@@ -20,12 +20,12 @@
             <Grid Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto">
-                        
+
                     </RowDefinition>
                     <RowDefinition Height="*">
-                        
 
-                        </RowDefinition>
+
+                    </RowDefinition>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" Margin="0,5"  VerticalAlignment="Top">
@@ -39,18 +39,18 @@
                     <Button HorizontalAlignment="Right" Command="{Binding NovoItemCommand}"  ToolTipService.ToolTip="Criar novo registro">Novo</Button>
                 </StackPanel>
             </Grid>
-         
-           
+
+
         </Expander>
-            <StackPanel DockPanel.Dock="Right">
+        <StackPanel DockPanel.Dock="Right">
             <StackPanel.Resources>
-            <Style TargetType="{x:Type StackPanel}">
+                <Style TargetType="{x:Type StackPanel}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Pessoa}" Value="{x:Null}">
                             <Setter Property="IsEnabled" Value="False"></Setter>
                         </DataTrigger>
                     </Style.Triggers>
-            </Style>
+                </Style>
             </StackPanel.Resources>
             <DockPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Center"  Style="{StaticResource splinha}" >
@@ -79,7 +79,11 @@
                 <TextBlock Margin="8,0" Width="120" FontWeight="Bold">Nome:</TextBlock>
                 <TextBox Text="{Binding Pessoa.Nome}"  Width="350"></TextBox>
             </StackPanel>
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
+                <TextBlock VerticalAlignment="Center" Margin="10,0" Width="120" FontWeight="Bold" >Data de Nascimento:</TextBlock>
+                <DatePicker SelectedDate="{Binding Pessoa.DataNascimento}"/>
 
+            </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0"  Width="120" FontWeight="Bold">Nome fantasia:</TextBlock>
                 <TextBox Width="350" Text="{Binding Pessoa.NomeFantasia}"></TextBox>
@@ -89,20 +93,53 @@
                 <TextBlock Margin="8,0" Width="120" FontWeight="Bold">Nome representante:</TextBlock>
                 <TextBox Text="{Binding Pessoa.NomeRepresentante}" Width="350"></TextBox>
             </StackPanel>
+            <GroupBox Header="Telefones:">
+                <DockPanel>
+                    <StackPanel HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Margin="8,0" Grid.Column="0">Tipo:</TextBlock>
+                            <TextBlock Margin="8,0" Grid.Column="1">DDD:</TextBlock>
+                            <TextBlock Margin="8,0" Grid.Column="2">Número:</TextBlock>
+                            <ComboBox DisplayMemberPath="Value"  Grid.Row="1"  Width="100" SelectedValuePath="Value" SelectedValue="{Binding TelefoneSelecionado.Descricao}" ItemsSource="{Binding ListaTiposTelefone}"></ComboBox>
+                            <TextBox Grid.Row="1"  Grid.Column="1" Width="40" Text="{Binding TelefoneSelecionado.Ddd}"></TextBox>
+                            <TextBox Grid.Row="1"  Grid.Column="2" Width="120" Text="{Binding TelefoneSelecionado.NumeroTelefone}"></TextBox>
+                            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="3">
+                                <Button Command="{Binding AdicionarTelefoneCommand, Mode=OneWay}" >+</Button>
+                                <Button Command="{Binding RemoverTelefoneCommand, Mode=OneWay}"  >X</Button>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                    <ListBox DockPanel.Dock="Right" VerticalAlignment="Top" Margin="5,20,5,5"  SelectedItem="{Binding TelefoneSelecionado}"  ItemsSource="{Binding Pessoa.Telefones}" >
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
-                <TextBlock Margin="8,0" Width="120" FontWeight="Bold">CPF/CNPJ:</TextBlock>
-                <TextBox Width="150"></TextBox>
-                <TextBlock Margin="8,0" Width="50" FontWeight="Bold">Telefone:</TextBlock>
-                <TextBox Width="135"></TextBox>
-            </StackPanel>
+                    </ListBox>
+                </DockPanel>
+
+            </GroupBox>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Width="120" Margin="8,0" FontWeight="Bold">E-mail:</TextBlock>
-                <TextBox Text="{Binding Pessoa.Email}"  Width="100"></TextBox>
-                <TextBlock Margin="8,0" FontWeight="Bold">Homepage:</TextBlock>
-                <TextBox  Text="{Binding Pessoa.Homepage}" Width="170"></TextBox>
+                <TextBox Text="{Binding Pessoa.Email}"  Width="130"></TextBox>
+                <TextBlock Margin="8,0" Width="120" FontWeight="Bold">CPF/CNPJ:</TextBlock>
+                <TextBox Width="100"></TextBox>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                
+                <TextBlock Margin="8,0" Width="120"  FontWeight="Bold">Homepage:</TextBlock>
+                <TextBox  Text="{Binding Pessoa.Homepage}" Width="250"></TextBox>
+            </StackPanel>
+
+
 
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
@@ -111,8 +148,10 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
-                <TextBlock Margin="8,0" Width="120" FontWeight="Bold">Cidade:</TextBlock>
-                <TextBox Text="{Binding Pessoa.Cidade}" Width="350"></TextBox>
+                <TextBlock Margin="8,0" Width="120" FontWeight="Bold">Bairro:</TextBlock>
+                <TextBox Text="{Binding Pessoa.Bairro}" Width="150"></TextBox>
+                <TextBlock Margin="8,0"  FontWeight="Bold">Cidade:</TextBlock>
+                <TextBox Text="{Binding Pessoa.Cidade}" HorizontalAlignment="left"  Width="140"></TextBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">

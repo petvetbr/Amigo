@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -197,8 +198,8 @@ namespace AmigoRepo
             }
         }
 
-        IEnumerable<ITelefone> _Telefones;
-        public IEnumerable<ITelefone> Telefones
+        IList<ITelefone> _Telefones;
+        public IList<ITelefone> Telefones
         {
             get
             {
@@ -280,6 +281,44 @@ namespace AmigoRepo
                     OnPropertyChanged(nameof(Tipo));
                 }
             }
+        }
+
+        IEnumerable<IChaveValor<string, string>> _camposExtras;
+        public IEnumerable<IChaveValor<string, string>> CamposExtras
+        {
+            get
+            {
+                return _camposExtras;
+            }
+            set
+            {
+                if (_camposExtras != value)
+                {
+                    _camposExtras = value;
+                    OnPropertyChanged(nameof(CamposExtras));
+                }
+            }
+        }
+        string _bairro;
+        public string Bairro
+        {
+            get
+            {
+                return _bairro;
+            }
+            set
+            {
+                if (_bairro != value)
+                {
+                    _bairro = value;
+                    OnPropertyChanged(nameof(Bairro));
+                }
+            }
+        }
+
+        public Pessoa()
+        {
+            this.Telefones = new ObservableCollection<ITelefone>();
         }
     }
 }

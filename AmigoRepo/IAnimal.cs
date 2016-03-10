@@ -16,7 +16,8 @@ namespace AmigoRepo
         int Raca { get; set; }
         int Ambiente { get; set; }
         bool Castrado { get; set; }
-        IVeterinario Clinica { get; set; }
+        IPessoa Clinica { get; set; }
+        string Foto { get; set; }
         IEnumerable<IChaveValor<DateTime, IVacinaVermifugo>> Vacinas { get; set; }
         IEnumerable<IChaveValor<DateTime, IVacinaVermifugo>> Vermifugos { get; set; }
         int Status { get; set; }

@@ -38,6 +38,16 @@ namespace Amigo.ViewModel
             private set;
         }
 
+        public RelayCommand AdicionarTelefoneCommand
+        {
+            get;
+            private set;
+        }
+        public RelayCommand RemoverTelefoneCommand
+        {
+            get;
+            private set;
+        }
         Pessoa _pessoa;
         public Pessoa Pessoa
         {
@@ -51,6 +61,8 @@ namespace Amigo.ViewModel
                 {
                     _pessoa = value;
                     RaisePropertyChanged(nameof(Pessoa));
+                    if (value == null) return;
+                    this.TelefoneSelecionado = value.Telefones.FirstOrDefault() ?? new Telefone();
                 }
             }
         }
@@ -103,6 +115,23 @@ namespace Amigo.ViewModel
                 }
             }
         }
+        ObservableCollection<KeyValuePair<int, string>> _listaTiposTelefone;
+        public ObservableCollection<KeyValuePair<int, string>> ListaTiposTelefone
+        {
+            get
+            {
+                return _listaTiposTelefone;
+            }
+            set
+            {
+                if (_listaTiposTelefone != value)
+                {
+                    _listaTiposTelefone = value;
+                    RaisePropertyChanged(nameof(ListaTiposTelefone));
+                }
+            }
+        }
+
 
         ObservableCollection<IRepositorio> _listaItens;
         public ObservableCollection<IRepositorio> ListaItens
@@ -172,6 +201,23 @@ namespace Amigo.ViewModel
             }
         }
 
+        ITelefone _telefoneSelecionado;
+        public ITelefone TelefoneSelecionado
+        {
+            get
+            {
+                return _telefoneSelecionado;
+            }
+            set
+            {
+                if (_telefoneSelecionado != value)
+                {
+                    _telefoneSelecionado = value;
+                    RaisePropertyChanged(nameof(TelefoneSelecionado));
+                }
+            }
+        }
+
 
         public PessoasViewModel()
         {
@@ -181,37 +227,35 @@ namespace Amigo.ViewModel
             this.ExcluiCommand = new RelayCommand(Excluir, () => Pessoa != null);
             this.PesquisaCommand = new RelayCommand(Pesquisar);
             this.NovoItemCommand = new RelayCommand(CriarNovoItem);
+            this.AdicionarTelefoneCommand = new RelayCommand(AdicionarTelefone, () => this.TelefoneSelecionado != null);
+            this.RemoverTelefoneCommand = new RelayCommand(RemoverTelefone, 
+                () => this.TelefoneSelecionado != null     && this.Pessoa.Telefones.Contains(this.TelefoneSelecionado));
             ExpanderAberto = true;
 
             CarregarListas();
 
         }
 
+        private void AdicionarTelefone()
+        {
+            this.Pessoa.Telefones.Add(this.TelefoneSelecionado);
+            this.TelefoneSelecionado = new Telefone();
+        }
+
+        private void RemoverTelefone()
+        {
+            this.Pessoa.Telefones.Remove(this.TelefoneSelecionado);
+            this.TelefoneSelecionado = new Telefone();
+        }
+
         private void CarregarListas()
         {
-            var cat = new List<KeyValuePair<int, string>>();
-            cat.Add(new KeyValuePair<int, string>(1, "Fundador"));
-            cat.Add(new KeyValuePair<int, string>(2, "Efetivo"));
-            cat.Add(new KeyValuePair<int, string>(3, "Colaborador"));
-            cat.Add(new KeyValuePair<int, string>(4, "Honorario"));
-            cat.Add(new KeyValuePair<int, string>(5, "Mirim"));
+           
 
-            this.ListaCategorias = new ObservableCollection<KeyValuePair<int, string>>(cat);
-
-            var tipos = new List<KeyValuePair<int, string>>();
-            tipos.Add(new KeyValuePair<int, string>(1, "Normal"));
-            tipos.Add(new KeyValuePair<int, string>(2, "Diretoria"));
-            tipos.Add(new KeyValuePair<int, string>(3, "Voluntário"));
-
-            this.ListaTipos = new ObservableCollection<KeyValuePair<int, string>>(tipos);
-
-
-            var status = new List<KeyValuePair<int, string>>();
-            status.Add(new KeyValuePair<int, string>(1, "Ativo"));
-            status.Add(new KeyValuePair<int, string>(2, "Pendente"));
-            status.Add(new KeyValuePair<int, string>(3, "Inativo"));
-
-            this.ListaStatus = new ObservableCollection<KeyValuePair<int, string>>(status);
+            this.ListaCategorias = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaPessoasCategoria());
+            this.ListaTipos = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaPessoasTipos());
+            this.ListaStatus = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaPessoasStatus());
+            this.ListaTiposTelefone = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaTiposTelefone());
         }
 
         private string _nomeTabela;
@@ -252,16 +296,19 @@ namespace Amigo.ViewModel
 
         private void CriarNovoItem()
         {
-            this.Pessoa = new Pessoa();
+            var pessoa = new Pessoa();
             if (Util.Repositorio.ObterLista<Pessoa>(nomeTabela: _nomeTabela).Any())
             {
                 var maxAtual = Util.Repositorio.ObterLista<Pessoa>(nomeTabela: _nomeTabela).Max(p => p.Numero);
-                Pessoa.Numero = ++maxAtual;
+                pessoa.Numero = ++maxAtual;
             }
             else
             {
-                Pessoa.Numero = 1;
+                pessoa.Numero = 1;
             }
+            pessoa.DataCadastro = DateTime.Now;
+            this.TelefoneSelecionado = new Telefone() { Descricao = this.ListaTiposTelefone.FirstOrDefault().Value };
+            this.Pessoa = pessoa;
             ExpanderAberto = false;
         }
 

@@ -9,6 +9,6 @@ namespace AmigoRepo
     {
         string Descricao { get; set; }
         string Ddd { get; set; }
-        string Numero { get; set; }
+        string NumeroTelefone { get; set; }
     }
 }

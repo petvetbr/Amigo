@@ -22,6 +22,23 @@ namespace AmigoRepo
                 OnPropertyChanged(nameof(Ddd));
             }
         }
+        string _numeroTelefone;
+        public string NumeroTelefone
+        {
+            get
+            {
+                return _numeroTelefone;
+            }
+            set
+            {
+                if (_numeroTelefone != value)
+                {
+                    _numeroTelefone = value;
+                    OnPropertyChanged(nameof(NumeroTelefone));
+                }
+            }
+        }
+
         string _Descricao;
         public string Descricao
         {
@@ -37,19 +54,11 @@ namespace AmigoRepo
                 OnPropertyChanged(nameof(Descricao));
             }
         }
-
-        
-        string ITelefone.Numero
+        public override string ToString()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            return string.Format("{0}: {1}-{2}", this.Descricao, this.Ddd, this.NumeroTelefone);
         }
+
+
     }
 }
