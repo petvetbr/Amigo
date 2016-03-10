@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AmigoRepo
 {
-    public class CaixaTransporte:EntidadeRepo, ICaixaTransporte
+    public class CaixaTransporte : EntidadeRepo, ICaixaTransporte
     {
         int _altura;
         public int Altura
@@ -91,8 +91,8 @@ namespace AmigoRepo
             }
         }
 
-        IChaveValor<int,string> _localizacao;
-        public IChaveValor<int, string> Localizacao
+        int _localizacao;
+        public int Localizacao
         {
             get
             {
@@ -100,14 +100,15 @@ namespace AmigoRepo
             }
             set
             {
-                if (_localizacao != value)
+                if (_localizacao == value)
                 {
-                    _localizacao = value;
-                    OnPropertyChanged(nameof(Localizacao));
+                    return;
                 }
+                _localizacao = value;
+                OnPropertyChanged(nameof(Localizacao));
             }
         }
 
-      
+
     }
 }

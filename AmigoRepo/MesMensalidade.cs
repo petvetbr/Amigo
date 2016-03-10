@@ -40,8 +40,8 @@ namespace AmigoRepo
             }
         }
 
-        IChaveValor<int, string> _situacao;
-        public IChaveValor<int, string> Situacao
+        int _situacao;
+        public int Situacao
         {
             get
             {

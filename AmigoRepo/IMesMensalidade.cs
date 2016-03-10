@@ -9,6 +9,6 @@ namespace AmigoRepo
     {
         int Ano { get; set; }
         int Mes { get; set; }
-        IChaveValor<int, string> Situacao { get; set; }
+        int Situacao { get; set; }
     }
 }
