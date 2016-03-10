@@ -64,23 +64,24 @@
 
                 </DockPanel>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
-                    <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">Tamanho da caixa</TextBlock>
-                </StackPanel>
+                <GroupBox Header="Tamanho">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                            <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Altura</TextBlock>
+                            <TextBox Width="50"></TextBox>
+                            <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Comprimento</TextBlock>
+                            <TextBox Width="50"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                            <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Largura</TextBlock>
+                            <TextBox Width="50"></TextBox>
+                            <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Peso</TextBlock>
+                            <TextBox Width="50"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
-                    <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Altura</TextBlock>
-                    <TextBox Width="50"></TextBox>
-                    <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Comprimento</TextBlock>
-                    <TextBox Width="50"></TextBox>
-                </StackPanel>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
-                    <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Largura</TextBlock>
-                    <TextBox Width="50"></TextBox>
-                    <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Peso</TextBlock>
-                    <TextBox Width="50"></TextBox>
-                </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                     <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Situação:</TextBlock>
