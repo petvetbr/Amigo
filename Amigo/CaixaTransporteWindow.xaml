@@ -6,8 +6,80 @@
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
         DataContext="{Binding Path=CaixaTransporte, Source={StaticResource Locator}}"
-        Title="CaixaTransporteWindow" Height="300" Width="300">
+        Title="CaixaTransporteWindow" Height="350" Width="600">
+    <Window.Resources>
+        <Style TargetType="{x:Type StackPanel}" x:Key="splinha">
+            <Setter Property="Margin" Value="6">
+
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+
+
+        <StackPanel DockPanel.Dock="Right">
+            <DockPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Center"  Style="{StaticResource splinha}" >
+                    <TextBlock Margin="10,0" FontWeight="Bold">Nº:</TextBlock>
+                    <TextBox Width="40"  Text="{}" ></TextBox>
+                </StackPanel>
+
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
+                    <TextBlock VerticalAlignment="Center" Margin="15,0" FontWeight="Bold" >Data de cadastro:</TextBlock>
+                    <DatePicker></DatePicker>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="15,0" FontWeight="Bold" VerticalAlignment="Center" >Número de identificação:</TextBlock>
+                        <TextBox Width="50"></TextBox>
+                    </StackPanel>                    
+
+                </StackPanel>
+
+                
+            </DockPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center">Tamanho da caixa</TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Altura</TextBlock>
+                <TextBox Width="50"></TextBox>
+                <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Comprimento</TextBlock>
+                <TextBox Width="50"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Largura</TextBlock>
+                <TextBox Width="50"></TextBox>
+                <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Peso</TextBlock>
+                <TextBox Width="50"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Situação:</TextBlock>
+                <ComboBox Width="80"></ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="150">Ocorrência / Observação:</TextBlock>
+                
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
+                <TextBox Width="250" Height="60"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Style="{StaticResource splinha}">
+
+                <Button Command="{Binding SalvarCommand}"  Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO" Background="#FF3FCFF9">SALVAR</Button>
+                <!--<Button Margin="8,0" Padding="5,0" ToolTip="ALTERA REGISTRO" Background="#FF3FCFF9">ALTERA</Button>-->
+                <Button Command="{Binding PesquisaCommand}"  Margin="8,0" Padding="5,0" ToolTip="PESQUISA REGISTRO" Background="#FF3FCFF9">PESQUISA</Button>
+                <Button Command="{Binding ExcluiCommand}"  Margin="8,0" Padding="5,0" ToolTip="EXCLUI REGISTRO" Background="#FF3FCFF9">EXCLUI</Button>
+            </StackPanel>
+
+
+
+
+        </StackPanel>
+
     </Grid>
 </Window>
