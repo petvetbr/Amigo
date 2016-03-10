@@ -122,7 +122,7 @@ namespace Amigo.ViewModel
                 case 1:
                     {
                         
-                            var lista = Util.Repositorio.ObterLista<Socio>();
+                            var lista = Util.Repositorio.ObterLista<Pessoa>();
                             this.ListaItens = new ObservableCollection<IRepositorio>(lista);
                         
                     }

@@ -21,6 +21,9 @@ namespace AmigoRepo
         string TipoPessoa { get; set; }
         string Homepage { get; set; }
         IEnumerable<ITelefone> Telefones { get; set; }
-        IChaveValor<int, string> Status { get; set; }
+        int Status { get; set; }
+        int Categoria { get; set; }
+        int Tipo { get; set; }
+
     }
 }

@@ -108,7 +108,7 @@ namespace AmigoRepo
             get
             {
                 return _Endereco;
-                    }
+            }
 
             set
             {
@@ -180,9 +180,9 @@ namespace AmigoRepo
             }
         }
 
-        IChaveValor<int, string> _Status;
-        
-            public IChaveValor<int, string> Status
+        int _Status;
+
+        public int Status
         {
             get
             {
@@ -219,7 +219,7 @@ namespace AmigoRepo
             {
                 return _TipoPessoa;
 
-                    }
+            }
 
             set
             {
@@ -247,6 +247,39 @@ namespace AmigoRepo
         public override string ToString()
         {
             return string.Format("{0} -{1}", this.Numero, this.Nome);
+        }
+        int _categoria;
+        public int Categoria
+        {
+            get
+            {
+                return _categoria;
+            }
+            set
+            {
+                if (_categoria != value)
+                {
+                    _categoria = value;
+                    OnPropertyChanged(nameof(Categoria));
+                }
+            }
+        }
+
+        int _tipo;
+        public int Tipo
+        {
+            get
+            {
+                return _tipo;
+            }
+            set
+            {
+                if (_tipo != value)
+                {
+                    _tipo = value;
+                    OnPropertyChanged(nameof(Tipo));
+                }
+            }
         }
     }
 }

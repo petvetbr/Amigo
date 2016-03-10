@@ -167,14 +167,14 @@ namespace Amigo.ViewModel
         private void CriarNovoItem()
         {
             this.Pessoa = new Pessoa();
-            Pessoa.Numero = Util.Repositorio.ObterLista<Socio>().DefaultIfEmpty().Max(p => p.Numero) + 1;
+            Pessoa.Numero = Util.Repositorio.ObterLista<Pessoa>().DefaultIfEmpty().Max(p => p.Numero) + 1;
         }
 
         
 
         private void Salvar()
         {
-            if (Util.Repositorio.Salvar<Socio>(this.Pessoa as Socio).Key)
+            if (Util.Repositorio.Salvar<Pessoa>(this.Pessoa as Pessoa).Key)
             {
                 RefreshLista();
             }
@@ -183,7 +183,7 @@ namespace Amigo.ViewModel
 
         private void Excluir()
         {
-            Util.Repositorio.Apagar<Socio>(x => x.Id == this.Pessoa.Id);
+            Util.Repositorio.Apagar<Pessoa>(x => x.Id == this.Pessoa.Id);
         }
 
         private void Pesquisar()
@@ -197,7 +197,7 @@ namespace Amigo.ViewModel
         }
         private void RefreshLista()
         {
-            var lista = Util.Repositorio.ObterLista<Socio>();
+            var lista = Util.Repositorio.ObterLista<Pessoa>();
             this.ListaItens = new ObservableCollection<IRepositorio>(lista);
         }
     }

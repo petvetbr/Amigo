@@ -7,8 +7,8 @@ namespace AmigoRepo
 {
     public class Mensalidades:EntidadeRepo, IMensalidades
     {
-        ISocio _socio;
-        public ISocio Socio
+        IPessoa _socio;
+        public IPessoa Socio
         {
             get
             {
