@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Amigo"
         DataContext="{Binding Path=Main, Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        Title="Amigo" Height="600" Width="800">
+        Title="Amigo" Height="600" Width="800" Icon="Imagens/LogoAmigo64.png">
     <Window.Resources>
         <Style TargetType="{x:Type StackPanel}" x:Key="splinha">
             <Setter Property="Margin" Value="4">

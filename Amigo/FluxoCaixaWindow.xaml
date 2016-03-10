@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
+        Icon="Imagens/LogoAmigo64.png"
         DataContext="{Binding Path=FluxoCaixa, Source={StaticResource Locator}}"
         Title="FluxoCaixaWindow" Height="300" Width="300">
     <Grid>
