@@ -22,12 +22,12 @@ namespace AmigoRepo
 
     
 
-        public KeyValuePair<bool, int> Salvar<T>(T item) where T :  class, IRepositorio, new()
+        public KeyValuePair<bool, int> Salvar<T>(T item, string nomeTabela=null) where T :  class, IRepositorio, new()
         {
             try
             {
-
-                var itens = db.GetCollection<T>(ObterPlural<T>());
+                nomeTabela = nomeTabela ?? ObterPlural<T>();
+                var itens = db.GetCollection<T>(nomeTabela);
                 T itemAntigo = null;
                 if (item.Id > 0)
                 {
@@ -58,12 +58,12 @@ namespace AmigoRepo
             var nome = s + "s";
             return nome;
         }
-        public T Obter<T>(Expression<Func<T,bool>> exp) where T: class,new()
+        public T Obter<T>(Expression<Func<T,bool>> exp, string nomeTabela = null) where T: class,new()
         {
             try
             {
-                
-                var socios = db.GetCollection<T>(ObterPlural<T>());
+                nomeTabela = nomeTabela ?? ObterPlural<T>();
+                var socios = db.GetCollection<T>(nomeTabela);
                 return socios.FindOne(exp);
             }
             catch (Exception)
@@ -73,11 +73,12 @@ namespace AmigoRepo
             }
 
         }
-        public IEnumerable<T> ObterLista<T>(Expression<Func<T, bool>> exp=null) where T : class, new()
+        public IEnumerable<T> ObterLista<T>(Expression<Func<T, bool>> exp=null, string nomeTabela = null) where T : class, new()
         {
             try
             {
-                var socios = db.GetCollection<T>(ObterPlural<T>());
+                nomeTabela = nomeTabela ?? ObterPlural<T>();
+                var socios = db.GetCollection<T>(nomeTabela);
                 if(exp==null)
                 {
                     return socios.FindAll();
@@ -93,12 +94,13 @@ namespace AmigoRepo
         }
 
         
-        public bool Apagar<T>(Expression<Func<T, bool>> exp) where T : class, new()
+        public bool Apagar<T>(Expression<Func<T, bool>> exp, string nomeTabela = null) where T : class, new()
 
         {
             try
             {
-                var socios = db.GetCollection<T>(ObterPlural<T>());
+                nomeTabela = nomeTabela ?? ObterPlural<T>();
+                var socios = db.GetCollection<T>(nomeTabela);
                 socios.Delete(exp);
                 return true;
             }

@@ -86,7 +86,7 @@ namespace Amigo.ViewModel
             }
         }
         ObservableCollection<IChaveValor<int,string>> _listaSatus;
-        public ObservableCollection<IChaveValor<int, string>> ListaSatus
+        public ObservableCollection<IChaveValor<int, string>> ListaStatus
         {
             get
             {
@@ -97,7 +97,7 @@ namespace Amigo.ViewModel
                 if (_listaSatus != value)
                 {
                     _listaSatus = value;
-                    RaisePropertyChanged(nameof(ListaSatus));
+                    RaisePropertyChanged(nameof(ListaStatus));
                 }
             }
         }
@@ -113,37 +113,45 @@ namespace Amigo.ViewModel
         public PessoasViewModel()
         {
            
-            Messenger.Default.Register<IPessoa>(this, PessoaEnviada);
+            
+            Messenger.Default.Register<PessoaMessageArgs>(this, PessoaEnviada);
             this.SalvarCommand = new RelayCommand(Salvar, () => podeSalvar);
             this.ExcluiCommand = new RelayCommand(Excluir, () => podeExcluir);
             this.PesquisaCommand = new RelayCommand(Pesquisar);
 
+            var cat = new List<IChaveValor<int, string>>();
+            cat.Add(new ChaveValor<int, string>() { Chave = 1, Valor = "Fundador" });
+            cat.Add(new ChaveValor<int, string>() { Chave = 2, Valor = "Efetivo" });
+            cat.Add(new ChaveValor<int, string>() { Chave = 3, Valor = "Colaborador" });
+            cat.Add(new ChaveValor<int, string>() { Chave = 4, Valor = "Honorario" });
+            cat.Add(new ChaveValor<int, string>() { Chave = 5, Valor = "Mirim" });
+           
+            this.ListaCategorias = new ObservableCollection<IChaveValor<int, string>>(cat);
+
+            var tipos = new List<IChaveValor<int, string>>();
+            tipos.Add(new ChaveValor<int, string>() { Chave = 1, Valor = "Normal" });
+            tipos.Add(new ChaveValor<int, string>() { Chave = 2, Valor = "Diretoria" });
+            tipos.Add(new ChaveValor<int, string>() { Chave = 3, Valor = "Voluntário" });
             
-            //var categorias = (ConfigurationManager.GetSection("appSettings/Categorias") as System.Collections.Hashtable)
-            //     .Cast<System.Collections.DictionaryEntry>()
-            //     .Select(n => new ChaveValor<int, string>() {
-            //         Chave = Convert.ToInt32(n.Key),
-            //         Valor = n.Value.ToString() });
-                 
-            //this.ListaCategorias = new ObservableCollection<IChaveValor<int, string>>(categorias);
-            //var tipos = (ConfigurationManager.GetSection("Tipos") as System.Collections.Hashtable)
-            //     .Cast<System.Collections.DictionaryEntry>()
-            //      .Select(n => new ChaveValor<int, string>()
-            //      {
-            //          Chave = Convert.ToInt32(n.Key),
-            //          Valor = n.Value.ToString()
-            //      });
-            //this.ListaSatus = new ObservableCollection<IChaveValor<int, string>>(tipos);
+            this.ListaTipos = new ObservableCollection<IChaveValor<int, string>>(tipos);
 
-            //var status = (ConfigurationManager.GetSection("Status") as System.Collections.Hashtable)
-            //     .Cast<System.Collections.DictionaryEntry>()
-            //      .Select(n => new ChaveValor<int, string>()
-            //      {
-            //          Chave = Convert.ToInt32(n.Key),
-            //          Valor = n.Value.ToString()
-            //      });
-            //this.ListaSatus = new ObservableCollection<IChaveValor<int, string>>(status);
 
+            var status = new List<IChaveValor<int, string>>();
+            status.Add(new ChaveValor<int, string>() { Chave = 1, Valor = "Ativo" });
+            status.Add(new ChaveValor<int, string>() { Chave = 2, Valor = "Pendente" });
+            status.Add(new ChaveValor<int, string>() { Chave = 3, Valor = "Inativo" });
+
+            this.ListaStatus = new ObservableCollection<IChaveValor<int, string>>(status);
+            
+        }
+
+        private void PessoaEnviada(PessoaMessageArgs args)
+        {
+            this.Pessoa = args.Pessoa;
+            if (Pessoa.Numero == 0)
+            {
+                Pessoa.Numero = Util.Repositorio.ObterLista<Socio>().Max(p => p.Numero) + 1;
+            }
         }
 
         private void Salvar()
@@ -170,9 +178,6 @@ namespace Amigo.ViewModel
             throw new NotImplementedException();
         }
 
-        private void PessoaEnviada(IPessoa pessoa)
-        {
-            this.Pessoa = pessoa;
-        }
+        
     }
 }

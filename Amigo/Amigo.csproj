@@ -90,6 +90,7 @@
     <Compile Include="ViewModel\FluxoCaixaViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MensalidadesViewModel.cs" />
+    <Compile Include="ViewModel\PessoaMessageArgs.cs" />
     <Compile Include="ViewModel\PessoasViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="CaixaTransporteWindow.xaml">

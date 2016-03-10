@@ -147,7 +147,7 @@ namespace Amigo.ViewModel
             this.ListaCombo = new ObservableCollection<KeyValuePair<int, string>>(listaCombo);
 
             AbrirItemCommand = new RelayCommand(ExecutarAbrirItem,() => itemSelecionadoLista != null);
-            NovoItemCommand = new RelayCommand(ExecutarNovoItem, () => true);
+            NovoItemCommand = new RelayCommand(ExecutarNovoItem, () => ItemSelecionado.Key>0);
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -160,8 +160,20 @@ namespace Amigo.ViewModel
 
         private void ExecutarNovoItem()
         {
-            var pw = new PessoasWindow();
-            pw.Show();
+
+            switch (itemSelecionado.Key)
+            {
+                case 1:
+                    {
+                        var pw = new PessoasWindow();
+                        Messenger.Default.Send(new PessoaMessageArgs() { Pessoa = this.itemSelecionadoLista as IPessoa, Tipo = TipoPessoa.Socio });
+                        pw.ShowDialog();
+                        RefreshLista();
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void ExecutarAbrirItem()
@@ -172,7 +184,7 @@ namespace Amigo.ViewModel
                     {
                         
                         var pw = new PessoasWindow();
-                        Messenger.Default.Send(itemSelecionadoLista as IPessoa);
+                        Messenger.Default.Send(new PessoaMessageArgs() { Pessoa = this.itemSelecionadoLista as IPessoa, Tipo = TipoPessoa.Socio });
                         pw.ShowDialog();
                         RefreshLista();
 
