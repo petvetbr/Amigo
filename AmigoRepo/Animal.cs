@@ -38,8 +38,8 @@ namespace AmigoRepo
                 OnPropertyChanged(nameof(Castrado));
             }
         }
-        IVeterinario _clinica;
-        public IVeterinario Clinica
+        IPessoa _clinica;
+        public IPessoa Clinica
         {
             get
             {
@@ -214,5 +214,23 @@ namespace AmigoRepo
                 OnPropertyChanged(nameof(Vermifugos));
             }
         }
+        string _foto;
+        public string Foto
+        {
+            get
+            {
+                return _foto;
+            }
+            set
+            {
+                if (_foto != value)
+                {
+                    _foto = value;
+                    OnPropertyChanged(nameof(Foto));
+                }
+            }
+        }
+       
+
     }
 }

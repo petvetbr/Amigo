@@ -18,6 +18,52 @@ namespace Amigo
         private static IEnumerable<KeyValuePair<int, string>> _situacaoCaixaTransporte;
         private static IEnumerable<KeyValuePair<int, string>> _localizacaoCaixaTransporte;
 
+        private static IEnumerable<KeyValuePair<int, string>> _ambienteAnimal;
+        private static IEnumerable<KeyValuePair<int, string>> _statusAnimal;
+        private static IEnumerable<KeyValuePair<int, string>> _especieAnimal;
+        private static IEnumerable<KeyValuePair<int, string>> _generoAnimal;
+
+        public static IEnumerable<KeyValuePair<int, string>> ObterListaEspecieAnimal()
+        {
+            if (_especieAnimal != null)
+            {
+                return _especieAnimal;
+            }
+            var especie = new List<KeyValuePair<int, string>>();
+            especie.Add(new KeyValuePair<int, string>(1, "Canino"));
+            especie.Add(new KeyValuePair<int, string>(2, "Felino"));
+            _especieAnimal = especie;
+            return especie;
+        }
+
+        public static IEnumerable<KeyValuePair<int, string>> ObterListaStatusAnimal()
+        {
+            if (_statusAnimal != null)
+            {
+                return _statusAnimal;
+            }
+            var status = new List<KeyValuePair<int, string>>();
+            status.Add(new KeyValuePair<int, string>(1, "Normal"));
+            status.Add(new KeyValuePair<int, string>(2, "Restricao ou problemas"));
+            status.Add(new KeyValuePair<int, string>(3, "Morto"));
+            _statusAnimal = status;
+            return status;
+        }
+        public static IEnumerable<KeyValuePair<int, string>> ObterListaAmbientesAnimal()
+        {
+            if (_ambienteAnimal != null)
+            {
+                return _ambienteAnimal;
+            }
+            var ambiente = new List<KeyValuePair<int, string>>();
+            ambiente.Add(new KeyValuePair<int, string>(1, "Doméstico"));
+            ambiente.Add(new KeyValuePair<int, string>(2, "De Rua"));
+            _ambienteAnimal = ambiente;
+            return ambiente;
+        }
+
+
+
         public static IEnumerable<KeyValuePair<int, string>> ObterListaStatusCaixaTransporte()
         {
             if (_statusCaixaTransporte != null)
