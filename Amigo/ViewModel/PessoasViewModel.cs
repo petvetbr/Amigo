@@ -12,19 +12,20 @@ using System.Threading.Tasks;
 
 namespace Amigo.ViewModel
 {
-    public class PessoasViewModel: ViewModelBase
+    public class PessoasViewModel : ViewModelBase
     {
         public RelayCommand SalvarCommand
         {
             get;
             private set;
         }
-        
-        //public RelayCommand AlteraCommand
-        //{
-        //    get;
-        //    private set;
-        //}
+
+        public RelayCommand NovoItemCommand
+        {
+            get;
+            private set;
+        }
+
         public RelayCommand PesquisaCommand
         {
             get;
@@ -53,8 +54,8 @@ namespace Amigo.ViewModel
             }
         }
 
-        ObservableCollection<IChaveValor<int,string>> _listaCategorias;
-        public ObservableCollection<IChaveValor<int,string>> ListaCategorias
+        ObservableCollection<IChaveValor<int, string>> _listaCategorias;
+        public ObservableCollection<IChaveValor<int, string>> ListaCategorias
         {
             get
             {
@@ -85,7 +86,7 @@ namespace Amigo.ViewModel
                 }
             }
         }
-        ObservableCollection<IChaveValor<int,string>> _listaSatus;
+        ObservableCollection<IChaveValor<int, string>> _listaSatus;
         public ObservableCollection<IChaveValor<int, string>> ListaStatus
         {
             get
@@ -102,6 +103,22 @@ namespace Amigo.ViewModel
             }
         }
 
+        ObservableCollection<IRepositorio> _listaItens;
+        public ObservableCollection<IRepositorio> ListaItens
+        {
+            get
+            {
+                return _listaItens;
+            }
+            set
+            {
+                if (_listaItens != value)
+                {
+                    _listaItens = value;
+                    RaisePropertyChanged(nameof(ListaItens));
+                }
+            }
+        }
 
 
         public RelayCommand AlteraCommand { get; private set; }
@@ -112,9 +129,8 @@ namespace Amigo.ViewModel
 
         public PessoasViewModel()
         {
-           
-            
-            Messenger.Default.Register<PessoaMessageArgs>(this, PessoaEnviada);
+
+            //Messenger.Default.Register<PessoaMessageArgs>(this, PessoaEnviada);
             this.SalvarCommand = new RelayCommand(Salvar, () => podeSalvar);
             this.ExcluiCommand = new RelayCommand(Excluir, () => podeExcluir);
             this.PesquisaCommand = new RelayCommand(Pesquisar);
@@ -125,14 +141,14 @@ namespace Amigo.ViewModel
             cat.Add(new ChaveValor<int, string>() { Chave = 3, Valor = "Colaborador" });
             cat.Add(new ChaveValor<int, string>() { Chave = 4, Valor = "Honorario" });
             cat.Add(new ChaveValor<int, string>() { Chave = 5, Valor = "Mirim" });
-           
+
             this.ListaCategorias = new ObservableCollection<IChaveValor<int, string>>(cat);
 
             var tipos = new List<IChaveValor<int, string>>();
             tipos.Add(new ChaveValor<int, string>() { Chave = 1, Valor = "Normal" });
             tipos.Add(new ChaveValor<int, string>() { Chave = 2, Valor = "Diretoria" });
             tipos.Add(new ChaveValor<int, string>() { Chave = 3, Valor = "Voluntário" });
-            
+
             this.ListaTipos = new ObservableCollection<IChaveValor<int, string>>(tipos);
 
 
@@ -142,30 +158,32 @@ namespace Amigo.ViewModel
             status.Add(new ChaveValor<int, string>() { Chave = 3, Valor = "Inativo" });
 
             this.ListaStatus = new ObservableCollection<IChaveValor<int, string>>(status);
-            
+            NovoItemCommand = new RelayCommand(CriarNovoItem);
+            RefreshLista();
+
+
         }
 
-        private void PessoaEnviada(PessoaMessageArgs args)
+        private void CriarNovoItem()
         {
-            this.Pessoa = args.Pessoa;
-            if (Pessoa.Numero == 0)
-            {
-                Pessoa.Numero = Util.Repositorio.ObterLista<Socio>().Max(p => p.Numero) + 1;
-            }
+            this.Pessoa = new Pessoa();
+            Pessoa.Numero = Util.Repositorio.ObterLista<Socio>().DefaultIfEmpty().Max(p => p.Numero) + 1;
         }
+
+        
 
         private void Salvar()
         {
-            if(Util.Repositorio.Salvar<Socio>(this.Pessoa as Socio).Key)
+            if (Util.Repositorio.Salvar<Socio>(this.Pessoa as Socio).Key)
             {
-                Messenger.Default.Send(new CloseWindowMessage(), "PessoasWindow");
+                RefreshLista();
             }
-            
+
         }
 
         private void Excluir()
         {
-            Util.Repositorio.Apagar<Socio>(x=>x.Id== this.Pessoa.Id);
+            Util.Repositorio.Apagar<Socio>(x => x.Id == this.Pessoa.Id);
         }
 
         private void Pesquisar()
@@ -177,7 +195,10 @@ namespace Amigo.ViewModel
         {
             throw new NotImplementedException();
         }
-
-        
+        private void RefreshLista()
+        {
+            var lista = Util.Repositorio.ObterLista<Socio>();
+            this.ListaItens = new ObservableCollection<IRepositorio>(lista);
+        }
     }
 }

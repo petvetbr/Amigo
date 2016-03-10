@@ -22,6 +22,17 @@ namespace Amigo.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        public RelayCommand MenuCadastroSociosCommand
+        {
+            get;
+            private set;
+        }
+        public RelayCommand MenuCadastroCaixasTransporteCommand
+        {
+            get;
+            private set;
+        }
+      
 
         public RelayCommand AbrirItemCommand
         {
@@ -148,14 +159,22 @@ namespace Amigo.ViewModel
 
             AbrirItemCommand = new RelayCommand(ExecutarAbrirItem,() => itemSelecionadoLista != null);
             NovoItemCommand = new RelayCommand(ExecutarNovoItem, () => ItemSelecionado.Key>0);
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+            MenuCadastroSociosCommand = new RelayCommand(MenuCadastroSocios);
+            MenuCadastroCaixasTransporteCommand = new RelayCommand(MenuCadastroCaixasTransporte);
+            
+        }
+
+        private void MenuCadastroCaixasTransporte()
+        {
+            var ctw = new CaixaTransporteWindow();
+            ctw.ShowDialog();
+        }
+
+        private void MenuCadastroSocios()
+        {
+            var pw = new PessoasWindow();
+            pw.ShowDialog();
+
         }
 
         private void ExecutarNovoItem()

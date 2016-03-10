@@ -14,7 +14,17 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu  >
+            <MenuItem Header="Cadastro">
+                <MenuItem Header="Sócios" Command="{Binding MenuCadastroSociosCommand}"/>
+                <MenuItem Header="Caixas de Transportes" Command="{Binding MenuCadastroCaixasTransporteCommand}"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel Grid.Row="1">
             <ComboBox x:Name="Categoria" ToolTip="Escolha o item categoria" Width="250"
                       ItemsSource="{Binding ListaCombo}"
                       SelectedItem="{Binding ItemSelecionado}"

@@ -14,8 +14,34 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid>
-        <StackPanel>
+    <DockPanel>
+        <Expander DockPanel.Dock="Left" ExpandDirection="Right" Header="Pesquisa">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto">
+                        
+                    </RowDefinition>
+                    <RowDefinition Height="*">
+                        
+
+                        </RowDefinition>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                    <TextBox Width="200"></TextBox>
+                    <Button Command="{Binding PesquisaCommand}"  ToolTip="Pesquisar por nome">Pesquisar</Button>
+                </StackPanel>
+
+                <ListBox Grid.Row="1" ItemsSource="{Binding ListaItens}" SelectedItem="{Binding Pessoa}">
+                </ListBox>
+                <StackPanel Margin="0,5"  Grid.Row="2" HorizontalAlignment="Right"   Orientation="Horizontal" VerticalAlignment="Top">
+                    <Button HorizontalAlignment="Right"  ToolTipService.ToolTip="Criar novo registro">+</Button>
+                </StackPanel>
+            </Grid>
+         
+           
+        </Expander>
+            <StackPanel DockPanel.Dock="Right">
             <DockPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top"  Style="{StaticResource splinha}" >
                     <TextBlock Margin="8,0" FontWeight="Bold">Nº:</TextBlock>
@@ -93,7 +119,7 @@
 
                 <TextBlock Margin="10,0" FontWeight="Bold"><Run Text="Tipo"/></TextBlock>
                 <ComboBox Width="100" ItemsSource="{Binding ListaTipos}" SelectedItem="{Binding Pessoa.Tipo, Mode=TwoWay}"  DisplayMemberPath="Valor">
-                 
+
                 </ComboBox>
                 <TextBlock Margin="10,0" FontWeight="Bold"><Run Text="Status"/></TextBlock>
                 <ComboBox Width="100" ItemsSource="{Binding ListaStatus}" SelectedItem="{Binding Pessoa.Status, Mode=TwoWay}"   DisplayMemberPath="Valor">
@@ -110,6 +136,6 @@
 
         </StackPanel>
 
-    </Grid>
+    </DockPanel>
 
 </Window>
