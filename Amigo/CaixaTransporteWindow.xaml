@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
+        Icon="Imagens/LogoAmigo64.png"
         DataContext="{Binding Path=CaixaTransporte, Source={StaticResource Locator}}"
         Title="CaixaTransporteWindow" Height="350" Width="800">
     <Window.Resources>
