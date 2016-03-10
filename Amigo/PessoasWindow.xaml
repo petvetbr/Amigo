@@ -44,7 +44,7 @@
             <StackPanel DockPanel.Dock="Right">
             <DockPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Center"  Style="{StaticResource splinha}" >
-                    <TextBlock Margin="8,0" FontWeight="Bold">Nº:</TextBlock>
+                    <TextBlock Margin="10,0" FontWeight="Bold">Nº:</TextBlock>
                     <TextBox Width="40"  Text="{Binding Pessoa.Numero}" ></TextBox>
                 </StackPanel>
 
@@ -55,7 +55,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
-                    <TextBlock Text="Tipo de Pessoa:" VerticalAlignment="Center" Margin="5,0,0,2" Width="100" FontWeight="Bold">
+                    <TextBlock Text="Tipo de Pessoa:" VerticalAlignment="Center" Margin="10,0,0,2" Width="100" FontWeight="Bold">
 
                     </TextBlock>
 
