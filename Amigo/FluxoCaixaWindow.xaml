@@ -6,8 +6,46 @@
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
         DataContext="{Binding Path=FluxoCaixa, Source={StaticResource Locator}}"
-        Title="FluxoCaixaWindow" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+        Title="FluxoCaixaWindow" Height="350" Width="500">
+    
+        <Window.Resources>
+            <Style TargetType="{x:Type StackPanel}" x:Key="splinha">
+                <Setter Property="Margin" Value="6">
+
+                </Setter>
+            </Style>
+        </Window.Resources>
+        <Grid>
+
+
+            <StackPanel DockPanel.Dock="Right">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Center"  Style="{StaticResource splinha}" >
+                        <TextBlock Margin="10,0" FontWeight="Bold">Mês:</TextBlock>
+                    <ComboBox Width="60"></ComboBox>
+                    </StackPanel>
+
+                    <StackPanel DockPanel.Dock="Left" Orientation="Horizontal"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
+                        <TextBlock VerticalAlignment="Center" Margin="15,0" FontWeight="Bold" >Ano:</TextBlock>
+                    <ComboBox Width="60"></ComboBox>
+
+                        
+
+                    </StackPanel>
+
+
+                </DockPanel>
+
+
+
+            <DataGrid>
+
+                
+            </DataGrid>
+
+
+
+            </StackPanel>
+
+        </Grid>
 </Window>
