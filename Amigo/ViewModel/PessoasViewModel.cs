@@ -189,29 +189,11 @@ namespace Amigo.ViewModel
 
         private void CarregarListas()
         {
-            var cat = new List<KeyValuePair<int, string>>();
-            cat.Add(new KeyValuePair<int, string>(1, "Fundador"));
-            cat.Add(new KeyValuePair<int, string>(2, "Efetivo"));
-            cat.Add(new KeyValuePair<int, string>(3, "Colaborador"));
-            cat.Add(new KeyValuePair<int, string>(4, "Honorario"));
-            cat.Add(new KeyValuePair<int, string>(5, "Mirim"));
+           
 
-            this.ListaCategorias = new ObservableCollection<KeyValuePair<int, string>>(cat);
-
-            var tipos = new List<KeyValuePair<int, string>>();
-            tipos.Add(new KeyValuePair<int, string>(1, "Normal"));
-            tipos.Add(new KeyValuePair<int, string>(2, "Diretoria"));
-            tipos.Add(new KeyValuePair<int, string>(3, "Voluntário"));
-
-            this.ListaTipos = new ObservableCollection<KeyValuePair<int, string>>(tipos);
-
-
-            var status = new List<KeyValuePair<int, string>>();
-            status.Add(new KeyValuePair<int, string>(1, "Ativo"));
-            status.Add(new KeyValuePair<int, string>(2, "Pendente"));
-            status.Add(new KeyValuePair<int, string>(3, "Inativo"));
-
-            this.ListaStatus = new ObservableCollection<KeyValuePair<int, string>>(status);
+            this.ListaCategorias = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaPessoasCategoria());
+            this.ListaTipos = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaPessoasTipos());
+            this.ListaStatus = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaPessoasStatus());
         }
 
         private string _nomeTabela;
