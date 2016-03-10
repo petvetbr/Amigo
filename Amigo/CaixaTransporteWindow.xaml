@@ -98,7 +98,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Style="{StaticResource splinha}">
 
                     <Button Command="{Binding SalvarCommand}"  Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO" Background="#FF3FCFF9">SALVAR</Button>
-                    <Button Command="{Binding ExcluiCommand}"  Margin="8,0" Padding="5,0" ToolTip="EXCLUI REGISTRO" Background="#FF3FCFF9">EXCLUI</Button>
+                    <Button Command="{Binding ExcluiCommand}"  Margin="8,0" Padding="5,0" ToolTip="EXCLUI REGISTRO" Background="#FF3FCFF9">EXCLUIR</Button>
                 </StackPanel>
 
 
