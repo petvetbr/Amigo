@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
+        Icon="Imagens/LogoAmigo64.png"
         DataContext="{Binding Path=Pessoas, Source={StaticResource Locator}}"
-        Title="MainWindow" Height="600" Width="800">
+        Title="{Binding Titulo}" Height="400" Width="1000">
     <Window.Resources>
         <Style TargetType="{x:Type StackPanel}" x:Key="splinha">
             <Setter Property="Margin" Value="4">
@@ -15,7 +16,7 @@
         </Style>
     </Window.Resources>
     <DockPanel>
-        <Expander DockPanel.Dock="Left" ExpandDirection="Right" Header="Pesquisa">
+        <Expander  DockPanel.Dock="Left"  ExpandDirection="Right"  Header="Pesquisa" IsExpanded="{Binding ExpanderAberto}">
             <Grid Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto">
@@ -27,21 +28,30 @@
                         </RowDefinition>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                    <TextBox Width="200"></TextBox>
-                    <Button Command="{Binding PesquisaCommand}"  ToolTip="Pesquisar por nome">Pesquisar</Button>
+                <StackPanel Orientation="Horizontal" Margin="0,5"  VerticalAlignment="Top">
+                    <TextBox VerticalAlignment="Center"  Text="{Binding FiltroPesquisa}"  Width="200"></TextBox>
+                    <Button Command="{Binding PesquisaCommand}" Margin="5"  ToolTip="Pesquisar por nome">Pesquisar</Button>
                 </StackPanel>
 
                 <ListBox Grid.Row="1" ItemsSource="{Binding ListaItens}" SelectedItem="{Binding Pessoa}">
                 </ListBox>
                 <StackPanel Margin="0,5"  Grid.Row="2" HorizontalAlignment="Right"   Orientation="Horizontal" VerticalAlignment="Top">
-                    <Button HorizontalAlignment="Right"  ToolTipService.ToolTip="Criar novo registro">+</Button>
+                    <Button HorizontalAlignment="Right" Command="{Binding NovoItemCommand}"  ToolTipService.ToolTip="Criar novo registro">Novo</Button>
                 </StackPanel>
             </Grid>
          
            
         </Expander>
             <StackPanel DockPanel.Dock="Right">
+            <StackPanel.Resources>
+            <Style TargetType="{x:Type StackPanel}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Pessoa}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+            </Style>
+            </StackPanel.Resources>
             <DockPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Center"  Style="{StaticResource splinha}" >
                     <TextBlock Margin="10,0" FontWeight="Bold">Nº:</TextBlock>
@@ -114,22 +124,19 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Style="{StaticResource splinha}"  >
                 <TextBlock FontWeight="Bold"><Run Text="Categoria"/></TextBlock>
                 <ComboBox x:Name="Categoria" ToolTip="Escolha a categoria" Width="100" Margin="10,0"
-                          ItemsSource="{Binding ListaCategorias}" SelectedItem="{Binding Pessoa.Categoria, Mode=TwoWay}"  DisplayMemberPath="Valor">
+                          ItemsSource="{Binding ListaCategorias}" SelectedValuePath="Key"  SelectedValue="{Binding Pessoa.Categoria, Mode=TwoWay}"  DisplayMemberPath="Value">
                 </ComboBox>
 
                 <TextBlock Margin="10,0" FontWeight="Bold"><Run Text="Tipo"/></TextBlock>
-                <ComboBox Width="100" ItemsSource="{Binding ListaTipos}" SelectedItem="{Binding Pessoa.Tipo, Mode=TwoWay}"  DisplayMemberPath="Valor">
+                <ComboBox Width="100" ItemsSource="{Binding ListaTipos}" SelectedValuePath="Key" SelectedValue="{Binding Pessoa.Tipo, Mode=TwoWay}"  DisplayMemberPath="Value">
 
                 </ComboBox>
                 <TextBlock Margin="10,0" FontWeight="Bold"><Run Text="Status"/></TextBlock>
-                <ComboBox Width="100" ItemsSource="{Binding ListaStatus}" SelectedItem="{Binding Pessoa.Status, Mode=TwoWay}"   DisplayMemberPath="Valor">
+                <ComboBox Width="100" ItemsSource="{Binding ListaStatus}" SelectedValuePath="Key" SelectedValue="{Binding Pessoa.Status, Mode=TwoWay}"   DisplayMemberPath="Value">
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Style="{StaticResource splinha}">
-
                 <Button Command="{Binding SalvarCommand}"  Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO" Background="#FF3FCFF9">SALVAR</Button>
-                <!--<Button Margin="8,0" Padding="5,0" ToolTip="ALTERA REGISTRO" Background="#FF3FCFF9">ALTERA</Button>-->
-                <Button Command="{Binding PesquisaCommand}"  Margin="8,0" Padding="5,0" ToolTip="PESQUISA REGISTRO" Background="#FF3FCFF9">PESQUISA</Button>
                 <Button Command="{Binding ExcluiCommand}"  Margin="8,0" Padding="5,0" ToolTip="EXCLUI REGISTRO" Background="#FF3FCFF9">EXCLUI</Button>
             </StackPanel>
 

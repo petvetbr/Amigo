@@ -7,8 +7,8 @@ namespace AmigoRepo
 {
     public class Animal : EntidadeRepo, IAnimal
     {
-        IChaveValor<int, string> _ambiente;
-        public IChaveValor<int, string> Ambiente
+        int _ambiente;
+        public int Ambiente
         {
             get
             {
@@ -70,8 +70,8 @@ namespace AmigoRepo
             }
         }
 
-        private IChaveValor<int, string> _especie;
-        public IChaveValor<int, string> Especie
+        private int _especie;
+        public int Especie
         {
             get
             {
@@ -120,8 +120,8 @@ namespace AmigoRepo
             }
         }
 
-        IChaveValor<int, string> _raca;
-        public IChaveValor<int, string> Raca
+        int _raca;
+        public int Raca
         {
             get
             {
@@ -137,8 +137,8 @@ namespace AmigoRepo
         }
        
 
-        IChaveValor<int, string> _sexo;
-        public IChaveValor<int, string> Sexo
+        int _sexo;
+        public int Sexo
         {
             get
             {
@@ -153,8 +153,8 @@ namespace AmigoRepo
             }
         }
 
-        IChaveValor<int, string> _status;
-        public IChaveValor<int, string> Status
+        int _status;
+        public int Status
         {
             get
             {

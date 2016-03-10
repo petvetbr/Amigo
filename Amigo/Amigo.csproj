@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>LogoAmigo64.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37225, Culture=neutral, PublicKeyToken=bb738e8c4ab8c76c, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net35\GalaSoft.MvvmLight.dll</HintPath>
@@ -153,6 +156,14 @@
       <Project>{02e4bdb1-1131-40ad-b0a2-9109f0d2b6fc}</Project>
       <Name>AmigoRepo</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\LogoAmigo32.png" />
+    <Resource Include="Imagens\LogoAmigo48.png" />
+    <Resource Include="Imagens\LogoAmigo64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="LogoAmigo64.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

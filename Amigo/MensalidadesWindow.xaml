@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
+        Icon="Imagens/LogoAmigo64.png"
          DataContext="{Binding Path=MensalidadesViewModel, Source={StaticResource Locator}}"
         Title="MensalidadesWindow" Height="300" Width="300">
     <Grid>

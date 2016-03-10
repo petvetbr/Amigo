@@ -11,7 +11,7 @@ namespace AmigoRepo
         DateTime DataSaida { get; set; }
         DateTime DataRetorno { get; set; }
         IAnimal Animal { get; set; }
-        IChaveValor<int, string> Status { get; set; }
-        IChaveValor<int, string> Situacao { get; set; }
+        int Status { get; set; }
+        int Situacao { get; set; }
     }
 }

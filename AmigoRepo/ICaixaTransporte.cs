@@ -13,7 +13,7 @@ namespace AmigoRepo
         int Comprimento { get; set; }
         int Peso { get; set; }
         string Identificacao { get; set; }
-        IChaveValor<int, string> Localizacao { get; set; }
+        int Localizacao { get; set; }
         
         
 

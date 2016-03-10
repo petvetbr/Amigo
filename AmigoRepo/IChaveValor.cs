@@ -5,9 +5,9 @@ using System.Text;
 
 namespace AmigoRepo
 {
-    public interface IChaveValor<TipoChave,TipoValor>
+    public interface IChaveValor<TipoChave, TipoValor>
     {
         TipoChave Chave { get; set; }
-        TipoValor Valor { get;  set; }
+        TipoValor Valor { get; set; }
     }
 }

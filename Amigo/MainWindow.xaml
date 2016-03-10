@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Amigo"
         DataContext="{Binding Path=Main, Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="Amigo" Height="600" Width="800" Icon="Imagens/LogoAmigo64.png">
     <Window.Resources>
         <Style TargetType="{x:Type StackPanel}" x:Key="splinha">
             <Setter Property="Margin" Value="4">
@@ -23,20 +23,14 @@
                 <MenuItem Header="Sócios" Command="{Binding MenuCadastroSociosCommand}"/>
                 <MenuItem Header="Caixas de Transportes" Command="{Binding MenuCadastroCaixasTransporteCommand}"/>
             </MenuItem>
+            <MenuItem Header="Serviços">
+                <MenuItem Header="Empréstimo Caixas Transporte" Command="{Binding MenuServicosCaixaTransporteCommand}"/>
+            </MenuItem>
+            <MenuItem Header="Financeiro">
+                <MenuItem Header="Fluxo Caixa" Command="{Binding MenuFluxoCaixaCommand}"/>
+            </MenuItem>
         </Menu>
         <StackPanel Grid.Row="1">
-            <ComboBox x:Name="Categoria" ToolTip="Escolha o item categoria" Width="250"
-                      ItemsSource="{Binding ListaCombo}"
-                      SelectedItem="{Binding ItemSelecionado}"
-                      DisplayMemberPath="Value"
-                      Margin="10,0"/>
-            <ListBox Width="300" Height="400" ItemsSource="{Binding ListaItens}" SelectedItem="{Binding ItemSelecionadoLista}">
-                
-            </ListBox>
-            <StackPanel HorizontalAlignment="Center"  Orientation="Horizontal">
-                <Button Margin="5" Command="{Binding NovoItemCommand}">Novo</Button>
-                <Button Margin="5" Command="{Binding AbrirItemCommand}">Exibir</Button>
-            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>
