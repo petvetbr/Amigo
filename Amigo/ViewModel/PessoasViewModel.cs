@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,8 +38,8 @@ namespace Amigo.ViewModel
             private set;
         }
 
-        IPessoa _pessoa;
-        public IPessoa Pessoa
+        Pessoa _pessoa;
+        public Pessoa Pessoa
         {
             get
             {
@@ -54,8 +55,8 @@ namespace Amigo.ViewModel
             }
         }
 
-        ObservableCollection<IChaveValor<int, string>> _listaCategorias;
-        public ObservableCollection<IChaveValor<int, string>> ListaCategorias
+        ObservableCollection<KeyValuePair<int, string>> _listaCategorias;
+        public ObservableCollection<KeyValuePair<int, string>> ListaCategorias
         {
             get
             {
@@ -70,8 +71,8 @@ namespace Amigo.ViewModel
                 }
             }
         }
-        ObservableCollection<IChaveValor<int, string>> _listaTipos;
-        public ObservableCollection<IChaveValor<int, string>> ListaTipos
+        ObservableCollection<KeyValuePair<int, string>> _listaTipos;
+        public ObservableCollection<KeyValuePair<int, string>> ListaTipos
         {
             get
             {
@@ -86,8 +87,8 @@ namespace Amigo.ViewModel
                 }
             }
         }
-        ObservableCollection<IChaveValor<int, string>> _listaSatus;
-        public ObservableCollection<IChaveValor<int, string>> ListaStatus
+        ObservableCollection<KeyValuePair<int, string>> _listaSatus;
+        public ObservableCollection<KeyValuePair<int, string>> ListaStatus
         {
             get
             {
@@ -120,6 +121,56 @@ namespace Amigo.ViewModel
             }
         }
 
+        string _filtroPesquisa;
+        public string FiltroPesquisa
+        {
+            get
+            {
+                return _filtroPesquisa;
+            }
+            set
+            {
+                if (_filtroPesquisa != value)
+                {
+                    _filtroPesquisa = value;
+                    RaisePropertyChanged(nameof(FiltroPesquisa));
+                }
+            }
+        }
+
+        bool expanderAberto;
+        public bool ExpanderAberto
+        {
+            get
+            {
+                return expanderAberto;
+            }
+            set
+            {
+                if (expanderAberto != value)
+                {
+                    expanderAberto = value;
+                    RaisePropertyChanged(nameof(ExpanderAberto));
+                }
+            }
+        }
+
+        string _titulo;
+        public string Titulo
+        {
+            get
+            {
+                return _titulo;
+            }
+            set
+            {
+                if (_titulo != value)
+                {
+                    _titulo = value;
+                    RaisePropertyChanged(nameof(Titulo));
+                }
+            }
+        }
 
         public RelayCommand AlteraCommand { get; private set; }
 
@@ -130,74 +181,131 @@ namespace Amigo.ViewModel
         public PessoasViewModel()
         {
 
-            //Messenger.Default.Register<PessoaMessageArgs>(this, PessoaEnviada);
+            Messenger.Default.Register<TipoPessoa>(this, TipoPessoaEnviada);
             this.SalvarCommand = new RelayCommand(Salvar, () => podeSalvar);
             this.ExcluiCommand = new RelayCommand(Excluir, () => podeExcluir);
             this.PesquisaCommand = new RelayCommand(Pesquisar);
 
-            var cat = new List<IChaveValor<int, string>>();
-            cat.Add(new ChaveValor<int, string>() { Chave = 1, Valor = "Fundador" });
-            cat.Add(new ChaveValor<int, string>() { Chave = 2, Valor = "Efetivo" });
-            cat.Add(new ChaveValor<int, string>() { Chave = 3, Valor = "Colaborador" });
-            cat.Add(new ChaveValor<int, string>() { Chave = 4, Valor = "Honorario" });
-            cat.Add(new ChaveValor<int, string>() { Chave = 5, Valor = "Mirim" });
+            var cat = new List<KeyValuePair<int, string>>();
+            cat.Add(new KeyValuePair<int, string>(1, "Fundador"));
+            cat.Add(new KeyValuePair<int, string>(2, "Efetivo"));
+            cat.Add(new KeyValuePair<int, string>(3, "Colaborador"));
+            cat.Add(new KeyValuePair<int, string>(4, "Honorario"));
+            cat.Add(new KeyValuePair<int, string>(5, "Mirim"));
 
-            this.ListaCategorias = new ObservableCollection<IChaveValor<int, string>>(cat);
+            this.ListaCategorias = new ObservableCollection<KeyValuePair<int, string>>(cat);
 
-            var tipos = new List<IChaveValor<int, string>>();
-            tipos.Add(new ChaveValor<int, string>() { Chave = 1, Valor = "Normal" });
-            tipos.Add(new ChaveValor<int, string>() { Chave = 2, Valor = "Diretoria" });
-            tipos.Add(new ChaveValor<int, string>() { Chave = 3, Valor = "Voluntário" });
+            var tipos = new List<KeyValuePair<int, string>>();
+            tipos.Add(new KeyValuePair<int, string>(1, "Normal"));
+            tipos.Add(new KeyValuePair<int, string>(2, "Diretoria"));
+            tipos.Add(new KeyValuePair<int, string>(3, "Voluntário"));
 
-            this.ListaTipos = new ObservableCollection<IChaveValor<int, string>>(tipos);
+            this.ListaTipos = new ObservableCollection<KeyValuePair<int, string>>(tipos);
 
 
-            var status = new List<IChaveValor<int, string>>();
-            status.Add(new ChaveValor<int, string>() { Chave = 1, Valor = "Ativo" });
-            status.Add(new ChaveValor<int, string>() { Chave = 2, Valor = "Pendente" });
-            status.Add(new ChaveValor<int, string>() { Chave = 3, Valor = "Inativo" });
+            var status = new List<KeyValuePair<int, string>>();
+            status.Add(new KeyValuePair<int, string>(1, "Ativo"));
+            status.Add(new KeyValuePair<int, string>(2, "Pendente"));
+            status.Add(new KeyValuePair<int, string>(3, "Inativo"));
 
-            this.ListaStatus = new ObservableCollection<IChaveValor<int, string>>(status);
+            this.ListaStatus = new ObservableCollection<KeyValuePair<int, string>>(status);
             NovoItemCommand = new RelayCommand(CriarNovoItem);
+            ExpanderAberto = true;
+
+
+        }
+        private string _nomeTabela;
+        private void TipoPessoaEnviada(TipoPessoa tipo)
+        {
+            switch (tipo)
+            {
+                case TipoPessoa.Socio:
+                    {
+                        _nomeTabela = "Socios";
+                        this.Titulo = "Cadastro de Sócios";
+                    }
+                    break;
+                case TipoPessoa.Veterinario:
+                    break;
+                case TipoPessoa.Clinica:
+                    break;
+                case TipoPessoa.Cliente:
+                    break;
+                case TipoPessoa.MoradorComunitario:
+                    break;
+                case TipoPessoa.Fornecedor:
+                    break;
+                case TipoPessoa.Entidade:
+                    break;
+                case TipoPessoa.Parceiro:
+                    break;
+                case TipoPessoa.Doador:
+                    break;
+                case TipoPessoa.Patrocinador:
+                    break;
+                default:
+                    break;
+            }
             RefreshLista();
-
-
+            
         }
 
         private void CriarNovoItem()
         {
             this.Pessoa = new Pessoa();
-            Pessoa.Numero = Util.Repositorio.ObterLista<Pessoa>().DefaultIfEmpty().Max(p => p.Numero) + 1;
+            if (Util.Repositorio.ObterLista<Pessoa>(nomeTabela: _nomeTabela).Any())
+            {
+                var maxAtual = Util.Repositorio.ObterLista<Pessoa>(nomeTabela: _nomeTabela).Max(p => p.Numero);
+                Pessoa.Numero = ++maxAtual;
+            }
+            else
+            {
+                Pessoa.Numero = 1;
+            }
+            ExpanderAberto = false;
         }
 
-        
+
 
         private void Salvar()
         {
-            if (Util.Repositorio.Salvar<Pessoa>(this.Pessoa as Pessoa).Key)
+            if (!Util.Repositorio.Salvar<Pessoa>(this.Pessoa, _nomeTabela).Key)
             {
-                RefreshLista();
+                return;
             }
+            RefreshLista();
+            ExpanderAberto = true;
 
         }
 
         private void Excluir()
         {
-            Util.Repositorio.Apagar<Pessoa>(x => x.Id == this.Pessoa.Id);
+            if(!Util.Repositorio.Apagar<Pessoa>(x => x.Id == this.Pessoa.Id))
+            {
+                return;
+            }
+            this.Pessoa = null;
+            RefreshLista();
+            ExpanderAberto = true;
         }
 
         private void Pesquisar()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(FiltroPesquisa))
+            {
+                RefreshLista();
+                return;
+            }
+            RefreshLista(x => x.Nome.Contains(FiltroPesquisa));
         }
 
         private void Alterar()
         {
             throw new NotImplementedException();
         }
-        private void RefreshLista()
+        private void RefreshLista(Expression<Func<Pessoa, bool>> expression = null)
         {
-            var lista = Util.Repositorio.ObterLista<Pessoa>();
+            var lista = Util.Repositorio.ObterLista<Pessoa>(expression, _nomeTabela);
             this.ListaItens = new ObservableCollection<IRepositorio>(lista);
         }
     }

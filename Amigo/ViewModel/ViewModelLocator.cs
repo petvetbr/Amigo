@@ -15,6 +15,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using System;
 
 namespace Amigo.ViewModel
 {
@@ -50,6 +51,10 @@ namespace Amigo.ViewModel
 
         }
 
+        private string _currentPessoasVMKey;
+        private string _currentFluxoCaixaVMKey;
+        private string _currentCaixaTransporteVMKey;
+        private string _currentMensalidadesVMKey;
         public MainViewModel Main
         {
             get
@@ -61,28 +66,49 @@ namespace Amigo.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<FluxoCaixaViewModel>();
+
+                if (!string.IsNullOrEmpty(_currentFluxoCaixaVMKey))
+                {
+                    SimpleIoc.Default.Unregister(_currentFluxoCaixaVMKey);
+                }
+                _currentFluxoCaixaVMKey = Guid.NewGuid().ToString();
+                return ServiceLocator.Current.GetInstance<FluxoCaixaViewModel>(_currentFluxoCaixaVMKey);
             }
         }
         public MensalidadesViewModel Mensalidades
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MensalidadesViewModel>();
+                if (!string.IsNullOrEmpty(_currentMensalidadesVMKey))
+                {
+                    SimpleIoc.Default.Unregister(_currentMensalidadesVMKey);
+                }
+                _currentMensalidadesVMKey = Guid.NewGuid().ToString();
+                return ServiceLocator.Current.GetInstance<MensalidadesViewModel>(_currentMensalidadesVMKey);
             }
         }
         public PessoasViewModel Pessoas
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<PessoasViewModel>();
+                if (!string.IsNullOrEmpty(_currentPessoasVMKey))
+                {
+                    SimpleIoc.Default.Unregister(_currentPessoasVMKey);
+                }
+                _currentPessoasVMKey = Guid.NewGuid().ToString();
+                return ServiceLocator.Current.GetInstance<PessoasViewModel>(_currentPessoasVMKey);
             }
         }
         public CaixaTransporteViewModel CaixaTransporte
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<CaixaTransporteViewModel>();
+                if (!string.IsNullOrEmpty(_currentCaixaTransporteVMKey))
+                {
+                    SimpleIoc.Default.Unregister(_currentCaixaTransporteVMKey);
+                }
+                _currentCaixaTransporteVMKey = Guid.NewGuid().ToString();
+                return ServiceLocator.Current.GetInstance<CaixaTransporteViewModel>(_currentCaixaTransporteVMKey);
             }
         }
         public static void Cleanup()
