@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Icon="Imagens/LogoAmigo64.png"
         DataContext="{Binding Path=Pessoas, Source={StaticResource Locator}}"
-        Title="{Binding Titulo}" Height="400" Width="1000">
+        Title="{Binding Titulo}" Height="450" Width="1000">
     <Window.Resources>
         <Style TargetType="{x:Type StackPanel}" x:Key="splinha">
             <Setter Property="Margin" Value="4">
@@ -110,7 +110,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Margin="8,0" Grid.Column="0">Tipo:</TextBlock>
                             <TextBlock Margin="8,0" Grid.Column="1">DDD:</TextBlock>
-                            <TextBlock Margin="8,0" Grid.Column="2">Numero:</TextBlock>
+                            <TextBlock Margin="8,0" Grid.Column="2">Número:</TextBlock>
                             <ComboBox DisplayMemberPath="Value"  Grid.Row="1"  Width="100" SelectedValuePath="Value" SelectedValue="{Binding TelefoneSelecionado.Descricao}" ItemsSource="{Binding ListaTiposTelefone}"></ComboBox>
                             <TextBox Grid.Row="1"  Grid.Column="1" Width="40" Text="{Binding TelefoneSelecionado.Ddd}"></TextBox>
                             <TextBox Grid.Row="1"  Grid.Column="2" Width="120" Text="{Binding TelefoneSelecionado.NumeroTelefone}"></TextBox>
@@ -130,15 +130,13 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Width="120" Margin="8,0" FontWeight="Bold">E-mail:</TextBlock>
                 <TextBox Text="{Binding Pessoa.Email}"  Width="130"></TextBox>
-                <TextBlock Margin="8,0" Width="Auto" FontWeight="Bold">Outro telefone:</TextBlock>
-                <TextBox Width="120"></TextBox>
-
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0" Width="120" FontWeight="Bold">CPF/CNPJ:</TextBlock>
                 <TextBox Width="100"></TextBox>
-                <TextBlock Margin="8,0" FontWeight="Bold">Homepage:</TextBlock>
-                <TextBox  Text="{Binding Pessoa.Homepage}" Width="170"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                
+                <TextBlock Margin="8,0" Width="120"  FontWeight="Bold">Homepage:</TextBlock>
+                <TextBox  Text="{Binding Pessoa.Homepage}" Width="250"></TextBox>
             </StackPanel>
 
 
