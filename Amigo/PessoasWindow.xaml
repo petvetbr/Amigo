@@ -112,8 +112,8 @@
                             <TextBlock Margin="8,0" Grid.Column="1">DDD:</TextBlock>
                             <TextBlock Margin="8,0" Grid.Column="2">Número:</TextBlock>
                             <ComboBox DisplayMemberPath="Value"  Grid.Row="1"  Width="100" SelectedValuePath="Value" SelectedValue="{Binding TelefoneSelecionado.Descricao}" ItemsSource="{Binding ListaTiposTelefone}"></ComboBox>
-                            <TextBox Grid.Row="1"  Grid.Column="1" Width="40" Text="{Binding TelefoneSelecionado.Ddd}"></TextBox>
-                            <TextBox Grid.Row="1"  Grid.Column="2" Width="120" Text="{Binding TelefoneSelecionado.NumeroTelefone}"></TextBox>
+                            <TextBox Grid.Row="1"  Grid.Column="1" Width="40" Text="{Binding TelefoneSelecionado.Ddd}" MaxLength="3"></TextBox>
+                            <TextBox Grid.Row="1"  Grid.Column="2" Width="120" Text="{Binding TelefoneSelecionado.NumeroTelefone}" MaxLength="14"></TextBox>
                             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="3">
                                 <Button Command="{Binding AdicionarTelefoneCommand, Mode=OneWay}" >+</Button>
                                 <Button Command="{Binding RemoverTelefoneCommand, Mode=OneWay}"  >X</Button>
@@ -129,9 +129,9 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Width="120" Margin="8,0" FontWeight="Bold">E-mail:</TextBlock>
-                <TextBox Text="{Binding Pessoa.Email}"  Width="130"></TextBox>
+                <TextBox Text="{Binding Pessoa.Email}"  Width="130" ></TextBox>
                 <TextBlock Margin="8,0" Width="120" FontWeight="Bold">CPF/CNPJ:</TextBlock>
-                <TextBox Width="100"></TextBox>
+                <TextBox Width="100" MaxLength="20"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 
@@ -156,9 +156,9 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0" Width="120" FontWeight="Bold">UF:</TextBlock>
-                <TextBox Width="140" Text="{Binding Pessoa.UF}"></TextBox>
+                <ComboBox Width="140" Text="{Binding Pessoa.UF}"></ComboBox>
                 <TextBlock Margin="8,0" Width="30" FontWeight="Bold">CEP:</TextBlock>
-                <TextBox Width="164" Text="{Binding Pessoa.CEP}"></TextBox>
+                <TextBox Width="164" Text="{Binding Pessoa.CEP}" MaxLength="9"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Style="{StaticResource splinha}"  >
                 <TextBlock FontWeight="Bold"><Run Text="Categoria"/></TextBlock>
