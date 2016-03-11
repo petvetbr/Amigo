@@ -7,8 +7,41 @@
         mc:Ignorable="d"
         Icon="Imagens/LogoAmigo64.png"
          DataContext="{Binding Path=MensalidadesViewModel, Source={StaticResource Locator}}"
-        Title="MensalidadesWindow" Height="300" Width="300">
+        Title="MensalidadesWindow" Height="400" Width="400">
     <Grid>
-        
+        <ListView>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <Grid HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Border>
+                                <TextBlock Margin="8,0" Grid.Column="0" HorizontalAlignment="Center">Mês</TextBlock>
+                            </Border>
+                            <TextBlock Margin="8,0" Grid.Column="1" Width="auto" HorizontalAlignment="Center">
+                                <RadioButton>Pago</RadioButton>
+                            </TextBlock>
+                            <TextBlock Margin="8,0" Grid.Column="2"  Width="auto" HorizontalAlignment="Center">
+                                <RadioButton>Em aberto</RadioButton>
+                            </TextBlock>
+
+                        </Grid>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+
+        </ListView>
+
     </Grid>
 </Window>
