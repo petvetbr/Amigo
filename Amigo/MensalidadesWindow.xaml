@@ -55,7 +55,7 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Resources>
-                                    <TextBlock Margin="8,0" Grid.Column="0" HorizontalAlignment="Center" Text="{Binding Mes}"></TextBlock>
+                                    <TextBlock Margin="8,0" Width="100"  Grid.Column="0" HorizontalAlignment="Center" Text="{Binding Mes}"></TextBlock>
                                 </Border>
                                 <StackPanel Orientation="Horizontal" Grid.Column="1">
                                     <TextBlock Margin="8,0"  Width="auto" HorizontalAlignment="Center">
