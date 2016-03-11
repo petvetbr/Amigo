@@ -67,7 +67,8 @@ namespace Amigo.ViewModel
 
         private void MenuFluxoCaixa()
         {
-            throw new NotImplementedException();
+            var flux = new FluxoCaixaWindow();
+            flux.ShowDialog();
         }
 
         private void MenuCadastroCaixasTransporte()

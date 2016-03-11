@@ -1,0 +1,146 @@
+﻿<Window x:Class="Amigo.AnimalWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Amigo"
+        mc:Ignorable="d"
+        Icon="Imagens/LogoAmigo64.png"
+        DataContext="{Binding Path=Animais, Source={StaticResource Locator}}"
+        Title="{Binding Titulo}" Height="450" Width="1000">
+    <Window.Resources>
+        <Style TargetType="{x:Type StackPanel}" x:Key="splinha">
+            <Setter Property="Margin" Value="4">
+
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <Expander  DockPanel.Dock="Left"  ExpandDirection="Right"  Header="Pesquisa" IsExpanded="{Binding ExpanderAberto}">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto">
+
+                    </RowDefinition>
+                    <RowDefinition Height="*">
+
+
+                    </RowDefinition>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Margin="0,5"  VerticalAlignment="Top">
+                    <TextBox VerticalAlignment="Center"  Text="{Binding FiltroPesquisa}"  Width="200"></TextBox>
+                    <Button Command="{Binding PesquisaCommand}" Margin="5"  ToolTip="Pesquisar por nome">Pesquisar</Button>
+                </StackPanel>
+
+                <ListBox Grid.Row="1" ItemsSource="{Binding ListaItens}" SelectedItem="{Binding Pessoa}">
+                </ListBox>
+                <StackPanel Margin="0,5"  Grid.Row="2" HorizontalAlignment="Right"   Orientation="Horizontal" VerticalAlignment="Top">
+                    <Button HorizontalAlignment="Right" Command="{Binding NovoItemCommand}"  ToolTipService.ToolTip="Criar novo registro">Novo</Button>
+                </StackPanel>
+            </Grid>
+
+
+        </Expander>
+        <StackPanel DockPanel.Dock="Right">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Pessoa}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Resources>
+            <DockPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Center"  Style="{StaticResource splinha}" >
+                    <TextBlock Margin="10,0" FontWeight="Bold">Nº:</TextBlock>
+                    <TextBox Width="40"  Text="{Binding Pessoa.Numero}" ></TextBox>
+                </StackPanel>
+
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
+                    <TextBlock VerticalAlignment="Center" Margin="10,0" FontWeight="Bold" >Data de cadastro:</TextBlock>
+                    <DatePicker SelectedDate="{Binding Pessoa.DataCadastro}"/>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}"/>
+            </DockPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Margin="8,0" Width="120" FontWeight="Bold">Nome do Tutor:</TextBlock>
+                <TextBox Text="{Binding Pessoa.Nome}"  Width="350"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Margin="8,0"  Width="120" FontWeight="Bold">Nome do animal:</TextBlock>
+                <TextBox Width="350" Text="{Binding Pessoa.NomeFantasia}"></TextBox>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
+                <TextBlock VerticalAlignment="Center" Margin="8,0" Width="120" FontWeight="Bold" >Data de Nascimento:</TextBlock>
+                <DatePicker SelectedDate="{Binding Pessoa.DataNascimento}"/>
+                <TextBlock VerticalAlignment="Center" Margin="10,0"  FontWeight="Bold">Idade:</TextBlock>
+                <TextBox Width="110"></TextBox>
+
+            </StackPanel>
+            
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Margin="8,0"  FontWeight="Bold">Espécie:</TextBlock>
+                <ComboBox Width="80"></ComboBox>
+                <TextBlock Margin="8,0"  FontWeight="Bold">Raça:</TextBlock>
+                <ComboBox Width="80"></ComboBox>
+                <TextBlock Margin="8,0"  FontWeight="Bold">Gênero:</TextBlock>
+                <ComboBox Width="80"></ComboBox>
+                <TextBlock Margin="8,0"  FontWeight="Bold">Peso:</TextBlock>
+                <TextBox Width="80"></TextBox>
+            </StackPanel>
+            <GroupBox Header="Vacinas:">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="20,20">
+                        <TextBlock Margin="8,0" FontWeight="Bold">Vacinado?</TextBlock>
+                        <CheckBox Margin="10,0" FontStyle="Italic">Sim</CheckBox>
+                        <CheckBox Margin="10,0" FontStyle="Italic">Não</CheckBox>
+                        <TextBlock Margin="10,0" FontWeight="Bold">Tipo de vacina:</TextBlock>
+                        <ComboBox Width="100" ></ComboBox>
+                        <TextBlock Margin="10,0" FontWeight="Bold">Data da vacina:</TextBlock>
+                        <DatePicker></DatePicker>
+                    </StackPanel>
+                    
+                </StackPanel>
+            </GroupBox>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                <TextBlock Width="70" Margin="8,0" FontWeight="Bold">Ambiente:</TextBlock>
+                <CheckBox Margin="8,0" FontWeight="Bold">Doméstico</CheckBox>
+                <CheckBox Margin="8,0" FontWeight="Bold">De rua</CheckBox>
+            </StackPanel>
+            <GroupBox Header="Controle populacional" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}" Margin="20,20">
+
+                <TextBlock Width="70" Margin="8,0" FontWeight="Bold">Castrado:</TextBlock>
+                <CheckBox Margin="8,0" FontWeight="Bold">Sim</CheckBox>
+                <CheckBox Margin="8,0" FontWeight="Bold">Não</CheckBox>
+                <TextBlock  Margin="8,0" FontWeight="Bold">Clínica conveniada/veterinário(a): </TextBlock>
+                <TextBox Width="120"></TextBox>
+            </StackPanel>
+            </GroupBox>
+
+
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Style="{StaticResource splinha}">
+                <Button Command="{Binding SalvarCommand}"  Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO" Background="#FF3FCFF9">SALVAR</Button>
+                <Button Command="{Binding ExcluiCommand}"  Margin="8,0" Padding="5,0" ToolTip="EXCLUI REGISTRO" Background="#FF3FCFF9">EXCLUIR</Button>
+            </StackPanel>
+
+
+        </StackPanel>
+
+    </DockPanel>
+
+</Window>
+
