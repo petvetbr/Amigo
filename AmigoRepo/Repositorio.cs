@@ -14,6 +14,7 @@ namespace AmigoRepo
         LiteDatabase db;
         public Repositorio(string nomeRepositorio, string caminho = null)
         {
+            caminho = @"C:\Users\Teresa\Desktop\DB";
             caminho = caminho ?? @"e:\acpa\";
             this.NomeRepositorio = nomeRepositorio;
             this.CaminhoRepositorio = string.Format("{0}{1}.db", caminho, nomeRepositorio);
