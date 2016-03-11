@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Icon="Imagens/LogoAmigo64.png"
         DataContext="{Binding Path=Animais, Source={StaticResource Locator}}"
-        Title="{Binding Titulo}" Height="450" Width="1000">
+        Title="{Binding Titulo}" Height="600" Width="1000">
     <Window.Resources>
         <Style TargetType="{x:Type StackPanel}" x:Key="splinha">
             <Setter Property="Margin" Value="4">
@@ -93,13 +93,14 @@
                 <ComboBox Width="80"></ComboBox>
                 <TextBlock Margin="8,0"  FontWeight="Bold">Peso:</TextBlock>
                 <TextBox Width="80"></TextBox>
+                <TextBlock Margin="8,0"  FontWeight="Bold">Foto:</TextBlock>
+                <TextBlock Margin="8,0"  FontWeight="Bold"></TextBlock>
+                <Button Width="20">+</Button>
             </StackPanel>
             <GroupBox Header="Vacinas:">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="20,20">
-                        <TextBlock Margin="8,0" FontWeight="Bold">Vacinado?</TextBlock>
-                        <CheckBox Margin="10,0" FontStyle="Italic">Sim</CheckBox>
-                        <CheckBox Margin="10,0" FontStyle="Italic">Não</CheckBox>
+                        
                         <TextBlock Margin="10,0" FontWeight="Bold">Tipo de vacina:</TextBlock>
                         <ComboBox Width="100" ></ComboBox>
                         <TextBlock Margin="10,0" FontWeight="Bold">Data da vacina:</TextBlock>
@@ -109,10 +110,10 @@
                 </StackPanel>
             </GroupBox>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+            <StackPanel Orientation="Horizontal" Margin="20"  HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Width="70" Margin="8,0" FontWeight="Bold">Ambiente:</TextBlock>
-                <CheckBox Margin="8,0" FontWeight="Bold">Doméstico</CheckBox>
-                <CheckBox Margin="8,0" FontWeight="Bold">De rua</CheckBox>
+                <CheckBox Margin="8,0" >Doméstico</CheckBox>
+                <CheckBox Margin="8,0" >De rua</CheckBox>
             </StackPanel>
             <GroupBox Header="Controle populacional" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}" Margin="20,20">
@@ -120,12 +121,16 @@
                 <TextBlock Width="70" Margin="8,0" FontWeight="Bold">Castrado:</TextBlock>
                 <CheckBox Margin="8,0" FontWeight="Bold">Sim</CheckBox>
                 <CheckBox Margin="8,0" FontWeight="Bold">Não</CheckBox>
-                <TextBlock  Margin="8,0" FontWeight="Bold">Clínica conveniada/veterinário(a): </TextBlock>
-                <TextBox Width="120"></TextBox>
+                <TextBlock  Margin="40,0" FontWeight="Bold">Clínica conveniada/veterinário(a): </TextBlock>
+                <ComboBox Width="120"></ComboBox>
             </StackPanel>
             </GroupBox>
-
-
+            <GroupBox Header="Observações / Histórico:">
+            <StackPanel>
+                
+                <TextBox HorizontalAlignment="Center" VerticalAlignment="Top" Width="600" Height="80"></TextBox>
+            </StackPanel>
+            </GroupBox>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}"/>
 
