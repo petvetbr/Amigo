@@ -44,26 +44,26 @@
                                 <Border>
                                     <Border.Resources>
                                         <Style TargetType="{x:Type Border}">
-                                            <Setter Property="Background" Value="Gray"></Setter>
+                                            <Setter Property="Background" Value="Gainsboro"></Setter>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Pago}" Value="True">
-                                                    <Setter Property="Background" Value="Green"></Setter>
+                                                    <Setter Property="Background" Value="#FF98FF98"></Setter>
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding Pago}" Value="False">
-                                                    <Setter Property="Background" Value="Red"></Setter>
+                                                    <Setter Property="Background" Value="#FFFFB5B5"></Setter>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Resources>
-                                    <TextBlock Margin="8,0" Grid.Column="0" HorizontalAlignment="Center">Mês</TextBlock>
+                                    <TextBlock Margin="8,0" Grid.Column="0" HorizontalAlignment="Center" Text="{Binding Mes}"></TextBlock>
                                 </Border>
                                 <StackPanel Orientation="Horizontal" Grid.Column="1">
                                     <TextBlock Margin="8,0"  Width="auto" HorizontalAlignment="Center">
-                                <RadioButton IsChecked="{Binding Pago, Mode=TwoWay}">
+                                <RadioButton IsChecked="{Binding Pago, Mode=TwoWay}"  IsThreeState="True">
                                     Pago</RadioButton>
                                     </TextBlock>
                                     <TextBlock Margin="8,0"  Width="auto" HorizontalAlignment="Center">
-                                <RadioButton IsChecked="{Binding Pago, Mode=TwoWay,Converter={local:InverseBooleanConverter}}">Em aberto</RadioButton>
+                                <RadioButton IsChecked="{Binding Pago, Mode=TwoWay,Converter={local:InverseBooleanConverter}}" IsThreeState="True">Em aberto</RadioButton>
                                     </TextBlock>
                                 </StackPanel>
                             </Grid>
