@@ -43,8 +43,12 @@ namespace Amigo.ViewModel
             get;
             private set;
         }
+        public RelayCommand MenuMensalidadesCommand
+        {
+            get;
+            private set;
+        }
 
-        
 
 
         /// <summary>
@@ -57,12 +61,17 @@ namespace Amigo.ViewModel
             MenuCadastroCaixasTransporteCommand = new RelayCommand(MenuCadastroCaixasTransporte);
             MenuFluxoCaixaCommand = new RelayCommand(MenuFluxoCaixa);
             MenuServicosCaixaTransporteCommand = new RelayCommand(ServicosCaixaTransporte);
-            
+            MenuMensalidadesCommand = new RelayCommand(AbrirMensalidades);
+        }
+
+        private void AbrirMensalidades()
+        {
+            new MensalidadesWindow().ShowDialog();
         }
 
         private void ServicosCaixaTransporte()
         {
-            throw new NotImplementedException();
+            new ServicoCaixaTransporteWindow().ShowDialog();
         }
 
         private void MenuFluxoCaixa()

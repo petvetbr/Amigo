@@ -8,6 +8,6 @@ namespace AmigoRepo
     public interface IMensalidades:IRepositorio, IObservacao
     {
         IPessoa Socio { get; set; }
-        IEnumerable<IMesMensalidade> Pagamentos { get; set; }
+        IList<IMesMensalidade> Pagamentos { get; set; }
     }
 }

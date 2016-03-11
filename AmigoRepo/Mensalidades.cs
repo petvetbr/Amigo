@@ -23,8 +23,8 @@ namespace AmigoRepo
                 }
             }
         }
-        IEnumerable<IMesMensalidade> _pagamentos;
-        public IEnumerable<IMesMensalidade> Pagamentos
+        IList<IMesMensalidade> _pagamentos;
+        public IList<IMesMensalidade> Pagamentos
         {
             get
             {

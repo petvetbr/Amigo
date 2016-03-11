@@ -28,6 +28,7 @@
             </MenuItem>
             <MenuItem Header="Financeiro">
                 <MenuItem Header="Fluxo Caixa" Command="{Binding MenuFluxoCaixaCommand}"/>
+                <MenuItem Header="Mensalidades" Command="{Binding MenuMensalidadesCommand}"/>
             </MenuItem>
         </Menu>
         <StackPanel Grid.Row="1">

@@ -9,6 +9,6 @@ namespace AmigoRepo
     {
         int Ano { get; set; }
         int Mes { get; set; }
-        int Situacao { get; set; }
+        bool? Pago { get; set; }
     }
 }

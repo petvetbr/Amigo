@@ -48,6 +48,7 @@ namespace Amigo.ViewModel
             SimpleIoc.Default.Register<MensalidadesViewModel>();
             SimpleIoc.Default.Register<FluxoCaixaViewModel>();
             SimpleIoc.Default.Register<CaixaTransporteViewModel>();
+            SimpleIoc.Default.Register<ServicoCaixaTransportesViewModel>();
 
         }
 
@@ -55,6 +56,9 @@ namespace Amigo.ViewModel
         private string _currentFluxoCaixaVMKey;
         private string _currentCaixaTransporteVMKey;
         private string _currentMensalidadesVMKey;
+        private string _currentServicoCaixaTransporteVMKey;
+
+
         public MainViewModel Main
         {
             get
@@ -109,6 +113,18 @@ namespace Amigo.ViewModel
                 }
                 _currentCaixaTransporteVMKey = Guid.NewGuid().ToString();
                 return ServiceLocator.Current.GetInstance<CaixaTransporteViewModel>(_currentCaixaTransporteVMKey);
+            }
+        }
+        public ServicoCaixaTransportesViewModel ServicoCaixaTransportes
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(_currentServicoCaixaTransporteVMKey))
+                {
+                    SimpleIoc.Default.Unregister(_currentServicoCaixaTransporteVMKey);
+                }
+                _currentServicoCaixaTransporteVMKey = Guid.NewGuid().ToString();
+                return ServiceLocator.Current.GetInstance<ServicoCaixaTransportesViewModel>(_currentServicoCaixaTransporteVMKey);
             }
         }
         public static void Cleanup()

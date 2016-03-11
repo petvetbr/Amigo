@@ -40,19 +40,19 @@ namespace AmigoRepo
             }
         }
 
-        int _situacao;
-        public int Situacao
+        bool? _Pago;
+        public bool? Pago
         {
             get
             {
-                return _situacao;
+                return _Pago;
             }
             set
             {
-                if (_situacao != value)
+                if (_Pago != value)
                 {
-                    _situacao = value;
-                    OnPropertyChanged(nameof(Situacao));
+                    _Pago = value;
+                    OnPropertyChanged(nameof(Pago));
                 }
             }
         }

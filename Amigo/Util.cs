@@ -11,6 +11,11 @@ namespace Amigo
     public static class Util
     {
        public static Repositorio Repositorio { get; set; }
+       public static IEnumerable<KeyValuePair<int,string>> ObterListaSocios()
+        {
+            return Repositorio.ObterLista<Pessoa>(nomeTabela: "Socios")
+                .Select((p => new KeyValuePair<int,string> (p.Id, p.Nome)));
+        }
     }
    
 }
