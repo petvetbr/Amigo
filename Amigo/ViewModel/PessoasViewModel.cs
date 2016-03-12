@@ -589,44 +589,69 @@ namespace Amigo.ViewModel
                     break;
                 case TipoPessoa.Cliente:
                     {
+                        
                         _nomeTabela = "Clientes";
                         this.Titulo = "Cadastro de Clientes";
+                        this.ExibirStatus = true;
+                        this.ExibirNascimento = true;
+                        this.ExibirHomePage = true;
                     }
                     break;
                 case TipoPessoa.MoradorComunitario:
                     {
                         _nomeTabela = "Morador";
                         this.Titulo = "Cadastro de Moradores Comunitários";
+                        this.ExibirStatus = true;
+                        this.ExibirNascimento = true;
+                        this.ExibirHomePage = true;
                     }
                     break;
                 case TipoPessoa.Fornecedor:
                     {
                         _nomeTabela = "Fornecedores";
                         this.Titulo = "Cadastro de Fornecedores";
+                        this.LabelFantasia = "Nome Fantasia/Apelido:";
+                        this.ExibirNomeFantasia = true;
+                        this.ExibirStatus = true;
+                        this.ExibirCpfCnpj = true;
+                        this.ExibirHomePage = true;
                     }
                     break;
                 case TipoPessoa.Entidade:
                     {
                         _nomeTabela = "Entidades";
                         this.Titulo = "Cadastro de Entidades";
+                        this.LabelNome = "Nome da Entidade:";
+                        this.ExibirNomeRepresentante = true;
+                        this.ExibirCpfCnpj = true;
+                        this.ExibirHomePage = true;
                     }
                     break;
                 case TipoPessoa.Parceiro:
                     {
                         _nomeTabela = "Parceiros";
                         this.Titulo = "Cadastro de Parceiros";
+                        this.LabelFantasia = "Nome Fantasia/Apelido:";
+                        this.ExibirNomeFantasia = true;
+                        this.ExibirNomeRepresentante = true;
+                        this.ExibirCpfCnpj = true;
+                        this.ExibirHomePage = true;
                     }
                     break;
                 case TipoPessoa.Doador:
                     {
                         _nomeTabela = "Doadores";
                         this.Titulo = "Cadastro de Doadores";
+                        this.ExibirNomeFantasia = true;
+                        this.ExibirHomePage = true;
                     }
                     break;
                 case TipoPessoa.Patrocinador:
                     {
                         _nomeTabela = "Patrocinadores";
                         this.Titulo = "Cadastro de Patrocinador";
+                        this.ExibirNomeFantasia = true;
+                        this.ExibirHomePage = true;
                     }
                     break;
                 default:
