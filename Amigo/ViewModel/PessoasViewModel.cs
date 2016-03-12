@@ -229,7 +229,10 @@ namespace Amigo.ViewModel
             this.NovoItemCommand = new RelayCommand(CriarNovoItem);
             this.AdicionarTelefoneCommand = new RelayCommand(AdicionarTelefone, () => this.TelefoneSelecionado != null);
             this.RemoverTelefoneCommand = new RelayCommand(RemoverTelefone, 
-                () => this.TelefoneSelecionado != null     && this.Pessoa.Telefones.Contains(this.TelefoneSelecionado));
+                () => this.TelefoneSelecionado != null 
+                && this.Pessoa!=null    
+                &&  this.Pessoa.Telefones!=null
+                &&  this.Pessoa.Telefones.Contains(this.TelefoneSelecionado));
             ExpanderAberto = true;
 
             CarregarListas();

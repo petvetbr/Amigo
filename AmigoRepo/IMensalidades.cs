@@ -7,7 +7,7 @@ namespace AmigoRepo
 {
     public interface IMensalidades:IRepositorio, IObservacao
     {
-        IPessoa Socio { get; set; }
+        Pessoa Socio { get; set; }
         IList<IMesMensalidade> Pagamentos { get; set; }
     }
 }

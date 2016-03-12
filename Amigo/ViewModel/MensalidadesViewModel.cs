@@ -1,6 +1,7 @@
 ﻿using AmigoRepo;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using LiteDB;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -151,7 +152,7 @@ namespace Amigo.ViewModel
                 return;
             }
 
-            var mensalidade = repo.Obter<Mensalidades>(p => p.Socio.Numero==socio.Numero);
+            var mensalidade = repo.ObterMensalidades(p => p.Socio.Id==_socioSelecionado.Key);
             if(mensalidade==null)
             {
                 mensalidade = new AmigoRepo.Mensalidades()
@@ -187,7 +188,9 @@ namespace Amigo.ViewModel
                 }
                 else
                 {
-                    this.Pagamentos = new ObservableCollection<IMesMensalidade>(GerarMensalidadesAno(_anoSelecionado.GetValueOrDefault()));
+                    var listaNovasMensalidades = GerarMensalidadesAno(_anoSelecionado.GetValueOrDefault()).ToList();
+                    listaNovasMensalidades.ForEach(p => this._mensalidades.Pagamentos.Add(p));
+                    this.Pagamentos = new ObservableCollection<IMesMensalidade>(listaNovasMensalidades);
                 }
                 
             }

@@ -25,8 +25,8 @@ namespace AmigoRepo
             
             this.NomeRepositorio = nomeRepositorio;
             this.CaminhoRepositorio = string.Format("{0}{1}.db", caminho, nomeRepositorio);
-            db = new LiteDatabase(CaminhoRepositorio);
-            
+            db = new AmigoDb(CaminhoRepositorio);
+
         }
 
     
@@ -66,6 +66,28 @@ namespace AmigoRepo
             var s = typeof(T).Name;
             var nome = s + "s";
             return nome;
+        }
+
+
+        public Mensalidades ObterMensalidades(Expression<Func<Mensalidades, bool>> exp, string nomeTabela = null)
+        {
+            try
+            {
+                nomeTabela = nomeTabela ?? ObterPlural<Mensalidades>();
+
+                var mensalidades = db.GetCollection<Mensalidades>(nomeTabela)
+                    .Include(x => x.Socio)
+                    .FindAll()
+                    .Where(exp.Compile());
+                    
+               
+                return mensalidades.FirstOrDefault(); 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         public T Obter<T>(Expression<Func<T,bool>> exp, string nomeTabela = null) where T: class,new()
         {

@@ -5,10 +5,11 @@ using System.Text;
 
 namespace AmigoRepo
 {
-    public class Mensalidades:EntidadeRepo, IMensalidades
+    public class Mensalidades:EntidadeRepo,IMensalidades
     {
-        IPessoa _socio;
-        public IPessoa Socio
+      
+        Pessoa _socio;
+        public Pessoa Socio
         {
             get
             {
@@ -23,6 +24,7 @@ namespace AmigoRepo
                 }
             }
         }
+     
         IList<IMesMensalidade> _pagamentos;
         public IList<IMesMensalidade> Pagamentos
         {
