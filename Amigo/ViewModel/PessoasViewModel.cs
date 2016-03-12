@@ -48,9 +48,10 @@ namespace Amigo.ViewModel
         {
             get;
             private set;
-        } 
+        }
         #endregion
         #region Propriedades
+        private TipoPessoa _tipoPessoa;
         Pessoa _pessoa;
         public Pessoa Pessoa
         {
@@ -64,8 +65,19 @@ namespace Amigo.ViewModel
                 {
                     _pessoa = value;
                     RaisePropertyChanged(nameof(Pessoa));
-                    if (value == null) return;
+                    if (value == null)
+                    {
+                        this.Crmv = string.Empty;
+                        this.CrmvUf = string.Empty;
+                        return;
+                    }
                     this.TelefoneSelecionado = value.Telefones.FirstOrDefault() ?? new Telefone();
+                    if (_tipoPessoa == TipoPessoa.Veterinario)
+                    {
+
+                        this.Crmv = _pessoa.CamposExtras.SingleOrDefault(p =>  p.Chave?.Equals(nameof(Crmv))??false)?.Valor ??string.Empty;
+                        this.CrmvUf = _pessoa.CamposExtras.SingleOrDefault (p => p.Chave?.Equals(nameof(CrmvUf)) ?? false)?.Valor ??string.Empty;
+                    }
                 }
             }
         }
@@ -370,6 +382,58 @@ namespace Amigo.ViewModel
                 }
             }
         }
+
+
+        bool _exibirCrmv;
+        public bool ExibirCrmv
+        {
+            get
+            {
+                return _exibirCrmv;
+            }
+            set
+            {
+                if (_exibirCrmv != value)
+                {
+                    _exibirCrmv = value;
+                    RaisePropertyChanged(nameof(ExibirCrmv));
+                }
+            }
+        }
+
+        string _crmv;
+        public string Crmv
+        {
+            get
+            {
+                return _crmv;
+            }
+            set
+            {
+                if (_crmv != value)
+                {
+                    _crmv = value;
+                    RaisePropertyChanged(nameof(Crmv));
+                }
+            }
+        }
+        string _crmvUf;
+        public string CrmvUf
+        {
+            get
+            {
+                return _crmvUf;
+            }
+            set
+            {
+                if (_crmvUf != value)
+                {
+                    _crmvUf = value;
+                    RaisePropertyChanged(nameof(CrmvUf));
+                }
+            }
+        }
+
         #endregion
 
 
@@ -382,11 +446,11 @@ namespace Amigo.ViewModel
             this.PesquisaCommand = new RelayCommand(Pesquisar);
             this.NovoItemCommand = new RelayCommand(CriarNovoItem);
             this.AdicionarTelefoneCommand = new RelayCommand(AdicionarTelefone, () => this.TelefoneSelecionado != null);
-            this.RemoverTelefoneCommand = new RelayCommand(RemoverTelefone, 
-                () => this.TelefoneSelecionado != null 
-                && this.Pessoa!=null    
-                &&  this.Pessoa.Telefones!=null
-                &&  this.Pessoa.Telefones.Contains(this.TelefoneSelecionado));
+            this.RemoverTelefoneCommand = new RelayCommand(RemoverTelefone,
+                () => this.TelefoneSelecionado != null
+                && this.Pessoa != null
+                && this.Pessoa.Telefones != null
+                && this.Pessoa.Telefones.Contains(this.TelefoneSelecionado));
             ExpanderAberto = true;
 
             CarregarListas();
@@ -407,7 +471,7 @@ namespace Amigo.ViewModel
 
         private void CarregarListas()
         {
-           
+
 
             this.ListaCategorias = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaPessoasCategoria());
             this.ListaTipos = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaPessoasTipos());
@@ -419,7 +483,8 @@ namespace Amigo.ViewModel
         private string _nomeTabela;
         private void TipoPessoaEnviada(TipoPessoa tipo)
         {
-            switch (tipo)
+            _tipoPessoa = tipo;
+            switch (_tipoPessoa)
             {
                 case TipoPessoa.Socio:
                     {
@@ -428,28 +493,65 @@ namespace Amigo.ViewModel
                     }
                     break;
                 case TipoPessoa.Veterinario:
+                    {
+                        _nomeTabela = "Veterinarios";
+                        this.Titulo = "Cadastro de Veterinários";
+                        this.ExibirCrmv = true;
+                    }
                     break;
                 case TipoPessoa.Clinica:
+                    {
+                        _nomeTabela = "Clinicas";
+                        this.Titulo = "Cadastro de Clínicas";
+                    }
                     break;
                 case TipoPessoa.Cliente:
+                    {
+                        _nomeTabela = "Clientes";
+                        this.Titulo = "Cadastro de Clientes";
+                    }
                     break;
                 case TipoPessoa.MoradorComunitario:
+                    {
+                        _nomeTabela = "Morador";
+                        this.Titulo = "Cadastro de Moradores Comunitários";
+                    }
                     break;
                 case TipoPessoa.Fornecedor:
+                    {
+                        _nomeTabela = "Fornecedores";
+                        this.Titulo = "Cadastro de Fornecedores";
+                    }
                     break;
                 case TipoPessoa.Entidade:
+                    {
+                        _nomeTabela = "Entidades";
+                        this.Titulo = "Cadastro de Entidades";
+                    }
                     break;
                 case TipoPessoa.Parceiro:
+                    {
+                        _nomeTabela = "Parceiros";
+                        this.Titulo = "Cadastro de Parceiros";
+                    }
                     break;
                 case TipoPessoa.Doador:
+                    {
+                        _nomeTabela = "Doadores";
+                        this.Titulo = "Cadastro de Doadores";
+                    }
                     break;
                 case TipoPessoa.Patrocinador:
+                    {
+                        _nomeTabela = "Patrocinadores";
+                        this.Titulo = "Cadastro de Patrocinador";
+                    }
                     break;
                 default:
                     break;
             }
             RefreshLista();
-            
+
         }
 
         private void CriarNovoItem()
@@ -466,6 +568,17 @@ namespace Amigo.ViewModel
             }
             pessoa.DataCadastro = DateTime.Now;
             this.TelefoneSelecionado = new Telefone() { Descricao = this.ListaTiposTelefone.FirstOrDefault().Value };
+
+            if (_tipoPessoa == TipoPessoa.Veterinario)
+            {
+                pessoa.CamposExtras = new List<IChaveValor<string, string>>();
+
+                this.Crmv = string.Empty;
+                this.CrmvUf = string.Empty;
+                pessoa.CamposExtras.Add(new ChaveValor<string, string>() { Chave = nameof(Crmv), Valor = this.Crmv });
+                pessoa.CamposExtras.Add(new ChaveValor<string, string>() { Chave = nameof(CrmvUf), Valor = this.CrmvUf });
+            }
+
             this.Pessoa = pessoa;
             ExpanderAberto = false;
         }
@@ -474,7 +587,31 @@ namespace Amigo.ViewModel
 
         private void Salvar()
         {
-            if (!Util.Repositorio.Salvar<Pessoa>(this.Pessoa, _nomeTabela).Key)
+            if (_tipoPessoa == TipoPessoa.Veterinario)
+            {
+                var campoCrmv = _pessoa.CamposExtras.SingleOrDefault(p => object.Equals(p.Chave, nameof(Crmv)));
+                if (campoCrmv == null)
+                {
+                    _pessoa.CamposExtras.Add(new ChaveValor<string, string>() { Chave = nameof(Crmv), Valor = this.Crmv });
+                }
+                else
+                {
+                    campoCrmv.Valor = this.Crmv;
+                }
+                var campoCrmvUf = _pessoa.CamposExtras.SingleOrDefault(p => object.Equals(p.Chave, nameof(CrmvUf)));
+                if (campoCrmvUf == null)
+                {
+                    _pessoa.CamposExtras.Add(new ChaveValor<string, string>() { Chave = nameof(CrmvUf), Valor = this.CrmvUf });
+                }
+                else
+                {
+                    campoCrmvUf.Valor = this.CrmvUf;
+                }
+
+                
+            }
+
+            if (!Util.Repositorio.Salvar<Pessoa>(_pessoa, _nomeTabela).Key)
             {
                 return;
             }
@@ -485,7 +622,7 @@ namespace Amigo.ViewModel
 
         private void Excluir()
         {
-            if(!Util.Repositorio.Apagar<Pessoa>(x => x.Id == this.Pessoa.Id))
+            if (!Util.Repositorio.Apagar<Pessoa>(x => x.Id == this.Pessoa.Id))
             {
                 return;
             }
@@ -506,7 +643,7 @@ namespace Amigo.ViewModel
 
         private void RefreshLista(Expression<Func<Pessoa, bool>> expression = null)
         {
-            var lista = Util.Repositorio.ObterLista<Pessoa>(expression, _nomeTabela);
+            var lista = Util.Repositorio.ObterLista<Pessoa>(expression, _nomeTabela).OrderBy(p=>p.Nome);
             this.ListaItens = new ObservableCollection<IRepositorio>(lista);
         }
     }

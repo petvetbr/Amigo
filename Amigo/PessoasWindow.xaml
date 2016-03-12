@@ -134,8 +134,26 @@
                 <TextBlock VerticalAlignment="Center"
                            Margin="10,0"
                            Width="120"
+                           FontWeight="Bold"
+                           Visibility="{Binding ExibirCrmv, Converter={StaticResource BooleanToVisibilityConverter}}">CRMV:</TextBlock>
+                <TextBox Text="{Binding Crmv}"
+                         Visibility="{Binding ExibirCrmv, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         VerticalAlignment="Center"
+                         Width="60"></TextBox>
+                <TextBlock Margin="8,0"
+                           Visibility="{Binding ExibirCrmv, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           VerticalAlignment="Center"
+                           FontWeight="Bold">UF:</TextBlock>
+                <ComboBox Width="40"
+                          Visibility="{Binding ExibirCrmv, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          ItemsSource="{Binding ListaUf}"
+                          SelectedItem="{Binding CrmvUf, Mode=TwoWay}"></ComboBox>
+                <TextBlock VerticalAlignment="Center"
+                           Margin="10,0"
+                           Width="120"
                            FontWeight="Bold">Data de Nascimento:</TextBlock>
-                <DatePicker SelectedDate="{Binding Pessoa.DataNascimento}" />
+                <DatePicker SelectedDate="{Binding Pessoa.DataNascimento}"
+                            VerticalAlignment="Center" />
 
             </StackPanel>
             <StackPanel Orientation="Horizontal"
@@ -210,6 +228,7 @@
                     </StackPanel>
                     <ListBox DockPanel.Dock="Right"
                              VerticalAlignment="Top"
+                             Height="50"
                              Margin="5,20,5,5"
                              SelectedItem="{Binding TelefoneSelecionado}"
                              ItemsSource="{Binding Pessoa.Telefones}">
@@ -284,7 +303,7 @@
                 <TextBlock Margin="8,0"
                            Width="120"
                            FontWeight="Bold">UF:</TextBlock>
-                <ComboBox Width="140" 
+                <ComboBox Width="40" 
                           Text="{Binding Pessoa.UF}"
                           ItemsSource="{Binding ListaUf}"
                           SelectedItem="{Binding Pessoa.UF, Mode=TwoWay}"></ComboBox>

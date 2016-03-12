@@ -20,7 +20,36 @@
         </Grid.RowDefinitions>
         <Menu  >
             <MenuItem Header="Cadastro">
-                <MenuItem Header="Sócios" Command="{Binding MenuCadastroSociosCommand}"/>
+                <MenuItem Header="Sócios" Command="{Binding MenuCadastroCommand}" CommandParameter="0"/>
+                <MenuItem Header="Veterinários"
+                          Command="{Binding MenuCadastroCommand}"
+                          CommandParameter="1" />
+                <MenuItem Header="Clínicas"
+                          Command="{Binding MenuCadastroCommand}"
+                          CommandParameter="2" />
+                <MenuItem Header="Clientes"
+                          Command="{Binding MenuCadastroCommand}"
+                          CommandParameter="3" />
+                
+                <MenuItem Header="Moradores Comunitários"
+                          CommandParameter="4"
+                          Command="{Binding MenuCadastroCommand}" />
+                <MenuItem Header="Fornecedores"
+                          CommandParameter="5"
+                          Command="{Binding MenuCadastroCommand}" />
+                <MenuItem Header="Entidades"
+                          CommandParameter="6"
+                          Command="{Binding MenuCadastroCommand}" />
+                <MenuItem Header="Parceiros"
+                          CommandParameter="7"
+                          Command="{Binding MenuCadastroCommand}" />
+                <MenuItem Header="Doadores"
+                          CommandParameter="8"
+                          Command="{Binding MenuCadastroCommand}" />
+                <MenuItem Header="Patrocinadores"
+                          CommandParameter="9"
+                          Command="{Binding MenuCadastroCommand}" />
+                
                 <MenuItem Header="Caixas de Transportes" Command="{Binding MenuCadastroCaixasTransporteCommand}"/>
             </MenuItem>
             <MenuItem Header="Serviços">

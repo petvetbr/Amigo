@@ -17,7 +17,7 @@ namespace AmigoRepo
 
             set
             {
-                if (!value.Equals(_chave))
+                if (!object.Equals(value, _chave))
                 {
                     _chave = value;
                     OnPropertyChanged(nameof(Chave));
@@ -34,7 +34,7 @@ namespace AmigoRepo
 
             set
             {
-                if (!value.Equals(_valor))
+                if (!object.Equals(value,_valor))
                 {
                     _valor = value;
                     OnPropertyChanged(nameof(Valor));

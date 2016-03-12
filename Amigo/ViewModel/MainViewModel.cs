@@ -22,7 +22,7 @@ namespace Amigo.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        public RelayCommand MenuCadastroSociosCommand
+        public RelayCommand<int>MenuCadastroCommand
         {
             get;
             private set;
@@ -57,11 +57,19 @@ namespace Amigo.ViewModel
         public MainViewModel()
         {
            
-            MenuCadastroSociosCommand = new RelayCommand(MenuCadastroSocios);
+            MenuCadastroCommand = new RelayCommand<int>(MenuCadastro);
             MenuCadastroCaixasTransporteCommand = new RelayCommand(MenuCadastroCaixasTransporte);
             MenuFluxoCaixaCommand = new RelayCommand(MenuFluxoCaixa);
             MenuServicosCaixaTransporteCommand = new RelayCommand(ServicosCaixaTransporte);
             MenuMensalidadesCommand = new RelayCommand(AbrirMensalidades);
+        }
+
+        private void MenuCadastro(int tipoPessoa)
+        {
+            var tp =(TipoPessoa) Enum.ToObject(typeof(TipoPessoa), tipoPessoa);
+            var pw = new PessoasWindow();
+            Messenger.Default.Send(tp);
+            pw.ShowDialog();
         }
 
         private void AbrirMensalidades()
@@ -86,13 +94,7 @@ namespace Amigo.ViewModel
             ctw.ShowDialog();
         }
 
-        private void MenuCadastroSocios()
-        {
-            var pw = new PessoasWindow();
-            Messenger.Default.Send(TipoPessoa.Socio);
-            pw.ShowDialog();
-
-        }
+        
 
 
     }

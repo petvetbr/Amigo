@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -21,11 +22,11 @@ namespace AmigoRepo
         string Cpf_Cnpj { get; set; }
         string TipoPessoa { get; set; }
         string Homepage { get; set; }
-        IList<ITelefone> Telefones { get; set; }
+        ObservableCollection<ITelefone> Telefones { get; set; }
         int Status { get; set; }
         int Categoria { get; set; }
         int Tipo { get; set; }
-        IEnumerable<IChaveValor<string,string>> CamposExtras { get; set; }
+        IList<IChaveValor<string,string>> CamposExtras { get; set; }
 
     }
 }

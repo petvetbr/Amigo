@@ -198,8 +198,8 @@ namespace AmigoRepo
             }
         }
 
-        IList<ITelefone> _Telefones;
-        public IList<ITelefone> Telefones
+        ObservableCollection<ITelefone> _Telefones;
+        public ObservableCollection<ITelefone> Telefones
         {
             get
             {
@@ -283,8 +283,8 @@ namespace AmigoRepo
             }
         }
 
-        IEnumerable<IChaveValor<string, string>> _camposExtras;
-        public IEnumerable<IChaveValor<string, string>> CamposExtras
+        IList<IChaveValor<string, string>> _camposExtras;
+        public IList<IChaveValor<string, string>> CamposExtras
         {
             get
             {
