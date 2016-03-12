@@ -434,6 +434,71 @@ namespace Amigo.ViewModel
             }
         }
 
+        string labelResponsavel;
+        public string LabelResponsavel
+        {
+            get
+            {
+                return labelResponsavel;
+            }
+            set
+            {
+                if (labelResponsavel != value)
+                {
+                    labelResponsavel = value;
+                    RaisePropertyChanged(nameof(LabelResponsavel));
+                }
+            }
+        }
+        string labelFantasia;
+        public string LabelFantasia
+        {
+            get
+            {
+                return labelFantasia;
+            }
+            set
+            {
+                if (labelFantasia != value)
+                {
+                    labelFantasia = value;
+                    RaisePropertyChanged(nameof(LabelFantasia));
+                }
+            }
+        }
+        string labelNome;
+        public string LabelNome
+        {
+            get
+            {
+                return labelNome;
+            }
+            set
+            {
+                if (labelNome != value)
+                {
+                    labelNome = value;
+                    RaisePropertyChanged(nameof(LabelNome));
+                }
+            }
+        }
+        private bool _exibirNascimento;
+        public bool ExibirNascimento
+        {
+            get
+            {
+                return _exibirNascimento;
+            }
+            set
+            {
+                if (_exibirNascimento != value)
+                {
+                    _exibirNascimento = value;
+                    RaisePropertyChanged(nameof(ExibirNascimento));
+                }
+            }
+        }
+
         #endregion
 
 
@@ -445,6 +510,9 @@ namespace Amigo.ViewModel
             this.ExcluiCommand = new RelayCommand(Excluir, () => Pessoa != null);
             this.PesquisaCommand = new RelayCommand(Pesquisar);
             this.NovoItemCommand = new RelayCommand(CriarNovoItem);
+            this.LabelResponsavel = "Nome representante:";
+            this.LabelFantasia = "Nome fantasia:";
+            this.LabelNome = "Nome:";
             this.AdicionarTelefoneCommand = new RelayCommand(AdicionarTelefone, () => this.TelefoneSelecionado != null);
             this.RemoverTelefoneCommand = new RelayCommand(RemoverTelefone,
                 () => this.TelefoneSelecionado != null
@@ -490,6 +558,10 @@ namespace Amigo.ViewModel
                     {
                         _nomeTabela = "Socios";
                         this.Titulo = "Cadastro de Sócios";
+                        this.ExibirStatus = true;
+                        this.ExibirTipo = true;
+                        this.ExibirCategoria = true;
+                        this.ExibirNascimento = true;
                     }
                     break;
                 case TipoPessoa.Veterinario:
@@ -497,12 +569,22 @@ namespace Amigo.ViewModel
                         _nomeTabela = "Veterinarios";
                         this.Titulo = "Cadastro de Veterinários";
                         this.ExibirCrmv = true;
+                        this.ExibirStatus = true;
+                        this.ExibirNascimento = true;
                     }
                     break;
                 case TipoPessoa.Clinica:
                     {
                         _nomeTabela = "Clinicas";
                         this.Titulo = "Cadastro de Clínicas";
+                        this.LabelNome = "Nome da Clínica:";
+                        this.LabelResponsavel = "Responsável da Clínica:";
+                        this.LabelFantasia = "Veterinário Responsável:";
+                        this.ExibirStatus = true;
+                        this.ExibirNomeFantasia = true;
+                        this.ExibirHomePage = true;
+                        this.ExibirNomeRepresentante = true;
+
                     }
                     break;
                 case TipoPessoa.Cliente:

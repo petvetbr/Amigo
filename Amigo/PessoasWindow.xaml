@@ -122,8 +122,9 @@
                         VerticalAlignment="Top"
                         Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0"
-                           Width="120"
-                           FontWeight="Bold">Nome:</TextBlock>
+                           MinWidth="120"
+                           FontWeight="Bold"
+                           Text="{Binding LabelNome}"></TextBlock>
                 <TextBox Text="{Binding Pessoa.Nome}"
                          Width="350"></TextBox>
             </StackPanel>
@@ -149,10 +150,12 @@
                           ItemsSource="{Binding ListaUf}"
                           SelectedItem="{Binding CrmvUf, Mode=TwoWay}"></ComboBox>
                 <TextBlock VerticalAlignment="Center"
+                           Visibility="{Binding ExibirNascimento, Converter={StaticResource BooleanToVisibilityConverter}}"
                            Margin="10,0"
                            Width="120"
                            FontWeight="Bold">Data de Nascimento:</TextBlock>
                 <DatePicker SelectedDate="{Binding Pessoa.DataNascimento}"
+                            Visibility="{Binding ExibirNascimento, Converter={StaticResource BooleanToVisibilityConverter}}"
                             VerticalAlignment="Center" />
 
             </StackPanel>
@@ -162,8 +165,9 @@
                         VerticalAlignment="Top"
                         Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0"
-                           Width="120"
-                           FontWeight="Bold">Nome fantasia:</TextBlock>
+                           MinWidth="120"
+                           FontWeight="Bold"
+                           Text="{Binding LabelFantasia}"></TextBlock>
                 <TextBox Width="350"
                          Text="{Binding Pessoa.NomeFantasia}"></TextBox>
             </StackPanel>
@@ -174,8 +178,9 @@
                         VerticalAlignment="Top"
                         Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0"
-                           Width="120"
-                           FontWeight="Bold">Nome representante:</TextBlock>
+                           MinWidth="120"
+                           FontWeight="Bold"
+                           Text="{Binding LabelResponsavel}"></TextBlock>
                 <TextBox Text="{Binding Pessoa.NomeRepresentante}"
                          Width="350"></TextBox>
             </StackPanel>
@@ -317,7 +322,9 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Style="{StaticResource splinha}">
-                <TextBlock FontWeight="Bold"><Run Text="Categoria" /></TextBlock>
+                <TextBlock VerticalAlignment="Center"
+                           Visibility="{Binding ExibirCategoria, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           FontWeight="Bold"><Run Text="Categoria" /></TextBlock>
                 <ComboBox x:Name="Categoria"
                           ToolTip="Escolha a categoria"
                           Width="100"
@@ -325,22 +332,27 @@
                           ItemsSource="{Binding ListaCategorias}"
                           SelectedValuePath="Key"
                           SelectedValue="{Binding Pessoa.Categoria, Mode=TwoWay}"
-                          DisplayMemberPath="Value">
+                          DisplayMemberPath="Value"
+                          Visibility="{Binding ExibirCategoria, Converter={StaticResource BooleanToVisibilityConverter}}">
                 </ComboBox>
 
                 <TextBlock Margin="10,0"
+                           Visibility="{Binding ExibirTipo, Converter={StaticResource BooleanToVisibilityConverter}}"
                            FontWeight="Bold"><Run Text="Tipo" /></TextBlock>
                 <ComboBox Width="100"
                           ItemsSource="{Binding ListaTipos}"
                           SelectedValuePath="Key"
                           SelectedValue="{Binding Pessoa.Tipo, Mode=TwoWay}"
+                          Visibility="{Binding ExibirTipo, Converter={StaticResource BooleanToVisibilityConverter}}"
                           DisplayMemberPath="Value">
 
                 </ComboBox>
                 <TextBlock Margin="10,0"
+                           Visibility="{Binding ExibirStatus, Converter={StaticResource BooleanToVisibilityConverter}}"
                            FontWeight="Bold"><Run Text="Status" /></TextBlock>
                 <ComboBox Width="100"
                           ItemsSource="{Binding ListaStatus}"
+                          Visibility="{Binding ExibirStatus, Converter={StaticResource BooleanToVisibilityConverter}}"
                           SelectedValuePath="Key"
                           SelectedValue="{Binding Pessoa.Status, Mode=TwoWay}"
                           DisplayMemberPath="Value">
