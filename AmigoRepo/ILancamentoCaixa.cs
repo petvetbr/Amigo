@@ -10,5 +10,6 @@ namespace AmigoRepo
         string Descricao { get; set; }
         DateTime Data { get; set; }
         Decimal Valor { get; set; }
+        bool? EhDespesa { get; set; }
     }
 }

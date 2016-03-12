@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace AmigoRepo
         int Ano { get; set; }
         int Mes { get; set; }
         decimal SaldoAnterior { get; set; }
-        IEnumerable<ILancamentoCaixa> Lancamentos { get; set; }
+        ObservableCollection<ILancamentoCaixa> Lancamentos { get; set; }
 
     }
 }

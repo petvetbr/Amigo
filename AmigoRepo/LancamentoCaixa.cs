@@ -60,5 +60,22 @@ namespace AmigoRepo
                 }
             }
         }
+        bool? _ehDespesa;
+        public bool? EhDespesa
+        {
+            get
+            {
+                return _ehDespesa;
+            }
+            set
+            {
+                if (_ehDespesa != value)
+                {
+                    _ehDespesa = value;
+                    OnPropertyChanged(nameof(EhDespesa));
+                }
+            }
+        }
+
     }
 }

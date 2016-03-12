@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,8 +26,8 @@ namespace AmigoRepo
                 }
             }
         }
-        IEnumerable<ILancamentoCaixa> _Lancamentos;
-        public IEnumerable<ILancamentoCaixa> Lancamentos
+        ObservableCollection<ILancamentoCaixa> _Lancamentos;
+        public ObservableCollection<ILancamentoCaixa> Lancamentos
         {
             get
             {
@@ -75,6 +76,10 @@ namespace AmigoRepo
                     OnPropertyChanged(nameof(SaldoAnterior));
                 }
             }
+        }
+        public FluxoCaixa()
+        {
+            this.Lancamentos = new ObservableCollection<ILancamentoCaixa>();
         }
     }
 }
