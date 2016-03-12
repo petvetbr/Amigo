@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Icon="Imagens/LogoAmigo64.png"
          DataContext="{Binding Path=Mensalidades, Source={StaticResource Locator}}"
-        Title="Mensalidades" Height="600" Width="400">
+        Title="Mensalidades" Height="489" Width="400">
     <Window.Resources>
 
     </Window.Resources>
@@ -75,7 +75,7 @@
                 <TextBox  Margin="5" Text="{Binding Mensalidades.Observacao}"></TextBox>
             </GroupBox>
             <StackPanel Margin="10,10" Width="100">
-                <Button Command="{Binding SalvarCommand}"  Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO" Background="#FF3FCFF9">SALVAR</Button>
+                <Button Command="{Binding SalvarCommand}"  Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO" >SALVAR</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

@@ -1,6 +1,7 @@
 ﻿using AmigoRepo;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using LiteDB;
 using System;
 using System.Collections.Generic;
@@ -133,12 +134,14 @@ namespace Amigo.ViewModel
             this.ListaAnos = new ObservableCollection<int>(Config.ObterListaAnos().Select(p => p.Key));
             this.ListaSocios = new ObservableCollection<KeyValuePair<int, string>>(Util.ObterListaSocios());
             this.SalvarCommand = new RelayCommand(Salvar, () => this.Mensalidades != null);
+            this.AnoSelecionado = DateTime.Now.Year;
         }
 
         private void Salvar()
         {
             var repo = Util.Repositorio;
             var resultado=repo.Salvar<Mensalidades>((Mensalidades)this.Mensalidades);
+            Messenger.Default.Send<CloseWindowMessage>(new CloseWindowMessage(), "MensalidadesWindow");
         }
 
         private void AtualizaDados()

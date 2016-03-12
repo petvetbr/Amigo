@@ -15,6 +15,7 @@ namespace Amigo.ViewModel
 {
     public class PessoasViewModel : ViewModelBase
     {
+        #region Comandos
         public RelayCommand SalvarCommand
         {
             get;
@@ -47,7 +48,9 @@ namespace Amigo.ViewModel
         {
             get;
             private set;
-        }
+        } 
+        #endregion
+        #region Propriedades
         Pessoa _pessoa;
         public Pessoa Pessoa
         {
@@ -128,6 +131,23 @@ namespace Amigo.ViewModel
                 {
                     _listaTiposTelefone = value;
                     RaisePropertyChanged(nameof(ListaTiposTelefone));
+                }
+            }
+        }
+
+        ObservableCollection<string> _listaUf;
+        public ObservableCollection<string> ListaUf
+        {
+            get
+            {
+                return _listaUf;
+            }
+            set
+            {
+                if (_listaUf != value)
+                {
+                    _listaUf = value;
+                    RaisePropertyChanged(nameof(ListaUf));
                 }
             }
         }
@@ -218,6 +238,140 @@ namespace Amigo.ViewModel
             }
         }
 
+        bool _exibirTipoPessoa;
+        public bool ExibirTipoPessoa
+        {
+            get
+            {
+                return _exibirTipoPessoa;
+            }
+            set
+            {
+                if (_exibirTipoPessoa != value)
+                {
+                    _exibirTipoPessoa = value;
+                    RaisePropertyChanged(nameof(ExibirTipoPessoa));
+                }
+            }
+        }
+        bool _exibirNomeFantasia;
+        public bool ExibirNomeFantasia
+        {
+            get
+            {
+                return _exibirNomeFantasia;
+            }
+            set
+            {
+                if (_exibirNomeFantasia != value)
+                {
+                    _exibirNomeFantasia = value;
+                    RaisePropertyChanged(nameof(ExibirNomeFantasia));
+                }
+            }
+        }
+        bool _exibirNomeRepresentante;
+        public bool ExibirNomeRepresentante
+        {
+            get
+            {
+                return _exibirNomeRepresentante;
+            }
+            set
+            {
+                if (_exibirNomeRepresentante != value)
+                {
+                    _exibirNomeRepresentante = value;
+                    RaisePropertyChanged(nameof(ExibirNomeRepresentante));
+                }
+            }
+        }
+
+
+        bool _exibirCpfCnpj;
+        public bool ExibirCpfCnpj
+        {
+            get
+            {
+                return _exibirCpfCnpj;
+            }
+            set
+            {
+                if (_exibirCpfCnpj != value)
+                {
+                    _exibirCpfCnpj = value;
+                    RaisePropertyChanged(nameof(ExibirCpfCnpj));
+                }
+            }
+        }
+
+
+        bool _exibirHomePage;
+        public bool ExibirHomePage
+        {
+            get
+            {
+                return _exibirHomePage;
+            }
+            set
+            {
+                if (_exibirHomePage != value)
+                {
+                    _exibirHomePage = value;
+                    RaisePropertyChanged(nameof(ExibirHomePage));
+                }
+            }
+        }
+        bool _exibirCategoria;
+        public bool ExibirCategoria
+        {
+            get
+            {
+                return _exibirCategoria;
+            }
+            set
+            {
+                if (_exibirCategoria != value)
+                {
+                    _exibirCategoria = value;
+                    RaisePropertyChanged(nameof(ExibirCategoria));
+                }
+            }
+        }
+        bool _exibirTipo;
+        public bool ExibirTipo
+        {
+            get
+            {
+                return _exibirTipo;
+            }
+            set
+            {
+                if (_exibirTipo != value)
+                {
+                    _exibirTipo = value;
+                    RaisePropertyChanged(nameof(ExibirTipo));
+                }
+            }
+        }
+        bool _exibirStatus;
+        public bool ExibirStatus
+        {
+            get
+            {
+                return _exibirStatus;
+            }
+            set
+            {
+                if (_exibirStatus != value)
+                {
+                    _exibirStatus = value;
+                    RaisePropertyChanged(nameof(ExibirStatus));
+                }
+            }
+        }
+        #endregion
+
 
         public PessoasViewModel()
         {
@@ -259,6 +413,7 @@ namespace Amigo.ViewModel
             this.ListaTipos = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaPessoasTipos());
             this.ListaStatus = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaPessoasStatus());
             this.ListaTiposTelefone = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaTiposTelefone());
+            this.ListaUf = new ObservableCollection<string>(Config.ObterListaUf());
         }
 
         private string _nomeTabela;

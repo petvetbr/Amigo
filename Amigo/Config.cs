@@ -23,9 +23,44 @@ namespace Amigo
         private static IEnumerable<KeyValuePair<int, string>> _especieAnimal;
         private static IEnumerable<KeyValuePair<int, string>> _generoAnimal;
         private static IEnumerable<KeyValuePair<int, string>> _tiposTelefones;
+        private static IEnumerable<string>_listaUf;
 
 
-        public static IEnumerable<KeyValuePair<int, string>> ObterListaTiposTelefone()
+        public static IEnumerable<string> ObterListaUf()
+        {
+            var _uf = new List<string>();
+            _uf.Add("AC");
+            _uf.Add("AL");
+            _uf.Add("AP");
+            _uf.Add("AM");
+            _uf.Add("BA");
+            _uf.Add("CE");
+            _uf.Add("DF");
+            _uf.Add("ES");
+            _uf.Add("GO");
+            _uf.Add("MA");
+            _uf.Add("MT");
+            _uf.Add("MS");
+            _uf.Add("MG");
+            _uf.Add("PA");
+            _uf.Add("PB");
+            _uf.Add("PR");
+            _uf.Add("PE");
+            _uf.Add("PI");
+            _uf.Add("RJ");
+            _uf.Add("RN");
+            _uf.Add("RS");
+            _uf.Add("RO");
+            _uf.Add("RR");
+            _uf.Add("SC");
+            _uf.Add("SP");
+            _uf.Add("SE");
+            _uf.Add("TO");
+            _listaUf = _uf;
+            return _listaUf;
+        }
+
+       public static IEnumerable<KeyValuePair<int, string>> ObterListaTiposTelefone()
         {
             if (_tiposTelefones != null)
             {

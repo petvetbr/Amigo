@@ -24,7 +24,7 @@ namespace AmigoRepo
             }
             
             this.NomeRepositorio = nomeRepositorio;
-            this.CaminhoRepositorio = string.Format("{0}{1}.db", caminho, nomeRepositorio);
+            this.CaminhoRepositorio = string.Format("{0}{1}2.db", caminho, nomeRepositorio);
             db = new AmigoDb(CaminhoRepositorio);
 
         }

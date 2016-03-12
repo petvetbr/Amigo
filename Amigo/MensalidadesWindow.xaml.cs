@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace Amigo
         public MensalidadesWindow()
         {
             InitializeComponent();
+            Messenger.Default.Register<CloseWindowMessage>(this, "MensalidadesWindow", _ => Close());
         }
     }
 }

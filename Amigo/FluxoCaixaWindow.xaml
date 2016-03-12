@@ -79,7 +79,7 @@
             </DataGrid>
 
             <StackPanel Margin="10,10" Width="100">
-                <Button Command="{Binding SalvarCommand}"  Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO" Background="#FF3FCFF9">SALVAR</Button>
+                <Button Command="{Binding SalvarCommand}"  Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO" >SALVAR</Button>
 
             </StackPanel>
 
