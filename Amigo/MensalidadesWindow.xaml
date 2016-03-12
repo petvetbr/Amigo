@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Icon="Imagens/LogoAmigo64.png"
          DataContext="{Binding Path=Mensalidades, Source={StaticResource Locator}}"
-        Title="MensalidadesWindow" Height="400" Width="400">
+        Title="Mensalidades" Height="600" Width="400">
     <Window.Resources>
 
     </Window.Resources>
@@ -27,7 +27,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <ListView ItemsSource="{Binding Mensalidades.Pagamentos}" >
+            <ListView Height="250"  ItemsSource="{Binding Pagamentos}" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
@@ -39,7 +39,6 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
-
                                 </Grid.ColumnDefinitions>
                                 <Border>
                                     <Border.Resources>
@@ -55,7 +54,8 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Resources>
-                                    <TextBlock Margin="8,0" Width="100"  Grid.Column="0" HorizontalAlignment="Center" Text="{Binding Mes}"></TextBlock>
+                                    <TextBlock Margin="8,0" Width="100" TextAlignment="Center"  Grid.Column="0" HorizontalAlignment="Center" Text="{Binding Mes, Converter={local:NumeroParaNomeMesConverter}}">
+                                    </TextBlock>
                                 </Border>
                                 <StackPanel Orientation="Horizontal" Grid.Column="1">
                                     <TextBlock Margin="8,0"  Width="auto" HorizontalAlignment="Center">
@@ -71,12 +71,11 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <GroupBox Header="Observações">
-                <TextBox Width="300" Height="30" Margin="20,10"></TextBox>
+            <GroupBox Header="Observações" Height="100">
+                <TextBox  Margin="5" Text="{Binding Mensalidades.Observacao}"></TextBox>
             </GroupBox>
             <StackPanel Margin="10,10" Width="100">
                 <Button Command="{Binding SalvarCommand}"  Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO" Background="#FF3FCFF9">SALVAR</Button>
-
             </StackPanel>
         </StackPanel>
     </Grid>

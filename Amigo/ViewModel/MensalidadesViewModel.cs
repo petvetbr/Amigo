@@ -32,17 +32,13 @@ namespace Amigo.ViewModel
                 {
                     _mensalidades = value;
                     RaisePropertyChanged(nameof(Mensalidades));
-                    if (value != null)
-                    {
-                        this.Pagamentos = new ObservableCollection<IMesMensalidade>(_mensalidades.Pagamentos.Where(p => p.Ano == _anoSelecionado));
-                    }
-                    else
-                    {
-                        this.Pagamentos = null;
-                    }
+                    AtualizarListaPagamentos(value);
                 }
             }
         }
+
+      
+
         ObservableCollection<IMesMensalidade> _pagamentos;
         public ObservableCollection<IMesMensalidade> Pagamentos
         {
@@ -140,7 +136,8 @@ namespace Amigo.ViewModel
 
         private void Salvar()
         {
-            
+            var repo = Util.Repositorio;
+            var resultado=repo.Salvar<Mensalidades>((Mensalidades)this.Mensalidades);
         }
 
         private void AtualizaDados()
@@ -148,7 +145,13 @@ namespace Amigo.ViewModel
             if (_anoSelecionado == null || _socioSelecionado.Key == 0) return;
             var repo = Util.Repositorio;
             var socio = repo.Obter<Pessoa>(p => p.Id == _socioSelecionado.Key, "Socios");
-            var mensalidade = repo.Obter<Mensalidades>(p => p.Socio==socio);
+            if(_mensalidades!=null && _mensalidades.Socio.Id==socio.Id)
+            {
+                AtualizarListaPagamentos(_mensalidades);
+                return;
+            }
+
+            var mensalidade = repo.Obter<Mensalidades>(p => p.Socio.Numero==socio.Numero);
             if(mensalidade==null)
             {
                 mensalidade = new AmigoRepo.Mensalidades()
@@ -170,6 +173,27 @@ namespace Amigo.ViewModel
             for (int i = 1; i <= 12; i++)
             {
                 yield return new MesMensalidade() {  Ano=ano, Mes=i };
+            }
+        }
+        private void AtualizarListaPagamentos(IMensalidades value)
+        {
+            if (value != null)
+            {
+                var mensalidades = _mensalidades.Pagamentos.Where(p => p.Ano == _anoSelecionado).ToList();
+                if (mensalidades.Any())
+                {
+                    this.Pagamentos = new ObservableCollection<IMesMensalidade>(mensalidades);
+
+                }
+                else
+                {
+                    this.Pagamentos = new ObservableCollection<IMesMensalidade>(GerarMensalidadesAno(_anoSelecionado.GetValueOrDefault()));
+                }
+                
+            }
+            else
+            {
+                this.Pagamentos = null;
             }
         }
     }

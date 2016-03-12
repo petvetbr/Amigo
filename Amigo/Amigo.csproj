@@ -83,6 +83,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="Constantes.cs" />
     <Compile Include="Converters\InvertedBooleanConverter.cs" />
+    <Compile Include="Converters\NumeroParaNomeMesConverter.cs" />
     <Compile Include="FluxoCaixaWindow.xaml.cs">
       <DependentUpon>FluxoCaixaWindow.xaml</DependentUpon>
     </Compile>

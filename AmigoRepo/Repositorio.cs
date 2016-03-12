@@ -26,6 +26,7 @@ namespace AmigoRepo
             this.NomeRepositorio = nomeRepositorio;
             this.CaminhoRepositorio = string.Format("{0}{1}.db", caminho, nomeRepositorio);
             db = new LiteDatabase(CaminhoRepositorio);
+            
         }
 
     
