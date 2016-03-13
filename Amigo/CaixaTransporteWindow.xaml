@@ -13,7 +13,9 @@
             <Setter Property="Margin" Value="6">
 
             </Setter>
+           
         </Style>
+        <BitmapImage x:Key="CaixaTransporte" UriSource="imagens/caixatransporte.png" />
     </Window.Resources>
     <Grid>
         <DockPanel>
@@ -60,7 +62,7 @@
                         </StackPanel>
 
                     </StackPanel>
-
+                    <Image DockPanel.Dock="Right" HorizontalAlignment="Right" Source="{StaticResource CaixaTransporte}" Margin="0,0,100,-130" Stretch="None" />
 
                 </DockPanel>
 
