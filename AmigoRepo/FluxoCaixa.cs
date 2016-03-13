@@ -65,7 +65,7 @@ namespace AmigoRepo
         {
             get
             {
-                return SaldoAnterior;
+                return _SaldoAnterior;
             }
 
             set

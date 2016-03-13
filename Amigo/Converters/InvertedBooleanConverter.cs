@@ -44,6 +44,7 @@ namespace Amigo
 
         #endregion
     }
+
     [ValueConversion(typeof(bool), typeof(Visibility))]
     public class InverseBooleanVisibilityConverter : MarkupExtension, IValueConverter
     {
@@ -64,13 +65,13 @@ namespace Amigo
             throw new NotImplementedException();
         }
 
-        private InverseBooleanConverter _converter;
+        private InverseBooleanVisibilityConverter _converter;
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
 
             if (_converter == null)
             {
-                _converter = new InverseBooleanConverter();
+                _converter = new InverseBooleanVisibilityConverter();
             }
 
             return _converter;

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
         Icon="Imagens/LogoAmigo64.png"
+        x:Name="window"
         DataContext="{Binding Path=FluxoCaixa, Source={StaticResource Locator}}"
         Title="FluxoCaixaWindow"
         Height="550"
@@ -79,18 +80,17 @@
                         <TextBlock  Margin="20,0,5,0"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right">Tipo:</TextBlock>
-                        <RadioButton  IsChecked="{Binding LancamentoSelecionado.EhDespesa, Converter={local:InverseBooleanConverter}}"
+                        <RadioButton  IsChecked="{Binding LancamentoSelecionado.EhDespesa, Converter={local:InverseBooleanConverter}, Mode=TwoWay}"
                                       Margin="3,0"
                                       VerticalAlignment="Center"
                                       IsThreeState="True">Receita</RadioButton>
                         <RadioButton  IsThreeState="True"
-                                      IsChecked="{Binding LancamentoSelecionado.EhDespesa}"
+                                      IsChecked="{Binding LancamentoSelecionado.EhDespesa, Mode=TwoWay}"
                                       VerticalAlignment="Center">Despesa</RadioButton>
                         <Button Command="{Binding NovoItemCommand}"
                                 Width="20"
                                 Margin="20,0,10,0">+</Button>
-                        <Button Command="{Binding ExcluiItemCommand}"
-                                Width="20">-</Button>
+                       
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
 
@@ -100,7 +100,6 @@
             </GroupBox>
             <DataGrid Name="FluxoCaixaGrid"
                       Margin="5"
-                      SelectedItem="{Binding LancamentoSelecionado,Mode=TwoWay}"
                       ItemsSource="{Binding FluxoCaixaMes.Lancamentos}"
                       AutoGenerateColumns="False"
                       Height="300">
@@ -135,7 +134,16 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-
+                    <DataGridTemplateColumn Header=""
+                                            Width="30">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding DataContext.ExcluiItemCommand, ElementName=window}" CommandParameter="{Binding}"
+                                        Width="20">-</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                   
                 </DataGrid.Columns>
             </DataGrid>
 

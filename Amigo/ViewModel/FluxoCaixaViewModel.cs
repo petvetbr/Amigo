@@ -23,8 +23,8 @@ namespace Amigo.ViewModel
             get;
             private set;
         }
-      
-        public RelayCommand ExcluiItemCommand
+
+        public RelayCommand<LancamentoCaixa> ExcluiItemCommand
         {
             get;
             private set;
@@ -65,8 +65,8 @@ namespace Amigo.ViewModel
                 }
             }
         }
-        ObservableCollection<KeyValuePair<int,string>> _listaMeses;
-        public ObservableCollection<KeyValuePair<int,string>> ListaMeses
+        ObservableCollection<KeyValuePair<int, string>> _listaMeses;
+        public ObservableCollection<KeyValuePair<int, string>> ListaMeses
         {
             get
             {
@@ -99,7 +99,7 @@ namespace Amigo.ViewModel
             }
         }
 
-       
+
 
         int? _MesSelecionado;
         public int? MesSelecionado
@@ -172,14 +172,13 @@ namespace Amigo.ViewModel
 
         public FluxoCaixaViewModel()
         {
-            this.ListaAnos =new ObservableCollection<int>(Config.ObterListaAnos().Select(p => p.Key));
+            this.ListaAnos = new ObservableCollection<int>(Config.ObterListaAnos().Select(p => p.Key));
             this.ListaMeses = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaMeses());
             this.AnoSelecionado = DateTime.Now.Year;
-            this.ExcluiItemCommand = new RelayCommand(ExcluiItem, ()=>this._lancamentoSelecionado!=null );
+            this.ExcluiItemCommand = new RelayCommand<LancamentoCaixa>(ExcluiItem);
             this.SalvarCommand = new RelayCommand(Salvar);
             this.NovoItemCommand = new RelayCommand(NovoItem, () => this._lancamentoSelecionado != null);
-            this.FluxoCaixaMes = new FluxoCaixa();
-            this.LancamentoSelecionado = new LancamentoCaixa() { Data = DateTime.Now };
+
         }
 
         private void NovoItem()
@@ -187,29 +186,45 @@ namespace Amigo.ViewModel
             var lista = this._FluxoCaixaMes.Lancamentos;
             lista.Add(_lancamentoSelecionado);
             lista.OrderBy(p => p.Data).ToList();
-            this.LancamentoSelecionado= new LancamentoCaixa() { Data = DateTime.Now };
+            this.LancamentoSelecionado = new LancamentoCaixa() { Data = DateTime.Now, EhDespesa = true };
+            AtualizaValores();
         }
-        private void ExcluiItem()
+        private void ExcluiItem(LancamentoCaixa lancamento)
         {
-            this._FluxoCaixaMes.Lancamentos.Remove(_lancamentoSelecionado);
-            this.LancamentoSelecionado = new LancamentoCaixa() { Data = DateTime.Now };
+            this._FluxoCaixaMes.Lancamentos.Remove(lancamento);
+            AtualizaValores();
         }
 
         private void Salvar()
         {
-            throw new NotImplementedException();
+            var repo = Util.Repositorio;
+            repo.Salvar<FluxoCaixa>(_FluxoCaixaMes);
         }
 
 
         private void AtualizaDados()
         {
-            if(this.MesSelecionado.GetValueOrDefault() == 0|| this._anoSelecionado==0 )
+            if (this.MesSelecionado.GetValueOrDefault() == 0 || this._anoSelecionado.GetValueOrDefault() == 0)
             {
                 return;
             }
-            
+            var repo = Util.Repositorio;
+            var fluxo = repo.Obter<FluxoCaixa>(p => p.Ano == _anoSelecionado && p.Mes == _MesSelecionado.Value);
+            if(fluxo==null)
+            {
+                fluxo = new FluxoCaixa() { Ano = _anoSelecionado.Value, Mes = _MesSelecionado.Value, Lancamentos = new ObservableCollection<ILancamentoCaixa>() };
+            }
+            this.FluxoCaixaMes = fluxo;
+            this.LancamentoSelecionado = new LancamentoCaixa() { Data = DateTime.Now, EhDespesa = false };
+            AtualizaValores();
 
 
+        }
+        private void AtualizaValores()
+        {
+            var receitas = _FluxoCaixaMes.Lancamentos.Where(p => !p.EhDespesa.GetValueOrDefault()).Sum(p => p.Valor);
+            var despesas = _FluxoCaixaMes.Lancamentos.Where(p => p.EhDespesa.GetValueOrDefault()).Sum(p => p.Valor);
+            this.SaldoAtual = _saldoAnterior + receitas - despesas;
         }
     }
 }
