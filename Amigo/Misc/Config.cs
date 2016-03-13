@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Amigo
 {
     public static class Config
     {
-
+        const string CONFIG_FILE = "config.xml";
         private static IEnumerable<KeyValuePair<int, string>> _categorias;
         private static IEnumerable<KeyValuePair<int, string>> _statusPessoas;
         private static IEnumerable<KeyValuePair<int, string>> _tiposPessoa;
@@ -26,38 +28,22 @@ namespace Amigo
         private static IEnumerable<string>_listaUf;
 
 
+        public static string  ObterCaminhoExecucao()
+        {
+            //To get the location the assembly normally resides on disk or the install directory
+            var path = new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath;
+
+            return System.IO.Path.GetDirectoryName(path);
+        }
+
         public static IEnumerable<string> ObterListaUf()
         {
             var _uf = new List<string>();
-            _uf.Add("AC");
-            _uf.Add("AL");
-            _uf.Add("AP");
-            _uf.Add("AM");
-            _uf.Add("BA");
-            _uf.Add("CE");
-            _uf.Add("DF");
-            _uf.Add("ES");
-            _uf.Add("GO");
-            _uf.Add("MA");
-            _uf.Add("MT");
-            _uf.Add("MS");
-            _uf.Add("MG");
-            _uf.Add("PA");
-            _uf.Add("PB");
-            _uf.Add("PR");
-            _uf.Add("PE");
-            _uf.Add("PI");
-            _uf.Add("RJ");
-            _uf.Add("RN");
-            _uf.Add("RS");
-            _uf.Add("RO");
-            _uf.Add("RR");
-            _uf.Add("SC");
-            _uf.Add("SP");
-            _uf.Add("SE");
-            _uf.Add("TO");
-            _listaUf = _uf;
-            return _listaUf;
+            var config = ObterCaminhoExecucao() + "\\" + CONFIG_FILE;
+            var x = XDocument.Load(config);
+            _uf = x.Root.Element("UFs").Elements().Select(p => p.Value.ToString()).ToList();
+            return _uf;
+            
         }
 
        public static IEnumerable<KeyValuePair<int, string>> ObterListaTiposTelefone()

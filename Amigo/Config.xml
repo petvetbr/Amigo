@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ConfigAmigo>
+  <UFs>
+    <UF>AC</UF>
+    <UF>AL</UF>
+    <UF>AP</UF>
+    <UF>AM</UF>
+    <UF>BA</UF>
+    <UF>CE</UF>
+    <UF>DF</UF>
+    <UF>ES</UF>
+    <UF>GO</UF>
+    <UF>MA</UF>
+    <UF>MT</UF>
+    <UF>MS</UF>
+    <UF>MG</UF>
+    <UF>PA</UF>
+    <UF>PB</UF>
+    <UF>PR</UF>
+    <UF>PE</UF>
+    <UF>PI</UF>
+    <UF>RJ</UF>
+    <UF>RN</UF>
+    <UF>RS</UF>
+    <UF>RO</UF>
+    <UF>RR</UF>
+    <UF>SC</UF>
+    <UF>SP</UF>
+    <UF>SE</UF>
+    <UF>TO</UF>
+  </UFs>
+</ConfigAmigo>
