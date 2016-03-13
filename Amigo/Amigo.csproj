@@ -83,6 +83,9 @@
     <Compile Include="CaixaTransporteWindow.xaml.cs">
       <DependentUpon>CaixaTransporteWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EmprestimoCaixaWindow.xaml.cs">
+      <DependentUpon>EmprestimoCaixaWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Misc\CloseWindowMessage.cs" />
     <Compile Include="Misc\Config.cs" />
     <Compile Include="Misc\Constantes.cs" />
@@ -116,6 +119,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CaixaTransporteWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmprestimoCaixaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
