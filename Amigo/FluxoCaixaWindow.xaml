@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras"
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
         Icon="Imagens/LogoAmigo64.png"
@@ -14,7 +16,7 @@
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
-            <Style TargetType="{x:Type StackPanel}"
+        <Style TargetType="{x:Type StackPanel}"
                x:Key="splinha">
             <Setter Property="Margin"
                     Value="6">
@@ -90,7 +92,7 @@
                         <Button Command="{Binding NovoItemCommand}"
                                 Width="20"
                                 Margin="20,0,10,0">+</Button>
-                       
+
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
 
@@ -118,6 +120,7 @@
                             <DataTemplate>
                                 <TextBlock Foreground="Green"
                                            TextAlignment="Right"
+                                           Margin="3,0"
                                            Visibility="{Binding EhDespesa, Converter={local:InverseBooleanVisibilityConverter}}"
                                            Text="{Binding Valor, StringFormat='{}{0:C}'}"></TextBlock>
                             </DataTemplate>
@@ -128,6 +131,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Foreground="Red"
+                                           Margin="3,0"
                                            Visibility="{Binding EhDespesa, Converter={StaticResource BooleanToVisibilityConverter}}"
                                            TextAlignment="Right"
                                            Text="{Binding Valor, StringFormat='{}{0:C}'}"></TextBlock>
@@ -138,18 +142,33 @@
                                             Width="30">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Command="{Binding DataContext.ExcluiItemCommand, ElementName=window}" CommandParameter="{Binding}"
+                                <Button Command="{Binding DataContext.ExcluiItemCommand, ElementName=window}"
+                                        CommandParameter="{Binding}"
                                         Width="20">-</Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                   
+
                 </DataGrid.Columns>
             </DataGrid>
 
             <DockPanel Margin="10">
-                <TextBlock  DockPanel.Dock="Left"
-                            Text="{Binding SaldoAnterior, StringFormat='Saldo Anterior: {0:C}'}"></TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left"
+                               DockPanel.Dock="Right"
+                               Text="Saldo Anterior (R$):"></TextBlock>
+                    <TextBox  DockPanel.Dock="Left"
+                              Margin="5,0"
+                              Width="100"
+                              Text="{Binding FluxoCaixaMes.SaldoAnterior}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="LostFocus">
+                                <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=SaldoAnteriorMudouCommand}"
+                                                    PassEventArgsToCommand="False" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </StackPanel>
                 <TextBlock HorizontalAlignment="Right"
                            DockPanel.Dock="Right"
                            Text="{Binding SaldoAtual, StringFormat='Saldo Atual: {0:C}'}"></TextBlock>

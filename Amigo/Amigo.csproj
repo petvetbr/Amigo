@@ -80,7 +80,7 @@
     <Compile Include="AnimalWindow.xaml.cs">
       <DependentUpon>AnimalWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\CaixaTransporteWindow.xaml.cs">
+    <Compile Include="CaixaTransporteWindow.xaml.cs">
       <DependentUpon>CaixaTransporteWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Misc\CloseWindowMessage.cs" />
@@ -88,16 +88,16 @@
     <Compile Include="Misc\Constantes.cs" />
     <Compile Include="Converters\InvertedBooleanConverter.cs" />
     <Compile Include="Converters\NumeroParaNomeMesConverter.cs" />
-    <Compile Include="Windows\FluxoCaixaWindow.xaml.cs">
+    <Compile Include="FluxoCaixaWindow.xaml.cs">
       <DependentUpon>FluxoCaixaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\MensalidadesWindow.xaml.cs">
+    <Compile Include="MensalidadesWindow.xaml.cs">
       <DependentUpon>MensalidadesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\PessoasWindow.xaml.cs">
+    <Compile Include="PessoasWindow.xaml.cs">
       <DependentUpon>PessoasWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ServicoCaixaTransporteWindow.xaml.cs">
+    <Compile Include="ServicoCaixaTransporteWindow.xaml.cs">
       <DependentUpon>ServicoCaixaTransporteWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Misc\Settings.cs" />
@@ -115,15 +115,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\CaixaTransporteWindow.xaml">
+    <Page Include="CaixaTransporteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\FluxoCaixaWindow.xaml">
+    <Page Include="FluxoCaixaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\MainWindow.xaml">
+    <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -131,19 +131,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Windows\MainWindow.xaml.cs">
+    <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\MensalidadesWindow.xaml">
+    <Page Include="MensalidadesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\PessoasWindow.xaml">
+    <Page Include="PessoasWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ServicoCaixaTransporteWindow.xaml">
+    <Page Include="ServicoCaixaTransporteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -188,7 +188,9 @@
   <ItemGroup>
     <Resource Include="LogoAmigo64.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Windows\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

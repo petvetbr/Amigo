@@ -29,6 +29,12 @@ namespace Amigo.ViewModel
             get;
             private set;
         }
+        public RelayCommand SaldoAnteriorMudouCommand
+        {
+            get;
+            private set;
+        }
+        
 
         FluxoCaixa _FluxoCaixaMes;
         public FluxoCaixa FluxoCaixaMes
@@ -135,22 +141,22 @@ namespace Amigo.ViewModel
             }
         }
 
-        decimal _saldoAnterior;
-        public decimal SaldoAnterior
-        {
-            get
-            {
-                return _saldoAnterior;
-            }
-            set
-            {
-                if (_saldoAnterior != value)
-                {
-                    _saldoAnterior = value;
-                    RaisePropertyChanged(nameof(SaldoAnterior));
-                }
-            }
-        }
+        //decimal _saldoAnterior;
+        //public decimal SaldoAnterior
+        //{
+        //    get
+        //    {
+        //        return _saldoAnterior;
+        //    }
+        //    set
+        //    {
+        //        if (_saldoAnterior != value)
+        //        {
+        //            _saldoAnterior = value;
+        //            RaisePropertyChanged(nameof(SaldoAnterior));
+        //        }
+        //    }
+        //}
 
         LancamentoCaixa _lancamentoSelecionado;
         public LancamentoCaixa LancamentoSelecionado
@@ -178,7 +184,13 @@ namespace Amigo.ViewModel
             this.ExcluiItemCommand = new RelayCommand<LancamentoCaixa>(ExcluiItem);
             this.SalvarCommand = new RelayCommand(Salvar);
             this.NovoItemCommand = new RelayCommand(NovoItem, () => this._lancamentoSelecionado != null);
+            this.SaldoAnteriorMudouCommand = new RelayCommand(TextoSaldoAnteriorMudou);
 
+        }
+
+        private void TextoSaldoAnteriorMudou()
+        {
+            AtualizaValores();
         }
 
         private void NovoItem()
@@ -222,9 +234,10 @@ namespace Amigo.ViewModel
         }
         private void AtualizaValores()
         {
+            if (this.FluxoCaixaMes == null) return;
             var receitas = _FluxoCaixaMes.Lancamentos.Where(p => !p.EhDespesa.GetValueOrDefault()).Sum(p => p.Valor);
             var despesas = _FluxoCaixaMes.Lancamentos.Where(p => p.EhDespesa.GetValueOrDefault()).Sum(p => p.Valor);
-            this.SaldoAtual = _saldoAnterior + receitas - despesas;
+            this.SaldoAtual = _FluxoCaixaMes.SaldoAnterior + receitas - despesas;
         }
     }
 }
