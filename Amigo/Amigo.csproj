@@ -80,28 +80,28 @@
     <Compile Include="AnimalWindow.xaml.cs">
       <DependentUpon>AnimalWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CaixaTransporteWindow.xaml.cs">
+    <Compile Include="Windows\CaixaTransporteWindow.xaml.cs">
       <DependentUpon>CaixaTransporteWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CloseWindowMessage.cs" />
-    <Compile Include="Config.cs" />
-    <Compile Include="Constantes.cs" />
+    <Compile Include="Misc\CloseWindowMessage.cs" />
+    <Compile Include="Misc\Config.cs" />
+    <Compile Include="Misc\Constantes.cs" />
     <Compile Include="Converters\InvertedBooleanConverter.cs" />
     <Compile Include="Converters\NumeroParaNomeMesConverter.cs" />
-    <Compile Include="FluxoCaixaWindow.xaml.cs">
+    <Compile Include="Windows\FluxoCaixaWindow.xaml.cs">
       <DependentUpon>FluxoCaixaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MensalidadesWindow.xaml.cs">
+    <Compile Include="Windows\MensalidadesWindow.xaml.cs">
       <DependentUpon>MensalidadesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PessoasWindow.xaml.cs">
+    <Compile Include="Windows\PessoasWindow.xaml.cs">
       <DependentUpon>PessoasWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ServicoCaixaTransporteWindow.xaml.cs">
+    <Compile Include="Windows\ServicoCaixaTransporteWindow.xaml.cs">
       <DependentUpon>ServicoCaixaTransporteWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
-    <Compile Include="Util.cs" />
+    <Compile Include="Misc\Settings.cs" />
+    <Compile Include="Misc\Util.cs" />
     <Compile Include="ViewModel\AnimalViewModel.cs" />
     <Compile Include="ViewModel\CaixaTransporteViewModel.cs" />
     <Compile Include="ViewModel\FluxoCaixaViewModel.cs" />
@@ -115,15 +115,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CaixaTransporteWindow.xaml">
+    <Page Include="Windows\CaixaTransporteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FluxoCaixaWindow.xaml">
+    <Page Include="Windows\FluxoCaixaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -131,19 +131,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MensalidadesWindow.xaml">
+    <Page Include="Windows\MensalidadesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PessoasWindow.xaml">
+    <Page Include="Windows\PessoasWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ServicoCaixaTransporteWindow.xaml">
+    <Page Include="Windows\ServicoCaixaTransporteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -188,6 +188,7 @@
   <ItemGroup>
     <Resource Include="LogoAmigo64.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
