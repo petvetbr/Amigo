@@ -29,4 +29,57 @@
     <UF>SE</UF>
     <UF>TO</UF>
   </UFs>
+  <TipoTelefones>
+    <Tipo Key="1" Value="Celular"/>
+    <Tipo Key="2" Value="Fixo"/>
+    <Tipo Key="3" Value="Recado"/>
+  </TipoTelefones>
+  <Sexo>
+    <Tipo Key="1" Value="Macho"/>
+    <Tipo Key="2" Value="Fëmea"/>
+    <Tipo Key="3" Value="Indeterminado"/>
+  </Sexo>
+  <Especies>
+    <Tipo Key="1" Value="Canina"/>
+    <Tipo Key="2" Value="Felina"/>
+  </Especies>
+  <StatusAnimal>
+    <Tipo Key="1" Value="Normal"/>
+    <Tipo Key="2" Value="Restricao ou problemas"/>
+    <Tipo Key="3" Value="Morto"/>
+  </StatusAnimal>
+  <AmbienteAnimal>
+    <Tipo Key="1" Value="Doméstico"/>
+    <Tipo Key="2" Value="De Rua"/>
+  </AmbienteAnimal>
+  <StatusCaixaTransporte>
+    <Tipo Key="1" Value="Disponível"/>
+    <Tipo Key="2" Value="Reservada"/>
+  </StatusCaixaTransporte>
+  <SituacaoCaixaTransporte>
+    <Tipo Key="1" Value="Pendente"/>
+    <Tipo Key="2" Value="Confirmada"/>
+  </SituacaoCaixaTransporte>
+  <LocalizacaoCaixaTransporte>
+    <Tipo Key="1" Value="Depósito"/>
+    <Tipo Key="2" Value="Emprestada"/>
+    <Tipo Key="3" Value="Não devolvida"/>
+  </LocalizacaoCaixaTransporte>
+  <CategoriaSocios>
+    <Tipo Key="1" Value="Fundador"/>
+    <Tipo Key="2" Value="Efetivo"/>
+    <Tipo Key="3" Value="Colaborador"/>
+    <Tipo Key="4" Value="Honorario"/>
+    <Tipo Key="5" Value="Mirim"/>
+  </CategoriaSocios>
+  <TipoSocios>
+    <Tipo Key="1" Value="Normal"/>
+    <Tipo Key="2" Value="Diretoria"/>
+    <Tipo Key="3" Value="Voluntário"/>
+  </TipoSocios>
+  <StatusPessoa>
+    <Tipo Key="1" Value="Ativo"/>
+    <Tipo Key="2" Value="Pendente"/>
+    <Tipo Key="3" Value="Inativo"/>
+  </StatusPessoa>
 </ConfigAmigo>
