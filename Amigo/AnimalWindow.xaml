@@ -14,6 +14,7 @@
 
             </Setter>
         </Style>
+        <BitmapImage x:Key="CatDog" UriSource="imagens/catdogicon80.png" />
     </Window.Resources>
     <DockPanel>
         <Expander  DockPanel.Dock="Left"  ExpandDirection="Right"  Header="Pesquisa" IsExpanded="{Binding ExpanderAberto}">
@@ -61,16 +62,20 @@
                 <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
                     <TextBlock VerticalAlignment="Center" Margin="10,0" FontWeight="Bold" >Data de cadastro:</TextBlock>
                     <DatePicker SelectedDate="{Binding Pessoa.DataCadastro}"/>
+                   
 
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}"/>
+                <Image DockPanel.Dock="Right" HorizontalAlignment="Right" Source="{StaticResource CatDog}" Margin="0,0,70,-40" Stretch="None" />
             </DockPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0" Width="120" FontWeight="Bold">Nome do Tutor:</TextBlock>
                 <TextBox Text="{Binding Pessoa.Nome}"  Width="350"></TextBox>
+                
             </StackPanel>
+            
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0"  Width="120" FontWeight="Bold">Nome do animal:</TextBlock>
                 <TextBox Width="350" Text="{Binding Pessoa.NomeFantasia}"></TextBox>
