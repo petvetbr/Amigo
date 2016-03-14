@@ -14,6 +14,7 @@
 
             </Setter>
         </Style>
+        <BitmapImage x:Key="CatDog" UriSource="imagens/caixatransporte.png" />
     </Window.Resources>
     <Grid>
         <DockPanel>
@@ -59,7 +60,7 @@
 
                     </StackPanel>
 
-
+                    <Image DockPanel.Dock="Right" HorizontalAlignment="Right" Source="{StaticResource CatDog}" Margin="0,0,130,-370" Stretch="None" />
                 </DockPanel>
 
                 <GroupBox Header="Detalhes do Empréstimo da Caixa de Transporte" >
