@@ -123,8 +123,8 @@
     <Tipo Value="99" Velue= "Outro"/>
   </FabricanteVermifugo>
   <RacasCaes>
-    <Tipo Key="0"    Value="SRD"/>
-    <Tipo Key=""    Value="Alano Espanhol"/>
+    <Tipo Key="0" Value="SRD"/>
+    <Tipo Key=""  Value="Alano Espanhol"/>
     <Tipo Key="" Value="Airedale Terrier"/>
     <Tipo Key="" Value="American Staffordshire Terrier"/>
     <Tipo Key="" Value="American Water Spaniel"/>

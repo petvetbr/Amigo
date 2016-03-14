@@ -39,8 +39,8 @@ namespace AmigoRepo
                 OnPropertyChanged(nameof(Castrado));
             }
         }
-        IPessoa _clinica;
-        public IPessoa Clinica
+        Pessoa _clinica;
+        public Pessoa Clinica
         {
             get
             {
@@ -80,9 +80,14 @@ namespace AmigoRepo
 
             set
             {
-                if (value.Equals(_DataNascimento)) return;
-                _DataNascimento = value;
-                OnPropertyChanged(nameof(DataNascimento));
+
+                if (!object.Equals(value,_DataNascimento))
+                {
+                    _DataNascimento = value;
+                    OnPropertyChanged(nameof(DataNascimento));
+                }
+                OnPropertyChanged(nameof(Idade));
+
             }
         }
 
@@ -118,7 +123,7 @@ namespace AmigoRepo
             }
         }
 
-       
+
 
         float _peso;
         public float Peso
@@ -136,8 +141,8 @@ namespace AmigoRepo
             }
         }
 
-        int _raca;
-        public int Raca
+        string _raca;
+        public string Raca
         {
             get
             {
@@ -151,7 +156,7 @@ namespace AmigoRepo
                 OnPropertyChanged(nameof(Raca));
             }
         }
-       
+
 
         int _sexo;
         public int Sexo
@@ -185,8 +190,8 @@ namespace AmigoRepo
             }
         }
 
-        IPessoa _tutor;
-        public IPessoa Tutor
+        string _tutor;
+        public string Tutor
         {
             get
             {
@@ -247,10 +252,39 @@ namespace AmigoRepo
             }
         }
 
+        public string Idade
+        {
+            get
+            {
+                return ObterIdade();
+            }
+
+        }
+
+
         public Animal()
         {
             this.Vacinas = new ObservableCollection<IVacinaVermifugo>();
             this.Vermifugos = new ObservableCollection<IVacinaVermifugo>();
+        }
+        public override string ToString()
+        {
+            string idade = ObterIdade();
+            return string.Format("{0}-{1}-{2}-{3}", _nome, _raca, _tutor, idade);
+        }
+
+        private string ObterIdade()
+        {
+            string idade = string.Empty;
+            if (_DataNascimento != null)
+
+            {
+                var timespanIdade = DateTime.Now - _DataNascimento.Value;
+                idade = new DateDifference(DateTime.Now, _DataNascimento.Value).ToString();
+
+            }
+
+            return idade;
         }
     }
 }

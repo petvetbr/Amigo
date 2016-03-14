@@ -19,6 +19,9 @@ namespace AmigoRepo
             mapper.Entity<Mensalidades>()
                   .Id(x => x.Id)
                   .DbRef(x => x.Socio, "Socios");
+            mapper.Entity<Animal>()
+              .Id(x => x.Id)
+              .DbRef(x => x.Clinica, "Clinicas");
 
         }
 

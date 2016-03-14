@@ -292,21 +292,33 @@ namespace Amigo.ViewModel
                 }
             }
         }
+        ObservableCollection<IPessoa> _listaveterinario;
+        public ObservableCollection<IPessoa> ListaVeterinarios
+        {
+            get
+            {
+                return _listaveterinario;
+            }
+            set
+            {
+                if (_listaveterinario != value)
+                {
+                    _listaveterinario = value;
+                    RaisePropertyChanged(nameof(ListaVeterinarios));
+                }
+            }
+        }
+
 
         #endregion
         public AnimalViewModel()
         {
-          
+
             this.SalvarCommand = new RelayCommand(Salvar, () => Animal != null);
             this.ExcluiCommand = new RelayCommand(Excluir, () => Animal != null);
             this.PesquisaCommand = new RelayCommand(Pesquisar);
             this.NovoItemCommand = new RelayCommand(CriarNovoItem);
-            this.ListaSexo = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaGeneroAnimal());
-            this.ListaAmbiente = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaAmbientesAnimal());
-            this.ListaFabricanteVacina = new ObservableCollection<string>(Config.ObterListaFabricantesVacina());
-            this.ListaFabricanteVermifugo = new ObservableCollection<string>(Config.ObterListaFabricantesVermifugo());
-            this.ListaTipoVacina = new ObservableCollection<string>(Config.ObterListaTiposVacina());
-            this.ListaRaca = new ObservableCollection<string>(Config.ObterRacasCaes());
+            CarregarListas();
             this.ListaEspecie = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaEspecieAnimal());
             this.NovaVacinaCommand = new RelayCommand(NovaVacina);
             this.ExcluiVacinaCommand = new RelayCommand(ExcluiVacina);
@@ -314,9 +326,21 @@ namespace Amigo.ViewModel
             this.ExcluiVermifugoCommand = new RelayCommand(ExcluiVermifugo);
             this.VacinaSelecionada = new VacinaVermifugo();
             this.VermifugoSelecionado = new VacinaVermifugo();
+
             RefreshLista();
             ExpanderAberto = true;
 
+        }
+
+        private void CarregarListas()
+        {
+            this.ListaSexo = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaGeneroAnimal());
+            this.ListaAmbiente = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaAmbientesAnimal());
+            this.ListaFabricanteVacina = new ObservableCollection<string>(Config.ObterListaFabricantesVacina());
+            this.ListaFabricanteVermifugo = new ObservableCollection<string>(Config.ObterListaFabricantesVermifugo());
+            this.ListaTipoVacina = new ObservableCollection<string>(Config.ObterListaTiposVacina());
+            this.ListaRaca = new ObservableCollection<string>(Config.ObterRacasCaes());
+            this.ListaVeterinarios = new ObservableCollection<IPessoa>(Util.Repositorio.ObterLista<Pessoa>(null, "Veterinarios"));
         }
 
         private void ExcluiVermifugo()
