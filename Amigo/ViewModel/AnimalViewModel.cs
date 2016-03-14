@@ -139,11 +139,29 @@ namespace Amigo.ViewModel
                     _listaSexo = value;
                     RaisePropertyChanged(nameof(ListaSexo));
                 }
+
             }
         }
 
-        ObservableCollection<KeyValuePair<int, string>> _listaRaca;
-        public ObservableCollection<KeyValuePair<int, string>> ListaRaca
+        ObservableCollection<KeyValuePair<int, string>> _listaEspecie;
+        public ObservableCollection<KeyValuePair<int, string>> ListaEspecie
+        {
+            get
+            {
+                return _listaEspecie;
+            }
+            set
+            {
+                if (_listaEspecie != value)
+                {
+                    _listaEspecie = value;
+                    RaisePropertyChanged(nameof(ListaEspecie));
+                }
+            }
+        }
+
+        ObservableCollection<string> _listaRaca;
+        public ObservableCollection<string> ListaRaca
         {
             get
             {
@@ -176,8 +194,8 @@ namespace Amigo.ViewModel
             }
         }
 
-        public ObservableCollection<IVacinaVermifugo> _listaTipoVacina;
-        public ObservableCollection<IVacinaVermifugo> ListaTipoVacina
+        public ObservableCollection<string> _listaTipoVacina;
+        public ObservableCollection<string> ListaTipoVacina
         {
             get
             {
@@ -208,7 +226,73 @@ namespace Amigo.ViewModel
                     RaisePropertyChanged(nameof(ListaTipoVermifugo));
                 }
             }
-        } 
+        }
+        public ObservableCollection<string> _listaFabricanteVermifugo;
+        public ObservableCollection<string> ListaFabricanteVermifugo
+        {
+            get
+            {
+                return _listaFabricanteVermifugo;
+            }
+            set
+            {
+                if (_listaFabricanteVermifugo != value)
+                {
+                    _listaFabricanteVermifugo = value;
+                    RaisePropertyChanged(nameof(ListaFabricanteVermifugo));
+                }
+            }
+        }
+        IVacinaVermifugo _vacinaSelecionada;
+        public IVacinaVermifugo VacinaSelecionada
+        {
+            get
+            {
+                return _vacinaSelecionada;
+            }
+            set
+            {
+                if (_vacinaSelecionada != value)
+                {
+                    _vacinaSelecionada = value;
+                    RaisePropertyChanged(nameof(VacinaSelecionada));
+                }
+            }
+        }
+        IVacinaVermifugo _vermifugoSelecionado;
+        public IVacinaVermifugo VermifugoSelecionado
+        {
+            get
+            {
+                return _vermifugoSelecionado;
+            }
+            set
+            {
+                if (_vermifugoSelecionado != value)
+                {
+                    _vermifugoSelecionado = value;
+                    RaisePropertyChanged(nameof(VermifugoSelecionado));
+                }
+            }
+        }
+
+        public ObservableCollection<string> _listaFabricanteVacina;
+        public ObservableCollection<string> ListaFabricanteVacina
+        {
+            get
+            {
+                return _listaFabricanteVacina;
+            }
+            set
+            {
+                if (_listaFabricanteVacina != value)
+                {
+                    _listaFabricanteVacina = value;
+                    RaisePropertyChanged(nameof(ListaFabricanteVacina));
+                }
+            }
+        }
+
         #endregion
         public AnimalViewModel()
         {
@@ -219,11 +303,17 @@ namespace Amigo.ViewModel
             this.NovoItemCommand = new RelayCommand(CriarNovoItem);
             this.ListaSexo = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaGeneroAnimal());
             this.ListaAmbiente = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaAmbientesAnimal());
+            this.ListaFabricanteVacina = new ObservableCollection<string>(Config.ObterListaFabricantesVacina());
+            this.ListaFabricanteVermifugo = new ObservableCollection<string>(Config.ObterListaFabricantesVermifugo());
+            this.ListaTipoVacina = new ObservableCollection<string>(Config.ObterListaTiposVacina());
+            this.ListaRaca = new ObservableCollection<string>(Config.ObterRacasCaes());
+            this.ListaEspecie = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaEspecieAnimal());
             this.NovaVacinaCommand = new RelayCommand(NovaVacina);
             this.ExcluiVacinaCommand = new RelayCommand(ExcluiVacina);
             this.NovaVermifugoCommand = new RelayCommand(NovoVermifugo);
             this.ExcluiVermifugoCommand = new RelayCommand(ExcluiVermifugo);
-
+            this.VacinaSelecionada = new VacinaVermifugo();
+            this.VermifugoSelecionado = new VacinaVermifugo();
             RefreshLista();
             ExpanderAberto = true;
 
@@ -231,22 +321,27 @@ namespace Amigo.ViewModel
 
         private void ExcluiVermifugo()
         {
-            throw new NotImplementedException();
+            this.Animal.Vermifugos.Remove(_vermifugoSelecionado);
+            this.VermifugoSelecionado = null;
         }
 
         private void NovoVermifugo()
         {
-            throw new NotImplementedException();
+            this.Animal.Vermifugos.Add(_vermifugoSelecionado);
+            this.VermifugoSelecionado = null;
+
         }
 
         private void NovaVacina()
         {
-            throw new NotImplementedException();
+            this.Animal.Vacinas.Add(_vacinaSelecionada);
+            this.VacinaSelecionada = null;
         }
 
         private void ExcluiVacina()
         {
-            throw new NotImplementedException();
+            this.Animal.Vacinas.Remove(_vacinaSelecionada);
+            this.VacinaSelecionada = null;
         }
 
         private void RefreshLista(Expression<Func<Animal, bool>> expression = null)
@@ -258,9 +353,9 @@ namespace Amigo.ViewModel
         private void CriarNovoItem()
         {
             var animal = new Animal() { DataCadastro = DateTime.Now };
-            if (Util.Repositorio.ObterLista<CaixaTransporte>().Any())
+            if (Util.Repositorio.ObterLista<Animal>().Any())
             {
-                var maxAtual = Util.Repositorio.ObterLista<CaixaTransporte>().Max(p => p.Numero);
+                var maxAtual = Util.Repositorio.ObterLista<Animal>().Max(p => p.Numero);
                 animal.Numero = ++maxAtual;
             }
             else

@@ -120,8 +120,8 @@ namespace AmigoRepo
 
        
 
-        int _peso;
-        public int Peso
+        float _peso;
+        public float Peso
         {
             get
             {
@@ -200,8 +200,8 @@ namespace AmigoRepo
                 OnPropertyChanged(nameof(Tutor));
             }
         }
-        ObservableCollection<IChaveValor<DateTime, IVacinaVermifugo>> _vacinas;
-        public ObservableCollection<IChaveValor<DateTime, IVacinaVermifugo>> Vacinas
+        ObservableCollection<IVacinaVermifugo> _vacinas;
+        public ObservableCollection<IVacinaVermifugo> Vacinas
         {
             get
             {
@@ -215,8 +215,8 @@ namespace AmigoRepo
                 OnPropertyChanged(nameof(Vacinas));
             }
         }
-        ObservableCollection<IChaveValor<DateTime, IVacinaVermifugo>> _vermifugos;
-        public ObservableCollection<IChaveValor<DateTime, IVacinaVermifugo>> Vermifugos
+        ObservableCollection<IVacinaVermifugo> _vermifugos;
+        public ObservableCollection<IVacinaVermifugo> Vermifugos
         {
             get
             {
@@ -246,7 +246,11 @@ namespace AmigoRepo
                 }
             }
         }
-       
 
+        public Animal()
+        {
+            this.Vacinas = new ObservableCollection<IVacinaVermifugo>();
+            this.Vermifugos = new ObservableCollection<IVacinaVermifugo>();
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace AmigoRepo
 {
     public interface IVacinaVermifugo:IRepositorio
     {
-        string Descricao {get;set;}
+      
         string Fabricante { get; set; }
         string Lote { get; set; }
         string Tipo { get; set; }

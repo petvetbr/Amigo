@@ -56,7 +56,7 @@
 
                 <ListBox Grid.Row="1"
                          ItemsSource="{Binding ListaItens}"
-                         SelectedItem="{Binding Pessoa}">
+                         SelectedItem="{Binding Animal}">
                 </ListBox>
                 <StackPanel Margin="0,5"
                             Grid.Row="2"
@@ -74,7 +74,7 @@
             <StackPanel.Resources>
                 <Style TargetType="{x:Type StackPanel}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Pessoa}"
+                        <DataTrigger Binding="{Binding Animal}"
                                      Value="{x:Null}">
                             <Setter Property="IsEnabled"
                                     Value="False"></Setter>
@@ -160,17 +160,28 @@
                         Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0"
                            FontWeight="Bold">Espécie:</TextBlock>
-                <ComboBox Width="80"></ComboBox>
+                <ComboBox Width="80"
+                          ItemsSource="{Binding ListaEspecie}"
+                          SelectedValue="{Binding Animal.Especie}"
+                          SelectedValuePath="Key"
+                          DisplayMemberPath="Value"></ComboBox>
                 <TextBlock Margin="8,0"
                            FontWeight="Bold">Raça:</TextBlock>
                 <ComboBox Width="80"
+                          ItemsSource="{Binding ListaRaca}"
+                          SelectedItem="{Binding Animal.Raca}"
                           IsEditable="true"></ComboBox>
                 <TextBlock Margin="8,0"
                            FontWeight="Bold">Gênero:</TextBlock>
-                <ComboBox Width="80"></ComboBox>
+                <ComboBox Width="80"
+                          ItemsSource="{Binding ListaSexo}"
+                          SelectedValue="{Binding Animal.Sexo}"
+                          SelectedValuePath="Key"
+                          DisplayMemberPath="Value" />
                 <TextBlock Margin="8,0"
                            FontWeight="Bold">Peso (kg):</TextBlock>
-                <TextBox Width="80"></TextBox>
+                <TextBox Width="80"
+                         Text="{Binding Animal.Peso}"></TextBox>
                 <TextBlock Margin="8,0"
                            FontWeight="Bold">Foto:</TextBlock>
                 <TextBlock Margin="8,0"
@@ -178,40 +189,76 @@
                 <Button Width="20">+</Button>
             </StackPanel>
             <GroupBox Header="Vacinação:">
-                <DockPanel>
+                <StackPanel>
                     <StackPanel VerticalAlignment="Top"
                                 Orientation="Horizontal"
                                 Margin="5">
                         <TextBlock Margin="10,0"
-                                   FontWeight="Bold">Tipo de vacina:</TextBlock>
-                        <ComboBox Width="100"></ComboBox>
+                                   FontWeight="Bold">Data:</TextBlock>
+                        <DatePicker SelectedDate="{Binding VacinaSelecionada.Data}"></DatePicker>
                         <TextBlock Margin="10,0"
-                                   FontWeight="Bold">Data da vacina:</TextBlock>
-                        <DatePicker></DatePicker>
-                        <Button Width="20">+</Button>
-                        <Button Width="20">-</Button>
+                                   FontWeight="Bold">Tipo:</TextBlock>
+                        <ComboBox Width="100"
+                                  ItemsSource="{Binding ListaTipoVacina}"
+                                  IsEditable="true"
+                                  SelectedItem="{Binding VacinaSelecionada.Tipo}"></ComboBox>
+                        <TextBlock Margin="10,0"
+                                   FontWeight="Bold">Fabricante:</TextBlock>
+                        <ComboBox Width="100"
+                                  ItemsSource="{Binding ListaFabricanteVacina}"
+                                  IsEditable="true"
+                                  SelectedItem="{Binding VacinaSelecionada.Fabricante}"></ComboBox>
+                        <TextBlock Margin="10,0"
+                                   FontWeight="Bold">Lote:</TextBlock>
+                        <TextBox  Width="80"
+                                  Text="{Binding VacinaSelecionada.Lote}"></TextBox>
+                        <TextBlock Margin="10,0"
+                                   FontWeight="Bold">Observação:</TextBlock>
+                        <TextBox  Text="{Binding VacinaSelecionada.Observacao}" Width="120" />
+
+                        <Button Width="20"
+                                Command="{Binding NovaVacinaCommand, Mode=OneWay}">+</Button>
+                        <Button Width="20"
+                                Command="{Binding ExcluiVacinaCommand, Mode=OneWay}">-</Button>
                     </StackPanel>
-                    <ListBox>
+                    <ListBox Margin="5"  HorizontalAlignment="Right"  Width="500"
+                             ItemsSource="{Binding Animal.Vacinas}"
+                             SelectedItem="{Binding VacinaSelecionada}">
                     </ListBox>
-                </DockPanel>
+                </StackPanel>
             </GroupBox>
             <GroupBox Header="Vermífugação:">
-                <DockPanel>
+                <StackPanel>
                     <StackPanel VerticalAlignment="Top"
                                 Orientation="Horizontal"
                                 Margin="5">
                         <TextBlock Margin="10,0"
-                                   FontWeight="Bold">Tipo de vacina:</TextBlock>
-                        <ComboBox Width="100"></ComboBox>
-                        <TextBlock Margin="10,0"
-                                   FontWeight="Bold">Data da vacina:</TextBlock>
+                                   FontWeight="Bold">Data:</TextBlock>
                         <DatePicker></DatePicker>
-                        <Button Width="20">+</Button>
-                        <Button Width="20">-</Button>
+                        <TextBlock Margin="10,0"
+                                   FontWeight="Bold">Fabricante:</TextBlock>
+                        <ComboBox Width="100"
+                                  
+                                  IsEditable="true"
+                                  ItemsSource="{Binding ListaFabricanteVermifugo}"
+                                  SelectedItem="{Binding VermifugoSelecionado.Fabricante}"></ComboBox>
+                        <TextBlock Margin="10,0"
+                                   FontWeight="Bold">Observação:</TextBlock>
+                        <TextBox  Text="{Binding VermifugoSelecionado.Observacao}"
+                                  Width="120" />
+                        <Button Width="20"
+                                Command="{Binding NovaVermifugoCommand, Mode=OneWay}">+</Button>
+                        <Button Width="20"
+                                Command="{Binding ExcluiVermifugoCommand, Mode=OneWay}">-</Button>
                     </StackPanel>
-                    <ListBox>
+                    <ListBox Margin="5"
+                             HorizontalAlignment="Right"
+                             Width="500"
+                             ItemsSource="{Binding Animal.Vermifugos}"
+                             SelectedItem="{Binding VermifugoSelecionado}">
                     </ListBox>
-                </DockPanel>
+        </StackPanel>
+   
             </GroupBox>
 
             <GroupBox Header="Controle populacional">

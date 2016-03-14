@@ -5,22 +5,26 @@ using System.Text;
 
 namespace AmigoRepo
 {
-    public class VacinaVermifugo: EntidadeRepo,IVacinaVermifugo
+    public class VacinaVermifugo : EntidadeRepo, IVacinaVermifugo
     {
-        string _Descricao;
-        public string Descricao
+
+        DateTime? _data;
+        public DateTime? Data
         {
             get
             {
-                return _Descricao;
+                return _data;
             }
             set
             {
-                if (value.Equals(_Descricao)) return;
-                _Descricao = value;
-                OnPropertyChanged(nameof(Descricao));
+                if (object.Equals(_data, value)) return;
+                _data = value;
+                OnPropertyChanged(nameof(Data));
+
             }
         }
+
+
         string _Fabricante;
         public string Fabricante
         {
@@ -65,8 +69,8 @@ namespace AmigoRepo
         }
         public override string ToString()
         {
-            return string.Format("{0}-{1}", _Tipo, _Fabricante);
+            return string.Format("{0:d}-{1}-{2}-{3}",_data, _Tipo, _Fabricante, Observacao);
         }
-        
+
     }
 }

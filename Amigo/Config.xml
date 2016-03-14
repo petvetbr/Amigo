@@ -1,33 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ConfigAmigo>
   <UFs>
-    <UF>AC</UF>
-    <UF>AL</UF>
-    <UF>AP</UF>
-    <UF>AM</UF>
-    <UF>BA</UF>
-    <UF>CE</UF>
-    <UF>DF</UF>
-    <UF>ES</UF>
-    <UF>GO</UF>
-    <UF>MA</UF>
-    <UF>MT</UF>
-    <UF>MS</UF>
-    <UF>MG</UF>
-    <UF>PA</UF>
-    <UF>PB</UF>
-    <UF>PR</UF>
-    <UF>PE</UF>
-    <UF>PI</UF>
-    <UF>RJ</UF>
-    <UF>RN</UF>
-    <UF>RS</UF>
-    <UF>RO</UF>
-    <UF>RR</UF>
-    <UF>SC</UF>
-    <UF>SP</UF>
-    <UF>SE</UF>
-    <UF>TO</UF>
+    <Tipo Value="AC"/>
+    <Tipo Value="AL"/>
+    <Tipo Value="AP"/>
+    <Tipo Value="AM"/>
+    <Tipo Value="BA"/>
+    <Tipo Value="CE"/>
+    <Tipo Value="DF"/>
+    <Tipo Value="ES"/>
+    <Tipo Value="GO"/>
+    <Tipo Value="MA"/>
+    <Tipo Value="MT"/>
+    <Tipo Value="MS"/>
+    <Tipo Value="MG"/>
+    <Tipo Value="PA"/>
+    <Tipo Value="PB"/>
+    <Tipo Value="PR"/>
+    <Tipo Value="PE"/>
+    <Tipo Value="PI"/>
+    <Tipo Value="RJ"/>
+    <Tipo Value="RN"/>
+    <Tipo Value="RS"/>
+    <Tipo Value="RO"/>
+    <Tipo Value="RR"/>
+    <Tipo Value="SC"/>
+    <Tipo Value="SP"/>
+    <Tipo Value="SE"/>
+    <Tipo Value="TO"/>
   </UFs>
   <TipoTelefones>
     <Tipo Key="1" Value="Celular"/>
@@ -204,4 +204,7 @@
     <Tipo Key="" Value="Wolfspitz"/>
     <Tipo Key="" Value="Yorkshire T"/>
   </RacasCaes>
+<RacasGatos>
+  
+</RacasGatos>
 </ConfigAmigo>
