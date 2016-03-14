@@ -58,7 +58,7 @@
 
                     </StackPanel>
 
-                    <Image DockPanel.Dock="Right" HorizontalAlignment="Right" Source="{StaticResource CatDog}" Margin="0,0,130,-360" Stretch="None" />
+                    <Image DockPanel.Dock="Right" HorizontalAlignment="Right" Source="{StaticResource CatDog}" Margin="0,0,130,-370" Stretch="None" />
                 </DockPanel>
 
                 <GroupBox Header="Detalhes do Empréstimo da Caixa de Transporte" >

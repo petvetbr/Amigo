@@ -205,6 +205,20 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\catdogicon80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\caixatransporte.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\editar.png" />
+    <Resource Include="Imagens\email.png" />
+    <Resource Include="Imagens\excluir.png" />
+    <Resource Include="Imagens\pesquisar.png" />
+    <Resource Include="Imagens\telefone.png" />
+    <Resource Include="Imagens\visualizar.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>Copy "$(ProjectDir)config.xml" "$(TargetDir)"</PostBuildEvent>
