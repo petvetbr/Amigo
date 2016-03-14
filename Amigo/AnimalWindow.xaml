@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
         Icon="Imagens/LogoAmigo64.png"
-        DataContext="{Binding Path=Animais, Source={StaticResource Locator}}"
+        DataContext="{Binding Path=Animal, Source={StaticResource Locator}}"
         Title="{Binding Titulo}" Height="600" Width="1000">
     <Window.Resources>
         <Style TargetType="{x:Type StackPanel}" x:Key="splinha">
@@ -56,12 +56,12 @@
             <DockPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Center"  Style="{StaticResource splinha}" >
                     <TextBlock Margin="10,0" FontWeight="Bold">Nº:</TextBlock>
-                    <TextBox Width="40"  Text="{Binding Pessoa.Numero}" ></TextBox>
+                    <TextBox Width="40"  Text="{Binding Animal.Numero}" ></TextBox>
                 </StackPanel>
 
                 <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
                     <TextBlock VerticalAlignment="Center" Margin="10,0" FontWeight="Bold" >Data de cadastro:</TextBlock>
-                    <DatePicker SelectedDate="{Binding Pessoa.DataCadastro}"/>
+                    <DatePicker SelectedDate="{Binding Animal.DataCadastro}"/>
                    
 
                 </StackPanel>
@@ -74,17 +74,17 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0" Width="120" FontWeight="Bold">Nome do Tutor:</TextBlock>
-                <TextBox Text="{Binding Pessoa.Nome}"  Width="350"></TextBox>
+                <TextBox Text="{Binding Animal.Nome}"  Width="350"></TextBox>
                 
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                 <TextBlock Margin="8,0"  Width="120" FontWeight="Bold">Nome do animal:</TextBlock>
-                <TextBox Width="350" Text="{Binding Pessoa.NomeFantasia}"></TextBox>
+                <TextBox Width="350" Text="{Binding Animal.NomeFantasia}"></TextBox>
             </StackPanel>
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
                 <TextBlock VerticalAlignment="Center" Margin="8,0" Width="120" FontWeight="Bold" >Data de Nascimento:</TextBlock>
-                <DatePicker SelectedDate="{Binding Pessoa.DataNascimento}"/>
+                <DatePicker SelectedDate="{Binding Animal.DataNascimento}"/>
                 <TextBlock VerticalAlignment="Center" Margin="10,0"  FontWeight="Bold">Idade:</TextBlock>
                 <TextBox Width="110"></TextBox>
 

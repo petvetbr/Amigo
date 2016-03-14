@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -54,18 +55,33 @@ namespace AmigoRepo
             }
         }
 
-        DateTime _dataNascimento;
-        public DateTime DataNascimento
+        DateTime? _DataCadastro;
+        public DateTime? DataCadastro
         {
             get
             {
-                return _dataNascimento;
+                return _DataCadastro;
             }
 
             set
             {
-                if (value.Equals(_dataNascimento)) return;
-                _dataNascimento = value;
+                if (value.Equals(_DataCadastro)) return;
+                _DataCadastro = value;
+                OnPropertyChanged(nameof(DataCadastro));
+            }
+        }
+        DateTime? _DataNascimento;
+        public DateTime? DataNascimento
+        {
+            get
+            {
+                return _DataNascimento;
+            }
+
+            set
+            {
+                if (value.Equals(_DataNascimento)) return;
+                _DataNascimento = value;
                 OnPropertyChanged(nameof(DataNascimento));
             }
         }
@@ -184,8 +200,8 @@ namespace AmigoRepo
                 OnPropertyChanged(nameof(Tutor));
             }
         }
-        IEnumerable<IChaveValor<DateTime, IVacinaVermifugo>> _vacinas;
-        public IEnumerable<IChaveValor<DateTime, IVacinaVermifugo>> Vacinas
+        ObservableCollection<IChaveValor<DateTime, IVacinaVermifugo>> _vacinas;
+        public ObservableCollection<IChaveValor<DateTime, IVacinaVermifugo>> Vacinas
         {
             get
             {
@@ -199,8 +215,8 @@ namespace AmigoRepo
                 OnPropertyChanged(nameof(Vacinas));
             }
         }
-        IEnumerable<IChaveValor<DateTime, IVacinaVermifugo>> _vermifugos;
-        public IEnumerable<IChaveValor<DateTime, IVacinaVermifugo>> Vermifugos
+        ObservableCollection<IChaveValor<DateTime, IVacinaVermifugo>> _vermifugos;
+        public ObservableCollection<IChaveValor<DateTime, IVacinaVermifugo>> Vermifugos
         {
             get
             {
