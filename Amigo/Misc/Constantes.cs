@@ -8,7 +8,7 @@ namespace Amigo
 {
     public static class Constantes
     {
-        public static string NOME_REPOSITORIO = "Teste";
+        public static string NOME_REPOSITORIO = "dados";
       
     }
 }

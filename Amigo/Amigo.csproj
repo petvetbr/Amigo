@@ -105,6 +105,9 @@
     </Compile>
     <Compile Include="Misc\Settings.cs" />
     <Compile Include="Misc\Util.cs" />
+    <Compile Include="SobreWindow.xaml.cs">
+      <DependentUpon>SobreWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\AnimalViewModel.cs" />
     <Compile Include="ViewModel\CaixaTransporteViewModel.cs" />
     <Compile Include="ViewModel\FluxoCaixaViewModel.cs" />
@@ -154,6 +157,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SobreWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -175,6 +182,9 @@
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="dados.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -201,13 +211,25 @@
     <Folder Include="Windows\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Config.xml">
+    <None Include="Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Imagens\logo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\catdogicon80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\LogoAmigoGrande.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>Copy "$(ProjectDir)config.xml" "$(TargetDir)"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

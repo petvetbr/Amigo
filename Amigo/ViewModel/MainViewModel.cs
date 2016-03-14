@@ -5,6 +5,7 @@ using System;
 using AmigoRepo;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Windows.Media.Imaging;
 
 namespace Amigo.ViewModel
 {
@@ -48,7 +49,41 @@ namespace Amigo.ViewModel
             get;
             private set;
         }
+        public RelayCommand MenuCadastroAnimaisCommand
+        {
+            get;
+            private set;
+        }
 
+        public RelayCommand MenuCopiaDadosCommand
+        {
+            get;
+            private set;
+        }
+        public RelayCommand MenuSobreCommand
+        {
+            get;
+            private set;
+        }
+        
+
+
+        BitmapImage _logo;
+        public BitmapImage Logo
+        {
+            get
+            {
+                return _logo;
+            }
+            set
+            {
+                if (_logo != value)
+                {
+                    _logo = value;
+                    RaisePropertyChanged(nameof(Logo));
+                }
+            }
+        }
 
 
         /// <summary>
@@ -62,6 +97,15 @@ namespace Amigo.ViewModel
             MenuFluxoCaixaCommand = new RelayCommand(MenuFluxoCaixa);
             MenuServicosCaixaTransporteCommand = new RelayCommand(ServicosCaixaTransporte);
             MenuMensalidadesCommand = new RelayCommand(AbrirMensalidades);
+            MenuCadastroAnimaisCommand = new RelayCommand(() => new AnimalWindow().ShowDialog());
+            MenuSobreCommand = new RelayCommand(() => new SobreWindow().ShowDialog());
+            var logo = Config.ObterCaminhoLogo();
+            if(logo!=null)
+            {
+                var uriSource = new Uri(logo, UriKind.Absolute);
+                this.Logo = new BitmapImage(uriSource);
+            }
+            
         }
 
         private void MenuCadastro(int tipoPessoa)

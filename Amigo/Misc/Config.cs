@@ -10,7 +10,7 @@ namespace Amigo
 {
     public static class Config
     {
-        const string CONFIG_FILE = "config.xml";
+        static string CONFIG_FILE = Properties.Settings.Default.ArquivoConfig;
         private static IEnumerable<KeyValuePair<int, string>> _categorias;
         private static IEnumerable<KeyValuePair<int, string>> _statusPessoas;
         private static IEnumerable<KeyValuePair<int, string>> _tiposPessoa;
@@ -21,7 +21,6 @@ namespace Amigo
         private static IEnumerable<KeyValuePair<int, string>> _localizacaoCaixaTransporte;
 
         private static IEnumerable<KeyValuePair<int, string>> _ambienteAnimal;
-        private static IEnumerable<KeyValuePair<int, string>> _ambienteAnimal_statusAnimal;
         private static IEnumerable<KeyValuePair<int, string>> _especieAnimal;
         private static IEnumerable<KeyValuePair<int, string>> _generoAnimal;
         private static IEnumerable<KeyValuePair<int, string>> _tiposTelefones;
@@ -52,6 +51,12 @@ namespace Amigo
             return _listaUf;
 
         }
+        public static string ObterCaminhoLogo()
+        {
+            if (string.IsNullOrWhiteSpace(Properties.Settings.Default.ArquivoLogo)) return null;
+            return Path.Combine(ObterCaminhoExecucao(), Properties.Settings.Default.ArquivoLogo);
+        }
+
         private static IEnumerable<KeyValuePair<int, string>> ObterLista(string nomeLista)
         {
             var _uf = new List<string>();

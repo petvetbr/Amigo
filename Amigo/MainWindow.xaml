@@ -6,21 +6,29 @@
         xmlns:local="clr-namespace:Amigo"
         DataContext="{Binding Path=Main, Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        Title="Amigo" Height="600" Width="800" Icon="Imagens/LogoAmigo64.png">
+        Title="Amigo"
+        Height="600"
+        Width="800"
+        WindowStartupLocation="CenterOwner"
+        Icon="Imagens/LogoAmigo64.png">
     <Window.Resources>
-        <Style TargetType="{x:Type StackPanel}" x:Key="splinha">
-            <Setter Property="Margin" Value="4">
+        <Style TargetType="{x:Type StackPanel}"
+               x:Key="splinha">
+            <Setter Property="Margin"
+                    Value="4">
             </Setter>
         </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Menu  >
+        <Menu>
             <MenuItem Header="Cadastro">
-                <MenuItem Header="Sócios" Command="{Binding MenuCadastroCommand}" CommandParameter="0"/>
+                <MenuItem Header="Sócios"
+                          Command="{Binding MenuCadastroCommand}"
+                          CommandParameter="0" />
                 <MenuItem Header="Veterinários"
                           Command="{Binding MenuCadastroCommand}"
                           CommandParameter="1" />
@@ -30,7 +38,7 @@
                 <MenuItem Header="Clientes"
                           Command="{Binding MenuCadastroCommand}"
                           CommandParameter="3" />
-                
+
                 <MenuItem Header="Moradores Comunitários"
                           CommandParameter="4"
                           Command="{Binding MenuCadastroCommand}" />
@@ -49,19 +57,32 @@
                 <MenuItem Header="Patrocinadores"
                           CommandParameter="9"
                           Command="{Binding MenuCadastroCommand}" />
-                
-                <MenuItem Header="Caixas de Transportes" Command="{Binding MenuCadastroCaixasTransporteCommand}"/>
+                <MenuItem Header="Animais"
+                          Command="{Binding MenuCadastroAnimaisCommand}" />
+                <MenuItem Header="Caixas de Transportes"
+                          Command="{Binding MenuCadastroCaixasTransporteCommand}" />
             </MenuItem>
             <MenuItem Header="Serviços">
-                <MenuItem Header="Empréstimo Caixas Transporte" Command="{Binding MenuServicosCaixaTransporteCommand}"/>
+                <MenuItem Header="Empréstimo Caixas Transporte"
+                          Command="{Binding MenuServicosCaixaTransporteCommand}" />
             </MenuItem>
             <MenuItem Header="Financeiro">
-                <MenuItem Header="Fluxo Caixa" Command="{Binding MenuFluxoCaixaCommand}"/>
-                <MenuItem Header="Mensalidades" Command="{Binding MenuMensalidadesCommand}"/>
+                <MenuItem Header="Fluxo Caixa"
+                          Command="{Binding MenuFluxoCaixaCommand}" />
+                <MenuItem Header="Mensalidades"
+                          Command="{Binding MenuMensalidadesCommand}" />
+            </MenuItem>
+            <MenuItem Header="Manutenção">
+                <MenuItem Header="Fazer cópia dos dados"
+                          Command="{Binding MenuCopiaDadosCommand}" />
+                <MenuItem Header="Sobre"
+                          Command="{Binding MenuSobreCommand}" />
             </MenuItem>
         </Menu>
-        <StackPanel Grid.Row="1">
-        </StackPanel>
+       
+            <Image Grid.Row="1"   Source="{Binding Logo}"
+               Stretch="None"></Image>
+       
     </Grid>
 </Window>
 

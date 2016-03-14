@@ -5,19 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
         Icon="Imagens/LogoAmigo64.png"
         DataContext="{Binding Path=CaixaTransporte, Source={StaticResource Locator}}"
-        Title="CaixaTransporteWindow" Height="350" Width="800">
+        Title="Cadastro Caixas de Transporte"
+        Height="350"
+        Width="800">
     <Window.Resources>
-        <Style TargetType="{x:Type StackPanel}" x:Key="splinha">
-            <Setter Property="Margin" Value="6">
+        <Style TargetType="{x:Type StackPanel}"
+               x:Key="splinha">
+            <Setter Property="Margin"
+                    Value="6">
 
             </Setter>
         </Style>
     </Window.Resources>
     <Grid>
         <DockPanel>
-            <Expander  DockPanel.Dock="Left"  ExpandDirection="Right"  Header="Pesquisa" IsExpanded="{Binding ExpanderAberto}">
+            <Expander  DockPanel.Dock="Left"
+                       ExpandDirection="Right"
+                       Header="Pesquisa"
+                       IsExpanded="{Binding ExpanderAberto}">
                 <Grid Margin="5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto">
@@ -25,84 +34,136 @@
                         </RowDefinition>
                         <RowDefinition Height="*">
 
-
                         </RowDefinition>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal" Margin="0,5"  VerticalAlignment="Top">
-                        <TextBox VerticalAlignment="Center"  Text="{Binding FiltroPesquisa}"  Width="200"></TextBox>
-                        <Button Command="{Binding PesquisaCommand}" Margin="5"  ToolTip="Pesquisar por nome">Pesquisar</Button>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,5"
+                                VerticalAlignment="Top">
+                        <TextBox VerticalAlignment="Center"
+                                 Text="{Binding FiltroPesquisa}"
+                                 Width="200"></TextBox>
+                        <Button Command="{Binding PesquisaCommand}"
+                                Margin="5"
+                                ToolTip="Pesquisar por nome">Pesquisar</Button>
                     </StackPanel>
 
-                    <ListBox Grid.Row="1" ItemsSource="{Binding ListaItens}" SelectedItem="{Binding Pessoa}">
+                    <ListBox Grid.Row="1"
+                             ItemsSource="{Binding ListaItens}"
+                             SelectedItem="{Binding Pessoa}">
                     </ListBox>
-                    <StackPanel Margin="0,5"  Grid.Row="2" HorizontalAlignment="Right"   Orientation="Horizontal" VerticalAlignment="Top">
-                        <Button HorizontalAlignment="Right" Command="{Binding NovoItemCommand}"  ToolTipService.ToolTip="Criar novo registro">Novo</Button>
+                    <StackPanel Margin="0,5"
+                                Grid.Row="2"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Top">
+                        <Button HorizontalAlignment="Right"
+                                Command="{Binding NovoItemCommand}"
+                                ToolTipService.ToolTip="Criar novo registro">Novo</Button>
                     </StackPanel>
                 </Grid>
-
 
             </Expander>
             <StackPanel DockPanel.Dock="Right">
                 <DockPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Center"  Style="{StaticResource splinha}" >
-                        <TextBlock Margin="10,0" FontWeight="Bold">Nº:</TextBlock>
-                        <TextBox Width="40"  Text="{}" ></TextBox>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource splinha}">
+                        <TextBlock Margin="10,0"
+                                   FontWeight="Bold">Nº:</TextBlock>
+                        <TextBox Width="40"
+                                 Text="{}"></TextBox>
                     </StackPanel>
 
-                    <StackPanel DockPanel.Dock="Left" Orientation="Horizontal"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
-                        <TextBlock VerticalAlignment="Center" Margin="15,0" FontWeight="Bold" >Data de cadastro:</TextBlock>
+                    <StackPanel DockPanel.Dock="Left"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Top"
+                                Style="{StaticResource splinha}">
+                        <TextBlock VerticalAlignment="Center"
+                                   Margin="15,0"
+                                   FontWeight="Bold">Data de cadastro:</TextBlock>
                         <DatePicker></DatePicker>
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Margin="15,0" FontWeight="Bold" VerticalAlignment="Center" >Número de identificação:</TextBlock>
+                            <TextBlock Margin="15,0"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center">Número de identificação:</TextBlock>
                             <TextBox Width="50"></TextBox>
                         </StackPanel>
 
                     </StackPanel>
-
 
                 </DockPanel>
 
                 <GroupBox Header="Tamanho">
                     <StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
-                            <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Altura</TextBlock>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    Style="{StaticResource splinha}">
+                            <TextBlock Margin="10,0"
+                                       FontWeight="Bold"
+                                       TextAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       Width="80">Altura (cm):</TextBlock>
                             <TextBox Width="50"></TextBox>
-                            <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Comprimento</TextBlock>
+                            <TextBlock Margin="10,0"
+                                       FontWeight="Bold"
+                                       TextAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       Width="120">Comprimento (cm):</TextBlock>
                             <TextBox Width="50"></TextBox>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
-                            <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Largura</TextBlock>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    Style="{StaticResource splinha}">
+                            <TextBlock Margin="10,0"
+                                       FontWeight="Bold"
+                                       TextAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       Width="80">Largura (cm):</TextBlock>
                             <TextBox Width="50"></TextBox>
-                            <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Peso</TextBlock>
+                            <TextBlock Margin="10,0"
+                                       FontWeight="Bold"
+                                       TextAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       Width="120">Peso (cm):</TextBlock>
                             <TextBox Width="50"></TextBox>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
 
-
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
-                    <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="80">Situação:</TextBlock>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Style="{StaticResource splinha}">
+                    <TextBlock Margin="10,0"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Width="80">Situação:</TextBlock>
                     <ComboBox Width="80"></ComboBox>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
-                    <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" Width="150">Ocorrência / Observação:</TextBlock>
+                <GroupBox Header="Observações"
+                          Height="100">
+                    <TextBox  Margin="5"
+                              Text="{Binding Observacao}"></TextBox>
+                </GroupBox>
 
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource splinha}">
+
+                    <Button Command="{Binding SalvarCommand}"
+                            Margin="8,0"
+                            Padding="5,0"
+                            ToolTip="INCLUI REGISTRO">SALVAR</Button>
+                    <Button Command="{Binding ExcluiCommand}"
+                            Margin="8,0"
+                            Padding="5,0"
+                            ToolTip="EXCLUI REGISTRO">EXCLUIR</Button>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}" >
-                    <TextBox Width="250" Height="60"></TextBox>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Style="{StaticResource splinha}">
-
-                    <Button Command="{Binding SalvarCommand}"  Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO" >SALVAR</Button>
-                    <Button Command="{Binding ExcluiCommand}"  Margin="8,0" Padding="5,0" ToolTip="EXCLUI REGISTRO" >EXCLUIR</Button>
-                </StackPanel>
-
-
-
 
             </StackPanel>
         </DockPanel>

@@ -22,5 +22,23 @@ namespace Amigo.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("config.xml")]
+        public string ArquivoConfig {
+            get {
+                return ((string)(this["ArquivoConfig"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Imagens/logo.jpg")]
+        public string ArquivoLogo {
+            get {
+                return ((string)(this["ArquivoLogo"]));
+            }
+        }
     }
 }

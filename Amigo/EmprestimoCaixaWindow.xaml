@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Icon="Imagens/LogoAmigo64.png"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
         DataContext="{Binding Path=CaixaTransporte, Source={StaticResource Locator}}"
         Title="CaixaTransporteWindow" Height="480" Width="800">
     <Window.Resources>
@@ -91,18 +93,10 @@
                     </StackPanel>
                 </GroupBox>
 
-
-
-                
-                <GroupBox Header="Ocorrência / Observação:" Margin="0,10">
-                    
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,10">
-                    
-                        <TextBox Width="450" Height="60"></TextBox>
-                    </StackPanel>
-                
-                    
-               
+                <GroupBox Header="Observações"
+                          Height="100">
+                    <TextBox  Margin="5"
+                              Text="{Binding Observacao}"></TextBox>
                 </GroupBox>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Style="{StaticResource splinha}">

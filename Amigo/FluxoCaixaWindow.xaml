@@ -7,6 +7,8 @@
         xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras"
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
         Icon="Imagens/LogoAmigo64.png"
         x:Name="window"
         DataContext="{Binding Path=FluxoCaixa, Source={StaticResource Locator}}"

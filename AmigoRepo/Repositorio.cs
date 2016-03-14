@@ -14,17 +14,15 @@ namespace AmigoRepo
         LiteDatabase db;
         public Repositorio(string nomeRepositorio, string caminho = null)
         {
-            if (Environment.UserName.Contains("fe"))
+            if (caminho == null)
             {
-                caminho = caminho ?? @"e:\acpa\";
+                var path = new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath;
+
+                caminho= System.IO.Path.GetDirectoryName(path);
             }
-            else
-            {
-                caminho = @"C:\Users\Teresa\Desktop\DB";
-            }
-            
+           
             this.NomeRepositorio = nomeRepositorio;
-            this.CaminhoRepositorio = string.Format("{0}{1}2.db", caminho, nomeRepositorio);
+            this.CaminhoRepositorio = string.Format("{0}\\{1}.db", caminho, nomeRepositorio);
             db = new AmigoDb(CaminhoRepositorio);
 
         }

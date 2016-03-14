@@ -1,0 +1,40 @@
+﻿<Window x:Class="Amigo.SobreWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Amigo"
+        mc:Ignorable="d"
+        Title="Sobre" Height="350" Width="350"
+        ResizeMode="NoResize"
+        Topmost="True"
+        Icon="Imagens/LogoAmigo64.png"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto">
+              
+            </RowDefinition>
+            <RowDefinition></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <Image Width="150" Margin="10"  Source="Imagens/LogoAmigoGrande.png"
+                Stretch="UniformToFill"></Image>
+        <StackPanel Grid.Row="1">
+        <TextBlock FontSize="18.667"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center">Amigo</TextBlock>
+            <TextBlock Margin="0,10"  HorizontalAlignment="Center">Sistema de gerenciamento para proteção animal</TextBlock>
+            <TextBlock  HorizontalAlignment="Center">Criado por Fernando Lage Bastos e Teresa Anne Thompson</TextBlock>
+            <TextBlock Margin="0,5"  HorizontalAlignment="Center">
+                <Hyperlink NavigateUri="http://github.com/petvetbr/Amigo"
+                           RequestNavigate="ClickLink"
+                           TargetName="_blank">
+                    http://github.com/petvetbr/Amigo
+               </Hyperlink>
+            </TextBlock>
+            
+        </StackPanel>
+    </Grid>
+</Window>

@@ -220,6 +220,10 @@ namespace Amigo.ViewModel
             {
                 return;
             }
+            if(this.FluxoCaixaMes!=null)
+            {
+                Salvar();
+            }
             var repo = Util.Repositorio;
             var fluxo = repo.Obter<FluxoCaixa>(p => p.Ano == _anoSelecionado && p.Mes == _MesSelecionado.Value);
             if(fluxo==null)
