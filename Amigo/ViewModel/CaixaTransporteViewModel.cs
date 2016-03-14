@@ -13,22 +13,7 @@ namespace Amigo.ViewModel
 {
     public class CaixaTransporteViewModel:ViewModelBase
     {
-        string _caixa;
-        public string Caixa
-        {
-            get
-            {
-                return _caixa;
-            }
-            set
-            {
-                if (_caixa != value)
-                {
-                    _caixa = value;
-                    RaisePropertyChanged(nameof(Caixa));
-                }
-            }
-        }
+       
         public RelayCommand SalvarCommand
         {
             get;
@@ -50,6 +35,38 @@ namespace Amigo.ViewModel
         {
             get;
             private set;
+        }
+        CaixaTransporte _caixa;
+        public CaixaTransporte Caixa
+        {
+            get
+            {
+                return _caixa;
+            }
+            set
+            {
+                if (_caixa != value)
+                {
+                    _caixa = value;
+                    RaisePropertyChanged(nameof(Caixa));
+                }
+            }
+        }
+        ObservableCollection<KeyValuePair<int, string>> _listaLocalizacao;
+        public ObservableCollection<KeyValuePair<int, string>> ListaLocalizacao
+        {
+            get
+            {
+                return _listaLocalizacao;
+            }
+            set
+            {
+                if (_listaLocalizacao != value)
+                {
+                    _listaLocalizacao = value;
+                    RaisePropertyChanged(nameof(ListaLocalizacao));
+                }
+            }
         }
         ObservableCollection<ICaixaTransporte> _listaItens;
         public ObservableCollection<ICaixaTransporte> ListaItens
@@ -107,6 +124,7 @@ namespace Amigo.ViewModel
             this.ExcluiCommand = new RelayCommand(Excluir, () => Caixa!=null);
             this.PesquisaCommand = new RelayCommand(Pesquisar);
             this.NovoItemCommand = new RelayCommand(CriarNovoItem);
+            this.ListaLocalizacao=new ObservableCollection<KeyValuePair<int,string>>(Config.ObterListaLocalizacaoCaixaTransporte());
             RefreshLista();
             ExpanderAberto = true;
             
@@ -114,27 +132,59 @@ namespace Amigo.ViewModel
 
         private void CriarNovoItem()
         {
-            throw new NotImplementedException();
+
+            
+            var caixa = new CaixaTransporte() { DataCadastro = DateTime.Now };
+            if (Util.Repositorio.ObterLista<CaixaTransporte>().Any())
+            {
+                var maxAtual = Util.Repositorio.ObterLista<CaixaTransporte>().Max(p => p.Numero);
+                caixa.Numero = ++maxAtual;
+            }
+            else
+            {
+                caixa.Numero = 1;
+            }
+            this.Caixa = caixa;
+            ExpanderAberto = false;
         }
 
-        private void Pesquisar()
-        {
-            throw new NotImplementedException();
-        }
+
 
         private void Excluir()
         {
-            throw new NotImplementedException();
+            if (!Util.Repositorio.Apagar<CaixaTransporte>(x => x.Id == this.Caixa.Id))
+            {
+                return;
+            }
+            this.Caixa = null;
+            RefreshLista();
+            ExpanderAberto = true;
         }
 
         private void Salvar()
         {
-            throw new NotImplementedException();
+            if (!Util.Repositorio.Salvar<CaixaTransporte>(_caixa).Key)
+            {
+                return;
+            }
+            RefreshLista();
+            ExpanderAberto = true;
         }
-        
+
+        private void Pesquisar()
+        {
+            if (string.IsNullOrWhiteSpace(FiltroPesquisa))
+            {
+                RefreshLista();
+                return;
+            }
+            RefreshLista(x => x.Identificacao.Contains(FiltroPesquisa));
+        }
+
+       
         private void RefreshLista(Expression<Func<CaixaTransporte, bool>> expression = null)
         {
-            var lista = Util.Repositorio.ObterLista<CaixaTransporte>(expression);
+            var lista = Util.Repositorio.ObterLista<CaixaTransporte>(expression).OrderBy(p=>p.Identificacao);
             this.ListaItens = new ObservableCollection<ICaixaTransporte>(lista);
         }
     }

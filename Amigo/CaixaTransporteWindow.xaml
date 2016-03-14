@@ -11,7 +11,7 @@
         DataContext="{Binding Path=CaixaTransporte, Source={StaticResource Locator}}"
         Title="Cadastro Caixas de Transporte"
         Height="350"
-        Width="800">
+        Width="690.139">
     <Window.Resources>
         <Style TargetType="{x:Type StackPanel}"
                x:Key="splinha">
@@ -42,15 +42,15 @@
                                 VerticalAlignment="Top">
                         <TextBox VerticalAlignment="Center"
                                  Text="{Binding FiltroPesquisa}"
-                                 Width="200"></TextBox>
+                                 Width="120"></TextBox>
                         <Button Command="{Binding PesquisaCommand}"
                                 Margin="5"
-                                ToolTip="Pesquisar por nome">Pesquisar</Button>
+                                ToolTip="Pesquisar por identificação">Pesquisar</Button>
                     </StackPanel>
 
                     <ListBox Grid.Row="1"
                              ItemsSource="{Binding ListaItens}"
-                             SelectedItem="{Binding Pessoa}">
+                             SelectedItem="{Binding Caixa}">
                     </ListBox>
                     <StackPanel Margin="0,5"
                                 Grid.Row="2"
@@ -64,7 +64,18 @@
                 </Grid>
 
             </Expander>
-            <StackPanel DockPanel.Dock="Right">
+            <StackPanel  DockPanel.Dock="Right">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Caixa}"
+                                         Value="{x:Null}">
+                                <Setter Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Resources>
                 <DockPanel>
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Left"
@@ -73,7 +84,7 @@
                         <TextBlock Margin="10,0"
                                    FontWeight="Bold">Nº:</TextBlock>
                         <TextBox Width="40"
-                                 Text="{}"></TextBox>
+                                 Text="{Binding Caixa.Numero}"></TextBox>
                     </StackPanel>
 
                     <StackPanel DockPanel.Dock="Left"
@@ -83,21 +94,26 @@
                         <TextBlock VerticalAlignment="Center"
                                    Margin="15,0"
                                    FontWeight="Bold">Data de cadastro:</TextBlock>
-                        <DatePicker></DatePicker>
+                        <DatePicker SelectedDate="{Binding Caixa.DataCadastro}"></DatePicker>
 
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Margin="15,0"
-                                       FontWeight="Bold"
-                                       VerticalAlignment="Center">Número de identificação:</TextBlock>
-                            <TextBox Width="50"></TextBox>
-                        </StackPanel>
+                       
 
                     </StackPanel>
+                  
 
                 </DockPanel>
-
+                <StackPanel Margin="0,5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="15,0"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center">Número de identificação:</TextBlock>
+                        <TextBox Width="50"
+                                 VerticalAlignment="Center"
+                                 Text="{Binding Caixa.Identificacao}"></TextBox>
+                    </StackPanel>
+                </StackPanel>
                 <GroupBox Header="Tamanho">
-                    <StackPanel>
+                    <StackPanel HorizontalAlignment="Left">
                         <StackPanel Orientation="Horizontal"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
@@ -107,13 +123,15 @@
                                        TextAlignment="Right"
                                        VerticalAlignment="Center"
                                        Width="80">Altura (cm):</TextBlock>
-                            <TextBox Width="50"></TextBox>
+                            <TextBox Width="50"
+                                     Text="{Binding Caixa.Altura}"></TextBox>
                             <TextBlock Margin="10,0"
                                        FontWeight="Bold"
                                        TextAlignment="Right"
                                        VerticalAlignment="Center"
                                        Width="120">Comprimento (cm):</TextBlock>
-                            <TextBox Width="50"></TextBox>
+                            <TextBox Width="50"
+                                     Text="{Binding Caixa.Comprimento}"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"
                                     HorizontalAlignment="Center"
@@ -124,13 +142,15 @@
                                        TextAlignment="Right"
                                        VerticalAlignment="Center"
                                        Width="80">Largura (cm):</TextBlock>
-                            <TextBox Width="50"></TextBox>
+                            <TextBox Width="50"
+                                     Text="{Binding Caixa.Largura}"></TextBox>
                             <TextBlock Margin="10,0"
                                        FontWeight="Bold"
                                        TextAlignment="Right"
                                        VerticalAlignment="Center"
-                                       Width="120">Peso (cm):</TextBlock>
-                            <TextBox Width="50"></TextBox>
+                                       Width="120">Peso (g):</TextBlock>
+                            <TextBox Width="50"
+                                     Text="{Binding Caixa.Peso}"></TextBox>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
@@ -142,13 +162,18 @@
                     <TextBlock Margin="10,0"
                                FontWeight="Bold"
                                VerticalAlignment="Center"
-                               Width="80">Situação:</TextBlock>
-                    <ComboBox Width="80"></ComboBox>
+                               Width="80">Localização:</TextBlock>
+                    <ComboBox Width="162"
+                              ItemsSource="{Binding ListaLocalizacao}"
+                              DisplayMemberPath="Value"
+                              SelectedValuePath="Key"
+                              SelectedValue="{Binding Caixa.Localizacao, Mode=TwoWay}"
+                              ></ComboBox>
                 </StackPanel>
                 <GroupBox Header="Observações"
                           Height="100">
                     <TextBox  Margin="5"
-                              Text="{Binding Observacao}"></TextBox>
+                              Text="{Binding Caixa.Observacao}"></TextBox>
                 </GroupBox>
 
                 <StackPanel Orientation="Horizontal"
@@ -158,11 +183,11 @@
                     <Button Command="{Binding SalvarCommand}"
                             Margin="8,0"
                             Padding="5,0"
-                            ToolTip="INCLUI REGISTRO">SALVAR</Button>
+                            ToolTip="Salvar">Salvar</Button>
                     <Button Command="{Binding ExcluiCommand}"
                             Margin="8,0"
                             Padding="5,0"
-                            ToolTip="EXCLUI REGISTRO">EXCLUIR</Button>
+                            ToolTip="Excluir">Excluir</Button>
                 </StackPanel>
 
             </StackPanel>

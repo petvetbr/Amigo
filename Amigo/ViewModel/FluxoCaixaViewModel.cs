@@ -141,23 +141,7 @@ namespace Amigo.ViewModel
             }
         }
 
-        //decimal _saldoAnterior;
-        //public decimal SaldoAnterior
-        //{
-        //    get
-        //    {
-        //        return _saldoAnterior;
-        //    }
-        //    set
-        //    {
-        //        if (_saldoAnterior != value)
-        //        {
-        //            _saldoAnterior = value;
-        //            RaisePropertyChanged(nameof(SaldoAnterior));
-        //        }
-        //    }
-        //}
-
+       
         LancamentoCaixa _lancamentoSelecionado;
         public LancamentoCaixa LancamentoSelecionado
         {

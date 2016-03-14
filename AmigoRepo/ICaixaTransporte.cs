@@ -14,8 +14,8 @@ namespace AmigoRepo
         int Peso { get; set; }
         string Identificacao { get; set; }
         int Localizacao { get; set; }
-        
-        
+        DateTime? DataCadastro { get; set; }
+
 
     }
 }

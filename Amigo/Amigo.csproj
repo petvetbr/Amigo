@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="ViewModel\AnimalViewModel.cs" />
     <Compile Include="ViewModel\CaixaTransporteViewModel.cs" />
+    <Compile Include="ViewModel\EmprestimoCaixaTransporteViewModel.cs" />
     <Compile Include="ViewModel\FluxoCaixaViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MensalidadesViewModel.cs" />

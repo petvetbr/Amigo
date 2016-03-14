@@ -109,6 +109,26 @@ namespace AmigoRepo
             }
         }
 
+        DateTime? _DataCadastro;
+        public DateTime? DataCadastro
+        {
+            get
+            {
+                return _DataCadastro;
+            }
+            set
+            {
+                if (_DataCadastro != value)
+                {
+                    _DataCadastro = value;
+                    OnPropertyChanged(nameof(DataCadastro));
+                }
+            }
+        }
+        public override string ToString()
+        {
+            return string.Format("{0}-{1}->{2}x{3}x{4}", this.Numero, this.Identificacao, this.Largura, this.Comprimento, this.Altura);
+        }
 
     }
 }
