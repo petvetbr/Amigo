@@ -74,7 +74,32 @@
 
         </Expander>
         <Grid DockPanel.Dock="Right">
-            <StackPanel DockPanel.Dock="Right">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <TextBlock Margin="8,0"
+                           FontWeight="Bold">Foto:</TextBlock>
+                <TextBlock Margin="8,0"
+                           FontWeight="Bold"></TextBlock>
+                    <Button Width="20"
+                            Command="{Binding SelecaoFotoCommand, Mode=OneWay}">...</Button>
+                </StackPanel>
+                <Image Source="{Binding Foto}" />
+
+            </Grid>
+            <StackPanel Grid.ColumnSpan="2"
+                        Grid.RowSpan="2">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type StackPanel}">
                         <Style.Triggers>
@@ -182,11 +207,8 @@
                                FontWeight="Bold">Peso (kg):</TextBlock>
                     <TextBox Width="80"
                              Text="{Binding Animal.Peso}"></TextBox>
-                    <TextBlock Margin="8,0"
-                               FontWeight="Bold">Foto:</TextBlock>
-                    <TextBlock Margin="8,0"
-                               FontWeight="Bold"></TextBlock>
-                    <Button Width="20">+</Button>
+                  
+                  
                 </StackPanel>
                 <GroupBox Margin="5"  Header="Vacinação:">
                     <StackPanel>

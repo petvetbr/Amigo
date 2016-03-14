@@ -8,12 +8,18 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Amigo.ViewModel
 {
     public class AnimalViewModel:ViewModelBase
     {
         #region Commands
+        public RelayCommand SelecaoFotoCommand
+        {
+            get;
+            private set;
+        }
         public RelayCommand SalvarCommand
         {
             get;
@@ -72,6 +78,7 @@ namespace Amigo.ViewModel
                 {
                     _animal = value;
                     RaisePropertyChanged(nameof(Animal));
+                    CarregarFoto();
                 }
             }
         }
@@ -309,31 +316,74 @@ namespace Amigo.ViewModel
             }
         }
 
+        BitmapImage _foto;
+        public BitmapImage Foto
+        {
+            get
+            {
+                return _foto;
+            }
+            set
+            {
+                if (_foto != value)
+                {
+                    _foto = value;
+                    RaisePropertyChanged(nameof(Foto));
+                }
+            }
+        }
 
         #endregion
         public AnimalViewModel()
         {
+            SetarCommands();
+            CarregarListas();
+            RefreshLista();
+            ExpanderAberto = true;
 
+        }
+
+        private void SetarCommands()
+        {
             this.SalvarCommand = new RelayCommand(Salvar, () => Animal != null);
             this.ExcluiCommand = new RelayCommand(Excluir, () => Animal != null);
             this.PesquisaCommand = new RelayCommand(Pesquisar);
             this.NovoItemCommand = new RelayCommand(CriarNovoItem);
-            CarregarListas();
-            this.ListaEspecie = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaEspecieAnimal());
+            this.SelecaoFotoCommand = new RelayCommand(SelecaoFoto);
             this.NovaVacinaCommand = new RelayCommand(NovaVacina);
             this.ExcluiVacinaCommand = new RelayCommand(ExcluiVacina);
             this.NovaVermifugoCommand = new RelayCommand(NovoVermifugo);
             this.ExcluiVermifugoCommand = new RelayCommand(ExcluiVermifugo);
             this.VacinaSelecionada = new VacinaVermifugo();
             this.VermifugoSelecionado = new VacinaVermifugo();
+        }
 
-            RefreshLista();
-            ExpanderAberto = true;
+        private void SelecaoFoto()
+        {
+            // Create OpenFileDialog 
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".png";
+            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
 
+            // Display OpenFileDialog by calling ShowDialog method 
+            if (!dlg.ShowDialog().GetValueOrDefault()) return;
+            this.Animal.Foto = dlg.FileName;
+            CarregarFoto();
+        }
+
+        private void CarregarFoto()
+        {
+            
+            var imagem = _animal?.Foto??null;
+            if (imagem == null) return;
+            var uriSource = new Uri(imagem, UriKind.Absolute);
+            this.Foto = new BitmapImage(uriSource);
         }
 
         private void CarregarListas()
         {
+            this.ListaEspecie = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaEspecieAnimal());
             this.ListaSexo = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaGeneroAnimal());
             this.ListaAmbiente = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaAmbientesAnimal());
             this.ListaFabricanteVacina = new ObservableCollection<string>(Config.ObterListaFabricantesVacina());
