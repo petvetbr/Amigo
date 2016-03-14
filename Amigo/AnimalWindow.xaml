@@ -14,7 +14,7 @@
 
             </Setter>
         </Style>
-        <BitmapImage x:Key="CatDog" UriSource="imagens/catdogicon80.png" />
+ 
     </Window.Resources>
     <DockPanel>
         <Expander  DockPanel.Dock="Left"  ExpandDirection="Right"  Header="Pesquisa" IsExpanded="{Binding ExpanderAberto}">
@@ -67,7 +67,9 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}"/>
-                <Image DockPanel.Dock="Right" HorizontalAlignment="Right" Source="{StaticResource CatDog}" Margin="0,0,70,-40" Stretch="None" />
+                <Image DockPanel.Dock="Right" HorizontalAlignment="Right"
+                       Margin="0,0,70,-40" Stretch="None"
+                       Source="Imagens/catdogicon80.png" />
             </DockPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{StaticResource splinha}">

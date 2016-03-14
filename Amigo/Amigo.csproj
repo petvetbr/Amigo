@@ -222,13 +222,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Imagens\catdogicon80.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Imagens\LogoAmigoGrande.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Imagens\catdogicon80.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Imagens\caixatransporte.png" />
@@ -240,6 +234,9 @@
     <Resource Include="Imagens\pesquisar.png" />
     <Resource Include="Imagens\telefone.png" />
     <Resource Include="Imagens\visualizar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\catdogicon80.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
