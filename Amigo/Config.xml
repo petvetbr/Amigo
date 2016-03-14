@@ -82,4 +82,126 @@
     <Tipo Key="2" Value="Pendente"/>
     <Tipo Key="3" Value="Inativo"/>
   </StatusPessoa>
+  <TiposVacina>
+    <Tipo Key="1" Value="Raiva"               />
+    <Tipo Key="2" Value="V8"                  />
+    <Tipo Key="3" Value="V10"                 />
+    <Tipo Key="4" Value="V11"                 />
+    <Tipo Key="5" Value="V12"                 />
+    <Tipo Key="6" Value="V14"                 />
+    <Tipo Key="8" Value="Leptospirose"        />
+    <Tipo Key="9" Value="Cinomose"            />
+    <Tipo Key="10" Value="Tosse dos Canis"    />
+    <Tipo Key="11" Value="Giardia"            />
+    <Tipo Key="12" Value="V7"                 />
+    <Tipo Key="101" Value="Tríplice Felina"   />
+  </TiposVacina>
+  <FabricanteVacina>
+    <Tipo Key="0" Value="Nao Informado"/>
+    <Tipo Key="1" Value="Merial"/>
+    <Tipo Key="2" Value="Hertape"/>
+    <Tipo Key="3" Value="BioVet"/>
+    <Tipo Key="4" Value="Virbac"/>
+    <Tipo Key="5" Value="Vencofarma"/>
+    <Tipo Key="6" Value="Novartis"/>
+    <Tipo Key="7" Value="Zoetis/Fort Dodge"/>
+    <Tipo Key="99" Value="Outros"/>
+  </FabricanteVacina>
+  <FabricanteVermifugo>
+    <Tipo Value="0"  Velue="Não informado"/>
+    <Tipo Value="1"  Velue="Konig"/>
+    <Tipo Value="2"  Velue="Merial"/>
+    <Tipo Value="3"  Velue="Ceva"/>
+    <Tipo Value="4"  Velue="Bayer"/>
+    <Tipo Value="5"  Velue="Cepav"/>
+    <Tipo Value="6"  Velue="Agener"/>
+    <Tipo Value="7"  Velue="Biovet"/>
+    <Tipo Value="8"  Velue="Coveli"/>
+    <Tipo Value="9"  Velue="Vetnil"/>
+    <Tipo Value="10" Velue= "Duprat"/>
+    <Tipo Value="11" Velue= "Vansil"/>
+    <Tipo Value="99" Velue= "Outro"/>
+  </FabricanteVermifugo>
+  <RacasCaes>
+    <Tipo Key="0"    Value="SRD"/>
+    <Tipo Key=""    Value="Alano Espanhol"/>
+    <Tipo Key="" Value="Airedale Terrier"/>
+    <Tipo Key="" Value="American Staffordshire Terrier"/>
+    <Tipo Key="" Value="American Water Spaniel"/>
+    <Tipo Key="" Value="Antigo Cão de Pastor Inglês"/>
+    <Tipo Key="" Value="Basset Azul da Gasconha"/>
+    <Tipo Key="" Value="Basset Fulvo da Bretanha"/>
+    <Tipo Key="" Value="Basset Hound"/>
+    <Tipo Key="" Value="Beagle"/>
+    <Tipo Key="" Value="Bearded Collie"/>
+    <Tipo Key="" Value="Bichon Maltês"/>
+    <Tipo Key="" Value="Bobtail"/>
+    <Tipo Key="" Value="Border Collie"/>
+    <Tipo Key="" Value="Boston Terrier"/>
+    <Tipo Key="" Value="Boxer"/>
+    <Tipo Key="" Value="Bull Terrier"/>
+    <Tipo Key="" Value="Bullmastiff"/>
+    <Tipo Key="" Value="Bulldog"/>
+    <Tipo Key="" Value="Cão de Montanha dos Pirinéus"/>
+    <Tipo Key="" Value="Caniche"/>
+    <Tipo Key="" Value="Chihuahua"/>
+    <Tipo Key="" Value="Cirneco do Etna"/>
+    <Tipo Key="" Value="Chow Chow"/>
+    <Tipo Key="" Value="Cocker Spaniel (Americano ou Inglês)"/>
+    <Tipo Key="" Value="Dálmata"/>
+    <Tipo Key="" Value="Dobermann"/>
+    <Tipo Key="" Value="Dogue Alemão"/>
+    <Tipo Key="" Value="Dogue Argentino"/>
+    <Tipo Key="" Value="Dogue Canário"/>
+    <Tipo Key="" Value="Fox Terrier"/>
+    <Tipo Key="" Value="Foxhound"/>
+    <Tipo Key="" Value="Galgo"/>
+    <Tipo Key="" Value="Golden Retriever"/>
+    <Tipo Key="" Value="Gos d'Atura"/>
+    <Tipo Key="" Value="Husky Siberiano"/>
+    <Tipo Key="" Value="Laika"/>
+    <Tipo Key="" Value="Labrador Retriever	"/>
+    <Tipo Key="" Value="Malamute-do-Alasca"/>
+    <Tipo Key="" Value="Mastin dos Pirenéus"/>
+    <Tipo Key="" Value="Mastin do Tibete"/>
+    <Tipo Key="" Value="Mastin Espanhol"/>
+    <Tipo Key="" Value="Mastín Napolitano"/>
+    <Tipo Key="" Value="Pastor Alemão"/>
+    <Tipo Key="" Value="Pastor Belga"/>
+    <Tipo Key="" Value="Pastor de Brie"/>
+    <Tipo Key="" Value="Pastor dos Pirenéus de Cara Rosa"/>
+    <Tipo Key="" Value="Pequinês"/>
+    <Tipo Key="" Value="Perdigueiro"/>
+    <Tipo Key="" Value="Pitbull"/>
+    <Tipo Key="" Value="Podengo"/>
+    <Tipo Key="" Value="Pointer"/>
+    <Tipo Key="" Value="Pug"/>
+    <Tipo Key="" Value="Rhodesian Ridgeback"/>
+    <Tipo Key="" Value="Rottweiler"/>
+    <Tipo Key="" Value="Rough Collie"/>
+    <Tipo Key="" Value="Sabueso (Espanhol ou Italiano)"/>
+    <Tipo Key="" Value="Saluki"/>
+    <Tipo Key="" Value="Samoiedo"/>
+    <Tipo Key="" Value="São Bernardo"/>
+    <Tipo Key="" Value="Scottish Terrier"/>
+    <Tipo Key="" Value="Setter Irlandés"/>
+    <Tipo Key="" Value="Shar-Pei"/>
+    <Tipo Key="" Value="Shiba Inu"/>
+    <Tipo Key="" Value="Smooth Collie"/>
+    <Tipo Key="" Value="Staffordshire Bull Terrier"/>
+    <Tipo Key="" Value="Teckel"/>
+    <Tipo Key="" Value="Terra-nova"/>
+    <Tipo Key="" Value="Terrier Australiano"/>
+    <Tipo Key="" Value="Terrier Escocês"/>
+    <Tipo Key="" Value="Terrier Irlandês"/>
+    <Tipo Key="" Value="Terrier Japonês"/>
+    <Tipo Key="" Value="Terrier Negro Russo"/>
+    <Tipo Key="" Value="Terrier Norfolk"/>
+    <Tipo Key="" Value="Terrier Norwich"/>
+    <Tipo Key="" Value="Terrier Tibetano"/>
+    <Tipo Key="" Value="Welhs Terrier"/>
+    <Tipo Key="" Value="West Highland T."/>
+    <Tipo Key="" Value="Wolfspitz"/>
+    <Tipo Key="" Value="Yorkshire T"/>
+  </RacasCaes>
 </ConfigAmigo>

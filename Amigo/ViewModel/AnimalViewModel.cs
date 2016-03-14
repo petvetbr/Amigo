@@ -13,6 +13,7 @@ namespace Amigo.ViewModel
 {
     public class AnimalViewModel:ViewModelBase
     {
+        #region Commands
         public RelayCommand SalvarCommand
         {
             get;
@@ -35,7 +36,29 @@ namespace Amigo.ViewModel
             get;
             private set;
         }
+        public RelayCommand NovaVacinaCommand
+        {
+            get;
+            private set;
+        }
+        public RelayCommand ExcluiVacinaCommand
+        {
+            get;
+            private set;
+        }
+        public RelayCommand NovaVermifugoCommand
+        {
+            get;
+            private set;
+        }
+        public RelayCommand ExcluiVermifugoCommand
+        {
+            get;
+            private set;
+        }
 
+        #endregion
+        #region Propriedades
         Animal _animal;
         public Animal Animal
         {
@@ -102,8 +125,8 @@ namespace Amigo.ViewModel
             }
         }
 
-        ObservableCollection<KeyValuePair<int,string>> _listaSexo;
-        public ObservableCollection<KeyValuePair<int,string>>ListaSexo
+        ObservableCollection<KeyValuePair<int, string>> _listaSexo;
+        public ObservableCollection<KeyValuePair<int, string>> ListaSexo
         {
             get
             {
@@ -185,7 +208,8 @@ namespace Amigo.ViewModel
                     RaisePropertyChanged(nameof(ListaTipoVermifugo));
                 }
             }
-        }
+        } 
+        #endregion
         public AnimalViewModel()
         {
           
@@ -195,10 +219,34 @@ namespace Amigo.ViewModel
             this.NovoItemCommand = new RelayCommand(CriarNovoItem);
             this.ListaSexo = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaGeneroAnimal());
             this.ListaAmbiente = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaAmbientesAnimal());
-            
+            this.NovaVacinaCommand = new RelayCommand(NovaVacina);
+            this.ExcluiVacinaCommand = new RelayCommand(ExcluiVacina);
+            this.NovaVermifugoCommand = new RelayCommand(NovoVermifugo);
+            this.ExcluiVermifugoCommand = new RelayCommand(ExcluiVermifugo);
+
             RefreshLista();
             ExpanderAberto = true;
 
+        }
+
+        private void ExcluiVermifugo()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void NovoVermifugo()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void NovaVacina()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExcluiVacina()
+        {
+            throw new NotImplementedException();
         }
 
         private void RefreshLista(Expression<Func<Animal, bool>> expression = null)

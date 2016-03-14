@@ -63,5 +63,10 @@ namespace AmigoRepo
                 OnPropertyChanged(nameof(Tipo));
             }
         }
+        public override string ToString()
+        {
+            return string.Format("{0}-{1}", _Tipo, _Fabricante);
+        }
+        
     }
 }
