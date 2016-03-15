@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,8 +37,8 @@ namespace Amigo.ViewModel
         }
 
        
-        ObservableCollection<IEmprestimoCaixa> _listaItens;
-        public ObservableCollection<IEmprestimoCaixa> ListaItens
+        ObservableCollection<EmprestimoCaixaTransporte> _listaItens;
+        public ObservableCollection<EmprestimoCaixaTransporte> ListaItens
         {
             get
             {
@@ -134,8 +135,8 @@ namespace Amigo.ViewModel
             }
         }
 
-        IEmprestimoCaixa _emprestimo;
-        public IEmprestimoCaixa Emprestimo
+        EmprestimoCaixaTransporte _emprestimo;
+        public EmprestimoCaixaTransporte Emprestimo
         {
             get
             {
@@ -167,22 +168,54 @@ namespace Amigo.ViewModel
 
         private void Pesquisar()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(FiltroPesquisa))
+            {
+                RefreshLista();
+                return;
+            }
+            RefreshLista(x => x.Responsavel.Contains(FiltroPesquisa));
+        }
+        private void RefreshLista(Expression<Func<EmprestimoCaixaTransporte, bool>> expression = null)
+        {
+            var lista = Util.Repositorio.ObterLista<EmprestimoCaixaTransporte>(expression).OrderBy(p => p.Responsavel);
+            this.ListaItens = new ObservableCollection<EmprestimoCaixaTransporte>(lista);
         }
 
         private void Excluir()
         {
-            throw new NotImplementedException();
+            if (!Util.Repositorio.Apagar<EmprestimoCaixaTransporte>(x => x.Id == this.Emprestimo.Id))
+            {
+                return;
+            }
+            this.Emprestimo = null;
+            RefreshLista();
+            ExpanderAberto = true;
         }
 
         private void Salvar()
         {
-            throw new NotImplementedException();
+            if (!Util.Repositorio.Salvar(_emprestimo).Key)
+            {
+                return;
+            }
+            RefreshLista();
+            ExpanderAberto = true;
         }
 
         private void NovoItem()
         {
-            throw new NotImplementedException();
+            var emprestimo = new EmprestimoCaixaTransporte();
+            if (Util.Repositorio.ObterLista<EmprestimoCaixaTransporte>().Any())
+            {
+                var maxAtual = Util.Repositorio.ObterLista<EmprestimoCaixaTransporte>().Max(p => p.Numero);
+                emprestimo.Numero = ++maxAtual;
+            }
+            else
+            {
+                emprestimo.Numero = 1;
+            }
+            this.Emprestimo = emprestimo;
+            ExpanderAberto = false;
         }
     }
 }
