@@ -22,7 +22,7 @@ namespace AmigoRepo
                 OnPropertyChanged(nameof(Repositorio));
             }
         }
-        int _numero;
+        protected int _numero;
         public int Numero
         {
             get
@@ -38,7 +38,7 @@ namespace AmigoRepo
             }
         }
 
-        int _id;
+        protected int _id;
         public int Id
         {
             get

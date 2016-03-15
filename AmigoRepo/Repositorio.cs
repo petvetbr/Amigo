@@ -87,6 +87,29 @@ namespace AmigoRepo
                 throw;
             }
         }
+
+        public IEnumerable<EmprestimoCaixaTransporte> ObterEmprestimosCaixaTransporteComCaixa(Func<EmprestimoCaixaTransporte, bool> exp, string nomeTabela = null)
+        {
+            try
+            {
+                nomeTabela = nomeTabela ?? ObterPlural<EmprestimoCaixaTransporte>();
+
+                var emprestimos = db.GetCollection<EmprestimoCaixaTransporte>(nomeTabela)
+                    .Include(x => x.CaixaTransporte)
+                    .FindAll();
+                if (exp != null)
+                {
+                    emprestimos = emprestimos.Where(exp);
+                }
+
+                return emprestimos;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public T Obter<T>(Expression<Func<T,bool>> exp, string nomeTabela = null) where T: class,new()
         {
             try

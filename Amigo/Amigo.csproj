@@ -100,9 +100,6 @@
     <Compile Include="PessoasWindow.xaml.cs">
       <DependentUpon>PessoasWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ServicoCaixaTransporteWindow.xaml.cs">
-      <DependentUpon>ServicoCaixaTransporteWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Misc\Settings.cs" />
     <Compile Include="Misc\Util.cs" />
     <Compile Include="SobreWindow.xaml.cs">
@@ -151,10 +148,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PessoasWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ServicoCaixaTransporteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

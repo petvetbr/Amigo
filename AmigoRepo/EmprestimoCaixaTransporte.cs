@@ -104,23 +104,28 @@ namespace AmigoRepo
                 }
             }
         }
-        int _localizacao;
-        public int Localizacao
+     
+
+        CaixaTransporte _caixaTransporte;
+        public CaixaTransporte CaixaTransporte
         {
             get
             {
-                return _localizacao;
+                return _caixaTransporte;
             }
             set
             {
-                if (_localizacao != value)
+                if (_caixaTransporte != value)
                 {
-                    _localizacao = value;
-                    OnPropertyChanged(nameof(Localizacao));
+                    _caixaTransporte = value;
+                    OnPropertyChanged(nameof(CaixaTransporte));
                 }
             }
         }
-
-
+        public override string ToString()
+        {
+            return string.Format("{0}-{1}-{2:d}-{3:d}", CaixaTransporte.Numero, Responsavel, DataSaida, DataRetorno);
+        }
+      
     }
 }

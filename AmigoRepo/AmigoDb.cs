@@ -22,7 +22,9 @@ namespace AmigoRepo
             mapper.Entity<Animal>()
               .Id(x => x.Id)
               .DbRef(x => x.Clinica, "Clinicas");
-
+            mapper.Entity<EmprestimoCaixaTransporte>()
+                 .Id(x => x.Id)
+                .DbRef(x => x.CaixaTransporte, "CaixaTransportes");
         }
 
     }

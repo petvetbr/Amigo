@@ -129,6 +129,12 @@ namespace AmigoRepo
         {
             return string.Format("{0}-{1}->{2}x{3}x{4}", this.Numero, this.Identificacao, this.Largura, this.Comprimento, this.Altura);
         }
+        //public override bool Equals(object obj)
+        //{
+        //    var ob2 = obj as CaixaTransporte;
+        //    if (ob2 == null) return false;
+        //    return ob2._id== this._id;
+        //}
 
     }
 }

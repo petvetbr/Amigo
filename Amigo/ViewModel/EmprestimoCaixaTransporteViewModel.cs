@@ -53,6 +53,25 @@ namespace Amigo.ViewModel
                 }
             }
         }
+
+        ObservableCollection<CaixaTransporte> _listaCaixasTrasnporte;
+        public ObservableCollection<CaixaTransporte>  ListaCaixasTransportes
+        {
+            get
+            {
+                return _listaCaixasTrasnporte;
+            }
+            set
+            {
+                if (_listaCaixasTrasnporte != value)
+                {
+                    _listaCaixasTrasnporte = value;
+                    RaisePropertyChanged(nameof(ListaCaixasTransportes));
+                }
+            }
+        }
+
+
         string _filtroPesquisa;
         public string FiltroPesquisa
         {
@@ -156,14 +175,22 @@ namespace Amigo.ViewModel
 
         public EmprestimoCaixaTransporteViewModel()
         {
-            this.ListaLocalizacao = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaLocalizacaoCaixaTransporte());
-            this.ListaSituacao = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaSituacaoCaixaTransporte());
-            this.ListaStatus = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaStatusCaixaTransporte());
-            this.NovoItemCommand = new RelayCommand(NovoItem, () => _emprestimo != null);
+            CarregarListas();
+            this.NovoItemCommand = new RelayCommand(NovoItem);
             this.SalvarCommand = new RelayCommand(Salvar, () => _emprestimo != null);
             this.ExcluiCommand = new RelayCommand(Excluir, () => _emprestimo != null);
             this.PesquisaCommand = new RelayCommand(Pesquisar);
-            
+            RefreshLista();
+            ExpanderAberto = true;
+
+        }
+
+        private void CarregarListas()
+        {
+            this.ListaLocalizacao = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaLocalizacaoCaixaTransporte());
+            this.ListaSituacao = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaSituacaoCaixaTransporte());
+            this.ListaStatus = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaStatusCaixaTransporte());
+            this.ListaCaixasTransportes= new ObservableCollection<CaixaTransporte>(Util.Repositorio.ObterLista<CaixaTransporte>().OrderBy(p=>p.Numero));
         }
 
         private void Pesquisar()
@@ -175,9 +202,9 @@ namespace Amigo.ViewModel
             }
             RefreshLista(x => x.Responsavel.Contains(FiltroPesquisa));
         }
-        private void RefreshLista(Expression<Func<EmprestimoCaixaTransporte, bool>> expression = null)
+        private void RefreshLista(Func<EmprestimoCaixaTransporte, bool> expression = null)
         {
-            var lista = Util.Repositorio.ObterLista<EmprestimoCaixaTransporte>(expression).OrderBy(p => p.Responsavel);
+            var lista = Util.Repositorio.ObterEmprestimosCaixaTransporteComCaixa(expression).OrderBy(p => p.Responsavel);
             this.ListaItens = new ObservableCollection<EmprestimoCaixaTransporte>(lista);
         }
 

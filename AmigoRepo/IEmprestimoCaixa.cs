@@ -13,5 +13,6 @@ namespace AmigoRepo
         string Animal { get; set; }
         int Status { get; set; }
         int Situacao { get; set; }
+        CaixaTransporte CaixaTransporte { get; set; }
     }
 }

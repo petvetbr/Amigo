@@ -123,7 +123,7 @@ namespace Amigo.ViewModel
 
         private void ServicosCaixaTransporte()
         {
-            new ServicoCaixaTransporteWindow().ShowDialog();
+            new EmprestimoCaixaWindow().ShowDialog();
         }
 
         private void MenuFluxoCaixa()
