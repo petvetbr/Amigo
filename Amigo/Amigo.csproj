@@ -40,6 +40,10 @@
     <ApplicationIcon>LogoAmigo64.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Alienlab.Zip.Reduced, Version=1.9.1.9000, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alienlab.Zip.Reduced.1.9.1.8\lib\net20\Alienlab.Zip.Reduced.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37225, Culture=neutral, PublicKeyToken=bb738e8c4ab8c76c, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net35\GalaSoft.MvvmLight.dll</HintPath>
       <Private>True</Private>
@@ -97,6 +101,7 @@
     <Compile Include="MensalidadesWindow.xaml.cs">
       <DependentUpon>MensalidadesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Misc\PasswordSecurity.cs" />
     <Compile Include="PessoasWindow.xaml.cs">
       <DependentUpon>PessoasWindow.xaml</DependentUpon>
     </Compile>
@@ -104,6 +109,9 @@
     <Compile Include="Misc\Util.cs" />
     <Compile Include="SobreWindow.xaml.cs">
       <DependentUpon>SobreWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserWindow.xaml.cs">
+      <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AnimalViewModel.cs" />
     <Compile Include="ViewModel\CaixaTransporteViewModel.cs" />
@@ -114,6 +122,7 @@
     <Compile Include="ViewModel\PessoaMessageArgs.cs" />
     <Compile Include="ViewModel\PessoasViewModel.cs" />
     <Compile Include="ViewModel\ServicoCaixaTransportesViewModel.cs" />
+    <Compile Include="ViewModel\UsuarioViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="AnimalWindow.xaml">
       <SubType>Designer</SubType>
@@ -152,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SobreWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

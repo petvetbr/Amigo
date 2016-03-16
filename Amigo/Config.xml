@@ -108,19 +108,19 @@
     <Tipo Key="99" Value="Outros"/>
   </FabricanteVacina>
   <FabricanteVermifugo>
-    <Tipo Value="0"  Velue="Não informado"/>
-    <Tipo Value="1"  Velue="Konig"/>
-    <Tipo Value="2"  Velue="Merial"/>
-    <Tipo Value="3"  Velue="Ceva"/>
-    <Tipo Value="4"  Velue="Bayer"/>
-    <Tipo Value="5"  Velue="Cepav"/>
-    <Tipo Value="6"  Velue="Agener"/>
-    <Tipo Value="7"  Velue="Biovet"/>
-    <Tipo Value="8"  Velue="Coveli"/>
-    <Tipo Value="9"  Velue="Vetnil"/>
-    <Tipo Value="10" Velue= "Duprat"/>
-    <Tipo Value="11" Velue= "Vansil"/>
-    <Tipo Value="99" Velue= "Outro"/>
+    <Tipo Key="0"  Value="Não informado"/>
+    <Tipo Key="1"  Value="Konig"/>
+    <Tipo Key="2"  Value="Merial"/>
+    <Tipo Key="3"  Value="Ceva"/>
+    <Tipo Key="4"  Value="Bayer"/>
+    <Tipo Key="5"  Value="Cepav"/>
+    <Tipo Key="6"  Value="Agener"/>
+    <Tipo Key="7"  Value="Biovet"/>
+    <Tipo Key="8"  Value="Coveli"/>
+    <Tipo Key="9"  Value="Vetnil"/>
+    <Tipo Key="10" Value= "Duprat"/>
+    <Tipo Key="11" Value= "Vansil"/>
+    <Tipo Key="99" Value= "Outro"/>
   </FabricanteVermifugo>
   <RacasCaes>
     <Tipo Key="0" Value="SRD"/>
@@ -204,7 +204,12 @@
     <Tipo Key="" Value="Wolfspitz"/>
     <Tipo Key="" Value="Yorkshire T"/>
   </RacasCaes>
-<RacasGatos>
-  
-</RacasGatos>
+  <RacasGatos>
+  </RacasGatos>
+  <NiveisUsuario>
+    <Tipo Key="9999"  Value="Master"/>
+    <Tipo Key="1000"  Value="Geral"/>
+    <Tipo Key="100"   Value="Geral com restrições"/>
+    <Tipo Key="10"    Value="Somente leitura"/>
+  </NiveisUsuario>
 </ConfigAmigo>

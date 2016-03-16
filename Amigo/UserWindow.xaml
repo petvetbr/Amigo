@@ -1,0 +1,58 @@
+﻿<Window x:Class="Amigo.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Amigo"
+        mc:Ignorable="d"
+        Title="Usuários"
+        DataContext="{Binding Path=Usuario, Source={StaticResource Locator}}"
+        Height="300"
+        Width="400"
+        WindowStartupLocation="CenterOwner"
+        Icon="Imagens/LogoAmigo64.png">
+    <Grid>
+        <DockPanel>
+            <Expander  DockPanel.Dock="Left"
+                       ExpandDirection="Right"
+                       Header="Pesquisa"
+                       IsExpanded="{Binding ExpanderAberto}">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto">
+                        </RowDefinition>
+                        <RowDefinition Height="*">
+                        </RowDefinition>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,5"
+                                VerticalAlignment="Top">
+                        <TextBox VerticalAlignment="Center"
+                                 Text="{Binding FiltroPesquisa}"
+                                 Width="200"></TextBox>
+                        <Button Command="{Binding PesquisaCommand}"
+                                Margin="5"
+                                ToolTip="Pesquisar por nome">Pesquisar</Button>
+                    </StackPanel>
+
+                    <ListBox Grid.Row="1"
+                             ItemsSource="{Binding ListaItens}"
+                             SelectedItem="{Binding Emprestimo}">
+                    </ListBox>
+                    <StackPanel Margin="0,5"
+                                Grid.Row="2"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Top">
+                        <Button HorizontalAlignment="Right"
+                                Command="{Binding NovoItemCommand}"
+                                ToolTipService.ToolTip="Criar novo registro">Novo</Button>
+                    </StackPanel>
+                </Grid>
+            </Expander>
+            <StackPanel DockPanel.Dock="Right">
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>

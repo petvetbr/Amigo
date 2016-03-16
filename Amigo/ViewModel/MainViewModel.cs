@@ -7,6 +7,8 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using Alienlab.Zip;
+using System.IO;
 
 namespace Amigo.ViewModel
 {
@@ -129,10 +131,36 @@ namespace Amigo.ViewModel
 
         private void CopiarDados()
         {
-            var dump = Util.Repositorio.Dump();
-            Clipboard.SetText(dump);
-            MessageBox.Show("Cópia de segurança copiada para a área de transferência");
+            var isDump = false;
+            if (isDump)
+            {
+                var dump = Util.Repositorio.Dump();
+                using (var sw = File.CreateText("dump.txt"))
+                {
+                    sw.Write(dump);
+                }
 
+                using (var zip = new ZipFile())
+                {
+                    zip.Password = "ACPA";
+                    zip.AddFile("dump.txt");
+                    zip.Save("Backup.zip");
+
+                }
+                File.Delete("dump.txt");
+            }
+            else
+            {
+                using (var zip = new ZipFile())
+                {
+                    zip.Password = "ACPA";
+                    zip.AddFile("dados.db");
+                    zip.Save("Backup.zip");
+
+                }
+            }
+
+            MessageBox.Show("Cópia de segurança gerada: " +Config.ObterCaminhoExecucao()+@"\Backup.zip");
         }
 
         private void MenuCadastro(int tipoPessoa)
