@@ -72,7 +72,9 @@
                 <MenuItem Header="Mensalidades"
                           Command="{Binding MenuMensalidadesCommand}" />
             </MenuItem>
-            <MenuItem Header="Manutenção">
+            <MenuItem Header="Ferramentas">
+                <MenuItem Header="Calculadora"
+                          Command="{Binding MenuCalculadoraCommand}" />
                 <MenuItem Header="Fazer cópia de segurança dos dados"
                           Command="{Binding MenuCopiaDadosCommand}" />
                 <MenuItem Header="Restaurar cópia de segurança dos dados"

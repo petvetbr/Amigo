@@ -24,7 +24,7 @@ namespace Amigo.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        public RelayCommand<int>MenuCadastroCommand
+        public RelayCommand<int> MenuCadastroCommand
         {
             get;
             private set;
@@ -34,7 +34,7 @@ namespace Amigo.ViewModel
             get;
             private set;
         }
-      
+
         public RelayCommand MenuServicosCaixaTransporteCommand
         {
             get;
@@ -68,13 +68,17 @@ namespace Amigo.ViewModel
         }
 
 
-             public RelayCommand MenuRestauraDadosCommand
+        public RelayCommand MenuRestauraDadosCommand
         {
             get;
             private set;
         }
-        
 
+        public RelayCommand MenuCalculadoraCommand
+        {
+            get;
+            private set;
+        }
 
         BitmapImage _logo;
         public BitmapImage Logo
@@ -99,7 +103,7 @@ namespace Amigo.ViewModel
         /// </summary>
         public MainViewModel()
         {
-           
+
             MenuCadastroCommand = new RelayCommand<int>(MenuCadastro);
             MenuCadastroCaixasTransporteCommand = new RelayCommand(MenuCadastroCaixasTransporte);
             MenuFluxoCaixaCommand = new RelayCommand(MenuFluxoCaixa);
@@ -108,14 +112,14 @@ namespace Amigo.ViewModel
             MenuCadastroAnimaisCommand = new RelayCommand(() => new AnimalWindow().ShowDialog());
             MenuSobreCommand = new RelayCommand(() => new SobreWindow().ShowDialog());
             var logo = Config.ObterCaminhoLogo();
-            if(logo!=null)
+            if (logo != null)
             {
                 var uriSource = new Uri(logo, UriKind.Absolute);
                 this.Logo = new BitmapImage(uriSource);
             }
             MenuCopiaDadosCommand = new RelayCommand(CopiarDados);
             MenuRestauraDadosCommand = new RelayCommand(RestauraDados, () => false);
-            
+            MenuCalculadoraCommand= new RelayCommand(()=> System.Diagnostics.Process.Start("calc") );
         }
 
         private void RestauraDados()
@@ -133,7 +137,7 @@ namespace Amigo.ViewModel
 
         private void MenuCadastro(int tipoPessoa)
         {
-            var tp =(TipoPessoa) Enum.ToObject(typeof(TipoPessoa), tipoPessoa);
+            var tp = (TipoPessoa)Enum.ToObject(typeof(TipoPessoa), tipoPessoa);
             var pw = new PessoasWindow();
             Messenger.Default.Send(tp);
             pw.ShowDialog();
@@ -161,7 +165,7 @@ namespace Amigo.ViewModel
             ctw.ShowDialog();
         }
 
-        
+
 
 
     }
