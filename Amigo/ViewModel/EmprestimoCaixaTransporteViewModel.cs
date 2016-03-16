@@ -188,7 +188,7 @@ namespace Amigo.ViewModel
             set
             {
                 if (_emprestimo == null) return;
-                if (_emprestimo.CaixaTransporte.Identificacao.Equals(value)) return;
+                if (_emprestimo.CaixaTransporte != null && _emprestimo.CaixaTransporte.Identificacao.Equals(value)) return;
                 _emprestimo.CaixaTransporte = this.ListaCaixasTransportes.FirstOrDefault(p => p.Identificacao.Equals(value));
                 RaisePropertyChanged(nameof(IdentificacaoCaixa));
 

@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
         DataContext="{Binding Path=EmprestimoCaixaTransporte, Source={StaticResource Locator}}"
-        Title="Serviço Caixa de Transportes" Height="480" Width="800">
+        Title="Serviço Caixa de Transportes" Height="480" Width="1000">
     <Window.Resources>
         <Style TargetType="{x:Type StackPanel}" x:Key="splinha">
             <Setter Property="Margin" Value="6">
@@ -75,11 +75,23 @@
 
                     </StackPanel>
 
-                    <Image DockPanel.Dock="Right" HorizontalAlignment="Right" Source="{StaticResource CatDog}" Margin="0,0,130,-370" Stretch="None" />
+                  
                 </DockPanel>
 
                 <GroupBox Header="Detalhes do Empréstimo da Caixa de Transporte" >
-                    <StackPanel Margin="0,8">
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition  Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image HorizontalAlignment="Right"
+                               Margin="0,100,5,0"
+                               Grid.Column="1"
+                               Source="{StaticResource CatDog}"
+                               Stretch="None" />
+                  
+                    <StackPanel Margin="0,8" Grid.ColumnSpan="2">
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type StackPanel}">
                                 <Style.Triggers>
@@ -91,17 +103,17 @@
                                 </Style.Triggers>
                             </Style>
                         </StackPanel.Resources>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top"  Style="{StaticResource splinha}">
+                        <StackPanel Orientation="Horizontal"  VerticalAlignment="Top"  Style="{StaticResource splinha}">
                             <TextBlock FontWeight="Bold"  Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Responsável:</TextBlock>
                             <TextBox Width="300"
                                      Text="{Binding Emprestimo.Responsavel}"></TextBox>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                        <StackPanel Orientation="Horizontal"   VerticalAlignment="Top" Style="{StaticResource splinha}">
                             <TextBlock FontWeight="Bold" Width="110" HorizontalAlignment="Center" VerticalAlignment="Center">Animal:</TextBlock>
                             <TextBox Width="300"
                                      Text="{Binding Emprestimo.Animal}"></TextBox>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">Data de saída:</TextBlock>
                             <DatePicker HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0"
                                         SelectedDate="{Binding Emprestimo.DataSaida}"></DatePicker>
@@ -109,7 +121,7 @@
                             <DatePicker HorizontalAlignment="Center" VerticalAlignment="Center"
                                         SelectedDate="{Binding Emprestimo.DataRetorno}"></DatePicker>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                        <StackPanel Orientation="Horizontal"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                             <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Width="80">Status:</TextBlock>
                             <ComboBox Width="100"
                                       ItemsSource="{Binding ListaStatus}"
@@ -117,7 +129,7 @@
                                       SelectedValue="{Binding Emprestimo.Status}"
                                       SelectedValuePath="Key"></ComboBox>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                        <StackPanel Orientation="Horizontal"   VerticalAlignment="Top" Style="{StaticResource splinha}">
                             <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center"  HorizontalAlignment="Center" Width="80" >Situação:</TextBlock>
                             <ComboBox Width="100"
                                       ItemsSource="{Binding ListaSituacao}"
@@ -125,7 +137,7 @@
                                       SelectedValue="{Binding Emprestimo.Situacao}"
                                       SelectedValuePath="Key"></ComboBox>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Top" Style="{StaticResource splinha}">
+                        <StackPanel Orientation="Horizontal"  VerticalAlignment="Top" Style="{StaticResource splinha}">
                             <TextBlock Margin="10,0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Width="80">Localização:</TextBlock>
                             <ComboBox Width="100"
                                       ItemsSource="{Binding ListaLocalizacao}"
@@ -134,18 +146,19 @@
                                       DisplayMemberPath="Value"></ComboBox>
                         </StackPanel>
                     </StackPanel>
+                    </Grid>
                 </GroupBox>
 
                 <GroupBox Header="Observações"
                           Height="100">
                     <TextBox  Margin="5"
-                              Text="{Binding Observacao}"></TextBox>
+                              Text="{Binding Emprestimo.Observacao}"></TextBox>
                 </GroupBox>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Style="{StaticResource splinha}">
 
-                    <Button Command="{Binding SalvarCommand}"  Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO" >SALVAR</Button>
-                    <Button Command="{Binding ExcluiCommand}"  Margin="8,0" Padding="5,0" ToolTip="EXCLUI REGISTRO" >EXCLUIR</Button>
+                    <Button Command="{Binding SalvarCommand}"  Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO" >Salvar</Button>
+                    <Button Command="{Binding ExcluiCommand}"  Margin="8,0" Padding="5,0" ToolTip="EXCLUI REGISTRO" >Excluir</Button>
                 </StackPanel>
 
 
