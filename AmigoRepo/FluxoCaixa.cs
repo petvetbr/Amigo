@@ -77,9 +77,25 @@ namespace AmigoRepo
                 }
             }
         }
+        
+        public decimal SaldoAtual
+        {
+            get
+            {
+                return ObterSaldoAtual();
+            }
+          
+        }
+
         public FluxoCaixa()
         {
             this.Lancamentos = new ObservableCollection<ILancamentoCaixa>();
+        }
+        private decimal ObterSaldoAtual()
+        {
+            var receitas = this._Lancamentos.Where(p => !p.EhDespesa.GetValueOrDefault()).Sum(p => p.Valor);
+            var despesas = this._Lancamentos.Where(p => p.EhDespesa.GetValueOrDefault()).Sum(p => p.Valor);
+            return this._SaldoAnterior + receitas - despesas;
         }
     }
 }

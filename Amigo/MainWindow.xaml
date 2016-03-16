@@ -73,8 +73,10 @@
                           Command="{Binding MenuMensalidadesCommand}" />
             </MenuItem>
             <MenuItem Header="Manutenção">
-                <MenuItem Header="Fazer cópia dos dados"
+                <MenuItem Header="Fazer cópia de segurança dos dados"
                           Command="{Binding MenuCopiaDadosCommand}" />
+                <MenuItem Header="Restaurar cópia de segurança dos dados"
+                          Command="{Binding MenuRestauraDadosCommand}" />
                 <MenuItem Header="Sobre"
                           Command="{Binding MenuSobreCommand}" />
             </MenuItem>

@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Amigo.ViewModel
 {
@@ -34,7 +35,7 @@ namespace Amigo.ViewModel
             get;
             private set;
         }
-        
+
 
         FluxoCaixa _FluxoCaixaMes;
         public FluxoCaixa FluxoCaixaMes
@@ -141,7 +142,7 @@ namespace Amigo.ViewModel
             }
         }
 
-       
+
         LancamentoCaixa _lancamentoSelecionado;
         public LancamentoCaixa LancamentoSelecionado
         {
@@ -204,15 +205,31 @@ namespace Amigo.ViewModel
             {
                 return;
             }
-            if(this.FluxoCaixaMes!=null)
+            if (this.FluxoCaixaMes != null)
             {
                 Salvar();
             }
             var repo = Util.Repositorio;
+            var mesAnterior = new DateTime(_anoSelecionado.Value, _MesSelecionado.Value, 1).AddMonths(-1);
+            var fluxoAnterior = repo.Obter<FluxoCaixa>(p => p.Ano == mesAnterior.Year && p.Mes == mesAnterior.Month);
+
             var fluxo = repo.Obter<FluxoCaixa>(p => p.Ano == _anoSelecionado && p.Mes == _MesSelecionado.Value);
-            if(fluxo==null)
+            if (fluxo == null)
             {
-                fluxo = new FluxoCaixa() { Ano = _anoSelecionado.Value, Mes = _MesSelecionado.Value, Lancamentos = new ObservableCollection<ILancamentoCaixa>() };
+                fluxo = new FluxoCaixa() { Ano = _anoSelecionado.Value,
+                    Mes = _MesSelecionado.Value,
+                    Lancamentos = new ObservableCollection<ILancamentoCaixa>(),
+                    SaldoAnterior= fluxoAnterior?.SaldoAtual??0
+                };
+            }
+            else
+            {
+                if(fluxoAnterior!=null &&
+                    fluxoAnterior.SaldoAtual!= fluxo.SaldoAnterior &&
+                     (MessageBox.Show("Houve alteração no saldo do fluxo de caixa anterior, deseja atualizar?", "Atualização de saldo anterior", MessageBoxButton.YesNo) == MessageBoxResult.Yes))
+                {
+                    fluxo.SaldoAnterior = fluxoAnterior.SaldoAtual;
+                }
             }
             this.FluxoCaixaMes = fluxo;
             this.LancamentoSelecionado = new LancamentoCaixa() { Data = DateTime.Now, EhDespesa = false };
@@ -220,6 +237,7 @@ namespace Amigo.ViewModel
 
 
         }
+
         private void AtualizaValores()
         {
             if (this.FluxoCaixaMes == null) return;

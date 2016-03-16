@@ -6,6 +6,7 @@ using AmigoRepo;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.Windows.Media.Imaging;
+using System.Windows;
 
 namespace Amigo.ViewModel
 {
@@ -65,6 +66,13 @@ namespace Amigo.ViewModel
             get;
             private set;
         }
+
+
+             public RelayCommand MenuRestauraDadosCommand
+        {
+            get;
+            private set;
+        }
         
 
 
@@ -105,7 +113,22 @@ namespace Amigo.ViewModel
                 var uriSource = new Uri(logo, UriKind.Absolute);
                 this.Logo = new BitmapImage(uriSource);
             }
+            MenuCopiaDadosCommand = new RelayCommand(CopiarDados);
+            MenuRestauraDadosCommand = new RelayCommand(RestauraDados, () => false);
             
+        }
+
+        private void RestauraDados()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CopiarDados()
+        {
+            var dump = Util.Repositorio.Dump();
+            Clipboard.SetText(dump);
+            MessageBox.Show("Cópia de segurança copiada para a área de transferência");
+
         }
 
         private void MenuCadastro(int tipoPessoa)

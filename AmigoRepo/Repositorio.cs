@@ -11,7 +11,7 @@ namespace AmigoRepo
     {
         private readonly string NomeRepositorio;
         private readonly string CaminhoRepositorio;
-        LiteDatabase db;
+        AmigoDb db;
         public Repositorio(string nomeRepositorio, string caminho = null)
         {
             if (caminho == null)
@@ -26,7 +26,10 @@ namespace AmigoRepo
             db = new AmigoDb(CaminhoRepositorio);
 
         }
-
+        public string Dump()
+        {
+            return db.Dump();
+        }
     
 
         public KeyValuePair<bool, int> Salvar<T>(T item, string nomeTabela=null) where T :  class, IRepositorio, new()

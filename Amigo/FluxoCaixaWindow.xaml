@@ -162,7 +162,7 @@
                     <TextBox  DockPanel.Dock="Left"
                               Margin="5,0"
                               Width="100"
-                              Text="{Binding FluxoCaixaMes.SaldoAnterior}">
+                              Text="{Binding FluxoCaixaMes.SaldoAnterior, StringFormat={}{0:N2}}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="LostFocus">
                                 <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=SaldoAnteriorMudouCommand}"
