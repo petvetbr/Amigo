@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
-        ShowInTaskbar="False"
+        
         Icon="Imagens/LogoAmigo64.png"
         DataContext="{Binding Path=CaixaTransporte, Source={StaticResource Locator}}"
         Title="Cadastro Caixas de Transporte"

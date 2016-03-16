@@ -10,7 +10,7 @@
         Topmost="True"
         Icon="Imagens/LogoAmigo64.png"
         WindowStartupLocation="CenterOwner"
-        ShowInTaskbar="False">
+        >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto">

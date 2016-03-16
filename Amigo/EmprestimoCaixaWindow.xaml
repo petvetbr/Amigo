@@ -7,7 +7,7 @@
         xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras"
         Icon="Imagens/LogoAmigo64.png"
         WindowStartupLocation="CenterOwner"
-        ShowInTaskbar="False"
+        
         DataContext="{Binding Path=EmprestimoCaixaTransporte, Source={StaticResource Locator}}"
         Title="Serviço Caixa de Transportes" Height="480" Width="1000">
     <Window.Resources>
