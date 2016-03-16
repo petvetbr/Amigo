@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras"
         Icon="Imagens/LogoAmigo64.png"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
@@ -60,8 +62,15 @@
                                       ItemsSource="{Binding ListaCaixasTransportes}"
                                       DisplayMemberPath="Identificacao"
                                       Name="cmbId"
-                                      SelectedValue="{Binding Emprestimo.Caixa, Mode=TwoWay}"
-                                      SelectedItem="{Binding Emprestimo.Caixa, Mode=TwoWay}"></ComboBox>
+                                      SelectedValuePath="Identificacao"
+                                      SelectedValue="{Binding IdentificacaoCaixa, Mode=TwoWay}">
+                                <!--<i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=LoadedCommand}"
+                                                            PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>-->
+                            </ComboBox>
                         </StackPanel>
 
                     </StackPanel>

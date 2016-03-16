@@ -8,10 +8,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Amigo.ViewModel
 {
-    public class EmprestimoCaixaTransporteViewModel: ViewModelBase
+    public class EmprestimoCaixaTransporteViewModel : ViewModelBase
     {
         public RelayCommand SalvarCommand
         {
@@ -36,7 +37,12 @@ namespace Amigo.ViewModel
             private set;
         }
 
-       
+        public RelayCommand<SelectionChangedEventArgs> MudancaCaixaCommand
+        {
+            get;
+            private set;
+        }
+
         ObservableCollection<EmprestimoCaixaTransporte> _listaItens;
         public ObservableCollection<EmprestimoCaixaTransporte> ListaItens
         {
@@ -55,7 +61,7 @@ namespace Amigo.ViewModel
         }
 
         ObservableCollection<CaixaTransporte> _listaCaixasTrasnporte;
-        public ObservableCollection<CaixaTransporte>  ListaCaixasTransportes
+        public ObservableCollection<CaixaTransporte> ListaCaixasTransportes
         {
             get
             {
@@ -167,7 +173,25 @@ namespace Amigo.ViewModel
                 {
                     _emprestimo = value;
                     RaisePropertyChanged(nameof(Emprestimo));
+                    RaisePropertyChanged(nameof(IdentificacaoCaixa));
                 }
+            }
+        }
+
+
+        public string IdentificacaoCaixa
+        {
+            get
+            {
+                return _emprestimo?.CaixaTransporte?.Identificacao ?? null;
+            }
+            set
+            {
+                if (_emprestimo == null) return;
+                if (_emprestimo.CaixaTransporte.Identificacao.Equals(value)) return;
+                _emprestimo.CaixaTransporte = this.ListaCaixasTransportes.FirstOrDefault(p => p.Identificacao.Equals(value));
+                RaisePropertyChanged(nameof(IdentificacaoCaixa));
+
             }
         }
 
@@ -180,8 +204,17 @@ namespace Amigo.ViewModel
             this.SalvarCommand = new RelayCommand(Salvar, () => _emprestimo != null);
             this.ExcluiCommand = new RelayCommand(Excluir, () => _emprestimo != null);
             this.PesquisaCommand = new RelayCommand(Pesquisar);
+            this.MudancaCaixaCommand = new RelayCommand<SelectionChangedEventArgs>(MudancaCaixa);
             RefreshLista();
             ExpanderAberto = true;
+
+        }
+
+        private void MudancaCaixa(SelectionChangedEventArgs e)
+        {
+            var ctr = e.Source as ComboBox;
+            if (ctr == null) return;
+            var caixa = ctr.SelectedItem as CaixaTransporte;
 
         }
 
@@ -190,7 +223,7 @@ namespace Amigo.ViewModel
             this.ListaLocalizacao = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaLocalizacaoCaixaTransporte());
             this.ListaSituacao = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaSituacaoCaixaTransporte());
             this.ListaStatus = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaStatusCaixaTransporte());
-            this.ListaCaixasTransportes= new ObservableCollection<CaixaTransporte>(Util.Repositorio.ObterLista<CaixaTransporte>().OrderBy(p=>p.Numero));
+            this.ListaCaixasTransportes = new ObservableCollection<CaixaTransporte>(Util.Repositorio.ObterLista<CaixaTransporte>().OrderBy(p => p.Numero));
         }
 
         private void Pesquisar()

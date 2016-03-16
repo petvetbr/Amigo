@@ -363,8 +363,8 @@ namespace Amigo.ViewModel
             // Create OpenFileDialog 
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             // Set filter for file extension and default file extension 
-            dlg.DefaultExt = ".png";
-            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
+            dlg.DefaultExt = "*.png";
+            dlg.Filter = "JPEG  (*.jpeg)|*.jpeg|PNG  (*.png)|*.png|JPG (*.jpg)|*.jpg|BMP (*.bmp)|*.bmp|TIF (*.tif)|*.tif*";
 
             // Display OpenFileDialog by calling ShowDialog method 
             if (!dlg.ShowDialog().GetValueOrDefault()) return;
@@ -376,7 +376,14 @@ namespace Amigo.ViewModel
         {
             
             var imagem = _animal?.Foto??null;
-            if (imagem == null) return;
+            if (imagem == null)
+            {
+                Foto = null;
+                return;
+            }
+            
+            
+            
             var uriSource = new Uri(imagem, UriKind.Absolute);
             this.Foto = new BitmapImage(uriSource);
         }

@@ -8,8 +8,8 @@
         Icon="Imagens/LogoAmigo64.png"
         DataContext="{Binding Path=Animal, Source={StaticResource Locator}}"
         Title="Cadastro de Animais"
-        Height="600"
-        Width="1000">
+        Height="750"
+        Width="1200">
     <Window.Resources>
         <Style TargetType="{x:Type StackPanel}"
                x:Key="splinha">
@@ -75,8 +75,8 @@
         </Expander>
         <Grid DockPanel.Dock="Right">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="150" />
@@ -87,19 +87,12 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Grid.Row="1">
-                <TextBlock Margin="8,0"
-                           FontWeight="Bold">Foto:</TextBlock>
-                <TextBlock Margin="8,0"
-                           FontWeight="Bold"></TextBlock>
-                    <Button Width="20"
-                            Command="{Binding SelecaoFotoCommand, Mode=OneWay}">...</Button>
-                </StackPanel>
+              
                 <Image Source="{Binding Foto}" />
 
             </Grid>
-            <StackPanel Grid.ColumnSpan="2"
-                        Grid.RowSpan="2">
+            <StackPanel 
+                       >
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type StackPanel}">
                         <Style.Triggers>
@@ -178,7 +171,19 @@
                     <TextBlock Text="{Binding Animal.Idade, Mode=OneWay}"></TextBlock>
 
                 </StackPanel>
-
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="1">
+                    <TextBlock Margin="8,0"
+                               FontWeight="Bold">Foto:</TextBlock>
+                    <TextBlock Margin="8,0"
+                               Width="300"
+                               FontWeight="Bold"
+                               Text="{Binding Animal.Foto}"></TextBlock>
+                    <Button Width="20"
+                            Command="{Binding SelecaoFotoCommand, Mode=OneWay}">...</Button>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
