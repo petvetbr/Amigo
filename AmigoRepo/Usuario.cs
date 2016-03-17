@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AmigoRepo
 {
-    public class Usuario : EntidadeRepo
+    public class Usuario : EntidadeRepo, IRepositorio
     {
         string _login;
         public string Login
@@ -41,6 +41,8 @@ namespace AmigoRepo
                 }
             }
         }
+       
+
 
         string _stringHash;
         public string StringHash
@@ -74,6 +76,9 @@ namespace AmigoRepo
                 }
             }
         }
-
+        public override string ToString()
+        {
+            return string.Format("{0}-{1}", _nome, _login);
+        }
     }
 }

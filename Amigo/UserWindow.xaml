@@ -11,6 +11,28 @@
         Width="400"
         WindowStartupLocation="CenterOwner"
         Icon="Imagens/LogoAmigo64.png">
+    <Window.Resources>
+        <Style TargetType="{x:Type StackPanel}"
+               x:Key="splinha">
+            <Setter Property="Margin"
+                    Value="4">
+
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+
+    </Window.Resources>
     <Grid>
         <DockPanel>
             <Expander  DockPanel.Dock="Left"
@@ -51,8 +73,56 @@
                     </StackPanel>
                 </Grid>
             </Expander>
-            <StackPanel DockPanel.Dock="Right">
-            </StackPanel>
+            <Grid DockPanel.Dock="Right">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition  Height="Auto"></RowDefinition>
+                    <RowDefinition  Height="Auto"></RowDefinition>
+                    <RowDefinition  Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="1"
+                           Grid.Column="1">Nome:</TextBlock>
+                <TextBlock Grid.Row="2"
+                           Grid.Column="1">Login:</TextBlock>
+                <TextBlock Grid.Row="3"
+                           Grid.Column="1">Senha:</TextBlock>
+                <TextBox Width="150"
+                         Grid.Row="1"
+                         Margin="5"
+                         Grid.Column="2"
+                         Text="{Binding Usuario.Nome}" />
+                <TextBox Width="150"
+                         Margin="5"
+                         Grid.Row="2"
+                         Grid.Column="2"
+                         Text="{Binding Usuario.Login}" />
+                <PasswordBox Width="150"
+                         Margin="5"
+                         Name="txSenha"
+                         Grid.Row="3"
+                         Grid.Column="2" />
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Grid.Row="4"
+                            Margin="5"
+                            Grid.ColumnSpan="2"
+                            Grid.Column="1">
+                    <Button Command="{Binding SalvarCommand}"
+                            Margin="8,0"
+                            ToolTip="Salvar">Salvar</Button>
+                    <Button Command="{Binding ExcluiCommand}"
+                            Margin="8,0"
+                            ToolTip="Excluir">Excluir</Button>
+                </StackPanel>
+            </Grid>
         </DockPanel>
     </Grid>
 </Window>
