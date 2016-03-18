@@ -1,6 +1,7 @@
 ﻿using AmigoRepo;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +10,8 @@ using System.Linq.Expressions;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Amigo.ViewModel
 {
@@ -65,8 +68,10 @@ namespace Amigo.ViewModel
             {
                 if (_usuario != value)
                 {
+                    
                     _usuario = value;
                     RaisePropertyChanged(nameof(Usuario));
+                    this.NovoUsuario = (value?.Id??-1) == 0;
                 }
             }
         }
@@ -137,26 +142,56 @@ namespace Amigo.ViewModel
                 }
             }
         }
+
+        bool _novoUsuario;
+        public bool NovoUsuario
+        {
+            get
+            {
+                return _novoUsuario;
+            }
+            set
+            {
+                if (_novoUsuario != value)
+                {
+                    _novoUsuario = value;
+                    RaisePropertyChanged(nameof(NovoUsuario));
+                }
+            }
+        }
+
+
+        private PasswordBox txSenha;
+        private PasswordBox txSenha2;
         public UsuarioViewModel()
         {
-
+            this.ListaCategorias = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaNiveisUsuarios());
+            Messenger.Default.Register<Tuple<PasswordBox, PasswordBox>>(this, "senha", (pwb) => {
+                this.txSenha = pwb.Item1;
+                txSenha2 = pwb.Item2; } );
+            this.ExcluiCommand = new RelayCommand(Excluir);
+            this.SalvarCommand = new RelayCommand(Salvar);
+            this.NovoItemCommand = new RelayCommand(CriarNovoItem);
+            this.PesquisaCommand = new RelayCommand(Pesquisar);
+            this.ExpanderAberto = true;
+            RefreshLista();
         }
 
         private void CriarNovoItem()
         {
 
-
-            var Usuario = new Usuario();
+            this.NovoUsuario = true;
+            var usuario = new Usuario();
             if (Util.Repositorio.ObterLista<Usuario>().Any())
             {
                 var maxAtual = Util.Repositorio.ObterLista<Usuario>().Max(p => p.Numero);
-                Usuario.Numero = ++maxAtual;
+                usuario.Numero = ++maxAtual;
             }
             else
             {
-                Usuario.Numero = 1;
+                usuario.Numero = 1;
             }
-            this.Usuario = Usuario;
+            this.Usuario = usuario;
             ExpanderAberto = false;
         }
 
@@ -175,12 +210,27 @@ namespace Amigo.ViewModel
 
         private void Salvar()
         {
+            
+            if (NovoUsuario)
+            {
+                var pw1 = txSenha.Password;
+                var pw2 = txSenha2.Password;
+                if (!pw2.Equals(pw1))
+                {
+                    MessageBox.Show("As senhas não conferem");
+                    return;
+                }
+                _usuario.PasswordHash = PasswordSecurity.PasswordStorage.CreateHash(txSenha.Password);
+            }
+            
             if (!Util.Repositorio.Salvar<Usuario>(_usuario).Key)
             {
                 return;
             }
+            this.NovoUsuario = false;
             RefreshLista();
             ExpanderAberto = true;
+            
         }
 
         private void Pesquisar()

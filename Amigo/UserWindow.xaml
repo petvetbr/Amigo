@@ -8,9 +8,10 @@
         Title="Usuários"
         DataContext="{Binding Path=Usuario, Source={StaticResource Locator}}"
         Height="300"
-        Width="400"
+        Width="600"
         WindowStartupLocation="CenterOwner"
-        Icon="Imagens/LogoAmigo64.png">
+        Icon="Imagens/LogoAmigo64.png"
+       >
     <Window.Resources>
         <Style TargetType="{x:Type StackPanel}"
                x:Key="splinha">
@@ -52,7 +53,7 @@
                                 VerticalAlignment="Top">
                         <TextBox VerticalAlignment="Center"
                                  Text="{Binding FiltroPesquisa}"
-                                 Width="200"></TextBox>
+                                 Width="100"></TextBox>
                         <Button Command="{Binding PesquisaCommand}"
                                 Margin="5"
                                 ToolTip="Pesquisar por nome">Pesquisar</Button>
@@ -60,7 +61,7 @@
 
                     <ListBox Grid.Row="1"
                              ItemsSource="{Binding ListaItens}"
-                             SelectedItem="{Binding Emprestimo}">
+                             SelectedItem="{Binding Usuario}">
                     </ListBox>
                     <StackPanel Margin="0,5"
                                 Grid.Row="2"
@@ -73,17 +74,30 @@
                     </StackPanel>
                 </Grid>
             </Expander>
-            <Grid DockPanel.Dock="Right">
+            <Grid DockPanel.Dock="Right" >
+                <Grid.Resources>
+                    <Style TargetType="{x:Type Grid}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Usuario}"
+                                         Value="{x:Null}">
+                                <Setter Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition  Height="Auto"></RowDefinition>
                     <RowDefinition  Height="Auto"></RowDefinition>
                     <RowDefinition  Height="Auto"></RowDefinition>
+                    <RowDefinition  Height="Auto"></RowDefinition>
+                    <RowDefinition  Height="Auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
@@ -94,6 +108,10 @@
                            Grid.Column="1">Login:</TextBlock>
                 <TextBlock Grid.Row="3"
                            Grid.Column="1">Senha:</TextBlock>
+                <TextBlock Grid.Row="4"
+                           Grid.Column="1">Confirmar senha:</TextBlock>
+                <TextBlock Grid.Row="5"
+                           Grid.Column="1">Nível:</TextBlock>
                 <TextBox Width="150"
                          Grid.Row="1"
                          Margin="5"
@@ -102,17 +120,32 @@
                 <TextBox Width="150"
                          Margin="5"
                          Grid.Row="2"
+                         IsEnabled="{Binding NovoUsuario}"
                          Grid.Column="2"
                          Text="{Binding Usuario.Login}" />
                 <PasswordBox Width="150"
                          Margin="5"
                          Name="txSenha"
                          Grid.Row="3"
-                         Grid.Column="2" />
+                         Grid.Column="2"
+                             IsEnabled="{Binding NovoUsuario}" />
+                <PasswordBox Width="150"
+                             Margin="5"
+                             IsEnabled="{Binding NovoUsuario}"
+                             Name="txSenha2"
+                             Grid.Row="4"
+                             Grid.Column="2" />
+                <ComboBox  Grid.Row="5"
+                           SelectedValuePath="Key"
+                           DisplayMemberPath="Value"
+                           Grid.Column="2"
+                           Width="150"
+                           ItemsSource="{Binding ListaCategorias}"
+                           SelectedValue="{Binding Usuario.Nivel}" />
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"
-                            Grid.Row="4"
-                            Margin="5"
+                            Grid.Row="6"
+                            Margin="5,10"
                             Grid.ColumnSpan="2"
                             Grid.Column="1">
                     <Button Command="{Binding SalvarCommand}"

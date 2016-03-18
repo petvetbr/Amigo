@@ -81,6 +81,8 @@
                           Command="{Binding MenuRestauraDadosCommand}" />
                 <MenuItem Header="Sobre"
                           Command="{Binding MenuSobreCommand}" />
+                <MenuItem Header="Usuários"
+                          Command="{Binding MenuUsuariosCommand}" />
             </MenuItem>
         </Menu>
        

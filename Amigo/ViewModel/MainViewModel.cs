@@ -81,6 +81,11 @@ namespace Amigo.ViewModel
             get;
             private set;
         }
+        public RelayCommand MenuUsuariosCommand
+        {
+            get;
+            private set;
+        }
 
         BitmapImage _logo;
         public BitmapImage Logo
@@ -122,6 +127,13 @@ namespace Amigo.ViewModel
             MenuCopiaDadosCommand = new RelayCommand(CopiarDados);
             MenuRestauraDadosCommand = new RelayCommand(RestauraDados, () => false);
             MenuCalculadoraCommand= new RelayCommand(()=> System.Diagnostics.Process.Start("calc") );
+            MenuUsuariosCommand = new RelayCommand(Usuarios);
+        }
+
+        private void Usuarios()
+        {
+            var uw = new UserWindow();
+            uw.ShowDialog();
         }
 
         private void RestauraDados()

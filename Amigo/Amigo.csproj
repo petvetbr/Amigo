@@ -90,6 +90,9 @@
     <Compile Include="EmprestimoCaixaWindow.xaml.cs">
       <DependentUpon>EmprestimoCaixaWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Misc\CloseWindowMessage.cs" />
     <Compile Include="Misc\Config.cs" />
     <Compile Include="Misc\Constantes.cs" />
@@ -117,6 +120,7 @@
     <Compile Include="ViewModel\CaixaTransporteViewModel.cs" />
     <Compile Include="ViewModel\EmprestimoCaixaTransporteViewModel.cs" />
     <Compile Include="ViewModel\FluxoCaixaViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MensalidadesViewModel.cs" />
     <Compile Include="ViewModel\PessoaMessageArgs.cs" />
@@ -137,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FluxoCaixaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

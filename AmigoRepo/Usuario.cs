@@ -44,19 +44,19 @@ namespace AmigoRepo
        
 
 
-        string _stringHash;
-        public string StringHash
+        string _passwordfHash;
+        public string PasswordHash
         {
             get
             {
-                return _stringHash;
+                return _passwordfHash;
             }
             set
             {
-                if (_stringHash != value)
+                if (_passwordfHash != value)
                 {
-                    _stringHash = value;
-                    OnPropertyChanged(nameof(StringHash));
+                    _passwordfHash = value;
+                    OnPropertyChanged(nameof(PasswordHash));
                 }
             }
         }

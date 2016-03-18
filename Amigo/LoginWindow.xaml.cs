@@ -16,15 +16,15 @@ using System.Windows.Shapes;
 namespace Amigo
 {
     /// <summary>
-    /// Interaction logic for UserWindow.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class UserWindow : Window
+    public partial class LoginWindow : Window
     {
-        public UserWindow()
+        public LoginWindow()
         {
             InitializeComponent();
-            Messenger.Default.Send(Tuple.Create(txSenha, txSenha2), "senha");
-            
+            Messenger.Default.Send(txSenha, "login");
+            Messenger.Default.Register<CloseWindowMessage>(this, "LoginWindow", _ =>  this.Close());
         }
     }
 }

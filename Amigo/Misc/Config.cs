@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AmigoRepo;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace Amigo
         private static List<KeyValuePair<int, string>> _generoAnimal;
         private static List<KeyValuePair<int, string>> _tiposTelefones;
         private static List<KeyValuePair<int, string>> _statusAnimal;
+        private static List<KeyValuePair<int, string>> _niveisUsuario;
         private static List<string> _listaUf;
         private static List<string> _listaFabricantesVacina;
         private static List<string> _listaFabricantesVermifugo;
@@ -32,6 +34,7 @@ namespace Amigo
         private static List<string> _listaRacasCaes;
         private static List<string> _listaRacasGatos;
 
+        public static Usuario UsuarioAtual { get; set; }
 
         public static string ObterCaminhoExecucao()
         {
@@ -40,6 +43,7 @@ namespace Amigo
 
             return System.IO.Path.GetDirectoryName(path);
         }
+
 
         public static IEnumerable<string> ObterListaUf()
         {
@@ -210,6 +214,12 @@ namespace Amigo
             _anos = anos;
             return _anos;
         }
+        public static IEnumerable<KeyValuePair<int, string>> ObterListaNiveisUsuarios()
+        {
+            _niveisUsuario = _niveisUsuario ?? ObterListaKvp("NiveisUsuario").ToList();
+            return _niveisUsuario;
+        }
+
 
     }
 }
