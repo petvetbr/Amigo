@@ -506,19 +506,21 @@ namespace Amigo.ViewModel
         {
 
             Messenger.Default.Register<TipoPessoa>(this, TipoPessoaEnviada);
-            this.SalvarCommand = new RelayCommand(Salvar, () => Pessoa != null);
-            this.ExcluiCommand = new RelayCommand(Excluir, () => Pessoa != null);
+            this.SalvarCommand = new RelayCommand(Salvar, () => Pessoa != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
+            this.ExcluiCommand = new RelayCommand(Excluir, () => Pessoa != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Excluir));
             this.PesquisaCommand = new RelayCommand(Pesquisar);
-            this.NovoItemCommand = new RelayCommand(CriarNovoItem);
+            this.NovoItemCommand = new RelayCommand(CriarNovoItem,()=> Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Adicionar));
             this.LabelResponsavel = "Nome representante:";
             this.LabelFantasia = "Nome fantasia:";
             this.LabelNome = "Nome:";
-            this.AdicionarTelefoneCommand = new RelayCommand(AdicionarTelefone, () => this.TelefoneSelecionado != null);
+            this.AdicionarTelefoneCommand = new RelayCommand(AdicionarTelefone, () => this.TelefoneSelecionado != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
             this.RemoverTelefoneCommand = new RelayCommand(RemoverTelefone,
                 () => this.TelefoneSelecionado != null
                 && this.Pessoa != null
                 && this.Pessoa.Telefones != null
-                && this.Pessoa.Telefones.Contains(this.TelefoneSelecionado));
+                && this.Pessoa.Telefones.Contains(this.TelefoneSelecionado)
+                && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar)
+                );
             ExpanderAberto = true;
 
             CarregarListas();

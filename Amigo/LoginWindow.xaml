@@ -9,8 +9,10 @@
         Icon="Imagens/LogoAmigo64.png"
         ResizeMode="NoResize"
         DataContext="{Binding Path=Login, Source={StaticResource Locator}}"
-        Title="Login" Height="150" Width="300">
-    <Grid>
+        Title="Login" Height="150" Width="300"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>

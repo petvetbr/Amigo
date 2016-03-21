@@ -133,7 +133,7 @@ namespace Amigo.ViewModel
 
             this.ListaAnos = new ObservableCollection<int>(Config.ObterListaAnos().Select(p => p.Key));
             this.ListaSocios = new ObservableCollection<KeyValuePair<int, string>>(Util.ObterListaSocios());
-            this.SalvarCommand = new RelayCommand(Salvar, () => this.Mensalidades != null);
+            this.SalvarCommand = new RelayCommand(Salvar, () => this.Mensalidades != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
             this.AnoSelecionado = DateTime.Now.Year;
         }
 

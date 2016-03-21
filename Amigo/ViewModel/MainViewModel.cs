@@ -124,10 +124,10 @@ namespace Amigo.ViewModel
                 var uriSource = new Uri(logo, UriKind.Absolute);
                 this.Logo = new BitmapImage(uriSource);
             }
-            MenuCopiaDadosCommand = new RelayCommand(CopiarDados);
-            MenuRestauraDadosCommand = new RelayCommand(RestauraDados, () => false);
+            MenuCopiaDadosCommand = new RelayCommand(CopiarDados, ()=> Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.GerarBackup));
+            MenuRestauraDadosCommand = new RelayCommand(RestauraDados, () => Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.RestaurarBackup));
             MenuCalculadoraCommand= new RelayCommand(()=> System.Diagnostics.Process.Start("calc") );
-            MenuUsuariosCommand = new RelayCommand(Usuarios);
+            MenuUsuariosCommand = new RelayCommand(Usuarios, () => Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.AlterarUsuarios));
         }
 
         private void Usuarios()
@@ -154,7 +154,7 @@ namespace Amigo.ViewModel
         {
             Messenger.Default.Unregister<InputResultMessage>(this, msg.Token);
             if (!msg.Resultado) return;
-
+            string nomeArquivo = "Backup.zip";
             var isDump = false;
             if (isDump)
             {
@@ -168,7 +168,7 @@ namespace Amigo.ViewModel
                 {
                     zip.Password = msg.Texto;
                     zip.AddFile("dump.txt");
-                    zip.Save("Backup.zip");
+                    zip.Save(nomeArquivo);
 
                 }
                 File.Delete("dump.txt");
@@ -179,12 +179,12 @@ namespace Amigo.ViewModel
                 {
                     zip.Password = msg.Texto;
                     zip.AddFile("dados.db");
-                    zip.Save("Backup.zip");
+                    zip.Save(nomeArquivo);
 
                 }
             }
 
-            MessageBox.Show("Cópia de segurança gerada: " + Config.ObterCaminhoExecucao() + @"\Backup.zip");
+            MessageBox.Show("Cópia de segurança gerada: " + Config.ObterCaminhoExecucao() + @"\"+ nomeArquivo);
             
         }
 

@@ -166,9 +166,9 @@ namespace Amigo.ViewModel
             this.ListaAnos = new ObservableCollection<int>(Config.ObterListaAnos().Select(p => p.Key));
             this.ListaMeses = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaMeses());
             this.AnoSelecionado = DateTime.Now.Year;
-            this.ExcluiItemCommand = new RelayCommand<LancamentoCaixa>(ExcluiItem);
-            this.SalvarCommand = new RelayCommand(Salvar);
-            this.NovoItemCommand = new RelayCommand(NovoItem, () => this._lancamentoSelecionado != null);
+            this.ExcluiItemCommand = new RelayCommand<LancamentoCaixa>(ExcluiItem, (p)=> Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Excluir));
+            this.SalvarCommand = new RelayCommand(Salvar, () => Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
+            this.NovoItemCommand = new RelayCommand(NovoItem, () => this._lancamentoSelecionado != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Adicionar));
             this.SaldoAnteriorMudouCommand = new RelayCommand(TextoSaldoAnteriorMudou);
 
         }

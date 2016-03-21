@@ -345,15 +345,15 @@ namespace Amigo.ViewModel
 
         private void SetarCommands()
         {
-            this.SalvarCommand = new RelayCommand(Salvar, () => Animal != null);
-            this.ExcluiCommand = new RelayCommand(Excluir, () => Animal != null);
+            this.SalvarCommand = new RelayCommand(Salvar, () => Animal != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
+            this.ExcluiCommand = new RelayCommand(Excluir, () => Animal != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Excluir));
             this.PesquisaCommand = new RelayCommand(Pesquisar);
-            this.NovoItemCommand = new RelayCommand(CriarNovoItem);
-            this.SelecaoFotoCommand = new RelayCommand(SelecaoFoto);
-            this.NovaVacinaCommand = new RelayCommand(NovaVacina);
-            this.ExcluiVacinaCommand = new RelayCommand(ExcluiVacina);
-            this.NovaVermifugoCommand = new RelayCommand(NovoVermifugo);
-            this.ExcluiVermifugoCommand = new RelayCommand(ExcluiVermifugo);
+            this.NovoItemCommand = new RelayCommand(CriarNovoItem, ()=> Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Adicionar));
+            this.SelecaoFotoCommand = new RelayCommand(SelecaoFoto, () => Animal != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
+            this.NovaVacinaCommand = new RelayCommand(NovaVacina, () => Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
+            this.ExcluiVacinaCommand = new RelayCommand(ExcluiVacina, ()=> Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
+            this.NovaVermifugoCommand = new RelayCommand(NovoVermifugo, () => Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
+            this.ExcluiVermifugoCommand = new RelayCommand(ExcluiVermifugo, () => Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
             this.VacinaSelecionada = new VacinaVermifugo();
             this.VermifugoSelecionado = new VacinaVermifugo();
         }

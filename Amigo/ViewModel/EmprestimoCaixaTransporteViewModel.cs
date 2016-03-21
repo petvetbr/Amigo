@@ -200,9 +200,9 @@ namespace Amigo.ViewModel
         public EmprestimoCaixaTransporteViewModel()
         {
             CarregarListas();
-            this.NovoItemCommand = new RelayCommand(NovoItem);
-            this.SalvarCommand = new RelayCommand(Salvar, () => _emprestimo != null);
-            this.ExcluiCommand = new RelayCommand(Excluir, () => _emprestimo != null);
+            this.NovoItemCommand = new RelayCommand(NovoItem, () => Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Adicionar));
+            this.SalvarCommand = new RelayCommand(Salvar, () => _emprestimo != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
+            this.ExcluiCommand = new RelayCommand(Excluir, () => _emprestimo != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Excluir));
             this.PesquisaCommand = new RelayCommand(Pesquisar);
             this.MudancaCaixaCommand = new RelayCommand<SelectionChangedEventArgs>(MudancaCaixa);
             RefreshLista();

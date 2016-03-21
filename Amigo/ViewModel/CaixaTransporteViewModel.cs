@@ -120,10 +120,10 @@ namespace Amigo.ViewModel
         }
         public CaixaTransporteViewModel()
         {
-            this.SalvarCommand = new RelayCommand(Salvar, () => Caixa != null);
-            this.ExcluiCommand = new RelayCommand(Excluir, () => Caixa!=null);
+            this.SalvarCommand = new RelayCommand(Salvar, () => Caixa != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
+            this.ExcluiCommand = new RelayCommand(Excluir, () => Caixa!=null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Excluir));
             this.PesquisaCommand = new RelayCommand(Pesquisar);
-            this.NovoItemCommand = new RelayCommand(CriarNovoItem);
+            this.NovoItemCommand = new RelayCommand(CriarNovoItem, () => Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Adicionar));
             this.ListaLocalizacao=new ObservableCollection<KeyValuePair<int,string>>(Config.ObterListaLocalizacaoCaixaTransporte());
             RefreshLista();
             ExpanderAberto = true;

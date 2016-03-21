@@ -110,6 +110,7 @@
     <Compile Include="MensalidadesWindow.xaml.cs">
       <DependentUpon>MensalidadesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Misc\Enums.cs" />
     <Compile Include="Misc\InputMessage.cs" />
     <Compile Include="Misc\PasswordSecurity.cs" />
     <Compile Include="PessoasWindow.xaml.cs">
@@ -134,7 +135,6 @@
     <Compile Include="ViewModel\MensalidadesViewModel.cs" />
     <Compile Include="ViewModel\PessoaMessageArgs.cs" />
     <Compile Include="ViewModel\PessoasViewModel.cs" />
-    <Compile Include="ViewModel\ServicoCaixaTransportesViewModel.cs" />
     <Compile Include="ViewModel\UsuarioViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="AnimalWindow.xaml">
