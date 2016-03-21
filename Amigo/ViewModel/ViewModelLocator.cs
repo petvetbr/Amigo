@@ -53,6 +53,8 @@ namespace Amigo.ViewModel
             SimpleIoc.Default.Register<AnimalViewModel>();
             SimpleIoc.Default.Register<UsuarioViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
+            SimpleIoc.Default.Register<ConfigViewModel>();
+            SimpleIoc.Default.Register<InputViewModel>();
 
         }
 
@@ -65,6 +67,9 @@ namespace Amigo.ViewModel
         private string _currentAnimalVMKey;
         private string _currentUsuarioVMKey;
         private string _currentLoginVMKey;
+        private string _currentConfigVMKey;
+        private string _currentInputVMKey;
+
 
         public MainViewModel Main
         {
@@ -85,6 +90,33 @@ namespace Amigo.ViewModel
                 }
                 _currentAnimalVMKey = Guid.NewGuid().ToString();
                 return ServiceLocator.Current.GetInstance<AnimalViewModel>(_currentAnimalVMKey);
+            }
+        }
+        public ConfigViewModel Config
+        {
+            get
+            {
+
+                if (!string.IsNullOrEmpty(_currentConfigVMKey))
+                {
+                    SimpleIoc.Default.Unregister(_currentConfigVMKey);
+                }
+                _currentConfigVMKey = Guid.NewGuid().ToString();
+                return ServiceLocator.Current.GetInstance<ConfigViewModel>(_currentConfigVMKey);
+            }
+        }
+
+        public InputViewModel Input
+        {
+            get
+            {
+
+                if (!string.IsNullOrEmpty(_currentInputVMKey))
+                {
+                    SimpleIoc.Default.Unregister(_currentInputVMKey);
+                }
+                _currentInputVMKey = Guid.NewGuid().ToString();
+                return ServiceLocator.Current.GetInstance<InputViewModel>(_currentInputVMKey);
             }
         }
         public FluxoCaixaViewModel FluxoCaixa

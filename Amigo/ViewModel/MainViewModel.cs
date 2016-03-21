@@ -143,6 +143,18 @@ namespace Amigo.ViewModel
 
         private void CopiarDados()
         {
+            string token= "CopiarDados";
+            var input = new InputWindow();
+            Messenger.Default.Register<InputResultMessage>(this, token, ContinuarCopiarDados);
+            Messenger.Default.Send(new ShowInputMessage() { Pergunta = "Qual senha deseja utilizar para proteger o arquivo?", Titulo = "Senha de proteção do arquivo", Token =token  });
+            input.ShowDialog();
+        }
+
+        private void ContinuarCopiarDados(InputResultMessage msg)
+        {
+            Messenger.Default.Unregister<InputResultMessage>(this, msg.Token);
+            if (!msg.Resultado) return;
+
             var isDump = false;
             if (isDump)
             {
@@ -154,7 +166,7 @@ namespace Amigo.ViewModel
 
                 using (var zip = new ZipFile())
                 {
-                    zip.Password = "ACPA";
+                    zip.Password = msg.Texto;
                     zip.AddFile("dump.txt");
                     zip.Save("Backup.zip");
 
@@ -165,14 +177,15 @@ namespace Amigo.ViewModel
             {
                 using (var zip = new ZipFile())
                 {
-                    zip.Password = "ACPA";
+                    zip.Password = msg.Texto;
                     zip.AddFile("dados.db");
                     zip.Save("Backup.zip");
 
                 }
             }
 
-            MessageBox.Show("Cópia de segurança gerada: " +Config.ObterCaminhoExecucao()+@"\Backup.zip");
+            MessageBox.Show("Cópia de segurança gerada: " + Config.ObterCaminhoExecucao() + @"\Backup.zip");
+            
         }
 
         private void MenuCadastro(int tipoPessoa)

@@ -52,7 +52,8 @@
             <Button Command="{Binding EntrarCommand}"
                     Margin="8,0"
                     HorizontalAlignment="Right"
-                    ToolTip="Salvar">Entrar</Button>
+                    ToolTip="Salvar"
+                    IsDefault="True">Entrar</Button>
         </StackPanel>
     </Grid>
 </Window>
