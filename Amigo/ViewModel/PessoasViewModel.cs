@@ -554,11 +554,11 @@ namespace Amigo.ViewModel
         private void TipoPessoaEnviada(TipoPessoa tipo)
         {
             _tipoPessoa = tipo;
+            _nomeTabela =Util.ObterNomeTabela(tipo);
             switch (_tipoPessoa)
             {
                 case TipoPessoa.Socio:
                     {
-                        _nomeTabela = "Socios";
                         this.Titulo = "Cadastro de Sócios";
                         this.ExibirStatus = true;
                         this.ExibirTipo = true;
@@ -568,7 +568,6 @@ namespace Amigo.ViewModel
                     break;
                 case TipoPessoa.Veterinario:
                     {
-                        _nomeTabela = "Veterinarios";
                         this.Titulo = "Cadastro de Veterinários";
                         this.ExibirCrmv = true;
                         this.ExibirStatus = true;
@@ -577,7 +576,6 @@ namespace Amigo.ViewModel
                     break;
                 case TipoPessoa.Clinica:
                     {
-                        _nomeTabela = "Clinicas";
                         this.Titulo = "Cadastro de Clínicas";
                         this.LabelNome = "Nome da Clínica:";
                         this.LabelResponsavel = "Responsável da Clínica:";
@@ -592,7 +590,6 @@ namespace Amigo.ViewModel
                 case TipoPessoa.Cliente:
                     {
                         
-                        _nomeTabela = "Clientes";
                         this.Titulo = "Cadastro de Clientes";
                         this.ExibirStatus = true;
                         this.ExibirNascimento = true;
@@ -601,7 +598,6 @@ namespace Amigo.ViewModel
                     break;
                 case TipoPessoa.MoradorComunitario:
                     {
-                        _nomeTabela = "Morador";
                         this.Titulo = "Cadastro de Moradores Comunitários";
                         this.ExibirStatus = true;
                         this.ExibirNascimento = true;
@@ -610,7 +606,6 @@ namespace Amigo.ViewModel
                     break;
                 case TipoPessoa.Fornecedor:
                     {
-                        _nomeTabela = "Fornecedores";
                         this.Titulo = "Cadastro de Fornecedores";
                         this.LabelFantasia = "Nome Fantasia/Apelido:";
                         this.ExibirNomeFantasia = true;
@@ -621,7 +616,6 @@ namespace Amigo.ViewModel
                     break;
                 case TipoPessoa.Entidade:
                     {
-                        _nomeTabela = "Entidades";
                         this.Titulo = "Cadastro de Entidades";
                         this.LabelNome = "Nome da Entidade:";
                         this.ExibirNomeRepresentante = true;
@@ -631,7 +625,6 @@ namespace Amigo.ViewModel
                     break;
                 case TipoPessoa.Parceiro:
                     {
-                        _nomeTabela = "Parceiros";
                         this.Titulo = "Cadastro de Parceiros";
                         this.LabelFantasia = "Nome Fantasia/Apelido:";
                         this.ExibirNomeFantasia = true;
@@ -642,7 +635,6 @@ namespace Amigo.ViewModel
                     break;
                 case TipoPessoa.Doador:
                     {
-                        _nomeTabela = "Doadores";
                         this.Titulo = "Cadastro de Doadores";
                         this.ExibirNomeFantasia = true;
                         this.ExibirHomePage = true;
@@ -650,7 +642,6 @@ namespace Amigo.ViewModel
                     break;
                 case TipoPessoa.Patrocinador:
                     {
-                        _nomeTabela = "Patrocinadores";
                         this.Titulo = "Cadastro de Patrocinador";
                         this.ExibirNomeFantasia = true;
                         this.ExibirHomePage = true;

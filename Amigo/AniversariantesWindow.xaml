@@ -1,0 +1,49 @@
+﻿<Window x:Class="Amigo.AniversariantesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Amigo"
+        mc:Ignorable="d"
+        Icon="Imagens/LogoAmigo64.png"
+        DataContext="{Binding Path=Aniversariantes, Source={StaticResource Locator}}"
+        Title="Aniversariantes"
+        Height="489"
+        Width="400">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center">Mês:</TextBlock>
+            <ComboBox Width="100"
+                      Margin="5"
+                      ItemsSource="{Binding ListaMeses}"
+                      SelectedValuePath="Key"
+                      DisplayMemberPath="Value"
+                      SelectedValue="{Binding MesSelecionado}"></ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1"  Orientation="Horizontal">
+            <TextBlock Text="Nome"
+                       Width="200" />
+            <TextBlock Text="Data"
+                       Width="100" />
+            <TextBlock Text="Cadastro" />
+        </StackPanel>
+        <ListView Grid.Row="2"
+                  ItemsSource="{Binding ListaAniversariantes}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Key.Nome}" Width="200" />
+                        <TextBlock Text="{Binding Key.DataNascimento, StringFormat='{}{0:dd}'}"
+                                   Width="100" />
+                        <TextBlock Text="{Binding Value}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>

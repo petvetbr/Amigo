@@ -83,6 +83,8 @@
                           Command="{Binding MenuSobreCommand}" />
                 <MenuItem Header="Usuários"
                           Command="{Binding MenuUsuariosCommand}" />
+                <MenuItem Header="Aniversariantes"
+                          Command="{Binding MenuAniversarioCommand}" />
             </MenuItem>
         </Menu>
        

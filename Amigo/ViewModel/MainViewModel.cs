@@ -87,6 +87,12 @@ namespace Amigo.ViewModel
             private set;
         }
 
+        public RelayCommand MenuAniversarioCommand
+        {
+            get;
+            private set;
+        }
+
         BitmapImage _logo;
         public BitmapImage Logo
         {
@@ -128,6 +134,14 @@ namespace Amigo.ViewModel
             MenuRestauraDadosCommand = new RelayCommand(RestauraDados, () => Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.RestaurarBackup));
             MenuCalculadoraCommand = new RelayCommand(() => System.Diagnostics.Process.Start("calc"));
             MenuUsuariosCommand = new RelayCommand(Usuarios, () => Util.ExisteUsuarioMaster() && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.AlterarUsuarios));
+            MenuAniversarioCommand = new RelayCommand(Aniversariantes);
+
+        }
+
+        private void Aniversariantes()
+        {
+            var aw = new AniversariantesWindow();
+            aw.ShowDialog();
         }
 
         private void Usuarios()

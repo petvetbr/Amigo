@@ -84,6 +84,9 @@
     <Compile Include="AnimalWindow.xaml.cs">
       <DependentUpon>AnimalWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AniversariantesWindow.xaml.cs">
+      <DependentUpon>AniversariantesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CaixaTransporteWindow.xaml.cs">
       <DependentUpon>CaixaTransporteWindow.xaml</DependentUpon>
     </Compile>
@@ -125,6 +128,7 @@
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AnimalViewModel.cs" />
+    <Compile Include="ViewModel\AniversariantesViewModel.cs" />
     <Compile Include="ViewModel\CaixaTransporteViewModel.cs" />
     <Compile Include="ViewModel\ConfigViewModel.cs" />
     <Compile Include="ViewModel\EmprestimoCaixaTransporteViewModel.cs" />
@@ -138,6 +142,10 @@
     <Compile Include="ViewModel\UsuarioViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="AnimalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AniversariantesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

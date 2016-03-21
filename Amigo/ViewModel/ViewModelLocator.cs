@@ -54,6 +54,7 @@ namespace Amigo.ViewModel
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<ConfigViewModel>();
             SimpleIoc.Default.Register<InputViewModel>();
+            SimpleIoc.Default.Register<AniversariantesViewModel>();
 
         }
 
@@ -67,6 +68,7 @@ namespace Amigo.ViewModel
         private string _currentLoginVMKey;
         private string _currentConfigVMKey;
         private string _currentInputVMKey;
+        private string _currentAniversariantesVMKey;
 
 
         public MainViewModel Main
@@ -88,6 +90,19 @@ namespace Amigo.ViewModel
                 }
                 _currentAnimalVMKey = Guid.NewGuid().ToString();
                 return ServiceLocator.Current.GetInstance<AnimalViewModel>(_currentAnimalVMKey);
+            }
+        }
+        public AniversariantesViewModel Aniversariantes
+        {
+            get
+            {
+
+                if (!string.IsNullOrEmpty(_currentAniversariantesVMKey))
+                {
+                    SimpleIoc.Default.Unregister(_currentAniversariantesVMKey);
+                }
+                _currentAniversariantesVMKey = Guid.NewGuid().ToString();
+                return ServiceLocator.Current.GetInstance<AniversariantesViewModel>(_currentAniversariantesVMKey);
             }
         }
         public ConfigViewModel Config

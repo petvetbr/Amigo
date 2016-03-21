@@ -1,4 +1,5 @@
-﻿using AmigoRepo;
+﻿using Amigo.ViewModel;
+using AmigoRepo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace Amigo
         }
         public static bool ExisteUsuarioMaster()
         {
-            return Repositorio.ObterLista<Usuario>().Any(p=>p.Nivel>= (int)NiveisUsuarios.Master);
+            return Repositorio.ObterLista<Usuario>().Any(p => p.Nivel >= (int)NiveisUsuarios.Master);
         }
         public static KeyValuePair<bool, object> CheckLogin(string login, string password)
         {
@@ -52,12 +53,87 @@ namespace Amigo
         }
         public static bool ValidarPermissao(Usuario usuario, PermissaoAtividadeUsuario permissaoSolicitada)
         {
-            if(usuario==null)
+            if (usuario == null)
             {
                 return true;
             }
             return usuario.Nivel >= (int)permissaoSolicitada;
         }
+        public static string ObterNomeTabela(TipoPessoa _tipoPessoa)
+        {
+
+            var _nomeTabela = string.Empty;
+            switch (_tipoPessoa)
+            {
+                case TipoPessoa.Socio:
+                    {
+                        _nomeTabela = "Socios";
+                    }
+                    break;
+                case TipoPessoa.Veterinario:
+                    {
+                        _nomeTabela = "Veterinarios";
+
+                    }
+                    break;
+                case TipoPessoa.Clinica:
+                    {
+                        _nomeTabela = "Clinicas";
+
+
+                    }
+                    break;
+                case TipoPessoa.Cliente:
+                    {
+
+                        _nomeTabela = "Clientes";
+
+                    }
+                    break;
+                case TipoPessoa.MoradorComunitario:
+                    {
+                        _nomeTabela = "Morador";
+
+                    }
+                    break;
+                case TipoPessoa.Fornecedor:
+                    {
+                        _nomeTabela = "Fornecedores";
+
+                    }
+                    break;
+                case TipoPessoa.Entidade:
+                    {
+                        _nomeTabela = "Entidades";
+
+                    }
+                    break;
+                case TipoPessoa.Parceiro:
+                    {
+                        _nomeTabela = "Parceiros";
+
+                    }
+                    break;
+                case TipoPessoa.Doador:
+                    {
+                        _nomeTabela = "Doadores";
+
+                    }
+                    break;
+                case TipoPessoa.Patrocinador:
+                    {
+                        _nomeTabela = "Patrocinadores";
+
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return _nomeTabela;
+
+
+        }
     }
+
 
 }
