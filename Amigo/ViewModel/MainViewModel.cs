@@ -92,6 +92,17 @@ namespace Amigo.ViewModel
             get;
             private set;
         }
+        public RelayCommand MenuGerarReciboCommand
+        {
+            get;
+            private set;
+        }
+        public RelayCommand MenuAbrirTabelaCommand
+        {
+            get;
+            private set;
+        }
+        
 
         BitmapImage _logo;
         public BitmapImage Logo
@@ -135,7 +146,19 @@ namespace Amigo.ViewModel
             MenuCalculadoraCommand = new RelayCommand(() => System.Diagnostics.Process.Start("calc"));
             MenuUsuariosCommand = new RelayCommand(Usuarios, () => Util.ExisteUsuarioMaster() && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.AlterarUsuarios));
             MenuAniversarioCommand = new RelayCommand(Aniversariantes);
+            MenuAbrirTabelaCommand = new RelayCommand(AbrirTabela, () => Properties.Settings.Default.ArquivoProdutosEServicos != null);
+            MenuGerarReciboCommand = new RelayCommand(AbrirRecibo, () => Properties.Settings.Default.ArquivoRecibo != null);
 
+        }
+
+        private void AbrirRecibo()
+        {
+            System.Diagnostics.Process.Start(Properties.Settings.Default.ArquivoRecibo);
+        }
+
+        private void AbrirTabela()
+        {
+            System.Diagnostics.Process.Start(Properties.Settings.Default.ArquivoProdutosEServicos);
         }
 
         private void Aniversariantes()

@@ -40,5 +40,23 @@ namespace Amigo.Properties {
                 return ((string)(this["ArquivoLogo"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("E:\\ACPA\\ACPA -1-CADASTRO.docx")]
+        public string ArquivoRecibo {
+            get {
+                return ((string)(this["ArquivoRecibo"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("E:\\ACPA\\ACPA-3-SERVIÇOS.docx")]
+        public string ArquivoProdutosEServicos {
+            get {
+                return ((string)(this["ArquivoProdutosEServicos"]));
+            }
+        }
     }
 }

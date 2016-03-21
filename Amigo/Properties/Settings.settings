@@ -8,5 +8,11 @@
     <Setting Name="ArquivoLogo" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Imagens/logo.jpg</Value>
     </Setting>
+    <Setting Name="ArquivoRecibo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">E:\ACPA\ACPA -1-CADASTRO.docx</Value>
+    </Setting>
+    <Setting Name="ArquivoProdutosEServicos" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">E:\ACPA\ACPA-3-SERVIÇOS.docx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

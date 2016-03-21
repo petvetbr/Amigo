@@ -28,7 +28,7 @@
         <StackPanel Grid.Row="1"  Orientation="Horizontal">
             <TextBlock Text="Nome"
                        Width="200" />
-            <TextBlock Text="Data"
+            <TextBlock Text="Dia"
                        Width="100" />
             <TextBlock Text="Cadastro" />
         </StackPanel>

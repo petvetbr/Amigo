@@ -65,6 +65,10 @@
             <MenuItem Header="Serviços">
                 <MenuItem Header="Empréstimo Caixas Transporte"
                           Command="{Binding MenuServicosCaixaTransporteCommand}" />
+                <MenuItem Header="Gerar Recibo"
+                          Command="{Binding MenuGerarReciboCommand}" />
+                <MenuItem Header="Abrir Tabela Produtos e Serviços"
+                          Command="{Binding MenuAbrirTabelaCommand}" />
             </MenuItem>
             <MenuItem Header="Financeiro">
                 <MenuItem Header="Fluxo Caixa"
