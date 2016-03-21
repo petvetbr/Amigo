@@ -124,10 +124,10 @@ namespace Amigo.ViewModel
                 var uriSource = new Uri(logo, UriKind.Absolute);
                 this.Logo = new BitmapImage(uriSource);
             }
-            MenuCopiaDadosCommand = new RelayCommand(CopiarDados, ()=> Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.GerarBackup));
+            MenuCopiaDadosCommand = new RelayCommand(CopiarDados, () => Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.GerarBackup));
             MenuRestauraDadosCommand = new RelayCommand(RestauraDados, () => Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.RestaurarBackup));
-            MenuCalculadoraCommand= new RelayCommand(()=> System.Diagnostics.Process.Start("calc") );
-            MenuUsuariosCommand = new RelayCommand(Usuarios, () => Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.AlterarUsuarios));
+            MenuCalculadoraCommand = new RelayCommand(() => System.Diagnostics.Process.Start("calc"));
+            MenuUsuariosCommand = new RelayCommand(Usuarios, () => Util.ExisteUsuarioMaster() && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.AlterarUsuarios));
         }
 
         private void Usuarios()
@@ -143,10 +143,10 @@ namespace Amigo.ViewModel
 
         private void CopiarDados()
         {
-            string token= "CopiarDados";
+            string token = "CopiarDados";
             var input = new InputWindow();
             Messenger.Default.Register<InputResultMessage>(this, token, ContinuarCopiarDados);
-            Messenger.Default.Send(new ShowInputMessage() { Pergunta = "Qual senha deseja utilizar para proteger o arquivo?", Titulo = "Senha de proteção do arquivo", Token =token  });
+            Messenger.Default.Send(new ShowInputMessage() { Pergunta = "Qual senha deseja utilizar para proteger o arquivo?", Titulo = "Senha de proteção do arquivo", Token = token });
             input.ShowDialog();
         }
 
@@ -184,8 +184,8 @@ namespace Amigo.ViewModel
                 }
             }
 
-            MessageBox.Show("Cópia de segurança gerada: " + Config.ObterCaminhoExecucao() + @"\"+ nomeArquivo);
-            
+            MessageBox.Show("Cópia de segurança gerada: " + Config.ObterCaminhoExecucao() + @"\" + nomeArquivo);
+
         }
 
         private void MenuCadastro(int tipoPessoa)

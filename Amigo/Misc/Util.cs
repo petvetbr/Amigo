@@ -16,6 +16,14 @@ namespace Amigo
             return Repositorio.ObterLista<Pessoa>(nomeTabela: "Socios")
                 .Select((p => new KeyValuePair<int, string>(p.Id, p.Nome)));
         }
+        public static bool CheckTemUsuarios()
+        {
+            return Repositorio.ObterLista<Usuario>().Any();
+        }
+        public static bool ExisteUsuarioMaster()
+        {
+            return Repositorio.ObterLista<Usuario>().Any(p=>p.Nivel>= (int)NiveisUsuarios.Master);
+        }
         public static KeyValuePair<bool, object> CheckLogin(string login, string password)
         {
             var repo = Repositorio;
@@ -44,6 +52,10 @@ namespace Amigo
         }
         public static bool ValidarPermissao(Usuario usuario, PermissaoAtividadeUsuario permissaoSolicitada)
         {
+            if(usuario==null)
+            {
+                return true;
+            }
             return usuario.Nivel >= (int)permissaoSolicitada;
         }
     }

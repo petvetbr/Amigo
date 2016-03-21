@@ -45,6 +45,10 @@ namespace Amigo.ViewModel
                 _pwb = pwb;
             });
             this.EntrarCommand = new RelayCommand(Entrar);
+            if(!Util.CheckTemUsuarios())
+            {
+                Continuar();
+            }
         }
 
         private void Entrar()
@@ -53,13 +57,19 @@ namespace Amigo.ViewModel
             if (result.Key)
             {
                 Config.UsuarioAtual = (Usuario)result.Value;
-                var mw = new MainWindow();
-                Messenger.Default.Send(new CloseWindowMessage(), "LoginWindow");
-                mw.ShowDialog();
+                Continuar();
                 return;
             }
             MessageBox.Show(result.Value.ToString());
 
+        }
+
+        private static void Continuar()
+        {
+          
+            var mw = new MainWindow();
+            Messenger.Default.Send(new CloseWindowMessage(), "LoginWindow");
+            mw.ShowDialog();
         }
     }
 }

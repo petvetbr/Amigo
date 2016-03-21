@@ -15,7 +15,7 @@ using System.Windows.Controls;
 
 namespace Amigo.ViewModel
 {
-    public class UsuarioViewModel:ViewModelBase
+    public class UsuarioViewModel : ViewModelBase
     {
 
         public RelayCommand SalvarCommand
@@ -68,10 +68,10 @@ namespace Amigo.ViewModel
             {
                 if (_usuario != value)
                 {
-                    
+
                     _usuario = value;
                     RaisePropertyChanged(nameof(Usuario));
-                    this.NovoUsuario = (value?.Id??-1) == 0;
+                    this.NovoUsuario = (value?.Id ?? -1) == 0;
                 }
             }
         }
@@ -166,9 +166,11 @@ namespace Amigo.ViewModel
         public UsuarioViewModel()
         {
             this.ListaCategorias = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaNiveisUsuarios());
-            Messenger.Default.Register<Tuple<PasswordBox, PasswordBox>>(this, "senha", (pwb) => {
+            Messenger.Default.Register<Tuple<PasswordBox, PasswordBox>>(this, "senha", (pwb) =>
+            {
                 this.txSenha = pwb.Item1;
-                txSenha2 = pwb.Item2; } );
+                txSenha2 = pwb.Item2;
+            });
             this.ExcluiCommand = new RelayCommand(Excluir);
             this.SalvarCommand = new RelayCommand(Salvar);
             this.NovoItemCommand = new RelayCommand(CriarNovoItem);
@@ -199,6 +201,15 @@ namespace Amigo.ViewModel
 
         private void Excluir()
         {
+            var repo = Util.Repositorio;
+
+            var lista = repo.ObterLista<Usuario>(p => p.Nivel >= (int)NiveisUsuarios.Master).Select(p => p.Id);
+            if (lista.Count() == 1 && lista.Contains(_usuario.Id))
+            {
+                MessageBox.Show("Não é possível apagar o único usuário Master. Cadastre outro usuário com este nível antes de apagar o atual");
+                return;
+            }
+
             if (!Util.Repositorio.Apagar<Usuario>(x => x.Id == this.Usuario.Id))
             {
                 return;
@@ -210,7 +221,7 @@ namespace Amigo.ViewModel
 
         private void Salvar()
         {
-            
+
             if (NovoUsuario)
             {
                 var pw1 = txSenha.Password;
@@ -222,7 +233,16 @@ namespace Amigo.ViewModel
                 }
                 _usuario.PasswordHash = PasswordSecurity.PasswordStorage.CreateHash(txSenha.Password);
             }
-            
+            else
+            {
+                var repo = Util.Repositorio;
+                var lista = repo.ObterLista<Usuario>(p => p.Nivel >= (int)NiveisUsuarios.Master).Select(p => p.Id);
+                if (lista.Count() == 1 && lista.Contains(_usuario.Id))
+                {
+                    MessageBox.Show("Não é possível reduzir o nível do único usuário Master. Cadastre outro usuário com este nível antes de alterar o nível do atual");
+                    return;
+                }
+            }
             if (!Util.Repositorio.Salvar<Usuario>(_usuario).Key)
             {
                 return;
@@ -230,7 +250,7 @@ namespace Amigo.ViewModel
             this.NovoUsuario = false;
             RefreshLista();
             ExpanderAberto = true;
-            
+
         }
 
         private void Pesquisar()
