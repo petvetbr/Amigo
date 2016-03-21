@@ -27,12 +27,20 @@ namespace Amigo
         private static List<KeyValuePair<int, string>> _tiposTelefones;
         private static List<KeyValuePair<int, string>> _statusAnimal;
         private static List<KeyValuePair<int, string>> _niveisUsuario;
+
+        private static List<KeyValuePair<int, string>> _TipoBem;
+        private static List<KeyValuePair<int, string>> _OrigemBem;
+        private static List<KeyValuePair<int, string>> _ExecucaoAgenda;
+        private static List<KeyValuePair<int, string>> _StatusAgenda;
+        private static List<KeyValuePair<int, string>> _StatusBem;
+
         private static List<string> _listaUf;
         private static List<string> _listaFabricantesVacina;
         private static List<string> _listaFabricantesVermifugo;
         private static List<string> _listaTiposVacina;
         private static List<string> _listaRacasCaes;
         private static List<string> _listaRacasGatos;
+        
 
         public static Usuario UsuarioAtual { get; set; }
 
@@ -181,11 +189,38 @@ namespace Amigo
             return _tiposPessoa;
             
         }
+        public static IEnumerable<KeyValuePair<int, string>> ObterExecucaoAgenda()
+        {
+            _ExecucaoAgenda = _ExecucaoAgenda ?? ObterListaKvp("ExecucaoAgenda").ToList();
+            return _ExecucaoAgenda;
+        }
+
+        public static IEnumerable<KeyValuePair<int, string>> ObterListaStatusAgenda()
+        {
+            _StatusAgenda = _StatusAgenda ?? ObterListaKvp("StatusAgenda").ToList();
+            return _StatusAgenda;
+        }
+        public static IEnumerable<KeyValuePair<int, string>> ObterListaTipoBem()
+        {
+            _TipoBem = _TipoBem ?? ObterListaKvp("TipoBem").ToList();
+            return _TipoBem;
+        }
         public static IEnumerable<KeyValuePair<int, string>> ObterListaPessoasStatus()
         {
             _statusPessoas = _statusPessoas ?? ObterListaKvp("StatusPessoa").ToList();
             return _statusPessoas;
         }
+        public static IEnumerable<KeyValuePair<int, string>> ObterListaOrigemBem()
+        {
+            _OrigemBem = _OrigemBem ?? ObterListaKvp("OrigemBem").ToList();
+            return _OrigemBem;
+        }
+        public static IEnumerable<KeyValuePair<int, string>> ObterListaStatusBem()
+        {
+            _StatusBem = _StatusBem ?? ObterListaKvp("StatusBem").ToList();
+            return _StatusBem;
+        }
+
         public static IEnumerable<KeyValuePair<int, string>> ObterListaMeses()
         {
             if (_meses != null)

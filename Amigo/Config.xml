@@ -212,4 +212,27 @@
     <Tipo Key="100"   Value="Geral com restrições"/>
     <Tipo Key="10"    Value="Somente leitura"/>
   </NiveisUsuario>
+  <TipoBem>
+    <Tipo Key="1" Value="Móveis"/>
+    <Tipo Key="2" Value="Eletro/eletrônicos"/>
+    <Tipo Key="3" Value="Diversos"/>
+  </TipoBem>
+  <OrigemBem>
+    <Tipo Key="1" Value="Novo"/>
+    <Tipo Key="2" Value="Doado"/>
+    <Tipo Key="3" Value="Cedido/emprestado"/>
+  </OrigemBem>
+  <SituacaoBem>
+    <Tipo Key="1" Value="Ativo"/>
+    <Tipo Key="2" Value="Emprestado"/>
+    <Tipo Key="3" Value="Baixado"/>
+  </SituacaoBem>
+  <ExecucaoAgenda>
+    <Tipo Key="1" Value="Clínica"/>
+    <Tipo Key="2" Value="Veterinário"/>
+  </ExecucaoAgenda>
+  <StatusAgenda>
+    <Tipo Key="1" Value="Clínica"/>
+    <Tipo Key="2" Value="Veterinário"/>
+  </StatusAgenda>
 </ConfigAmigo>

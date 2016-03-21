@@ -133,6 +133,21 @@ namespace Amigo
 
 
         }
+
+        public static List<KeyValuePair<TipoPessoa, Pessoa>> ObterListaSociosClientesMoradorComunitario()
+        {
+            var socios = Repositorio.ObterLista<Pessoa>(null, ObterNomeTabela(TipoPessoa.Socio))
+                .Select(p => new KeyValuePair<TipoPessoa, Pessoa>(TipoPessoa.Socio, p));
+            var clientes = Repositorio.ObterLista<Pessoa>(null, ObterNomeTabela(TipoPessoa.Cliente))
+                .Select(p => new KeyValuePair<TipoPessoa, Pessoa>(TipoPessoa.Cliente, p));
+            var moradores = Repositorio.ObterLista<Pessoa>(null, ObterNomeTabela(TipoPessoa.MoradorComunitario))
+                .Select(p => new KeyValuePair<TipoPessoa, Pessoa>(TipoPessoa.MoradorComunitario, p));
+            var lista = new List<KeyValuePair<TipoPessoa, Pessoa>>();
+            lista.AddRange(socios);
+            lista.AddRange(clientes);
+            lista.AddRange(moradores);
+            return lista;
+        }
     }
 
 

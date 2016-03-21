@@ -128,8 +128,10 @@
     <Compile Include="UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AgendamentoViewModel.cs" />
     <Compile Include="ViewModel\AnimalViewModel.cs" />
     <Compile Include="ViewModel\AniversariantesViewModel.cs" />
+    <Compile Include="ViewModel\BemMovelViewModel.cs" />
     <Compile Include="ViewModel\CaixaTransporteViewModel.cs" />
     <Compile Include="ViewModel\ConfigViewModel.cs" />
     <Compile Include="ViewModel\EmprestimoCaixaTransporteViewModel.cs" />

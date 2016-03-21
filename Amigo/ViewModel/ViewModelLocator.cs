@@ -55,6 +55,8 @@ namespace Amigo.ViewModel
             SimpleIoc.Default.Register<ConfigViewModel>();
             SimpleIoc.Default.Register<InputViewModel>();
             SimpleIoc.Default.Register<AniversariantesViewModel>();
+            SimpleIoc.Default.Register<BemMovelViewModel>();
+            SimpleIoc.Default.Register<AgendamentoViewModel>();
 
         }
 
@@ -69,7 +71,8 @@ namespace Amigo.ViewModel
         private string _currentConfigVMKey;
         private string _currentInputVMKey;
         private string _currentAniversariantesVMKey;
-
+        private string _currentBemMovelVMKey;
+        private string _currentAgendamentoVMKey;
 
         public MainViewModel Main
         {
@@ -130,6 +133,34 @@ namespace Amigo.ViewModel
                 }
                 _currentInputVMKey = Guid.NewGuid().ToString();
                 return ServiceLocator.Current.GetInstance<InputViewModel>(_currentInputVMKey);
+            }
+        }
+
+        public BemMovelViewModel BemMovel
+        {
+            get
+            {
+
+                if (!string.IsNullOrEmpty(_currentBemMovelVMKey))
+                {
+                    SimpleIoc.Default.Unregister(_currentBemMovelVMKey);
+                }
+                _currentBemMovelVMKey = Guid.NewGuid().ToString();
+                return ServiceLocator.Current.GetInstance<BemMovelViewModel>(_currentBemMovelVMKey);
+            }
+        }
+
+        public AgendamentoViewModel Agendamento
+        {
+            get
+            {
+
+                if (!string.IsNullOrEmpty(_currentAgendamentoVMKey))
+                {
+                    SimpleIoc.Default.Unregister(_currentAgendamentoVMKey);
+                }
+                _currentAgendamentoVMKey = Guid.NewGuid().ToString();
+                return ServiceLocator.Current.GetInstance<AgendamentoViewModel>(_currentAgendamentoVMKey);
             }
         }
         public FluxoCaixaViewModel FluxoCaixa
