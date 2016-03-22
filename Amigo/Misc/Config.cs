@@ -32,7 +32,7 @@ namespace Amigo
         private static List<KeyValuePair<int, string>> _OrigemBem;
         private static List<KeyValuePair<int, string>> _ExecucaoAgenda;
         private static List<KeyValuePair<int, string>> _StatusAgenda;
-        private static List<KeyValuePair<int, string>> _StatusBem;
+        private static List<KeyValuePair<int, string>> _SituacaoBem;
 
         private static List<string> _listaUf;
         private static List<string> _listaFabricantesVacina;
@@ -215,10 +215,10 @@ namespace Amigo
             _OrigemBem = _OrigemBem ?? ObterListaKvp("OrigemBem").ToList();
             return _OrigemBem;
         }
-        public static IEnumerable<KeyValuePair<int, string>> ObterListaStatusBem()
+        public static IEnumerable<KeyValuePair<int, string>> ObterListaSituacaoBem()
         {
-            _StatusBem = _StatusBem ?? ObterListaKvp("StatusBem").ToList();
-            return _StatusBem;
+            _SituacaoBem = _SituacaoBem ?? ObterListaKvp("SituacaoBem").ToList();
+            return _SituacaoBem;
         }
 
         public static IEnumerable<KeyValuePair<int, string>> ObterListaMeses()

@@ -104,6 +104,10 @@ namespace Amigo.ViewModel
 
         public AgendamentoViewModel()
         {
+            this.SalvarCommand = new RelayCommand(Salvar, () => Agendamento != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
+            this.ExcluiCommand = new RelayCommand(Excluir, () => Agendamento != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Excluir));
+            this.PesquisaCommand = new RelayCommand(Pesquisar);
+            this.NovoItemCommand = new RelayCommand(CriarNovoItem, () => Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Adicionar));
 
         }
 

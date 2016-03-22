@@ -54,27 +54,10 @@ namespace Amigo.ViewModel
                 }
             }
         }
-        ObservableCollection<BemMovel> _listaBens;
-        public ObservableCollection<BemMovel> ListaBens
-        {
-            get
-            {
-                return _listaBens;
-            }
-            set
-            {
-                if (_listaBens != value)
-                {
-                    _listaBens = value;
-                    RaisePropertyChanged(nameof(ListaBens));
-                }
-            }
-        }
+       
 
-
-
-        ObservableCollection<KeyValuePair<int,string>> _listaTipos;
-        public ObservableCollection<KeyValuePair<int,string>>  ListaTipos
+        ObservableCollection<KeyValuePair<int, string>> _listaTipos;
+        public ObservableCollection<KeyValuePair<int, string>> ListaTipos
         {
             get
             {
@@ -86,6 +69,22 @@ namespace Amigo.ViewModel
                 {
                     _listaTipos = value;
                     RaisePropertyChanged(nameof(ListaTipos));
+                }
+            }
+        }
+        ObservableCollection<KeyValuePair<int,string>> _listaLocalizacao;
+        public ObservableCollection<KeyValuePair<int,string>>  ListaLocalizacao
+        {
+            get
+            {
+                return _listaLocalizacao;
+            }
+            set
+            {
+                if (_listaLocalizacao != value)
+                {
+                    _listaLocalizacao = value;
+                    RaisePropertyChanged(nameof(ListaLocalizacao));
                 }
             }
         }
@@ -171,7 +170,18 @@ namespace Amigo.ViewModel
         }
         public BemMovelViewModel()
         {
-                
+            this.ListaLocalizacao = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaLocalizacaoCaixaTransporte());
+            this.ListaOrigem = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaOrigemBem());
+            this.ListaTipos = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaTipoBem());
+            this.ListaSituacao = new ObservableCollection<KeyValuePair<int, string>>(Config.ObterListaSituacaoBem());
+
+            this.SalvarCommand = new RelayCommand(Salvar, () => Bem != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
+            this.ExcluiCommand = new RelayCommand(Excluir, () => Bem != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Excluir));
+            this.PesquisaCommand = new RelayCommand(Pesquisar);
+            this.NovoItemCommand = new RelayCommand(CriarNovoItem, () => Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Adicionar));
+
+            this.ExpanderAberto = true;
+
         }
 
         private void CriarNovoItem()

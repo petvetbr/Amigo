@@ -7,8 +7,234 @@
         mc:Ignorable="d"
         Icon="Imagens/LogoAmigo64.png"
         DataContext="{Binding Path=BemMovel, Source={StaticResource Locator}}"
-        Title="Gerenciamento de Bens Móveis" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+        Title="Gerenciamento de Bens Móveis"
+       >
+    <Window.Resources>
+        <Style TargetType="{x:Type StackPanel}"
+               x:Key="splinha">
+            <Setter Property="Margin"
+                    Value="4">
+
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+
+    </Window.Resources>
+    <DockPanel>
+        <Expander  DockPanel.Dock="Left"
+                   ExpandDirection="Right"
+                   Header="Pesquisa"
+                   IsExpanded="{Binding ExpanderAberto}">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto">
+
+                    </RowDefinition>
+                    <RowDefinition Height="*">
+
+                    </RowDefinition>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,5"
+                            VerticalAlignment="Top">
+                    <TextBox VerticalAlignment="Center"
+                             Text="{Binding FiltroPesquisa}"
+                             Width="200"></TextBox>
+                    <Button Command="{Binding PesquisaCommand}"
+                            Margin="5"
+                            ToolTip="Pesquisar por nome">Pesquisar</Button>
+                </StackPanel>
+
+                <ListBox Grid.Row="1"
+                         ItemsSource="{Binding ListaItens}"
+                         SelectedItem="{Binding Bem}">
+                </ListBox>
+                <StackPanel Margin="0,5"
+                            Grid.Row="2"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Top">
+                    <Button HorizontalAlignment="Right"
+                            Command="{Binding NovoItemCommand}"
+                            ToolTipService.ToolTip="Criar novo registro">Novo</Button>
+                </StackPanel>
+            </Grid>
+
+        </Expander>
+        <StackPanel DockPanel.Dock="Right">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Bem}"
+                                     Value="{x:Null}">
+                            <Setter Property="IsEnabled"
+                                    Value="False"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Resources>
+            <DockPanel>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource splinha}">
+                    <TextBlock Margin="10,0"
+                               FontWeight="Bold">Nº:</TextBlock>
+                    <TextBox Width="40"
+                             Text="{Binding Bem.Numero}"></TextBox>
+                </StackPanel>
+
+                <StackPanel   DockPanel.Dock="Left"
+                              Orientation="Horizontal"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Top"
+                              Style="{StaticResource splinha}">
+                    <TextBlock VerticalAlignment="Center"
+                               Margin="10,0"
+                               FontWeight="Bold">Data de cadastro:</TextBlock>
+                    <DatePicker SelectedDate="{Binding Bem.DataCadastro}" />
+
+                </StackPanel>
+            </DockPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource splinha}">
+                <TextBlock Margin="8,0"
+                           
+                           FontWeight="Bold"
+                           Text="Descrição:"></TextBlock>
+                <TextBox Text="{Binding Bem.Descricao}"
+                         Width="579"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource splinha}">
+                <TextBlock Margin="8,0"
+
+                           FontWeight="Bold"
+                           Text="Tipo:"></TextBlock>
+                <ComboBox ToolTip="Escolha o tipo do bem móvel"
+                          Width="100"
+                          Margin="5,0"
+                          ItemsSource="{Binding ListaTipos}"
+                          SelectedValuePath="Key"
+                          SelectedValue="{Binding Bem.TipoBem}"
+                          DisplayMemberPath="Value" />
+                <TextBlock Margin="8,0"
+                           FontWeight="Bold"
+                           Text="Origem:"></TextBlock>
+                <ComboBox ToolTip="Escolha a origem do bem móvel"
+                          Width="100"
+                          Margin="5,0"
+                          ItemsSource="{Binding ListaOrigem}"
+                          SelectedValuePath="Key"
+                          SelectedValue="{Binding Bem.Origem, Mode=TwoWay}"
+                          DisplayMemberPath="Value" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource splinha}">
+                <TextBlock Margin="8,0"
+                           FontWeight="Bold"
+                           Text="Proprietário:"></TextBlock>
+                <TextBox Text="{Binding Bem.NomeProprietario}"
+                         Width="562"></TextBox>
+            </StackPanel>
+            <GroupBox Header="Empréstimo">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,5">
+                    <TextBlock Margin="8,0"
+                               FontWeight="Bold"
+                               Text="Situação:"></TextBlock>
+                    <ComboBox ToolTip="Escolha a situação do bem móvel"
+                              Width="100"
+                              Margin="5,0"
+                              ItemsSource="{Binding ListaSituacao}"
+                              SelectedValuePath="Key"
+                                  SelectedValue="{Binding Bem.Status}"
+                                  DisplayMemberPath="Value" />
+                        <TextBlock Margin="8,0"
+                                   FontWeight="Bold"
+                                   Text="Localização:"></TextBlock>
+                        <ComboBox ToolTip="Escolha a localização do bem móvel"
+                                  Width="100"
+                                  Margin="5,0"
+                                  ItemsSource="{Binding ListaLocalizacao}"
+                                  SelectedValuePath="Key"
+                                  SelectedValue="{Binding Bem.Localizacao, Mode=TwoWay}"
+                                  DisplayMemberPath="Value" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                   
+                            <TextBlock VerticalAlignment="Center"
+                                       Margin="10,0"
+                                       FontWeight="Bold">Data de saída:</TextBlock>
+                            <DatePicker SelectedDate="{Binding Bem.DataSaida}" />
+
+                     
+                            <TextBlock VerticalAlignment="Center"
+                                       Margin="10,0"
+                                       FontWeight="Bold">Data de retorno:</TextBlock>
+                        <DatePicker SelectedDate="{Binding Bem.DataRetorno}" />
+
+                        </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Style="{StaticResource splinha}">
+                        <TextBlock Margin="8,0"
+                                   FontWeight="Bold"
+                                   Text="Responsável pelo empréstimo:"></TextBlock>
+                        <TextBox Text="{Binding Bem.NomeResponsavelEmprestimo}"
+                                 Width="350"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Style="{StaticResource splinha}">
+                        <TextBlock Margin="8,0"
+                                   FontWeight="Bold"
+                                   Text="Emprestado para:"></TextBlock>
+                        <TextBox Text="{Binding Bem.NomeNomePegadorEmprestimo}"
+                                 Width="350"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Observações"
+                      Height="100">
+                <TextBox  Margin="5"
+                          VerticalAlignment="Stretch"
+                          Text="{Binding Bem.Observacao}"></TextBox>
+            </GroupBox>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource splinha}">
+                <Button Command="{Binding SalvarCommand}"
+                        Margin="8,0"
+                        Padding="5,0"
+                        ToolTip="Salvar cadastro">Salvar</Button>
+                <Button Command="{Binding ExcluiCommand}"
+                        Margin="8,0"
+                        Padding="5,0"
+                        ToolTip="Excluir cadastro">Excluir</Button>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
 </Window>

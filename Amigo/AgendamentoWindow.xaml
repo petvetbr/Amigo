@@ -7,8 +7,120 @@
         mc:Ignorable="d"
         Icon="Imagens/LogoAmigo64.png"
         DataContext="{Binding Path=Agendamento, Source={StaticResource Locator}}"
-        Title="Agenda" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+        Title="Agenda" Height="300"
+        Width="604.167">
+    <Window.Resources>
+        <Style TargetType="{x:Type StackPanel}"
+               x:Key="splinha">
+            <Setter Property="Margin"
+                    Value="4">
+
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+
+    </Window.Resources>
+    <DockPanel>
+        <Expander  DockPanel.Dock="Left"
+                   ExpandDirection="Right"
+                   Header="Pesquisa"
+                   IsExpanded="{Binding ExpanderAberto}">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto">
+
+                    </RowDefinition>
+                    <RowDefinition Height="*">
+
+                    </RowDefinition>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,5"
+                            VerticalAlignment="Top">
+                    <TextBox VerticalAlignment="Center"
+                             Text="{Binding FiltroPesquisa}"
+                             Width="200"></TextBox>
+                    <Button Command="{Binding PesquisaCommand}"
+                            Margin="5"
+                            ToolTip="Pesquisar por nome">Pesquisar</Button>
+                </StackPanel>
+
+                <ListBox Grid.Row="1"
+                         ItemsSource="{Binding ListaItens}"
+                         SelectedItem="{Binding Agendamento}">
+                </ListBox>
+                <StackPanel Margin="0,5"
+                            Grid.Row="2"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Top">
+                    <Button HorizontalAlignment="Right"
+                            Command="{Binding NovoItemCommand}"
+                            ToolTipService.ToolTip="Criar novo registro">Novo</Button>
+                </StackPanel>
+            </Grid>
+
+        </Expander>
+        <StackPanel DockPanel.Dock="Right">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Agendamento}"
+                                     Value="{x:Null}">
+                            <Setter Property="IsEnabled"
+                                    Value="False"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Resources>
+            <DockPanel>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource splinha}">
+                    <TextBlock Margin="10,0"
+                               FontWeight="Bold">Nº:</TextBlock>
+                    <TextBox Width="40"
+                             Text="{Binding Pessoa.Numero}"></TextBox>
+                </StackPanel>
+
+                <StackPanel   DockPanel.Dock="Left"
+                              Orientation="Horizontal"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Top"
+                              Style="{StaticResource splinha}">
+                    <TextBlock VerticalAlignment="Center"
+                               Margin="10,0"
+                               FontWeight="Bold">Data de cadastro:</TextBlock>
+                    <DatePicker SelectedDate="{Binding Pessoa.DataCadastro}" />
+
+                </StackPanel>
+            </DockPanel>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource splinha}">
+                <Button Command="{Binding SalvarCommand}"
+                        Margin="8,0"
+                        Padding="5,0"
+                        ToolTip="Salvar cadastro">Salvar</Button>
+                <Button Command="{Binding ExcluiCommand}"
+                        Margin="8,0"
+                        Padding="5,0"
+                        ToolTip="Excluir cadastro">Excluir</Button>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
 </Window>
