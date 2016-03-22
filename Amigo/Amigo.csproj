@@ -82,11 +82,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AgendamentoWindow.xaml.cs">
+      <DependentUpon>AgendamentoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AnimalWindow.xaml.cs">
       <DependentUpon>AnimalWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="AniversariantesWindow.xaml.cs">
       <DependentUpon>AniversariantesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BensMoveisWindow.xaml.cs">
+      <DependentUpon>BensMoveisWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="CaixaTransporteWindow.xaml.cs">
       <DependentUpon>CaixaTransporteWindow.xaml</DependentUpon>
@@ -144,11 +150,19 @@
     <Compile Include="ViewModel\PessoasViewModel.cs" />
     <Compile Include="ViewModel\UsuarioViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="AgendamentoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AnimalWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AniversariantesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BensMoveisWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

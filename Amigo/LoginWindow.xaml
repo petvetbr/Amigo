@@ -38,10 +38,12 @@
                  Margin="5"
                  Grid.Row="2"
                  Grid.Column="2"
+                 TabIndex="0"
                  Text="{Binding Login}" />
         <PasswordBox Width="150"
                      Margin="5"
                      Name="txSenha"
+                     TabIndex="1"
                      Grid.Row="3"
                      Grid.Column="2" />
      
@@ -55,6 +57,7 @@
                     Margin="8,0"
                     HorizontalAlignment="Right"
                     ToolTip="Salvar"
+                    TabIndex="2"
                     IsDefault="True">Entrar</Button>
         </StackPanel>
     </Grid>

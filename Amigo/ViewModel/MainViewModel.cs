@@ -102,7 +102,16 @@ namespace Amigo.ViewModel
             get;
             private set;
         }
-        
+        public RelayCommand MenuBensMoveisCommand
+        {
+            get;
+            private set;
+        }
+        public RelayCommand MenuAgendamentosCommand
+        {
+            get;
+            private set;
+        }
 
         BitmapImage _logo;
         public BitmapImage Logo
@@ -148,7 +157,22 @@ namespace Amigo.ViewModel
             MenuAniversarioCommand = new RelayCommand(Aniversariantes);
             MenuAbrirTabelaCommand = new RelayCommand(AbrirTabela, () => Properties.Settings.Default.ArquivoProdutosEServicos != null);
             MenuGerarReciboCommand = new RelayCommand(AbrirRecibo, () => Properties.Settings.Default.ArquivoRecibo != null);
+            MenuAgendamentosCommand = new RelayCommand(AgendamentoVeterinario);
+            MenuBensMoveisCommand = new RelayCommand(CadastroBensMoveis);
 
+        }
+
+        private void CadastroBensMoveis()
+        {
+
+            var bmw = new BensMoveisWindow();
+            bmw.ShowDialog();
+        }
+
+        private void AgendamentoVeterinario()
+        {
+            var agw = new AgendamentoWindow();
+            agw.ShowDialog();
         }
 
         private void AbrirRecibo()

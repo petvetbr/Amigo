@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AmigoRepo
 {
-    public abstract class EntidadeRepo : Observable
+    public abstract class EntidadeRepo : Observable, IRepositorio
     {
         string _repositorio;
         public string Repositorio

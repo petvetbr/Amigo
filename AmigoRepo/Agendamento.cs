@@ -40,6 +40,21 @@ namespace AmigoRepo
                 }
             }
         }
+        DateTime? _DataCadastro;
+        public DateTime? DataCadastro
+        {
+            get
+            {
+                return _DataCadastro;
+            }
+
+            set
+            {
+                if (value.Equals(_DataCadastro)) return;
+                _DataCadastro = value;
+                OnPropertyChanged(nameof(DataCadastro));
+            }
+        }
 
         DateTime? _dataAgenda;
         public DateTime? DataAgenda
