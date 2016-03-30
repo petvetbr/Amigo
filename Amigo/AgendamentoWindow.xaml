@@ -106,17 +106,98 @@
                                FontWeight="Bold">Data de cadastro:</TextBlock>
                     <DatePicker SelectedDate="{Binding Pessoa.DataCadastro}" />
 
+
+
                 </StackPanel>
+
+
             </DockPanel>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Bottom"
                         HorizontalAlignment="Center"
                         Style="{StaticResource splinha}">
-                <Button Command="{Binding SalvarCommand}"
+
+               
+                    <TextBlock Margin="8,0"
+                               Width="150"
+                               FontWeight="Bold">Número de identificação:</TextBlock>
+                    <TextBox Width="300"
+                             Text="{Binding Animal.Nome}"></TextBox>
+                </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource splinha}">
+
+
+                <TextBlock Margin="8,0"
+                               Width="150"
+                               FontWeight="Bold">Nome tutor:</TextBlock>
+                <ComboBox Width="300"
+                             Text="{Binding Animal.Nome}"></ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource splinha}">
+
+
+                <TextBlock Margin="8,0"
+                               Width="150"
+                               FontWeight="Bold">Nome do animal:</TextBlock>
+                <ComboBox Width="300"
+                             Text="{Binding Animal.Nome}"></ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource splinha}">
+
+
+                <TextBlock Margin="8,0"
+                               Width="150"
+                               FontWeight="Bold">Data de agendamento:</TextBlock>
+                <DatePicker Width="300"
+                             Text="{Binding Animal.Nome}"></DatePicker>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource splinha}">
+
+
+                <TextBlock Margin="8,0"
+                               Width="60"
+                               FontWeight="Bold">Execução:</TextBlock>
+                <ComboBox Margin="8,0" Width="100"
+                             Text="{Binding Animal.Nome}"></ComboBox>
+            
+           
+
+                <TextBlock Margin="8,0"
+                               Width="60"
+                               FontWeight="Bold">Status:</TextBlock>
+                <ComboBox Width="100"
+                             Text="{Binding Animal.Nome}"></ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"   Style="{StaticResource splinha}">
+
+                <GroupBox Width="450"  Header="Observações">
+
+                    <TextBox Height="20" Width="400" Margin="0,5"></TextBox>
+                    
+                </GroupBox>
+                
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"   Style="{StaticResource splinha}">
+            <Button Command="{Binding SalvarCommand}"
                         Margin="8,0"
                         Padding="5,0"
                         ToolTip="Salvar cadastro">Salvar</Button>
-                <Button Command="{Binding ExcluiCommand}"
+            <Button Command="{Binding ExcluiCommand}"
                         Margin="8,0"
                         Padding="5,0"
                         ToolTip="Excluir cadastro">Excluir</Button>
