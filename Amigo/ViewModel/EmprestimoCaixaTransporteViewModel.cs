@@ -8,10 +8,19 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Amigo.ViewModel
 {
+    public enum TipoPesquisaCaixaTransporte
+    {
+        Numero,
+        NumeroIdentificacao,
+        Responsavel,
+        Animal
+    }
+
     public class EmprestimoCaixaTransporteViewModel : ViewModelBase
     {
         public RelayCommand SalvarCommand
@@ -41,6 +50,23 @@ namespace Amigo.ViewModel
         {
             get;
             private set;
+        }
+
+        TipoPesquisaCaixaTransporte _opcaoPesquisa;
+        public TipoPesquisaCaixaTransporte OpcaoPesquisa
+        {
+            get
+            {
+                return _opcaoPesquisa;
+            }
+            set
+            {
+                if (_opcaoPesquisa != value)
+                {
+                    _opcaoPesquisa = value;
+                    RaisePropertyChanged(nameof(OpcaoPesquisa));
+                }
+            }
         }
 
         ObservableCollection<EmprestimoCaixaTransporte> _listaItens;
@@ -233,7 +259,27 @@ namespace Amigo.ViewModel
                 RefreshLista();
                 return;
             }
-            RefreshLista(x => x.Responsavel.Contains(FiltroPesquisa));
+
+            switch (_opcaoPesquisa)
+            {
+                case TipoPesquisaCaixaTransporte.Numero:
+                    int numero = 0;
+                    int.TryParse(_filtroPesquisa, out numero);
+                    RefreshLista(x => x.Numero==numero);
+                    break;
+                case TipoPesquisaCaixaTransporte.NumeroIdentificacao:
+                    RefreshLista(x => x.CaixaTransporte.Identificacao.Contains(FiltroPesquisa));
+                    break;
+                case TipoPesquisaCaixaTransporte.Responsavel:
+                    RefreshLista(x => x.Responsavel.Contains(FiltroPesquisa));
+                    break;
+                case TipoPesquisaCaixaTransporte.Animal:
+                    RefreshLista(x => x.Animal.Contains(FiltroPesquisa));
+                    break;
+                default:
+                    break;
+            }
+            
         }
         private void RefreshLista(Func<EmprestimoCaixaTransporte, bool> expression = null)
         {
@@ -254,12 +300,33 @@ namespace Amigo.ViewModel
 
         private void Salvar()
         {
+
+            var conflito = VerificaConflitoEmprestimo(_listaItens, _emprestimo);
+            if (conflito!=null)
+            {
+                MessageBox.Show(string.Format("Esta caixa de transporte já está com empréstimo agendado para um data que conflita com o empréstimo solicitado\n"
+                    + "Conflito:\n Número: {0} \n Responsável: {1} \n Animal: {2} \n Data de saída: {3:dd/MM/yyyy} \n Data de retorno: {4:dd/MM/yyyy}",
+                    conflito.Numero, conflito.Responsavel, conflito.Animal, conflito.DataSaida, conflito.DataRetorno));
+                return;
+            }
+       
+        
             if (!Util.Repositorio.Salvar(_emprestimo).Key)
             {
                 return;
             }
             RefreshLista();
             ExpanderAberto = true;
+        }
+
+        private static EmprestimoCaixaTransporte VerificaConflitoEmprestimo(IEnumerable<EmprestimoCaixaTransporte> lista, EmprestimoCaixaTransporte esteEmprestimo)
+        {
+            var conflito= lista.FirstOrDefault(p => 
+                p.Id!=esteEmprestimo.Id
+            && p.CaixaTransporte.Identificacao.Equals(esteEmprestimo.CaixaTransporte.Identificacao)
+            && ( p.DataRetorno > esteEmprestimo.DataSaida || p.DataSaida > esteEmprestimo.DataRetorno));
+            return conflito;
+         
         }
 
         private void NovoItem()

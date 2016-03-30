@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras"
+        xmlns:vm="clr-namespace:Amigo.ViewModel"
+        xmlns:local="clr-namespace:Amigo"
         Icon="Imagens/LogoAmigo64.png"
+        
         WindowStartupLocation="CenterOwner"
         
         DataContext="{Binding Path=EmprestimoCaixaTransporte, Source={StaticResource Locator}}"
@@ -20,7 +23,11 @@
     </Window.Resources>
     <Grid>
         <DockPanel>
-            <Expander  DockPanel.Dock="Left"  ExpandDirection="Right"  Header="Pesquisa" IsExpanded="{Binding ExpanderAberto}">
+            <Expander  DockPanel.Dock="Left"
+                       ExpandDirection="Right"
+                       Header="Pesquisa"
+                       
+                       IsExpanded="{Binding ExpanderAberto}">
                 <Grid Margin="5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto">
@@ -28,22 +35,52 @@
                         </RowDefinition>
                         <RowDefinition Height="*">
 
-
                         </RowDefinition>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal" Margin="0,5"  VerticalAlignment="Top">
-                        <TextBox VerticalAlignment="Center"  Text="{Binding FiltroPesquisa}"  Width="200"></TextBox>
-                        <Button Command="{Binding PesquisaCommand}" Margin="5"  ToolTip="Pesquisar por nome">Pesquisar</Button>
-                    </StackPanel>
+                    <GroupBox Header="Pesquisa"
+                              Grid.Row="0">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="0,5"
+                                        VerticalAlignment="Top">
+                                <TextBox VerticalAlignment="Center"
+                                         Text="{Binding FiltroPesquisa}"
+                                         Width="200"></TextBox>
+                                <Button Command="{Binding PesquisaCommand}"
+                                        Margin="5"
+                                        ToolTip="Pesquisar por nome">Pesquisar</Button>
+                            </StackPanel>
+                            <StackPanel>
 
-                    <ListBox Grid.Row="1" ItemsSource="{Binding ListaItens}" SelectedItem="{Binding Emprestimo}">
-                    </ListBox>
-                    <StackPanel Margin="0,5"  Grid.Row="2" HorizontalAlignment="Right"   Orientation="Horizontal" VerticalAlignment="Top">
-                        <Button HorizontalAlignment="Right" Command="{Binding NovoItemCommand}"  ToolTipService.ToolTip="Criar novo registro">Novo</Button>
+                                <RadioButton  Margin="3"
+                                              IsChecked="{Binding Path=OpcaoPesquisa, Converter={local:EnumToBooleanConverter}, ConverterParameter={x:Static vm:TipoPesquisaCaixaTransporte.Numero}}">Número</RadioButton>
+                                <RadioButton  Margin="3"
+                                              IsChecked="{Binding Path=OpcaoPesquisa, Converter={local:EnumToBooleanConverter}, ConverterParameter={x:Static vm:TipoPesquisaCaixaTransporte.NumeroIdentificacao}}">Número Identificação</RadioButton>
+                                <RadioButton  Margin="3"
+                                              IsChecked="{Binding Path=OpcaoPesquisa, Converter={local:EnumToBooleanConverter}, ConverterParameter={x:Static vm:TipoPesquisaCaixaTransporte.Responsavel}}">Responsável</RadioButton>
+                                <RadioButton Margin="3"
+                                             IsChecked="{Binding Path=OpcaoPesquisa, Converter={local:EnumToBooleanConverter}, ConverterParameter={x:Static vm:TipoPesquisaCaixaTransporte.Animal}}">Animal</RadioButton>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Resultado"
+                              Grid.Row="1">
+                        <ListBox Grid.Row="1"
+                                 ItemsSource="{Binding ListaItens}"
+                                 SelectedItem="{Binding Emprestimo}">
+                        </ListBox>
+                    </GroupBox>
+                    <StackPanel Margin="0,5"
+                                Grid.Row="2"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Top">
+                        <Button HorizontalAlignment="Right"
+                                Command="{Binding NovoItemCommand}"
+                                ToolTipService.ToolTip="Criar novo registro">Novo</Button>
                     </StackPanel>
                 </Grid>
-
 
             </Expander>
             <StackPanel DockPanel.Dock="Right">

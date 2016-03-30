@@ -10,7 +10,7 @@
         Icon="Imagens/LogoAmigo64.png"
         DataContext="{Binding Path=Pessoas, Source={StaticResource Locator}}"
         Title="{Binding Titulo}"
-        Height="500"
+        Height="600"
         Width="1000">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
