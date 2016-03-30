@@ -13,8 +13,34 @@ using System.Threading.Tasks;
 
 namespace Amigo.ViewModel
 {
+    public enum TipoPesquisa
+    {
+        Nome,
+        Numero,
+        Telefone
+    }
     public class PessoasViewModel : ViewModelBase
     {
+
+
+        TipoPesquisa _opcaoTipoPesquisa;
+        public TipoPesquisa OpcaoTipoPesquisa
+        {
+            get
+            {
+                return _opcaoTipoPesquisa;
+            }
+            set
+            {
+                if (_opcaoTipoPesquisa != value)
+                {
+                    _opcaoTipoPesquisa = value;
+                    RaisePropertyChanged(nameof(OpcaoTipoPesquisa));
+                }
+            }
+        }
+
+
         #region Comandos
         public RelayCommand SalvarCommand
         {
@@ -75,8 +101,8 @@ namespace Amigo.ViewModel
                     if (_tipoPessoa == TipoPessoa.Veterinario)
                     {
 
-                        this.Crmv = _pessoa.CamposExtras.SingleOrDefault(p =>  p.Chave?.Equals(nameof(Crmv))??false)?.Valor ??string.Empty;
-                        this.CrmvUf = _pessoa.CamposExtras.SingleOrDefault (p => p.Chave?.Equals(nameof(CrmvUf)) ?? false)?.Valor ??string.Empty;
+                        this.Crmv = _pessoa.CamposExtras.SingleOrDefault(p => p.Chave?.Equals(nameof(Crmv)) ?? false)?.Valor ?? string.Empty;
+                        this.CrmvUf = _pessoa.CamposExtras.SingleOrDefault(p => p.Chave?.Equals(nameof(CrmvUf)) ?? false)?.Valor ?? string.Empty;
                     }
                 }
             }
@@ -509,7 +535,7 @@ namespace Amigo.ViewModel
             this.SalvarCommand = new RelayCommand(Salvar, () => Pessoa != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
             this.ExcluiCommand = new RelayCommand(Excluir, () => Pessoa != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Excluir));
             this.PesquisaCommand = new RelayCommand(Pesquisar);
-            this.NovoItemCommand = new RelayCommand(CriarNovoItem,()=> Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Adicionar));
+            this.NovoItemCommand = new RelayCommand(CriarNovoItem, () => Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Adicionar));
             this.LabelResponsavel = "Nome representante:";
             this.LabelFantasia = "Nome fantasia:";
             this.LabelNome = "Nome:";
@@ -554,7 +580,7 @@ namespace Amigo.ViewModel
         private void TipoPessoaEnviada(TipoPessoa tipo)
         {
             _tipoPessoa = tipo;
-            _nomeTabela =Util.ObterNomeTabela(tipo);
+            _nomeTabela = Util.ObterNomeTabela(tipo);
             switch (_tipoPessoa)
             {
                 case TipoPessoa.Socio:
@@ -589,7 +615,7 @@ namespace Amigo.ViewModel
                     break;
                 case TipoPessoa.Cliente:
                     {
-                        
+
                         this.Titulo = "Cadastro de Clientes";
                         this.ExibirStatus = true;
                         this.ExibirNascimento = true;
@@ -708,7 +734,7 @@ namespace Amigo.ViewModel
                     campoCrmvUf.Valor = this.CrmvUf;
                 }
 
-                
+
             }
 
             if (!Util.Repositorio.Salvar<Pessoa>(_pessoa, _nomeTabela).Key)
@@ -733,17 +759,43 @@ namespace Amigo.ViewModel
 
         private void Pesquisar()
         {
-            if (string.IsNullOrWhiteSpace(FiltroPesquisa))
+            if (string.IsNullOrWhiteSpace(_filtroPesquisa))
             {
                 RefreshLista();
                 return;
             }
-            RefreshLista(x => x.Nome.Contains(FiltroPesquisa));
+            switch (_opcaoTipoPesquisa)
+            {
+                case TipoPesquisa.Nome:
+                    {
+                        RefreshLista(x => x.Nome.Contains(_filtroPesquisa));
+                    }
+                    break;
+                case TipoPesquisa.Numero:
+                    {
+                        int numero = 0;
+                        int.TryParse(_filtroPesquisa, out numero);
+                        RefreshLista(x => x.Numero == numero);
+                        
+                    }
+                    break;
+                case TipoPesquisa.Telefone:
+                    {
+                        var lista = Util.Repositorio.ObterLista<Pessoa>(null, _nomeTabela).Where(p=>p.Telefones.Any(q=>q.NumeroTelefone.Contains(_filtroPesquisa)));
+                        this.ListaItens = new ObservableCollection<IRepositorio>(lista);
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+
+
         }
 
         private void RefreshLista(Expression<Func<Pessoa, bool>> expression = null)
         {
-            var lista = Util.Repositorio.ObterLista<Pessoa>(expression, _nomeTabela).OrderBy(p=>p.Nome);
+            var lista = Util.Repositorio.ObterLista<Pessoa>(expression, _nomeTabela).OrderBy(p => p.Nome);
             this.ListaItens = new ObservableCollection<IRepositorio>(lista);
         }
     }

@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Amigo.ViewModel"
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
-        
         Icon="Imagens/LogoAmigo64.png"
         DataContext="{Binding Path=Pessoas, Source={StaticResource Locator}}"
         Title="{Binding Titulo}"
@@ -19,6 +19,8 @@
             <Setter Property="Margin"
                     Value="4" />
         </Style>
+        <local:EnumToBooleanConverter x:Key="enumToBooleanConverter" />
+
     </Window.Resources>
     <DockPanel>
         <Expander  DockPanel.Dock="Left"
@@ -27,6 +29,7 @@
                    IsExpanded="{Binding ExpanderAberto}">
             <Grid Margin="5">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto">
 
                     </RowDefinition>
@@ -35,23 +38,42 @@
                     </RowDefinition>
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal"
-                            Margin="0,5"
-                            VerticalAlignment="Top">
-                    <TextBox VerticalAlignment="Center"
-                             Text="{Binding FiltroPesquisa}"
-                             Width="200"></TextBox>
-                    <Button Command="{Binding PesquisaCommand}"
-                            Margin="5"
-                            ToolTip="Pesquisar por nome">Pesquisar</Button>
-                </StackPanel>
 
-                <ListBox Grid.Row="1"
-                         ItemsSource="{Binding ListaItens}"
-                         SelectedItem="{Binding Pessoa}">
-                </ListBox>
+                <GroupBox Header="Pesquisa"
+                          Grid.Row="1">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,5"
+                                    VerticalAlignment="Top">
+                            <TextBox VerticalAlignment="Center"
+                                     Text="{Binding FiltroPesquisa}"
+                                     Width="200"></TextBox>
+                            <Button Command="{Binding PesquisaCommand}"
+                                    Margin="5"
+                                    ToolTip="Pesquisar por nome">Pesquisar</Button>
+                        </StackPanel>
+                        <WrapPanel Orientation="Horizontal">
+                            <RadioButton Margin="3"
+                                         IsChecked="{Binding Path=OpcaoTipoPesquisa, Converter={StaticResource enumToBooleanConverter}, ConverterParameter={x:Static vm:TipoPesquisa.Nome}}">Nome</RadioButton>
+                            <RadioButton  Margin="3"
+                                          IsChecked="{Binding Path=OpcaoTipoPesquisa, Converter={StaticResource enumToBooleanConverter}, ConverterParameter={x:Static vm:TipoPesquisa.Numero}}">Número</RadioButton>
+                            <RadioButton  Margin="3"
+                                          IsChecked="{Binding Path=OpcaoTipoPesquisa, Converter={StaticResource enumToBooleanConverter}, ConverterParameter={x:Static vm:TipoPesquisa.Telefone}}">Telefone</RadioButton>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Resultado"
+                          Grid.Row="2">
+                    <Grid>
+                        
+                        <ListBox Grid.Row="2"
+                                 ItemsSource="{Binding ListaItens}"
+                                 SelectedItem="{Binding Pessoa}">
+                        </ListBox>
+                    </Grid>
+                </GroupBox>
                 <StackPanel Margin="0,5"
-                            Grid.Row="2"
+                            Grid.Row="3"
                             HorizontalAlignment="Right"
                             Orientation="Horizontal"
                             VerticalAlignment="Top">
@@ -89,8 +111,7 @@
                               Orientation="Horizontal"
                               HorizontalAlignment="Right"
                               VerticalAlignment="Top"
-                              Style="{StaticResource splinha}"
-                           >
+                              Style="{StaticResource splinha}">
                     <TextBlock VerticalAlignment="Center"
                                Margin="10,0"
                                FontWeight="Bold">Data de cadastro:</TextBlock>
@@ -270,7 +291,6 @@
 
                 <TextBlock Margin="8,0"
                            Width="120"
-                         
                            FontWeight="Bold">Homepage:</TextBlock>
                 <TextBox  Text="{Binding Pessoa.Homepage}"
                           Width="250"></TextBox>
@@ -310,7 +330,7 @@
                 <TextBlock Margin="8,0"
                            Width="120"
                            FontWeight="Bold">UF:</TextBlock>
-                <ComboBox Width="40" 
+                <ComboBox Width="40"
                           Text="{Binding Pessoa.UF}"
                           ItemsSource="{Binding ListaUf}"
                           SelectedItem="{Binding Pessoa.UF, Mode=TwoWay}"></ComboBox>
@@ -363,7 +383,7 @@
             <GroupBox Header="Observações"
                       Height="100">
                 <TextBox  Margin="5"
-                          Text="{Binding Observacao}"></TextBox>
+                          Text="{Binding Pessoa.Observacao}"></TextBox>
             </GroupBox>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Bottom"
@@ -372,8 +392,7 @@
                 <Button Command="{Binding SalvarCommand}"
                         Margin="8,0"
                         Padding="5,0"
-                        ToolTip="Salvar cadastro"
-                        >Salvar</Button>
+                        ToolTip="Salvar cadastro">Salvar</Button>
                 <Button Command="{Binding ExcluiCommand}"
                         Margin="8,0"
                         Padding="5,0"

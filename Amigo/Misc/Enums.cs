@@ -24,5 +24,10 @@ namespace Amigo
         Alterar = NiveisUsuarios.GeralRestrito,
         Excluir=NiveisUsuarios.Geral
     }
-
+    public enum EnumSimNao
+    {
+        NaoColocado,
+        Sim,
+        Nao
+    }
 }

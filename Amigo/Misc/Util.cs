@@ -19,6 +19,9 @@ namespace Amigo
         }
         public static bool CheckTemUsuarios()
         {
+//#if DEBUG
+//            return false;
+//#endif
             return Repositorio.ObterLista<Usuario>().Any();
         }
         public static bool ExisteUsuarioMaster()

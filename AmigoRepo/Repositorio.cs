@@ -113,6 +113,32 @@ namespace AmigoRepo
                 throw;
             }
         }
+
+        public IEnumerable<Animal> ObterAnimal(Func<Animal, bool> exp, string nomeTabela = null)
+        {
+            try
+            {
+                nomeTabela = nomeTabela ?? ObterPlural<Animal>();
+
+                var animais = db.GetCollection<Animal>(nomeTabela)
+                    .Include(x => x.Clinica)
+                    .FindAll();
+                if (exp != null)
+                {
+                    animais = animais.Where(exp);
+                }
+
+                return animais;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
         public T Obter<T>(Expression<Func<T,bool>> exp, string nomeTabela = null) where T: class,new()
         {
             try
