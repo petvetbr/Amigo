@@ -37,7 +37,7 @@
                    ExpandDirection="Right"
                    Header="Pesquisa"
                    IsExpanded="{Binding ExpanderAberto}">
-            
+
             <Grid Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto">
@@ -87,12 +87,11 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-              
+
                 <Image Source="{Binding Foto}" />
 
             </Grid>
-            <StackPanel 
-                       >
+            <StackPanel>
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type StackPanel}">
                         <Style.Triggers>
@@ -131,7 +130,7 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 Style="{StaticResource splinha}" />
-                  
+
                 </DockPanel>
 
                 <StackPanel Orientation="Horizontal"
@@ -183,7 +182,8 @@
                             Command="{Binding SelecaoFotoCommand, Mode=OneWay}">...</Button>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+            <StackPanel Grid.Row="1"
+                        Grid.ColumnSpan="2">
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
@@ -212,10 +212,10 @@
                                FontWeight="Bold">Peso (kg):</TextBlock>
                     <TextBox Width="80"
                              Text="{Binding Animal.Peso}"></TextBox>
-                  
-                  
+
                 </StackPanel>
-                <GroupBox Margin="5"  Header="Vacinação:">
+                <GroupBox Margin="5"
+                          Header="Vacinação:">
                     <StackPanel>
                         <DockPanel>
                             <StackPanel>
@@ -273,14 +273,15 @@
                         </ListBox>
                     </StackPanel>
                 </GroupBox>
-                <GroupBox  Margin="5" Header="Vermífugação:">
+                <GroupBox  Margin="5"
+                           Header="Vermífugação:">
                     <StackPanel>
                         <StackPanel VerticalAlignment="Top"
                                     Orientation="Horizontal"
                                     Margin="5">
                             <TextBlock Margin="10,0"
                                        FontWeight="Bold">Data:</TextBlock>
-                            <DatePicker></DatePicker>
+                            <DatePicker  SelectedDate="{Binding VermifugoSelecionado.Data}"></DatePicker>
                             <TextBlock Margin="10,0"
                                        FontWeight="Bold">Fabricante:</TextBlock>
                             <ComboBox Width="100"
@@ -336,25 +337,28 @@
                                        FontWeight="Bold">Castrado:</TextBlock>
                             <RadioButton Margin="8,0"
                                          FontWeight="Bold"
-                                         IsChecked="{Binding Animal.Castrado}"
+                                         IsChecked="{Binding Animal.Castrado, Mode=TwoWay}"
                                          GroupName="Castrado">Sim</RadioButton>
                             <RadioButton Margin="8,0"
                                          GroupName="Castrado"
+                                         IsChecked="{Binding Animal.Castrado, Mode=OneWay, Converter={local:InverseBooleanConverter}}"
                                          FontWeight="Bold">Não</RadioButton>
                             <TextBlock  Margin="20,0"
                                         FontWeight="Bold">Clínica conveniada/veterinário(a):</TextBlock>
                             <ComboBox Width="400"
                                       IsEditable="true"
-                                      ItemsSource="{Binding ListaVeterinarios}"
+                                      ItemsSource="{Binding ListaClinicas}"
                                       DisplayMemberPath="Nome"
-                                      SelectedItem="{Binding Animal.Clinica}"></ComboBox>
+                                      SelectedValuePath="Id"
+                                      SelectedValue="{Binding Animal.Clinica.Id, Mode=OneWay}"
+                                      SelectedItem="{Binding Animal.Clinica, Mode=OneWayToSource}"></ComboBox>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Observações / Histórico:">
                     <StackPanel>
 
-                        <TextBox 
+                        <TextBox Text="{Binding Animal.Observacao}"
                                  Margin="5"
                                  Height="80"></TextBox>
                     </StackPanel>

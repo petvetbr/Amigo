@@ -299,19 +299,19 @@ namespace Amigo.ViewModel
                 }
             }
         }
-        ObservableCollection<IPessoa> _listaveterinario;
-        public ObservableCollection<IPessoa> ListaVeterinarios
+        ObservableCollection<IPessoa> _listaClinicas;
+        public ObservableCollection<IPessoa> ListaClinicas
         {
             get
             {
-                return _listaveterinario;
+                return _listaClinicas;
             }
             set
             {
-                if (_listaveterinario != value)
+                if (_listaClinicas != value)
                 {
-                    _listaveterinario = value;
-                    RaisePropertyChanged(nameof(ListaVeterinarios));
+                    _listaClinicas = value;
+                    RaisePropertyChanged(nameof(ListaClinicas));
                 }
             }
         }
@@ -364,7 +364,7 @@ namespace Amigo.ViewModel
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             // Set filter for file extension and default file extension 
             dlg.DefaultExt = "*.png";
-            dlg.Filter = "JPEG  (*.jpeg)|*.jpeg|PNG  (*.png)|*.png|JPG (*.jpg)|*.jpg|BMP (*.bmp)|*.bmp|TIF (*.tif)|*.tif*";
+            dlg.Filter = "PNG  (*.png)|*.png|JPG (*.jpg)|*.jpg|JPEG  (*.jpeg)|*.jpeg|BMP (*.bmp)|*.bmp|TIF (*.tif)|*.tif*";
 
             // Display OpenFileDialog by calling ShowDialog method 
             if (!dlg.ShowDialog().GetValueOrDefault()) return;
@@ -397,7 +397,7 @@ namespace Amigo.ViewModel
             this.ListaFabricanteVermifugo = new ObservableCollection<string>(Config.ObterListaFabricantesVermifugo());
             this.ListaTipoVacina = new ObservableCollection<string>(Config.ObterListaTiposVacina());
             this.ListaRaca = new ObservableCollection<string>(Config.ObterRacasCaes());
-            this.ListaVeterinarios = new ObservableCollection<IPessoa>(Util.Repositorio.ObterLista<Pessoa>(null, "Veterinarios"));
+            this.ListaClinicas = new ObservableCollection<IPessoa>(Util.Repositorio.ObterLista<Pessoa>(null, "Clinicas"));
         }
 
         private void ExcluiVermifugo()
@@ -425,9 +425,9 @@ namespace Amigo.ViewModel
             this.VacinaSelecionada = null;
         }
 
-        private void RefreshLista(Expression<Func<Animal, bool>> expression = null)
+        private void RefreshLista(Func<Animal, bool> expression = null)
         {
-            var lista = Util.Repositorio.ObterLista<Animal>(expression).OrderBy(p => p.Nome);
+            var lista = Util.Repositorio.ObterAnimal(expression).OrderBy(p => p.Nome);
             this.ListaItens = new ObservableCollection<IAnimal>(lista);
         }
 
