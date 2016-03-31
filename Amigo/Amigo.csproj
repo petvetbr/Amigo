@@ -100,6 +100,7 @@
     <Compile Include="ConfigWindow.xaml.cs">
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ConfigToStringConverter.cs" />
     <Compile Include="Converters\EnumToBooleanConverter.cs" />
     <Compile Include="EmprestimoCaixaWindow.xaml.cs">
       <DependentUpon>EmprestimoCaixaWindow.xaml</DependentUpon>

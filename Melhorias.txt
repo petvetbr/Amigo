@@ -1,0 +1,74 @@
+Olá o software ficou muito bom ,simples e ágil e de fácil entendimento. l
+
+Segue abaixo as alterações e ou ajustes no software AMIGO para qualificarmos o programa
+Melhorias / Ajustes
+
+Campo PESQUISAR  ---- buscar além do nome também por nº e telefone -> ok
+
+Campo SALVAR e EXCLUIR  não estão   habilitados -> testar
+
+No  CADASTRO  : sócios / veterinários / clínicas / clientes / moradores de rua 
+
+Campo OBSERVAÇÃO --- carrega sempre a informação do campo anterior-> ok
+
+Correto cada observação para cada registro .  EX: Reg1 – Observação1  / Registro2 – Observação2
+
+ Cadastro  ANIMAIS
+
+- campo VERMIFUGAÇÃO  - Data campo histórico não traz a DATA como no campo VACINAÇÃO
+
+    Carrega os dados do campo anterior ???-> ok
+
+- campo FOTO  não busca arquivo corretamente ( JPEG)-> ok
+
+- campo controle populacional carrega dados do campo anterior-> ok
+
+ Clinica conveniada - idem-> ok
+
+ Caixa de Transporte
+Pesquisar por nº /nº identificação/ responsável / animal-> ok
+
+Peso ( Kg) alterar-> ok
+
+ Empréstimos
+
+O sistema empresta a mesma caixa mesmo com a  situação emprestada  ?
+
+Permite mesma data entrega / saída e devolução da mesma caixa  para outro pessoa.
+
+Status : disponível ou indisponível
+
+Localização : no depósito / com diretoria  / externo
+
+Situação --- disponível   ----- empresta a caixa   muda para emprestado
+
+Situação indisponível  ---- não empresta   --- situação emprestada --- não devolvida   
+
+ 
+
+não faz cópia de segurança ??? -> ok
+
+MENSALIDADES
+
+- pesquisar nº sócio / nome( sócio )
+- trazer o campo STATUS  ( Do Cadastro) e OBSERVAÇÃO  com o mesmo registro de cada um .
+
+ 
+
+FLUXO DE CAIXA
+
+- alterar o campo DESCRIÇÃO ( aumentar o campo )
+
+- reduzir campo  Receita e despesas
+
+- campo DATA  volta sempre para  data atual ???
+
+ Grande abraço
+
+
+
+Att
+
+
+
+Marcão 

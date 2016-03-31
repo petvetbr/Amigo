@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,78 @@ namespace Amigo.ViewModel
         {
             get;
             private set;
+        }
+        public RelayCommand PesquisaCommand
+        {
+            get;
+            private set;
+        }
+
+
+        TipoPesquisa _opcaoTipoPesquisa;
+        public TipoPesquisa OpcaoTipoPesquisa
+        {
+            get
+            {
+                return _opcaoTipoPesquisa;
+            }
+            set
+            {
+                if (_opcaoTipoPesquisa != value)
+                {
+                    _opcaoTipoPesquisa = value;
+                    RaisePropertyChanged(nameof(OpcaoTipoPesquisa));
+                }
+            }
+        }
+        string _filtroPesquisa;
+        public string FiltroPesquisa
+        {
+            get
+            {
+                return _filtroPesquisa;
+            }
+            set
+            {
+                if (_filtroPesquisa != value)
+                {
+                    _filtroPesquisa = value;
+                    RaisePropertyChanged(nameof(FiltroPesquisa));
+                }
+            }
+        }
+
+        bool expanderAberto;
+        public bool ExpanderAberto
+        {
+            get
+            {
+                return expanderAberto;
+            }
+            set
+            {
+                if (expanderAberto != value)
+                {
+                    expanderAberto = value;
+                    RaisePropertyChanged(nameof(ExpanderAberto));
+                }
+            }
+        }
+        ObservableCollection<IRepositorio> _listaItens;
+        public ObservableCollection<IRepositorio> ListaItens
+        {
+            get
+            {
+                return _listaItens;
+            }
+            set
+            {
+                if (_listaItens != value)
+                {
+                    _listaItens = value;
+                    RaisePropertyChanged(nameof(ListaItens));
+                }
+            }
         }
 
         IMensalidades _mensalidades;
@@ -135,6 +208,42 @@ namespace Amigo.ViewModel
             this.ListaSocios = new ObservableCollection<KeyValuePair<int, string>>(Util.ObterListaSocios());
             this.SalvarCommand = new RelayCommand(Salvar, () => this.Mensalidades != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
             this.AnoSelecionado = DateTime.Now.Year;
+            this.PesquisaCommand = new RelayCommand(Pesquisar);
+            RefreshLista();
+        }
+
+        private void Pesquisar()
+        {
+            if (string.IsNullOrWhiteSpace(_filtroPesquisa))
+            {
+                RefreshLista();
+                return;
+            }
+            switch (_opcaoTipoPesquisa)
+            {
+                case TipoPesquisa.Nome:
+                    {
+                        RefreshLista(x => x.Socio.Nome.Contains(_filtroPesquisa));
+                    }
+                    break;
+                case TipoPesquisa.Numero:
+                    {
+                        int numero = 0;
+                        int.TryParse(_filtroPesquisa, out numero);
+                        RefreshLista(x => x.Socio.Numero == numero);
+
+                    }
+                    break;
+                case TipoPesquisa.Telefone:
+                default:
+                    break;
+            }
+        }
+
+        private void RefreshLista(Expression<Func<Mensalidades, bool>> expression = null)
+        {
+            var lista = Util.Repositorio.ObterLista<Mensalidades>(expression,null).OrderBy(p => p.Socio.Nome);
+            this.ListaItens = new ObservableCollection<IRepositorio>(lista);
         }
 
         private void Salvar()

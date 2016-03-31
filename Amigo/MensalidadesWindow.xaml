@@ -3,82 +3,191 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Amigo.ViewModel"
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         
         Icon="Imagens/LogoAmigo64.png"
          DataContext="{Binding Path=Mensalidades, Source={StaticResource Locator}}"
-        Title="Mensalidades" Height="489" Width="400">
+        Title="Mensalidades" Height="489" Width="800">
     <Window.Resources>
 
     </Window.Resources>
-    <Grid>
-        <StackPanel>
-            <StackPanel DockPanel.Dock="Right">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="5">
-                        <TextBlock Margin="10,0" FontWeight="Bold">Sócio:</TextBlock>
-                        <ComboBox  MinWidth="250" ItemsSource="{Binding ListaSocios}" SelectedItem="{Binding SocioSelecionado}" DisplayMemberPath="Value"></ComboBox>
-                    </StackPanel>
+    <DockPanel>
+        <Expander  DockPanel.Dock="Left"
+                   ExpandDirection="Right"
+                   Header="Pesquisa"
+                   IsExpanded="{Binding ExpanderAberto}">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto">
 
-                    <StackPanel DockPanel.Dock="Left" Orientation="Horizontal"  VerticalAlignment="Top" Margin="5">
-                        <TextBlock VerticalAlignment="Center" Margin="15,0" FontWeight="Bold" >Ano:</TextBlock>
-                        <ComboBox Width="60" ItemsSource="{Binding ListaAnos}" SelectedItem="{Binding AnoSelecionado}"></ComboBox>
+                    </RowDefinition>
+                    <RowDefinition Height="*">
+
+                    </RowDefinition>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <GroupBox Header="Pesquisa"
+                          Grid.Row="1">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,5"
+                                    VerticalAlignment="Top">
+                            <TextBox VerticalAlignment="Center"
+                                     Text="{Binding FiltroPesquisa}"
+                                     Width="200"></TextBox>
+                            <Button Command="{Binding PesquisaCommand}"
+                                    Margin="5"
+                                    ToolTip="Pesquisar por nome">Pesquisar</Button>
+                        </StackPanel>
+                        <WrapPanel Orientation="Horizontal">
+                            <RadioButton Margin="3"
+                                         IsChecked="{Binding Path=OpcaoTipoPesquisa, Converter={local:EnumToBooleanConverter}, ConverterParameter={x:Static vm:TipoPesquisa.Nome}}">Nome</RadioButton>
+                            <RadioButton  Margin="3"
+                                          IsChecked="{Binding Path=OpcaoTipoPesquisa, Converter={local:EnumToBooleanConverter}, ConverterParameter={x:Static vm:TipoPesquisa.Numero}}">Número</RadioButton>
+                        </WrapPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Resultado"
+                          Grid.Row="2">
+                    <Grid>
+
+                        <ListBox Grid.Row="2"
+                                 ItemsSource="{Binding ListaItens}"
+                                 SelectedItem="{Binding Mensalidades}">
+                        </ListBox>
+                    </Grid>
+                </GroupBox>
+                <StackPanel Margin="0,5"
+                            Grid.Row="3"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Top">
+                    <Button HorizontalAlignment="Right"
+                            Command="{Binding NovoItemCommand}"
+                            ToolTipService.ToolTip="Criar novo registro">Novo</Button>
+                </StackPanel>
+            </Grid>
+
+        </Expander>
+        <Grid>
+            <StackPanel>
+                <StackPanel DockPanel.Dock="Right">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Margin="5">
+                            <TextBlock Margin="10,0"
+                                       FontWeight="Bold">Sócio:</TextBlock>
+                            <TextBlock Margin="10,0"
+                                       FontWeight="Bold" Text="{Binding Mensalidades.Socio.Nome}"></TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Margin="5">
+                            <TextBlock Margin="10,0"
+                                       FontWeight="Bold">Status:</TextBlock>
+                            <TextBlock Margin="10,0"
+                                       FontWeight="Bold"
+                                       Text="{Binding Mensalidades.Socio.Status}"></TextBlock>
+                        </StackPanel>
+
+                        <StackPanel DockPanel.Dock="Left"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Top"
+                                    Margin="5">
+                            <TextBlock VerticalAlignment="Center"
+                                       Margin="15,0"
+                                       FontWeight="Bold">Ano:</TextBlock>
+                            <ComboBox Width="60"
+                                      ItemsSource="{Binding ListaAnos}"
+                                      SelectedItem="{Binding AnoSelecionado}"></ComboBox>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
-            </StackPanel>
 
-            <ListView Height="250"  ItemsSource="{Binding Pagamentos}" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <WrapPanel>
-                            <Grid HorizontalAlignment="Center">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Border>
-                                    <Border.Resources>
-                                        <Style TargetType="{x:Type Border}">
-                                            <Setter Property="Background" Value="Gainsboro"></Setter>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Pago}" Value="True">
-                                                    <Setter Property="Background" Value="#FF98FF98"></Setter>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Pago}" Value="False">
-                                                    <Setter Property="Background" Value="#FFFFB5B5"></Setter>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Border.Resources>
-                                    <TextBlock Margin="8,0" Width="100" TextAlignment="Center"  Grid.Column="0" HorizontalAlignment="Center" Text="{Binding Mes, Converter={local:NumeroParaNomeMesConverter}}">
-                                    </TextBlock>
-                                </Border>
-                                <StackPanel Orientation="Horizontal" Grid.Column="1">
-                                    <TextBlock Margin="8,0"  Width="auto" HorizontalAlignment="Center">
-                                <RadioButton IsChecked="{Binding Pago, Mode=TwoWay}"  IsThreeState="True">
+                <ListView Height="250"
+                          ItemsSource="{Binding Pagamentos}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border>
+                                        <Border.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="Background"
+                                                        Value="Gainsboro"></Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Pago}"
+                                                                 Value="True">
+                                                        <Setter Property="Background"
+                                                                Value="#FF98FF98"></Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Pago}"
+                                                                 Value="False">
+                                                        <Setter Property="Background"
+                                                                Value="#FFFFB5B5"></Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Resources>
+                                        <TextBlock Margin="8,0"
+                                                   Width="100"
+                                                   TextAlignment="Center"
+                                                   Grid.Column="0"
+                                                   HorizontalAlignment="Center"
+                                                   Text="{Binding Mes, Converter={local:NumeroParaNomeMesConverter}}">
+                                        </TextBlock>
+                                    </Border>
+                                    <StackPanel Orientation="Horizontal"
+                                                Grid.Column="1">
+                                        <TextBlock Margin="8,0"
+                                                   Width="auto"
+                                                   HorizontalAlignment="Center">
+                                <RadioButton IsChecked="{Binding Pago, Mode=TwoWay}"
+                                             IsThreeState="True">
                                     Pago</RadioButton>
-                                    </TextBlock>
-                                    <TextBlock Margin="8,0"  Width="auto" HorizontalAlignment="Center">
-                                <RadioButton IsChecked="{Binding Pago, Mode=TwoWay,Converter={local:InverseBooleanConverter}}" IsThreeState="True">Em aberto</RadioButton>
-                                    </TextBlock>
-                                </StackPanel>
-                            </Grid>
-                        </WrapPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <GroupBox Header="Observações" Height="100">
-                <TextBox  Margin="5" Text="{Binding Mensalidades.Observacao}"></TextBox>
-            </GroupBox>
-            <StackPanel Margin="10,10" Width="100">
-                <Button Command="{Binding SalvarCommand}"  Margin="8,0" Padding="5,0" ToolTip="INCLUI REGISTRO" >SALVAR</Button>
+                                        </TextBlock>
+                                        <TextBlock Margin="8,0"
+                                                   Width="auto"
+                                                   HorizontalAlignment="Center">
+                                <RadioButton IsChecked="{Binding Pago, Mode=TwoWay,Converter={local:InverseBooleanConverter}}"
+                                             IsThreeState="True">Em aberto</RadioButton>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <GroupBox Header="Observações"
+                          Height="100">
+                    <TextBox  Margin="5"
+                              Text="{Binding Mensalidades.Observacao}"></TextBox>
+                </GroupBox>
+                <StackPanel Margin="10,10"
+                            Width="100">
+                    <Button Command="{Binding SalvarCommand}"
+                            Margin="8,0"
+                            Padding="5,0"
+                            ToolTip="INCLUI REGISTRO">SALVAR</Button>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
-    </Grid>
+        </Grid>
+    </DockPanel>
 </Window>
