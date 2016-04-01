@@ -40,6 +40,11 @@ namespace AmigoRepo
                     OnPropertyChanged(nameof(Pagamentos));
                 }
             }
+
+        }
+        public override string ToString()
+        {
+            return _socio?.ToString() ?? base.ToString();
         }
     }
 }

@@ -247,7 +247,7 @@ namespace AmigoRepo
         }
         public override string ToString()
         {
-            return string.Format("{0} -{1}", this.Numero, this.Nome);
+            return string.Format("{0} - {1}", this.Numero, this.Nome);
         }
         int _categoria;
         public int Categoria

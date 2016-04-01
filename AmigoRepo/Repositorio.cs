@@ -18,9 +18,9 @@ namespace AmigoRepo
             {
                 var path = new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath;
 
-                caminho= System.IO.Path.GetDirectoryName(path);
+                caminho = System.IO.Path.GetDirectoryName(path);
             }
-           
+
             this.NomeRepositorio = nomeRepositorio;
             this.CaminhoRepositorio = string.Format("{0}\\{1}.db", caminho, nomeRepositorio);
             db = new AmigoDb(CaminhoRepositorio);
@@ -30,9 +30,9 @@ namespace AmigoRepo
         {
             return db.Dump();
         }
-    
 
-        public KeyValuePair<bool, int> Salvar<T>(T item, string nomeTabela=null) where T :  class, IRepositorio, new()
+
+        public KeyValuePair<bool, int> Salvar<T>(T item, string nomeTabela = null) where T : class, IRepositorio, new()
         {
             try
             {
@@ -63,14 +63,14 @@ namespace AmigoRepo
 
         }
         private static string ObterPlural<T>()
-            {
+        {
             var s = typeof(T).Name;
             var nome = s + "s";
             return nome;
         }
 
 
-        public Mensalidades ObterMensalidades(Expression<Func<Mensalidades, bool>> exp, string nomeTabela = null)
+        public IEnumerable<Mensalidades> ObterMensalidades(Func<Mensalidades, bool> exp, string nomeTabela = null)
         {
             try
             {
@@ -78,11 +78,13 @@ namespace AmigoRepo
 
                 var mensalidades = db.GetCollection<Mensalidades>(nomeTabela)
                     .Include(x => x.Socio)
-                    .FindAll()
-                    .Where(exp.Compile());
-                    
-               
-                return mensalidades.FirstOrDefault(); 
+                    .FindAll();
+                if (exp != null)
+                {
+                    mensalidades = mensalidades.Where(exp);
+                }
+
+                return mensalidades;
             }
             catch (Exception)
             {
@@ -139,7 +141,7 @@ namespace AmigoRepo
 
 
 
-        public T Obter<T>(Expression<Func<T,bool>> exp, string nomeTabela = null) where T: class,new()
+        public T Obter<T>(Expression<Func<T, bool>> exp, string nomeTabela = null) where T : class, new()
         {
             try
             {
@@ -154,13 +156,13 @@ namespace AmigoRepo
             }
 
         }
-        public IEnumerable<T> ObterLista<T>(Expression<Func<T, bool>> exp=null, string nomeTabela = null) where T : class, new()
+        public IEnumerable<T> ObterLista<T>(Expression<Func<T, bool>> exp = null, string nomeTabela = null) where T : class, new()
         {
             try
             {
                 nomeTabela = nomeTabela ?? ObterPlural<T>();
                 var socios = db.GetCollection<T>(nomeTabela);
-                if(exp==null)
+                if (exp == null)
                 {
                     return socios.FindAll();
                 }
@@ -174,7 +176,7 @@ namespace AmigoRepo
 
         }
 
-        
+
         public bool Apagar<T>(Expression<Func<T, bool>> exp, string nomeTabela = null) where T : class, new()
 
         {

@@ -7,7 +7,6 @@
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
-        
         Icon="Imagens/LogoAmigo64.png"
          DataContext="{Binding Path=Mensalidades, Source={StaticResource Locator}}"
         Title="Mensalidades" Height="489" Width="800">
@@ -57,8 +56,21 @@
                     <Grid>
 
                         <ListBox Grid.Row="2"
-                                 ItemsSource="{Binding ListaItens}"
-                                 SelectedItem="{Binding Mensalidades}">
+                                  SelectedValuePath="Key" 
+                                  ItemsSource="{Binding ListaItens}"
+                                 SelectedItem="{Binding SocioSelecionado}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} - {1}">
+                                                <Binding Path="Key" />
+                                                <Binding Path="Value" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
                         </ListBox>
                     </Grid>
                 </GroupBox>
@@ -84,8 +96,10 @@
                                     Margin="5">
                             <TextBlock Margin="10,0"
                                        FontWeight="Bold">Sócio:</TextBlock>
-                            <TextBlock Margin="10,0"
-                                       FontWeight="Bold" Text="{Binding Mensalidades.Socio.Nome}"></TextBlock>
+                            <ComboBox  MinWidth="250"
+                                       ItemsSource="{Binding ListaSocios}"
+                                       SelectedItem="{Binding SocioSelecionado}"
+                                       DisplayMemberPath="Value"></ComboBox>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal"
@@ -96,7 +110,7 @@
                                        FontWeight="Bold">Status:</TextBlock>
                             <TextBlock Margin="10,0"
                                        FontWeight="Bold"
-                                       Text="{Binding Mensalidades.Socio.Status}"></TextBlock>
+                                       Text="{Binding Mensalidades.Socio.Status, Converter={local:ConfigToStringConverter}, ConverterParameter=PessoasStatus}"></TextBlock>
                         </StackPanel>
 
                         <StackPanel DockPanel.Dock="Left"

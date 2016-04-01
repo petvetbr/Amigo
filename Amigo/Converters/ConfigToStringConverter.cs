@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Amigo.Converters
+namespace Amigo
 {
     public class ConfigToStringConverter:MarkupExtension, IValueConverter
     {
@@ -21,7 +21,7 @@ namespace Amigo.Converters
             {
                 case "PessoasStatus":
                     {
-                        return Config.ObterListaPessoasStatus().SingleOrDefault(p => p.Key == valor.Value);
+                        return Config.ObterListaPessoasStatus().DefaultIfEmpty().SingleOrDefault(p => p.Key == valor.Value).Value;
                     }
                 default:
                     break;

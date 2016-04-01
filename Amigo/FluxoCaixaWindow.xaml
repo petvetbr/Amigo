@@ -8,13 +8,12 @@
         xmlns:local="clr-namespace:Amigo"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
-        
         Icon="Imagens/LogoAmigo64.png"
         x:Name="window"
         DataContext="{Binding Path=FluxoCaixa, Source={StaticResource Locator}}"
         Title="FluxoCaixaWindow"
         Height="550"
-        Width="600">
+        Width="800">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
@@ -79,7 +78,7 @@
                                 VerticalAlignment="Center">
                         <TextBlock  Width="60"
                                     Margin="10,0,10,0">Descrição:</TextBlock>
-                        <TextBox Width="200"
+                        <TextBox Width="400"
                                  Text="{Binding LancamentoSelecionado.Descricao}"></TextBox>
                         <TextBlock  Margin="20,0,5,0"
                                     VerticalAlignment="Center"
@@ -117,7 +116,7 @@
                                         Binding="{Binding Descricao}"
                                         Width="*" />
                     <DataGridTemplateColumn Header="Receitas"
-                                            Width="*">
+                                            Width="120">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Foreground="Green"
@@ -129,7 +128,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Despesas"
-                                            Width="*">
+                                            Width="120">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Foreground="Red"

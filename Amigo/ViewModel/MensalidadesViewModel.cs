@@ -77,8 +77,8 @@ namespace Amigo.ViewModel
                 }
             }
         }
-        ObservableCollection<IRepositorio> _listaItens;
-        public ObservableCollection<IRepositorio> ListaItens
+        ObservableCollection<KeyValuePair<int,string>> _listaItens;
+        public ObservableCollection<KeyValuePair<int, string>> ListaItens
         {
             get
             {
@@ -112,8 +112,7 @@ namespace Amigo.ViewModel
             }
         }
 
-      
-
+ 
         ObservableCollection<IMesMensalidade> _pagamentos;
         public ObservableCollection<IMesMensalidade> Pagamentos
         {
@@ -206,31 +205,33 @@ namespace Amigo.ViewModel
 
             this.ListaAnos = new ObservableCollection<int>(Config.ObterListaAnos().Select(p => p.Key));
             this.ListaSocios = new ObservableCollection<KeyValuePair<int, string>>(Util.ObterListaSocios());
+            this.ListaItens =  new ObservableCollection<KeyValuePair<int, string>>(Util.ObterListaSocios());
             this.SalvarCommand = new RelayCommand(Salvar, () => this.Mensalidades != null && Util.ValidarPermissao(Config.UsuarioAtual, PermissaoAtividadeUsuario.Alterar));
             this.AnoSelecionado = DateTime.Now.Year;
             this.PesquisaCommand = new RelayCommand(Pesquisar);
-            RefreshLista();
+            
+            RefreshLista(null);
         }
 
         private void Pesquisar()
         {
             if (string.IsNullOrWhiteSpace(_filtroPesquisa))
             {
-                RefreshLista();
+                RefreshLista(null);
                 return;
             }
             switch (_opcaoTipoPesquisa)
             {
                 case TipoPesquisa.Nome:
                     {
-                        RefreshLista(x => x.Socio.Nome.Contains(_filtroPesquisa));
+                        RefreshLista(x => x.Value.Contains(_filtroPesquisa));
                     }
                     break;
                 case TipoPesquisa.Numero:
                     {
                         int numero = 0;
                         int.TryParse(_filtroPesquisa, out numero);
-                        RefreshLista(x => x.Socio.Numero == numero);
+                        RefreshLista(x => x.Key == numero);
 
                     }
                     break;
@@ -240,10 +241,14 @@ namespace Amigo.ViewModel
             }
         }
 
-        private void RefreshLista(Expression<Func<Mensalidades, bool>> expression = null)
+        private void RefreshLista(Func<KeyValuePair<int,string>, bool> expression)
         {
-            var lista = Util.Repositorio.ObterLista<Mensalidades>(expression,null).OrderBy(p => p.Socio.Nome);
-            this.ListaItens = new ObservableCollection<IRepositorio>(lista);
+            var lista = Util.ObterListaSocios();
+            if (expression != null)
+            {
+                lista = lista.Where(expression);
+            }
+            this.ListaItens = new ObservableCollection<KeyValuePair<int,string>>(lista);
         }
 
         private void Salvar()
@@ -264,7 +269,7 @@ namespace Amigo.ViewModel
                 return;
             }
 
-            var mensalidade = repo.ObterMensalidades(p => p.Socio.Id==_socioSelecionado.Key);
+            var mensalidade = repo.ObterMensalidades(p => p.Socio.Id==_socioSelecionado.Key).FirstOrDefault();
             if(mensalidade==null)
             {
                 mensalidade = new AmigoRepo.Mensalidades()
@@ -304,6 +309,7 @@ namespace Amigo.ViewModel
                     listaNovasMensalidades.ForEach(p => this._mensalidades.Pagamentos.Add(p));
                     this.Pagamentos = new ObservableCollection<IMesMensalidade>(listaNovasMensalidades);
                 }
+                
                 
             }
             else
